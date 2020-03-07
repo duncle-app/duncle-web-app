@@ -4,5 +4,4 @@ export class Library {
         this.name = name;
     }
     public name: string;
-
 }

@@ -1,10 +1,15 @@
 import React from 'react'
 import {Library} from "../../model/library";
 
-export default function LibraryOverview(props: Library) {
+interface LibraryOverviewProps {
+    library: Library
+    onClick(): void;
+}
+
+export default function LibraryOverview(props: LibraryOverviewProps) {
     return (
-        <div>
-            {props.name}
+        <div onClick={props.onClick}>
+            {props.library.name}
         </div>)
 }
 
