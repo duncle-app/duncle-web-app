@@ -12,4 +12,10 @@ export class LibraryListController {
     public getListOfLibraries(): Observable<Library[]> {
         return this.libraryListService.getLibraries();
     }
+
+    public routeToLibraryDetail(library: Library) {
+
+        // navigate
+        //
+    }
 }

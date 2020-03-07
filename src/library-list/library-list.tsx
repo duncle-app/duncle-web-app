@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useHistory } from "react-router-dom";
 import {Library} from '../model/library'
 import LibraryOverview from './components/library-overview';
 import {LibraryListController} from './controller/library-list-controller';
@@ -11,6 +12,7 @@ function LibraryList(props: LibraryOverviewProps) {
     const initialLibrary: Library[] = [];
     const [libraries, setLibraries]:
         [Library[], React.Dispatch<React.SetStateAction<Library[]>>] = useState(initialLibrary);
+    let history = useHistory()
 
     useEffect(() => {
         props.controller.getListOfLibraries().subscribe(response => {
@@ -18,9 +20,14 @@ function LibraryList(props: LibraryOverviewProps) {
         })
     });
 
+    function reRoute(): void {
+        history.push('/mrsir')
+    }
+
     return (
         <div>
-            {libraries.map((lib: Library) => <LibraryOverview library={lib} onClick={() => console.log('clicked on Benis')}/>)}
+            {libraries.map((lib: Library) => <LibraryOverview library={lib}
+                                                              onClick={reRoute}/>)}
         </div>
     );
 }
