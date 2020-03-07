@@ -12,7 +12,7 @@ function LibraryList(props: LibraryOverviewProps) {
     const initialLibrary: Library[] = [];
     const [libraries, setLibraries]:
         [Library[], React.Dispatch<React.SetStateAction<Library[]>>] = useState(initialLibrary);
-    let history = useHistory()
+    let history = useHistory();
 
     useEffect(() => {
         props.controller.getListOfLibraries().subscribe(response => {
@@ -21,13 +21,13 @@ function LibraryList(props: LibraryOverviewProps) {
     });
 
     function reRoute(): void {
-        history.push('/mrsir')
+        history.push('/mrSir')
     }
 
     return (
         <div>
             {libraries.map((lib: Library) => <LibraryOverview library={lib}
-                                                              onClick={reRoute}/>)}
+                                                              onClick={() => props.controller.routeToLibraryDetail(lib, reRoute)}/>)}
         </div>
     );
 }
