@@ -1,7 +1,16 @@
 {
-  "libraries" : [
-    { "name": "Deity Steve's Libarry"},
-    { "name": "Dr. Mama's Libarry"},
-    { "name": "Zorro Libarry"}
+  "libraries": [
+    {
+      "name": "Deity Steve's Libarry",
+      "id": "123"
+    },
+    {
+      "name": "Dr. Mama's Libarry",
+      "id": "456"
+    },
+    {
+      "name": "Zorro Libarry",
+      "id": "789"
+    }
   ]
 }

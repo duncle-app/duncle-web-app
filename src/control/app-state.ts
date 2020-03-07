@@ -2,7 +2,7 @@ import {Library} from "../model/library";
 
 export class AppState {
     constructor() {
-        this.selectedLibrary = new Library('default');
+        this.selectedLibrary = new Library('default', '69');
     }
     private selectedLibrary: Library;
 

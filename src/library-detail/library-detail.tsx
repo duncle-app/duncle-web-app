@@ -10,7 +10,7 @@ interface LibraryDetailProps {
 
 export function LibraryDetail (props: LibraryDetailProps) {
 
-    const [selectedLibrary, setSelectedLibrary] = useState({name: 'cheese'});
+    const [selectedLibrary, setSelectedLibrary] = useState({name: ''});
 
     useEffect(() => {
         props.controller.getSelectedLibrary().subscribe( (x: Library) => {

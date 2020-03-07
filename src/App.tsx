@@ -23,8 +23,8 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/" children={<LibraryList controller={controller}/>}/>
-                    <Route exact path="/mrSir" children={<LibraryDetail controller={libraryDetailController}/>}/>
+                    <Route exact path="/" children={<LibraryList controller={controller} appState={appState}/>}/>
+                    <Route exact path="/:libraryId" children={<LibraryDetail controller={libraryDetailController}/>}/>
                 </Switch>
             </BrowserRouter>
 
