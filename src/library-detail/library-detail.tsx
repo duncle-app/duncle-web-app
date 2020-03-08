@@ -13,8 +13,8 @@ export function LibraryDetail (props: LibraryDetailProps) {
     const [selectedLibrary, setSelectedLibrary] = useState({name: ''});
 
     useEffect(() => {
-        props.controller.getSelectedLibrary().subscribe( (x: Library) => {
-            setSelectedLibrary(x);
+        props.controller.getSelectedLibrary().subscribe( (response: Library) => {
+            setSelectedLibrary(response);
         });
     });
 

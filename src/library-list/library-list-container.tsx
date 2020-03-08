@@ -25,7 +25,7 @@ function LibraryListContainer(props: LibraryOverviewProps) {
 
     function routeToLibraryDetail(library: Library): void {
         props.appState.setSelectedLibrary(library);
-        history.push(`/${library.id}`)
+        history.push(`/libraries/${library.id}`)
     }
 
     return (

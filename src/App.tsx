@@ -26,7 +26,7 @@ function App() {
                 <Navbar/>
                 <Switch>
                     <Route exact path="/" children={<LibraryListContainer controller={controller} appState={appState}/>}/>
-                    <Route exact path="/:libraryId" children={<LibraryDetail controller={libraryDetailController}/>}/>
+                    <Route exact path="/libraries/:libraryId" children={<LibraryDetail controller={libraryDetailController}/>}/>
                 </Switch>
             </BrowserRouter>
         </div>
