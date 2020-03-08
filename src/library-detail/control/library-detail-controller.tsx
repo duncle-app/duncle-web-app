@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import {Library} from "../../model/library";
-import {AppState} from "../../control/app-state";
+
 import {useHistory, useLocation} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {LibraryManager} from "../../control/library-manager";
 
 
 
 interface LibraryDetailProps {
-    appState: AppState,
+    libraryManager: LibraryManager
 }
 
 
@@ -23,7 +26,8 @@ export function LibraryDetailController (props: LibraryDetailProps) {
 
     useEffect(() => {
 
-        const subscription = props.appState.getLibraries().subscribe((libraries: Library[]) => {
+        // TODO: I don't like this...
+        const subscription = props.libraryManager.getLibraries().subscribe((libraries: Library[]) => {
             const libraryId = route.pathname.split('/')[2];
             const library: Library | undefined = libraries.find(x => x.id === libraryId);
 
@@ -36,9 +40,6 @@ export function LibraryDetailController (props: LibraryDetailProps) {
 
         return () => subscription.unsubscribe();
     });
-
-
-
 
     return (<LibraryDetail library={selectedLibrary} onBack={onBack}/>)
 }
