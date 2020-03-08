@@ -10,7 +10,7 @@ interface LibraryOverviewProps {
     appState: AppState
 }
 
-function LibraryList(props: LibraryOverviewProps) {
+function LibraryListContainer(props: LibraryOverviewProps) {
     const initialLibrary: Library[] = [];
     const [libraries, setLibraries]:
         [Library[], React.Dispatch<React.SetStateAction<Library[]>>] = useState(initialLibrary);
@@ -36,4 +36,4 @@ function LibraryList(props: LibraryOverviewProps) {
     );
 }
 
-export default LibraryList
+export default LibraryListContainer
