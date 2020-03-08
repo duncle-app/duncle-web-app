@@ -1,6 +1,7 @@
 import * as data from './TestLibraryGet.json'
 import {Library} from "../../model/library";
-import { of, Observable } from 'rxjs'
+import {of, Observable} from 'rxjs';
+
 
 export class LibraryListService {
 
@@ -12,3 +13,4 @@ export class LibraryListService {
         return of(data.libraries);
     }
 }
+

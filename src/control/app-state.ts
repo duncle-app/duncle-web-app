@@ -1,18 +1,26 @@
 import {Library} from "../model/library";
+import {BehaviorSubject, Observable} from 'rxjs';
 
 export class AppState {
     constructor() {
-        this.selectedLibrary = new Library('default');
+
     }
-    private selectedLibrary: Library;
+    private selectedLibrarySubject: BehaviorSubject<Library> = new BehaviorSubject<Library>(Library.None);
+    private librariesSubject: BehaviorSubject<Library[]> = new BehaviorSubject<Library[]>([]);
 
 
     public setSelectedLibrary(library: Library) {
-        this.selectedLibrary = library;
+        this.selectedLibrarySubject.next(library);
     }
 
-    public getSelectedLibrary() {
-        return this.selectedLibrary;
+    public getSelectedLibrary(): Observable<Library> {
+        return this.selectedLibrarySubject.asObservable();
     }
 
+    public setLibraries(libraries: Library[]) {
+        return this.librariesSubject.next(libraries);
+    }
+    public getLibraries(): Observable<Library[]> {
+        return this.librariesSubject.asObservable();
+    }
 }

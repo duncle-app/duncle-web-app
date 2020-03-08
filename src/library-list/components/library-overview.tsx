@@ -3,12 +3,12 @@ import {Library} from "../../model/library";
 
 interface LibraryOverviewProps {
     library: Library
-    onClick(): void;
+    onClick(library: Library): void;
 }
 
 export default function LibraryOverview(props: LibraryOverviewProps) {
     return (
-        <div onClick={props.onClick}>
+        <div onClick={() => props.onClick(props.library)}>
             {props.library.name}
         </div>)
 }

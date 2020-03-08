@@ -1,35 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import { useHistory } from "react-router-dom";
-import {Library} from '../model/library'
-import LibraryOverview from './components/library-overview';
-import {LibraryListController} from './controller/library-list-controller';
+import {Library} from "../model/library";
+import LibraryOverview from "./components/library-overview";
+import React from "react";
 
-interface LibraryOverviewProps {
-    controller: LibraryListController
+interface LibraryListProps {
+    libraries: Library[]
+    onLibraryClick(library: Library): void
 }
 
-function LibraryList(props: LibraryOverviewProps) {
-    const initialLibrary: Library[] = [];
-    const [libraries, setLibraries]:
-        [Library[], React.Dispatch<React.SetStateAction<Library[]>>] = useState(initialLibrary);
-    let history = useHistory();
-
-    useEffect(() => {
-        props.controller.getListOfLibraries().subscribe(response => {
-            setLibraries(response)
-        })
-    });
-
-    function reRoute(): void {
-        history.push('/mrSir')
-    }
-
+function LibraryList(props: LibraryListProps) {
     return (
         <div>
-            {libraries.map((lib: Library) => <LibraryOverview library={lib}
-                                                              onClick={() => props.controller.routeToLibraryDetail(lib, reRoute)}/>)}
+            {props.libraries.map((lib: Library) => <LibraryOverview library={lib}
+                                                              key={lib.id}
+                                                              onClick={props.onLibraryClick}/>)}
         </div>
-    );
+    )
 }
 
-export default LibraryList
+export default LibraryList;
