@@ -1,9 +1,0 @@
-{
-  "libraries" : [
-    { "name": "Deity Steve's Libarry",
-      "id": "1"
-    },
-    { "name": "Dr. Mama's Libarry", "id": "2"},
-    { "name": "Zorro Libarry", "id": "3"}
-  ]
-}

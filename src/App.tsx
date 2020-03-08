@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import LibraryListController from "./library-list/control/library-list-controller";
-import {LibraryListService} from "./library-list/control/library-list-service";
+import {LibraryService} from "./control/library-service";
 import {LibraryDetailController} from "./library-detail/control/library-detail-controller";
 import {AppState} from "./control/app-state";
 import {Observable} from 'rxjs';
@@ -15,7 +15,7 @@ function Dummy() {
 }
 
 const appState: AppState = new AppState();
-const libraryListService: LibraryListService = new LibraryListService();
+const libraryListService: LibraryService = new LibraryService();
 const libraryManager: LibraryManager = new LibraryManager( libraryListService, appState);
 
 

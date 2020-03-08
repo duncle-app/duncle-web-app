@@ -1,4 +1,4 @@
-import {LibraryListService} from "../library-list/control/library-list-service";
+import {LibraryService} from "./library-service";
 import {AppState} from "./app-state";
 import {Library} from "../model/library";
 import {Observable} from 'rxjs';
@@ -6,9 +6,9 @@ import {tap} from 'rxjs/operators';
 
 export class LibraryManager {
 
-    private libraryListService: LibraryListService;
+    private libraryListService: LibraryService;
     private appState: AppState;
-    constructor(libraryListService: LibraryListService, appState: AppState) {
+    constructor(libraryListService: LibraryService, appState: AppState) {
         this.libraryListService = libraryListService;
         this.appState = appState;
     }

@@ -21,7 +21,8 @@ export function LibraryDetailController (props: LibraryDetailProps) {
     let history = useHistory();
 
     function onBack(): void {
-        history.goBack();
+        // history.goBack();
+        history.push('/')
     }
 
     useEffect(() => {

@@ -1,13 +1,9 @@
 import * as data from './TestLibraryGet.json'
-import {Library} from "../../model/library";
+import {Library} from "../model/library";
 import {of, Observable} from 'rxjs';
 
 
-export class LibraryListService {
-
-    constructor() {
-
-    }
+export class LibraryService {
 
     getLibraries(): Observable<Library[]> {
         return of(data.libraries);
