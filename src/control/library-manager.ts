@@ -1,14 +1,15 @@
-import {LibraryService} from "./library-service";
+import {DummyLibraryService} from "./dummy-library-service";
 import {AppState} from "./app-state";
 import {Library} from "../model/library";
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {ILibraryService} from "./interfaces/i-library-service";
 
 export class LibraryManager {
 
-    private libraryListService: LibraryService;
+    private libraryListService: ILibraryService;
     private appState: AppState;
-    constructor(libraryListService: LibraryService, appState: AppState) {
+    constructor(libraryListService: ILibraryService, appState: AppState) {
         this.libraryListService = libraryListService;
         this.appState = appState;
     }

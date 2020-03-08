@@ -2,11 +2,12 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import LibraryListController from "./library-list/control/library-list-controller";
-import {LibraryService} from "./control/library-service";
+import {DummyLibraryService} from "./control/dummy-library-service";
 import {LibraryDetailController} from "./library-detail/control/library-detail-controller";
 import {AppState} from "./control/app-state";
 import {Observable} from 'rxjs';
 import {LibraryManager} from "./control/library-manager";
+import {ILibraryService} from "./control/interfaces/i-library-service";
 
 
 
@@ -15,9 +16,8 @@ function Dummy() {
 }
 
 const appState: AppState = new AppState();
-const libraryListService: LibraryService = new LibraryService();
-const libraryManager: LibraryManager = new LibraryManager( libraryListService, appState);
-
+const libraryService: ILibraryService = new DummyLibraryService();
+const libraryManager: LibraryManager = new LibraryManager( libraryService, appState);
 
 function App() {
     return (
@@ -26,7 +26,8 @@ function App() {
                 <Switch>
                     <Route exact path="/" children={<LibraryListController libraryManager={libraryManager}/>}
                     />
-                    <Route exact path="/library/:libraryId" children={<LibraryDetailController libraryManager={libraryManager}/>}
+                    <Route exact path="/library/:libraryId" children={<LibraryDetailController
+                        libraryManager={libraryManager}/>}
                     />
                 </Switch>
             </BrowserRouter>
