@@ -10,6 +10,7 @@ export default function LibraryOverview(props: LibraryOverviewProps) {
     return (
         <div onClick={() => props.onClick(props.library)}>
             {props.library.name}
-        </div>)
+        </div>
+        )
 }
 

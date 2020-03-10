@@ -16,7 +16,8 @@
         "phoneNumber": "619-867-5309",
         "emailAddress":"donteatpeople@hotmail.com"
       },
-      "notes": "Be careful talking to Jeffrey. I don't like the way he looks at me when I talk to him."
+      "notes": "Be careful talking to Jeffrey. I don't like the way he looks at me when I talk to him.",
+      "sales": []
     },
     { "name": "Dr. Mama's Libarry",
       "id": "2",
@@ -34,7 +35,8 @@
         "phoneNumber": "952-768-0309",
         "emailAddress": "Ilikewine@gmail.com"
       },
-      "notes": "Robert recently took the place of Aerys, who was very difficult difficult to deal with."
+      "notes": "Robert recently took the place of Aerys, who was very difficult difficult to deal with.",
+      "sales": []
     },
     { "name": "Zorro Libarry",
       "id": "3",
@@ -51,7 +53,8 @@
         "phoneNumber": "358-876-9899",
         "emailAddress":"jdepp@gmail.com"
       },
-      "notes": ""
+      "notes": "",
+      "sales": []
     }
   ]
 }

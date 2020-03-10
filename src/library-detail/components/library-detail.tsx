@@ -3,7 +3,9 @@ import {Library} from "../../model/library";
 
 interface LibraryDetailProps {
     library: Library,
-    onBack() : void
+    onBack(): void,
+    onEdit(library: Library): void,
+    onNewSales(library: Library): void
 }
 
 function LibraryDetail(props: LibraryDetailProps) {
@@ -11,6 +13,7 @@ function LibraryDetail(props: LibraryDetailProps) {
         <div>
             <div>
                 <button onClick={props.onBack}>Back</button>
+                <button onClick={() => props.onEdit(props.library)}>Edit</button>
             </div>
             <h2>{props.library.name}</h2>
             <div>Address: {props.library.address}</div>
@@ -30,6 +33,9 @@ function LibraryDetail(props: LibraryDetailProps) {
 
             <h2>Notes</h2>
             <div>{props.library.notes}</div>
+
+            <h2>Sales</h2>
+            <div><button onClick={() => props.onNewSales(props.library)}>+</button></div>
         </div>
     )
 }

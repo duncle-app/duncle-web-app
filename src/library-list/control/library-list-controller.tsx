@@ -23,10 +23,13 @@ function LibraryListController(props: LibraryOverviewProps) {
     function routeToLibraryDetail(library: Library): void {
         history.push(`/library/${library.id}`);
     }
+    function onAddLibraryClicked(): void {
+        console.log('add library clicked');
+    }
 
 
     return (
-        <LibraryList libraries={libraries} onLibraryClick={routeToLibraryDetail}/>
+        <LibraryList libraries={libraries} onLibraryClick={routeToLibraryDetail} onAddLibraryClick={onAddLibraryClicked}/>
     );
 }
 

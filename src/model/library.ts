@@ -1,4 +1,5 @@
 import {Contact} from "./contact";
+import {Sale} from "./sale";
 
 export class Library {
 
@@ -16,6 +17,7 @@ export class Library {
 
         this.zip = '';
         this.address = '';
+        this.sales = [];
     }
 
     public address: string;
@@ -29,4 +31,5 @@ export class Library {
     public zip: string;
     public state: string;
     public county: string;
+    public sales: Sale[];
 }
