@@ -9,6 +9,7 @@ interface LibraryDetailProps {
 }
 
 function LibraryDetail(props: LibraryDetailProps) {
+    let salesTotal = 0;
     return (
         <div>
             <div>
@@ -35,6 +36,7 @@ function LibraryDetail(props: LibraryDetailProps) {
             <div>{props.library.notes}</div>
 
             <h2>Sales</h2>
+            <div>Total: {props.library.sales.forEach(x => salesTotal+=x.amount)}</div>
             <div><button onClick={() => props.onNewSales(props.library)}>+</button></div>
         </div>
     )

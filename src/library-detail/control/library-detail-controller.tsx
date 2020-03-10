@@ -46,9 +46,6 @@ export function LibraryDetailController (props: LibraryDetailProps) {
 
             if (library) setSelectedLibrary(library);
             else setSelectedLibrary(Library.None);
-
-            console.log('the id is', libraryId);
-            console.log('setting library to', library);
         });
 
         return () => subscription.unsubscribe();
