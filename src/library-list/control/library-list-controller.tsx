@@ -12,6 +12,7 @@ function LibraryListController(props: LibraryOverviewProps) {
     const initialLibrary: Library[] = [];
     const [libraries, setLibraries]:
         [Library[], React.Dispatch<React.SetStateAction<Library[]>>] = useState(initialLibrary);
+    const [showAddLibraryComponent, setShowAddLibraryComponent] = useState(false);
     let history = useHistory();
 
     useEffect(() => {
@@ -25,11 +26,24 @@ function LibraryListController(props: LibraryOverviewProps) {
     }
     function onAddLibraryClicked(): void {
         console.log('add library clicked');
+        setShowAddLibraryComponent(true);
+    }
+    function onAddLibraryCancel(): void {
+        setShowAddLibraryComponent(false);
+    }
+    function onAddLibrarySubmit(library: Library): void {
+        props.libraryManager.addLibrary(library);
     }
 
 
     return (
-        <LibraryList libraries={libraries} onLibraryClick={routeToLibraryDetail} onAddLibraryClick={onAddLibraryClicked}/>
+        <LibraryList
+            libraries={libraries}
+            onLibraryClick={routeToLibraryDetail}
+            onAddLibraryClick={onAddLibraryClicked}
+            showAddLibraryComponent={showAddLibraryComponent}
+            onAddLibraryCancel={onAddLibraryCancel}
+            onAddLibrarySubmit={onAddLibrarySubmit}/>
     );
 }
 

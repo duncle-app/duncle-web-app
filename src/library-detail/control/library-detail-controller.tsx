@@ -3,8 +3,6 @@ import {Library} from "../../model/library";
 
 import {useHistory, useLocation} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {LibraryManager} from "../../control/library-manager";
 
 

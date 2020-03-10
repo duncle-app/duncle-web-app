@@ -1,4 +1,3 @@
-import {DummyLibraryService} from "./dummy-library-service";
 import {AppState} from "./app-state";
 import {Library} from "../model/library";
 import {Observable} from 'rxjs';
@@ -21,5 +20,10 @@ export class LibraryManager {
         return this.libraryListService.getLibraries().pipe(
             tap( x => this.appState.setLibraries(x))
         )
+    }
+
+    addLibrary(library: Library) {
+        // TODO: Add new library
+        throw new Error('Not Implemented.');
     }
 }

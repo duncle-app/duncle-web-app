@@ -5,15 +5,8 @@ import LibraryListController from "./library-list/control/library-list-controlle
 import {DummyLibraryService} from "./control/dummy-library-service";
 import {LibraryDetailController} from "./library-detail/control/library-detail-controller";
 import {AppState} from "./control/app-state";
-import {Observable} from 'rxjs';
 import {LibraryManager} from "./control/library-manager";
 import {ILibraryService} from "./control/interfaces/i-library-service";
-
-
-
-function Dummy() {
-    return (<h1>Hello</h1>)
-}
 
 const appState: AppState = new AppState();
 const libraryService: ILibraryService = new DummyLibraryService();
