@@ -22,9 +22,10 @@ export function LibraryDetailController (props: LibraryDetailProps) {
         // history.goBack();
         history.push('/')
     }
-    function onEdit(): void {
+    function onEdit(library: Library): void {
         console.log('on edit clicked...');
-        // TODO: edit the component...
+        console.log(`setting library to: ${library}`)
+        history.push(`/library/${library.id}/edit`)
     }
     function onNewSales(library: Library): void {
         console.log('on new Sales Clicked.');

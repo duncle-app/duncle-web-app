@@ -7,10 +7,11 @@ import {LibraryDetailController} from "./library-detail/control/library-detail-c
 import {AppState} from "./control/app-state";
 import {LibraryManager} from "./control/library-manager";
 import {ILibraryService} from "./control/interfaces/i-library-service";
+import LibraryEditController from "./library-edit/control/library-edit-controller";
 
 const appState: AppState = new AppState();
 const libraryService: ILibraryService = new DummyLibraryService();
-const libraryManager: LibraryManager = new LibraryManager( libraryService, appState);
+const libraryManager: LibraryManager = new LibraryManager(libraryService, appState);
 
 function App() {
     return (
@@ -22,6 +23,8 @@ function App() {
                     <Route exact path="/library/:libraryId" children={<LibraryDetailController
                         libraryManager={libraryManager}/>}
                     />
+                    <Route exact path="/library/:libraryId/edit"
+                           children={<LibraryEditController libraryManager={libraryManager}/>}/>
                 </Switch>
             </BrowserRouter>
 
