@@ -4,6 +4,7 @@ import {Sale} from "./sale";
 export class Library {
 
     public static None: Library = new Library('None', 'None');
+
     constructor(name: string, id: string) {
         this.name = name;
         this.id = id;
@@ -14,7 +15,6 @@ export class Library {
         this.city = '';
         this.state = '';
         this.county = '';
-
         this.zip = '';
         this.address = '';
         this.sales = [];

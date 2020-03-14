@@ -5,10 +5,15 @@ import AddLibrary from "./components/add-library";
 
 interface LibraryListProps {
     libraries: Library[]
+
     onLibraryClick(library: Library): void
+
     onAddLibraryClick(): void,
+
     showAddLibraryComponent: boolean,
+
     onAddLibraryCancel(): void,
+
     onAddLibrarySubmit(library: Library): void,
 
 }
@@ -25,7 +30,9 @@ function LibraryList(props: LibraryListProps) {
                                                                         key={lib.id}
                                                                         onClick={props.onLibraryClick}/>)}
             </div>
-            <div><button onClick={props.onAddLibraryClick}>+</button></div>
+            <div>
+                <button onClick={props.onAddLibraryClick}>+</button>
+            </div>
             {addLibraryMenu}
         </div>
 

@@ -2,13 +2,13 @@ import {AppState} from "./app-state";
 import {Library} from "../model/library";
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {ILibraryService} from "./interfaces/i-library-service";
+import {DummyLibraryService} from "./dummy-library-service";
 
 export class LibraryManager {
 
-    private libraryListService: ILibraryService;
+    private libraryListService: DummyLibraryService;
     private appState: AppState;
-    constructor(libraryListService: ILibraryService, appState: AppState) {
+    constructor(libraryListService: DummyLibraryService, appState: AppState) {
         this.libraryListService = libraryListService;
         this.appState = appState;
     }
@@ -25,5 +25,13 @@ export class LibraryManager {
     addLibrary(library: Library) {
         // TODO: Add new library
         throw new Error('Not Implemented.');
+    }
+
+    setSelectedLibrary(library: Library) {
+        this.appState.setSelectedLibrary(library)
+    }
+
+    getSelectedLibrary() {
+        return this.appState.getSelectedLibrary()
     }
 }

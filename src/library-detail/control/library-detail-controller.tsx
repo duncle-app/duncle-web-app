@@ -6,27 +6,39 @@ import LibraryDetail from "../components/library-detail";
 import {LibraryManager} from "../../control/library-manager";
 
 
-
 interface LibraryDetailProps {
     libraryManager: LibraryManager
 }
 
 
-export function LibraryDetailController (props: LibraryDetailProps) {
+function wait(ms: number) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+        end = new Date().getTime();
+    }
+}
 
+export function LibraryDetailController(props: LibraryDetailProps) {
+    const {libraryManager} = props
     const [selectedLibrary, setSelectedLibrary] = useState(Library.None);
-    let route  = useLocation();
+
+    let route = useLocation();
     let history = useHistory();
 
     function onBack(): void {
         // history.goBack();
         history.push('/')
     }
+
     function onEdit(library: Library): void {
         console.log('on edit clicked...');
         console.log(`setting library to: ${library}`)
+        // todo - set the global, currently selected library here instead
+        libraryManager.setSelectedLibrary(library)
         history.push(`/library/${library.id}/edit`)
     }
+
     function onNewSales(library: Library): void {
         console.log('on new Sales Clicked.');
         // TODO: Show the new Sales component...
@@ -41,10 +53,9 @@ export function LibraryDetailController (props: LibraryDetailProps) {
         * example through getting internet connection, then the behavior subject will be updated, and will emit its new
         * value. This subscription will get the new value and update the UI seamlessly.
         * */
-        const subscription = props.libraryManager.getLibraries().subscribe((libraries: Library[]) => {
+        const subscription = libraryManager.getLibraries().subscribe((libraries: Library[]) => {
             const libraryId = route.pathname.split('/')[2];
             const library: Library | undefined = libraries.find(x => x.id === libraryId);
-
             if (library) setSelectedLibrary(library);
             else setSelectedLibrary(Library.None);
         });

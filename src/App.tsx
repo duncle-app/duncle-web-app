@@ -6,11 +6,10 @@ import {DummyLibraryService} from "./control/dummy-library-service";
 import {LibraryDetailController} from "./library-detail/control/library-detail-controller";
 import {AppState} from "./control/app-state";
 import {LibraryManager} from "./control/library-manager";
-import {ILibraryService} from "./control/interfaces/i-library-service";
 import LibraryEditController from "./library-edit/control/library-edit-controller";
 
 const appState: AppState = new AppState();
-const libraryService: ILibraryService = new DummyLibraryService();
+const libraryService: DummyLibraryService = new DummyLibraryService();
 const libraryManager: LibraryManager = new LibraryManager(libraryService, appState);
 
 function App() {
