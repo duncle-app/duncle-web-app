@@ -5,11 +5,9 @@ import {useHistory, useLocation} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
 import {LibraryManager} from "../../control/library-manager";
 
-
 interface LibraryDetailProps {
     libraryManager: LibraryManager
 }
-
 
 function wait(ms: number) {
     var start = new Date().getTime();
@@ -34,8 +32,6 @@ export function LibraryDetailController(props: LibraryDetailProps) {
     function onEdit(library: Library): void {
         console.log('on edit clicked...');
         console.log(`setting library to: ${library}`)
-        // todo - set the global, currently selected library here instead
-        libraryManager.setSelectedLibrary(library)
         history.push(`/library/${library.id}/edit`)
     }
 

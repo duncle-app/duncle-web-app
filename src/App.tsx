@@ -26,7 +26,6 @@ function App() {
                            children={<LibraryEditController libraryManager={libraryManager}/>}/>
                 </Switch>
             </BrowserRouter>
-
         </div>
     );
 }

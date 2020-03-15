@@ -34,4 +34,8 @@ export class LibraryManager {
     getSelectedLibrary() {
         return this.appState.getSelectedLibrary()
     }
+
+    updateLibrary(library: Library) {
+        alert("not implemented")
+    }
 }

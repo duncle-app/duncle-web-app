@@ -5,17 +5,11 @@ import AddLibrary from "./components/add-library";
 
 interface LibraryListProps {
     libraries: Library[]
-
     onLibraryClick(library: Library): void
-
     onAddLibraryClick(): void,
-
     showAddLibraryComponent: boolean,
-
     onAddLibraryCancel(): void,
-
     onAddLibrarySubmit(library: Library): void,
-
 }
 
 function LibraryList(props: LibraryListProps) {
