@@ -3,6 +3,7 @@ import {Library} from "../../model/library";
 import LibraryEdit from "../components/library-edit";
 import {LibraryManager} from "../../control/library-manager";
 import {useLocation} from "react-router-dom";
+import {Form} from "react-final-form";
 
 interface LibraryEditControllerProps {
     libraryManager: LibraryManager
@@ -35,15 +36,22 @@ function LibraryEditController(props: LibraryEditControllerProps) {
         return () => subscription.unsubscribe();
     });
 
-    const handleSubmit = (library: Library) => {
-        libraryManager.updateLibrary(library);
+    const updateLibrarySubmit = (values: any) => {
+        console.log('submitted');
+        console.log(values)
+        // libraryManager.updateLibrary(library);
     };
 
     return (
         <>
-            {/*<Form onSubmit={handleSubmit}>*/}
-                <LibraryEdit library={selectedLibrary} libraryManager={libraryManager}/>
-            {/*</Form>*/}
+            <Form
+                onSubmit={updateLibrarySubmit}
+                render={({handleSubmit}) => (
+                    <form onSubmit={handleSubmit}>
+                        <LibraryEdit library={selectedLibrary} libraryManager={libraryManager}/>
+                    </form>
+                )}>
+            </Form>
         </>
     );
 }
