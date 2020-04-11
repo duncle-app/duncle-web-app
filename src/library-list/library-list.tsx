@@ -13,21 +13,24 @@ interface LibraryListProps {
 }
 
 function LibraryList(props: LibraryListProps) {
-    let addLibraryMenu = <div/>;
-    if (props.showAddLibraryComponent) addLibraryMenu = <AddLibrary onCancel={props.onAddLibraryCancel}
-                                                                    onSubmit={props.onAddLibrarySubmit}/>;
+    const { showAddLibraryComponent, onLibraryClick, onAddLibraryCancel, onAddLibrarySubmit, onAddLibraryClick, libraries } = props;
+
     return (
         <div>
             <h1>Libraries</h1>
             <div>
-                {props.libraries.map((lib: Library) => <LibraryOverview library={lib}
+                {libraries.map((lib: Library) => <LibraryOverview library={lib}
                                                                         key={lib.id}
-                                                                        onClick={props.onLibraryClick}/>)}
+                                                                        onClick={onLibraryClick}/>)}
             </div>
             <div>
-                <button onClick={props.onAddLibraryClick}>+</button>
+                <button onClick={onAddLibraryClick}>+</button>
             </div>
-            {addLibraryMenu}
+            {
+                showAddLibraryComponent &&
+                <AddLibrary onCancel={onAddLibraryCancel}
+                onSubmit={onAddLibrarySubmit}/>
+            }
         </div>
 
     )

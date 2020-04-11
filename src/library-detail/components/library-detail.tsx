@@ -16,7 +16,7 @@ function LibraryDetail(props: LibraryDetailProps) {
                 <button onClick={props.onBack}>Back</button>
                 <button onClick={() => props.onEdit(props.library)}>Edit</button>
             </div>
-            <h2>{props.library.name}</h2>
+            <h2>{props.library.libraryName}</h2>
             <div>Address: {props.library.address}</div>
             <div>City: {props.library.city}</div>
             <div>State: {props.library.state}</div>

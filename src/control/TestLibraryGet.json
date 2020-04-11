@@ -1,6 +1,6 @@
 {
   "libraries" : [
-    { "name": "Deity Steve's Libarry",
+    { "libraryName": "Deity Steve's Libarry",
       "id": "1",
       "level": "K - 8",
       "size":  "1200",
@@ -19,7 +19,7 @@
       "notes": "Be careful talking to Jeffrey. I don't like the way he looks at me when I talk to him.",
       "sales": []
     },
-    { "name": "Dr. Mama's Libarry",
+    { "libraryName": "Dr. Mama's Libarry",
       "id": "2",
 
       "level": "6 - 12",
@@ -38,7 +38,7 @@
       "notes": "Robert recently took the place of Aerys, who was very difficult difficult to deal with.",
       "sales": []
     },
-    { "name": "Zorro Libarry",
+    { "libraryName": "Zorro Libarry",
       "id": "3",
       "level": "K - 6",
       "size":  "400",

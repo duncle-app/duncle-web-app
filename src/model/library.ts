@@ -3,26 +3,27 @@ import {Sale} from "./sale";
 
 export class Library {
 
-    public static None: Library = new Library('None', 'None');
+    public static None: Library =
+        new Library( 'None', 'None', 'None', 'None', 'None', 'None', 'None','None',);
 
-    constructor(name: string, id: string) {
-        this.name = name;
-        this.id = id;
+    constructor(libraryName: string, level: string, size: string, city: string, state: string, county: string, zip: string, address: string) {
+        this.libraryName = libraryName;
         this.contact = Contact.None;
+        this.level = level;
+        this.size = size;
+        this.city = city;
+        this.state = state;
+        this.county = county;
+        this.zip = zip;
+        this.address = address;
+        this.id = '';
         this.notes = '';
-        this.level = '';
-        this.size = '';
-        this.city = '';
-        this.state = '';
-        this.county = '';
-        this.zip = '';
-        this.address = '';
         this.sales = [];
     }
 
     public address: string;
-    public name: string;
     public id: string;
+    public libraryName: string;
     public contact: Contact;
     public notes: string;
     public level: string;

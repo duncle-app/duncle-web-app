@@ -10,7 +10,7 @@ interface LibraryEditProps {
 }
 
 export default function LibraryEdit(props: LibraryEditProps) {
-    const {address, contact, city, county, id, level, name, notes, sales, size, state, zip} = props.library;
+    const {address, contact, city, county, id, level, libraryName, notes, sales, size, state, zip} = props.library;
     console.log(props.library);
     // this is the JSON object key that's returned when we click the the submit button.
     // i.e. { library : { .... } }
@@ -19,7 +19,7 @@ export default function LibraryEdit(props: LibraryEditProps) {
         {
             identifier: 'name',
             labelPlaceholder: 'Library Name',
-            value: name,
+            value: libraryName,
         },
         {
             identifier: 'address',
