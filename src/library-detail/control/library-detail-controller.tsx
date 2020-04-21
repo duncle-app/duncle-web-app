@@ -31,7 +31,7 @@ export function LibraryDetailController(props: LibraryDetailProps) {
 
     function onEdit(library: Library): void {
         console.log('on edit clicked...');
-        console.log(`setting library to: ${library}`)
+        // console.log(`setting library to: ${library}`)
         history.push(`/library/${library.id}/edit`)
     }
 

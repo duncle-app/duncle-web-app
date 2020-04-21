@@ -19,7 +19,7 @@ function EditField(props: EditFieldProps) {
                 component="input"
                 type="text"
                 placeholder={placeholder}
-                initialValue={value}
+                data={value}
             />
         </div>
     )
