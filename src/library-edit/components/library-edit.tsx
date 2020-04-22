@@ -5,6 +5,7 @@ import {LibraryManager} from "../../control/library-manager";
 import EditField from "./EditField";
 
 interface LibraryEditProps {
+    onLoad(): void,
     library: Library,
     libraryManager: LibraryManager
 }
@@ -15,39 +16,50 @@ export default function LibraryEdit(props: LibraryEditProps) {
     // this is the JSON object key that's returned when we click the the submit button.
     // i.e. { library : { .... } }
 
+    useEffect(() => {
+        props.onLoad();
+    });
+
     const formLabels = [
         {
             identifier: 'name',
             labelPlaceholder: 'Library Name',
-            value: libraryName,
+            propName: libraryName,
         },
         {
             identifier: 'address',
             labelPlaceholder: 'Address',
+            propName: address,
         },
         {
             identifier: 'city',
             labelPlaceholder: 'City',
+            propName: city,
         },
         {
             identifier: 'state',
             labelPlaceholder: 'State',
+            propName: state,
         },
         {
             identifier: 'zip',
             labelPlaceholder: 'Zip',
+            propName: zip,
         },
         {
             identifier: 'county',
             labelPlaceholder: 'County',
+            propName: county,
         },
         {
             identifier: 'level',
             labelPlaceholder: 'Level',
+            propName: level,
         },
         {
             identifier: 'size',
             labelPlaceholder: 'Size',
+            propName: size,
         },
     ];
 
@@ -64,7 +76,7 @@ export default function LibraryEdit(props: LibraryEditProps) {
                             label={field.labelPlaceholder}
                             placeholder={field.labelPlaceholder}
                             id={field.identifier}
-                            value={libraryName}
+                            value={field.propName}
                         />
                     )
                 })}

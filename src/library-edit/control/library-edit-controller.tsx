@@ -10,6 +10,20 @@ interface LibraryEditControllerProps {
     libraryManager: LibraryManager
 }
 
+function setFormValuesHelper(state: any, utils: any) {
+    const formFields: any = state.fields;
+
+    for (const key in formFields) {
+        if (formFields.hasOwnProperty(key)) {
+            const val = formFields[key];
+            console.log(`key ${key}, val ${val}`);
+            console.log(`last field state`, state.fields[key].lastFieldState)
+            // @ts-ignore
+            utils.changeValue(state, key, () => state.fields[key].lastFieldState.data)
+        }
+    }
+}
+
 function LibraryEditController(props: LibraryEditControllerProps) {
     // todo - srn - move this to a custom hook
     const [selectedLibrary, setSelectedLibrary] = useState(Library.None);
@@ -50,35 +64,18 @@ function LibraryEditController(props: LibraryEditControllerProps) {
                 onSubmit={updateLibrarySubmit}
                 mutators={{
                     setFieldValue: (args, state, utils) => {
-                        utils.changeValue(state, 'apples', () => 6)
+                        setFormValuesHelper(state, utils);
                     },
                 }}
 
-                render={({ form, ...rest }) => (
+                render={({ form, handleSubmit, ...rest }) => (
                     <>
-                        <button onClick={form.mutators.setFieldValue}>what I bought last time</button>
-                        <Field
-                        name={'apples'}
-                        component="input"
-                        type="text"
-                        />
+                        <form onSubmit={handleSubmit}>
+                            <LibraryEdit onLoad={form.mutators.setFieldValue} library={selectedLibrary} libraryManager={libraryManager}/>
+                        </form>
                     </>
                 )}
             />
-            {/*<Form*/}
-                {/*onSubmit={updateLibrarySubmit}*/}
-                {/*render={({handleSubmit}) => (*/}
-                    {/*<form onSubmit={handleSubmit}>*/}
-                        {/*/!*<LibraryEdit library={selectedLibrary} libraryManager={libraryManager}/>*!/*/}
-                        {/*<Field*/}
-                            {/*name={'mrSir'}*/}
-                            {/*component="input"*/}
-                            {/*type="text"*/}
-                            {/*placeholder={'ph'}*/}
-                        {/*/>*/}
-                    {/*</form>*/}
-                {/*)}>*/}
-            {/*</Form>*/}
         </>
     );
 }
