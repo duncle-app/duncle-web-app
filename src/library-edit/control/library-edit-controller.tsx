@@ -4,24 +4,9 @@ import LibraryEdit from "../components/library-edit";
 import {LibraryManager} from "../../control/library-manager";
 import {useLocation} from "react-router-dom";
 import {Field, Form} from "react-final-form";
-import EditField from "../components/EditField";
 
 interface LibraryEditControllerProps {
     libraryManager: LibraryManager
-}
-
-function setFormValuesHelper(state: any, utils: any) {
-    const formFields: any = state.fields;
-
-    for (const key in formFields) {
-        if (formFields.hasOwnProperty(key)) {
-            const val = formFields[key];
-            console.log(`key ${key}, val ${val}`);
-            console.log(`last field state`, state.fields[key].lastFieldState)
-            // @ts-ignore
-            utils.changeValue(state, key, () => state.fields[key].lastFieldState.data)
-        }
-    }
 }
 
 function LibraryEditController(props: LibraryEditControllerProps) {
@@ -32,7 +17,6 @@ function LibraryEditController(props: LibraryEditControllerProps) {
     let route = useLocation();
 
     useEffect(() => {
-        setSelectedLibrary(Library.None);
         /*
         * app state holds the current state of the app. Primarily, the list of libraries. Currently, the libraries are
         * held as a 'Behavior subject'. A behavior subject is an observable that can be subscribed too, and on
@@ -50,7 +34,7 @@ function LibraryEditController(props: LibraryEditControllerProps) {
             else setSelectedLibrary(Library.None);
         });
         return () => subscription.unsubscribe();
-    });
+    }, []);
 
     const updateLibrarySubmit = (values: any) => {
         console.log('submitted');
@@ -62,16 +46,13 @@ function LibraryEditController(props: LibraryEditControllerProps) {
         <>
             <Form
                 onSubmit={updateLibrarySubmit}
-                mutators={{
-                    setFieldValue: (args, state, utils) => {
-                        setFormValuesHelper(state, utils);
-                    },
-                }}
+                initialValues={selectedLibrary}
 
-                render={({ form, handleSubmit, ...rest }) => (
+                render={({form, handleSubmit}) => (
                     <>
                         <form onSubmit={handleSubmit}>
-                            <LibraryEdit onLoad={form.mutators.setFieldValue} library={selectedLibrary} libraryManager={libraryManager}/>
+                            <LibraryEdit
+                                library={selectedLibrary} libraryManager={libraryManager}/>
                         </form>
                     </>
                 )}

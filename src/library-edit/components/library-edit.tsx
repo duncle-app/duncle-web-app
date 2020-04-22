@@ -5,7 +5,6 @@ import {LibraryManager} from "../../control/library-manager";
 import EditField from "./EditField";
 
 interface LibraryEditProps {
-    onLoad(): void,
     library: Library,
     libraryManager: LibraryManager
 }
@@ -13,57 +12,51 @@ interface LibraryEditProps {
 export default function LibraryEdit(props: LibraryEditProps) {
     const {address, contact, city, county, id, level, libraryName, notes, sales, size, state, zip} = props.library;
     console.log('Library edit', props.library);
-    // this is the JSON object key that's returned when we click the the submit button.
-    // i.e. { library : { .... } }
-
-    useEffect(() => {
-        props.onLoad();
-    });
 
     const formLabels = [
         {
             identifier: 'name',
-            labelPlaceholder: 'Library Name',
+            label: 'Library Name',
             propName: libraryName,
         },
         {
             identifier: 'address',
-            labelPlaceholder: 'Address',
+            label: 'Address',
             propName: address,
         },
         {
             identifier: 'city',
-            labelPlaceholder: 'City',
+            label: 'City',
             propName: city,
         },
         {
             identifier: 'state',
-            labelPlaceholder: 'State',
+            label: 'State',
             propName: state,
         },
         {
             identifier: 'zip',
-            labelPlaceholder: 'Zip',
+            label: 'Zip',
             propName: zip,
         },
         {
             identifier: 'county',
-            labelPlaceholder: 'County',
+            label: 'County',
             propName: county,
         },
         {
             identifier: 'level',
-            labelPlaceholder: 'Level',
+            label: 'Level',
             propName: level,
         },
         {
             identifier: 'size',
-            labelPlaceholder: 'Size',
+            label: 'Size',
             propName: size,
         },
     ];
 
-    // todo - ask aaron
+
     return (
         <>
             <Grid container direction="column" spacing={1}>
@@ -73,15 +66,15 @@ export default function LibraryEdit(props: LibraryEditProps) {
                 {formLabels.map(field => {
                     return (
                         <EditField
-                            label={field.labelPlaceholder}
-                            placeholder={field.labelPlaceholder}
+                            label={field.label}
                             id={field.identifier}
+                            key={field.identifier}
                             value={field.propName}
                         />
                     )
                 })}
             </Grid>
-            <button/>
+            <button>Submit</button>
         </>
 
     );

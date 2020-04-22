@@ -3,13 +3,12 @@ import {Field} from "react-final-form";
 
 interface EditFieldProps {
     label: string,
-    placeholder: string,
     id: string,
     value: any,
 }
 
 function EditField(props: EditFieldProps) {
-    const {label, placeholder, id, value} = props;
+    const {label, id, value} = props;
 
     return (
         <div>
@@ -18,7 +17,6 @@ function EditField(props: EditFieldProps) {
                 name={id}
                 component="input"
                 type="text"
-                placeholder={placeholder}
                 data={value}
             />
         </div>
