@@ -47,7 +47,6 @@ function LibraryEditController(props: LibraryEditControllerProps) {
             <Form
                 onSubmit={updateLibrarySubmit}
                 initialValues={selectedLibrary}
-
                 render={({form, handleSubmit}) => (
                     <>
                         <form onSubmit={handleSubmit}>

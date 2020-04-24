@@ -3,13 +3,14 @@ import {Library} from "../model/library";
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {DummyLibraryService} from "./dummy-library-service";
+import {Sale} from "../model/sale";
 
 export class LibraryManager {
 
-    private libraryListService: DummyLibraryService;
+    private libraryService: DummyLibraryService;
     private appState: AppState;
     constructor(libraryListService: DummyLibraryService, appState: AppState) {
-        this.libraryListService = libraryListService;
+        this.libraryService = libraryListService;
         this.appState = appState;
     }
 
@@ -17,7 +18,7 @@ export class LibraryManager {
         if (this.appState.initialized()) {
             return this.appState.getLibraries();
         }
-        return this.libraryListService.getLibraries().pipe(
+        return this.libraryService.getLibraries().pipe(
             tap( x => this.appState.setLibraries(x))
         )
     }
@@ -37,5 +38,9 @@ export class LibraryManager {
 
     updateLibrary(library: Library) {
         alert("not implemented")
+    }
+
+    addSale(sale: Sale) {
+        throw new Error('Not Implemented.');
     }
 }

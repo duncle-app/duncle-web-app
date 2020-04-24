@@ -4,6 +4,7 @@ import {Library} from "../../model/library";
 import {useHistory, useLocation} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
 import {LibraryManager} from "../../control/library-manager";
+import {Sale} from "../../model/sale";
 
 interface LibraryDetailProps {
     libraryManager: LibraryManager
@@ -35,8 +36,9 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         history.push(`/library/${library.id}/edit`)
     }
 
-    function onNewSales(library: Library): void {
+    function onNewSales(sale: Sale): void {
         console.log('on new Sales Clicked.');
+        libraryManager.addSale(sale)
         // TODO: Show the new Sales component...
     }
 
