@@ -3,7 +3,7 @@ import {Library} from "../../model/library";
 import LibraryEdit from "../components/library-edit";
 import {LibraryManager} from "../../control/library-manager";
 import {useLocation} from "react-router-dom";
-import {Field, Form} from "react-final-form";
+import {Form} from "react-final-form";
 
 interface LibraryEditControllerProps {
     libraryManager: LibraryManager

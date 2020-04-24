@@ -10,12 +10,12 @@ interface LibraryEditProps {
 }
 
 export default function LibraryEdit(props: LibraryEditProps) {
-    const {address, contact, city, county, id, level, libraryName, notes, sales, size, state, zip} = props.library;
+    const {address, city, county, level, libraryName, size, state, zip} = props.library;
     console.log('Library edit', props.library);
 
     const formLabels = [
         {
-            identifier: 'name',
+            identifier: 'libraryName',
             label: 'Library Name',
             propName: libraryName,
         },
