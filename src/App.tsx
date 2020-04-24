@@ -7,6 +7,7 @@ import {LibraryDetailController} from "./library-detail/control/library-detail-c
 import {AppState} from "./control/app-state";
 import {LibraryManager} from "./control/library-manager";
 import LibraryEditController from "./library-edit/control/library-edit-controller";
+import Login from "./login/controller/login-controller";
 
 const appState: AppState = new AppState();
 const libraryService: DummyLibraryService = new DummyLibraryService();
@@ -17,13 +18,17 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/" children={<LibraryListController libraryManager={libraryManager}/>}
-                    />
-                    <Route exact path="/library/:libraryId" children={<LibraryDetailController
-                        libraryManager={libraryManager}/>}
-                    />
+                    <Route exact path="/"
+                       children={<Login/>}/>
+                    <Route exact path="/library"
+                       children={<LibraryListController
+                       libraryManager={libraryManager}/>}/>
+                    <Route exact path="/library/:libraryId"
+                        children={<LibraryDetailController
+                        libraryManager={libraryManager}/>}/>
                     <Route exact path="/library/:libraryId/edit"
-                           children={<LibraryEditController libraryManager={libraryManager}/>}/>
+                        children={<LibraryEditController
+                        libraryManager={libraryManager}/>}/>
                 </Switch>
             </BrowserRouter>
         </div>
