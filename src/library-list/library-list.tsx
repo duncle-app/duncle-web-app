@@ -1,10 +1,10 @@
-import { Library } from "../model/library";
+import {Library} from "../model/library";
 import LibraryOverview from "./components/library-overview";
 import React from "react";
-import AddLibrary from "./components/add-library";
-import { Divider, Card, CardHeader, CardContent } from "@material-ui/core";
+import {Card, CardContent, CardHeader, Divider} from "@material-ui/core";
 import useStyles from "../global-styles";
 import Grid from "@material-ui/core/Grid/Grid";
+
 interface LibraryListProps {
   libraries: Library[];
   onLibraryClick(library: Library): void;
@@ -21,8 +21,6 @@ function LibraryList(props: LibraryListProps) {
   } = props;
 
   const { cardHeader } = useStyles();
-
-
 
   return (
     <div>
