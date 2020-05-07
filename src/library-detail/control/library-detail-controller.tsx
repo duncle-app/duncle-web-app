@@ -26,8 +26,7 @@ export function LibraryDetailController(props: LibraryDetailProps) {
     let history = useHistory();
 
     function onBack(): void {
-        // history.goBack();
-        history.push('/')
+        history.goBack();
     }
 
     function onEdit(library: Library): void {

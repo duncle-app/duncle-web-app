@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const jake = async () => {
+const initializePouch = async () => {
     const localDb = new PouchDB('tcrm');
     // const remoteDb = new PouchDB('http://127.0.0.1:5984/tcrm');
     const remoteDb = new PouchDB('https://9847c227-5837-4157-b1ef-08b18c937630-bluemix.cloudant.com/testdb');
@@ -62,7 +62,7 @@ const jake = async () => {
 export default function Login() {
     let history = useHistory();
 
-    jake();
+    // initializePouch();
 
     const classes = useStyles();
 
