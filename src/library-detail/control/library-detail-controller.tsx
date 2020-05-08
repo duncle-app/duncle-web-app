@@ -4,7 +4,6 @@ import {Library} from "../../model/library";
 import {useHistory, useLocation} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
 import {LibraryManager} from "../../control/library-manager";
-import {Sale} from "../../model/sale";
 
 interface LibraryDetailProps {
     libraryManager: LibraryManager
@@ -34,12 +33,12 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         // console.log(`setting library to: ${library}`)
         history.push(`/library/${library.id}/edit`)
     }
-
-    function onNewSales(sale: Sale): void {
-        console.log('on new Sales Clicked.');
-        libraryManager.addSale(sale)
-        // TODO: Show the new Sales component...
-    }
+    //
+    // function onNewSales(sale: Sale): void {
+    //     console.log('on new Sales Clicked.');
+    //     libraryManager.addSale(sale)
+    //     // TODO: Show the new Sales component...
+    // }
 
     useEffect(() => {
         /*
@@ -60,5 +59,5 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         return () => subscription.unsubscribe();
     });
 
-    return (<LibraryDetail library={selectedLibrary} onBack={onBack} onEdit={onEdit} onNewSales={onNewSales}/>)
+    return (<LibraryDetail library={selectedLibrary} onBack={onBack} onEdit={onEdit}/>)
 }

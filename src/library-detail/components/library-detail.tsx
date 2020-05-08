@@ -1,16 +1,13 @@
 import React from 'react';
 import {Library} from "../../model/library";
-import {Sale} from "../../model/sale";
 
 interface LibraryDetailProps {
     library: Library,
     onBack(): void,
     onEdit(library: Library): void,
-    onNewSales(sale: Sale): void
 }
 
 function LibraryDetail(props: LibraryDetailProps) {
-    let salesTotal = 0;
     return (
         <div>
             <div>
@@ -35,10 +32,6 @@ function LibraryDetail(props: LibraryDetailProps) {
 
             <h2>Notes</h2>
             <div>{props.library.notes}</div>
-
-            <h2>Sales</h2>
-            <div>Total: {props.library.sales.forEach(x => salesTotal+=x.amount)}</div>
-            <div><button onClick={() => props.onNewSales(new Sale(55,'this is fantastic', props.library.id))}>+</button></div>
         </div>
     )
 }
