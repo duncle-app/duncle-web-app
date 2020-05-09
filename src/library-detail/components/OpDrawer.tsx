@@ -1,27 +1,43 @@
-import React from 'react'
+import React from "react";
 import useStyles from "../../global-styles";
-import {Library} from "../../model/library";
+import { Library } from "../../model/library";
+import { ListItem, List, Divider, ListItemText } from "@material-ui/core";
 
 interface drawerProps {
-    library: Library
+  library: Library;
 }
 
-export default ({library}: drawerProps) => {
-    // const {drawer} = useStyles();
-    const libraryKeys = Object.keys(library)
-    console.log(libraryKeys)
+export default ({ library }: drawerProps) => {
+  const { drawer } = useStyles();
 
-    return (
-        <div>
-            {
-                Object.values(library).map((row: any, i: number) => {
-                    function capitalizeFirstLetter(string: string) {
-                        return string.charAt(0).toUpperCase() + string.slice(1);
-                    }
-                    return <p key={i}>{`${capitalizeFirstLetter(libraryKeys[i])}: ${row}`}</p>
-                })
+  const { libraryName, city, state, address, contact } = library;
+  const { emailAddress, firstName, lastName, phoneNumber } = contact;
+  return (
+    <div className={drawer}>
+      <List>
+        <ListItem>
+          <ListItemText
+            primary={libraryName}
+            secondary={` ${address} ${city}, ${state}`}
+            primaryTypographyProps={{ variant: "h4" }}
+          />
+        </ListItem>
+        <Divider />
+        <ListItem>
+          <ListItemText
+            primary="Contacts"
+            primaryTypographyProps={{ variant: "h4" }}
+          />
+        </ListItem>
+        {}
+        <ListItem>
+          <ListItemText
+            primary={`${firstName} ${lastName}`}
+            secondary={`${emailAddress} ${phoneNumber}`}
+          />
+        </ListItem>
+      </List>
+    </div>
+  );
+};
 
-            }
-        </div>
-    );
-}
