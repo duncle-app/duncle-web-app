@@ -18,6 +18,8 @@ function LibraryAppbar() {
         <Grid container justify="center">
             <AppBar position="static" className={appHeader}>
                 <Toolbar>
+                    {/* Break out into it's own component */}
+                    {/* Could even set the size to be [Num elements / 12] */}
                     <Grid item xs={3}>
                         <Button color="inherit" className={appBarItem}>Dashboard</Button>
                     </Grid>

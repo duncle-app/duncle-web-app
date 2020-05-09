@@ -14,8 +14,12 @@ const useStyles = makeStyles((theme) => ({
     },
     appBarItem: {
         marginRight: theme.spacing(2),
-    }
-
+    },
+    drawer: {
+        width: 150,
+        maxWidth: 400,
+        backgroundColor: theme.palette.background.paper,
+    },
 }));
 
 export default useStyles;

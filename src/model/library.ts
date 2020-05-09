@@ -6,6 +6,7 @@ export class Library {
     public static None: Library =
         new Library( 'None', 'None', 'None', 'None', 'None', 'None', 'None','None',);
 
+
     constructor(libraryName: string, level: string, size: string, city: string, state: string, county: string, zip: string, address: string) {
         this.libraryName = libraryName;
         this.contact = Contact.None;
