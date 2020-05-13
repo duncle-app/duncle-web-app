@@ -10,6 +10,7 @@ import LibraryEditController from "./library-edit/control/library-edit-controlle
 import Login from "./login/controller/login-controller";
 import LibraryAppbar from "./library-appbar/LibraryAppbar";
 import LibraryCreate from "./library-create/LibraryCreate";
+import {usePouch} from "./control/hooks/UsePouch";
 
 const appState: AppState = new AppState();
 const libraryService: DummyLibraryService = new DummyLibraryService();
@@ -19,6 +20,13 @@ const libraryManager: LibraryManager = new LibraryManager(
 );
 
 function App() {
+
+    const pouch = usePouch()
+    console.log('pouch:',pouch)
+    // @ts-ignore
+    // const mrSir = await pouch.get('0380009f-0b66-4ac3-b363-d648e24208a2');
+    // console.log(mrSir)
+
   return (
     <div className="App">
       <BrowserRouter>
