@@ -1,8 +1,21 @@
 // todo - create local / dev / prod env
 import PouchDB from "pouchdb";
 
+export interface PouchReturnProps {
+    localDB: PouchDB.Database,
+    get: Function,
+    put: Function,
+}
+
 export function usePouch(): any {
-    const localPouch = new PouchDB('tcrm')
+    const localPouch: PouchDB.Database = new PouchDB('tcrm')
+
+    const remoteDatabase: PouchDB.Database = new PouchDB('http://127.0.0.1:5984/tcrm');
+
+    async function getInfo() {
+        console.log('Local db info:', await localPouch.info());
+        console.log('Remote db info:', await remoteDatabase.info());
+    }
 
     async function get(docId: any){
         try {
@@ -12,7 +25,26 @@ export function usePouch(): any {
         }
     }
 
-    return {localPouch, get};
+    async function put(docId: string, title: string) {
+        try {
+            return await localPouch.put({_id: docId, title})
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    console.log(getInfo())
+
+    // Setup database sync
+    localPouch.sync(remoteDatabase, {
+        live: true,
+    }).on('change', function() {
+        console.log('db changed');
+    }).on('error', function() {
+        console.log('sync error');
+    });
+
+    return {localPouch, get, put};
 }
 
 

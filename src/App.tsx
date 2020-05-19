@@ -10,7 +10,7 @@ import LibraryEditController from "./library-edit/control/library-edit-controlle
 import Login from "./login/controller/login-controller";
 import LibraryAppbar from "./library-appbar/LibraryAppbar";
 import LibraryCreate from "./library-create/LibraryCreate";
-import {usePouch} from "./control/hooks/UsePouch";
+import {PouchReturnProps, usePouch} from "./control/hooks/UsePouch";
 import {GlobalContext, initialValues} from "./control/GlobalContext";
 
 const appState: AppState = new AppState();
@@ -21,12 +21,10 @@ const libraryManager: LibraryManager = new LibraryManager(
 );
 
 function App() {
-
-    const pouch = usePouch()
+    const pouch: PouchReturnProps = usePouch()
     console.log('pouch:', pouch)
-    // @ts-ignore
-    // const mrSir = await pouch.get('0380009f-0b66-4ac3-b363-d648e24208a2');
-    // console.log(mrSir)
+    const mrSir = pouch.get('0380009f-0b66-4ac3-b363-d648e24208a2');
+    console.log("Testing POUCH GET from local", mrSir)
 
     return (
         <div className="App">
