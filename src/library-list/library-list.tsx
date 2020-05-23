@@ -7,36 +7,20 @@ import MaterialTable from "material-table";
 
 interface LibraryListProps {
     libraries: Library[];
-
     onLibraryClick(library: Library): void;
-
     onAddLibraryClick(): void;
-
     showAddLibraryComponent: boolean;
-
     onAddLibraryCancel(): void;
-
     onAddLibrarySubmit(library: Library): void;
 }
 
 function LibraryList(props: LibraryListProps) {
-    const {
-        onLibraryClick,
-        libraries,
-    } = props;
-
+    const {onLibraryClick, libraries} = props;
     const {cardHeader} = useStyles();
-
     const tableColumns = [
-        {
-            title: "Library", field: "libraryName",
-        },
-        {
-            title: "Contact", field: "contact.firstName",
-        },
-        {
-            title: "Phone", field: "contact.phoneNumber",
-        }
+        {title: "Library", field: "libraryName"},
+        {title: "Contact", field: "contact.firstName"},
+        {title: "Phone", field: "contact.phoneNumber"}
     ];
     return (
         <div>
@@ -57,19 +41,6 @@ function LibraryList(props: LibraryListProps) {
                                 }
                             ]}
                         />
-
-                        {/*<CardContent>*/}
-                            {/*{libraries.map((lib: Library) => (*/}
-                                {/*<>*/}
-                                    {/*<LibraryOverview*/}
-                                        {/*library={lib}*/}
-                                        {/*key={lib.id}*/}
-                                        {/*onClick={onLibraryClick}*/}
-                                    {/*/>*/}
-                                    {/*<Divider/>*/}
-                                {/*</>*/}
-                            {/*))}*/}
-                        {/*</CardContent>*/}
                     </Card>
                 </Grid>
             </Grid>

@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";
 import {useHistory} from "react-router";
 import PouchDB from 'pouchdb';
+import {usePouch} from "../../control/hooks/UsePouch";
 
 function Copyright() {
     return (
@@ -47,22 +48,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const initializePouch = async () => {
-    const localDb = new PouchDB('tcrm');
-    // const remoteDb = new PouchDB('http://127.0.0.1:5984/tcrm');
-    const remoteDb = new PouchDB('https://9847c227-5837-4157-b1ef-08b18c937630-bluemix.cloudant.com/testdb');
-
-    const localInfo = await localDb.info();
-    console.log('local info:',localInfo);
-
-    const remoteInfo = await remoteDb.info();
-    console.log('remote info:',remoteInfo);
-};
-
 export default function Login() {
     let history = useHistory();
-
-    // initializePouch();
 
     const classes = useStyles();
 

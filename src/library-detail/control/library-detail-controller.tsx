@@ -5,6 +5,8 @@ import {useHistory, useLocation} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
 import {LibraryManager} from "../../control/library-manager";
 
+import {GlobalContext} from "../../control/GlobalContext";
+
 interface LibraryDetailProps {
     libraryManager: LibraryManager
 }
@@ -59,5 +61,15 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         return () => subscription.unsubscribe();
     });
 
-    return (<LibraryDetail library={selectedLibrary} onBack={onBack} onEdit={onEdit}/>)
+    return (
+        <>
+            <GlobalContext.Consumer>
+                {
+                    ({authenticated}) => {
+                        return authenticated ? <LibraryDetail library={selectedLibrary} onBack={onBack} onEdit={onEdit}/> : <h1>You need to sign in</h1>;
+                    }
+                }
+            </GlobalContext.Consumer>
+        </>
+    )
 }
