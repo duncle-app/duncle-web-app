@@ -7,6 +7,6 @@ export default {
   component: Drawer,
 };
 
-export const Props = () => <Drawer library={newLibrary} />;
+export const withProps = () => <Drawer library={newLibrary} />;
 
 export const noProps = () => <Drawer />;
