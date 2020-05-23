@@ -13,4 +13,8 @@ export const withProps = () => (
   </MockForm>
 );
 
-export const noProps = () => <EditField />;
+export const noProps = () => (
+  <MockForm>
+    <EditField />
+  </MockForm>
+);

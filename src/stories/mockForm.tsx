@@ -3,10 +3,9 @@ import { Form } from "react-final-form";
 import { action } from "@storybook/addon-actions";
 
 function MockForm(props: any) {
-  const mockSubmit = (e: any) => action(e.target.values);
   return (
     <Form
-      onSubmit={() => mockSubmit}
+      onSubmit={action("submit")}
       render={({ handleSubmit }) => (
         <>
           <form onSubmit={handleSubmit}>{props.children}</form>
