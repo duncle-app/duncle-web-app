@@ -1,5 +1,6 @@
 export class Contact {
 
+
     public static None: Contact = new Contact('', '', '', '');
 
     constructor(firstName: string, lastName: string, phoneNumber: string, emailAddress: string) {
