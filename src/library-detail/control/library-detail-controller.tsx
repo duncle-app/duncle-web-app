@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Library} from "../../model/library";
+import Library from "../../model/library";
 
 import {useHistory, useLocation} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";

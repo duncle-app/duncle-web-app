@@ -1,5 +1,5 @@
 import {AppState} from "./app-state";
-import {Library} from "../model/library";
+import Library from "../model/library";
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {DummyLibraryService} from "./dummy-library-service";

@@ -1,4 +1,4 @@
-import {Library} from "../model/library";
+import Library from "../model/library";
 import {BehaviorSubject, Observable} from 'rxjs';
 
 export class AppState {

@@ -1,7 +1,7 @@
 import {Contact} from "./contact";
 import {Sale} from "./sale";
 
-export class Library {
+export default class Library {
 
     public static None: Library =
         new Library( 'None', 'None', 'None', 'None', 'None', 'None', 'None','None',);

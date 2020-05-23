@@ -1,4 +1,4 @@
-import {Library} from "../model/library";
+import Library from "../model/library";
 import React from "react";
 import {Card, CardHeader} from "@material-ui/core";
 import useStyles from "../global-styles";

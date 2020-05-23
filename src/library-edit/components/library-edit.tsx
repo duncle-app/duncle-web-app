@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Library} from "../../model/library";
+import Library from "../../model/library";
 import {Grid} from "@material-ui/core";
 import {LibraryManager} from "../../control/library-manager";
 import EditField from "./EditField";
