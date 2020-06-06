@@ -1,6 +1,6 @@
 import React from "react";
-import EditField from "../../library-edit/components/EditField";
-import MockForm from "../mockForm";
+import EditField from "./EditField";
+import MockForm from "../../storybook-mocks/mockForm";
 
 export default {
   title: "Edit Field",
