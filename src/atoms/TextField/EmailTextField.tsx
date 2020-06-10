@@ -1,25 +1,27 @@
 import React from 'react'
 import TextField from "@material-ui/core/TextField";
+import {Field, FieldInputProps} from "react-final-form";
 
-interface PasswordTextFieldProps {
-    onChange: (event: React.ChangeEvent<HTMLElement> | any) => void;
-}
-
-export default function EmailTextFieldProps({ onChange }: PasswordTextFieldProps) {
+export default function EmailTextField() {
     return (
-        <>
-            <TextField
-                onChange={onChange}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="email"
-                label="Email Address"
-                id="email"
-                autoComplete="email"
-                autoFocus
-            />
-        </>
+        <Field name="email">
+            {(props: FieldInputProps<any>) => (
+                <>
+                    <TextField
+                        onChange={props.input.onChange}
+                        value={props.input.value}
+                        name={props.input.name}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="Email Address"
+                        id="email"
+                        autoComplete="email"
+                        autoFocus
+                    />
+                </>
+            )}
+        </Field>
     );
 }

@@ -5,7 +5,8 @@ import Link from "@material-ui/core/Link";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {Field} from "react-final-form";
-import {EmailTextField, PasswordTextField} from "../../atoms/TextField";
+import EmailTextField from "../../atoms/TextField/EmailTextField";
+import PasswordTextField from "../../atoms/TextField/PasswordTextField";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
