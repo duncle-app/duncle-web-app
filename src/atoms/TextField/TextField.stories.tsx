@@ -1,9 +1,15 @@
 import React from "react";
-import TextField from "./TextField";
+import CustomTextField from "./CustomTextField";
+import EmailTextField from "./EmailTextField";
+import PasswordTextFieldProps from "./PasswordTextField";
 
 export default {
     title: "Atoms/TextField",
-    component: TextField,
+    component: CustomTextField,
 };
 
-export const withProps = () => <TextField name="Name" value="Mr Sir" />;
+export const emailField = () => <EmailTextField onChange={ () => {} } />;
+
+export const passwordField = () => <PasswordTextFieldProps onChange={ () => {} } />;
+
+export const customTextField = () => <CustomTextField name={"Mr Sir"} onChange={ () => {} } />;

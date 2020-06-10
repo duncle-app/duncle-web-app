@@ -5,6 +5,7 @@ import Link from "@material-ui/core/Link";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {Field} from "react-final-form";
+import {EmailTextField, PasswordTextField} from "../../atoms/TextField";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -35,39 +36,12 @@ export const RenderedForm = (props: any) => {
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Field name="email">
                 {props => (
-                    <>
-                        <TextField
-                            onChange={props.input.onChange}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                    </>
+                    <EmailTextField onChange={props.input.onChange}/>
                 )}
             </Field>
-
             <Field name="password">
                 {props => (
-                    <>
-                        <TextField
-                            onChange={props.input.onChange}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                    </>
+                    <PasswordTextField onChange={props.input.onChange}/>
                 )}
             </Field>
             <Button
