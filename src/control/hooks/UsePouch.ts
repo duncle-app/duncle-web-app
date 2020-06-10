@@ -1,16 +1,37 @@
 // todo - create local / dev / prod env
 import PouchDB from "pouchdb";
 
-export interface PouchReturnProps {
+export type PouchReturnProps = {
     localDB: PouchDB.Database,
     get: Function,
     put: Function,
 }
 
-export function usePouch(): any {
-    const localPouch: PouchDB.Database = new PouchDB('tcrm')
+export function useUserPouch(): any {
+    const { localPouch } = usePouch('user')
 
-    const remoteDatabase: PouchDB.Database = new PouchDB('http://127.0.0.1:5984/tcrm');
+    async function addUser(username: string, password: string, ) {
+        try {
+            return await localPouch.put({_id: new Date().toISOString(), username, password})
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    return {localPouch, addUser}
+}
+
+/**
+ * Returns
+ */
+export function useLibraryPouch(): any {
+    return usePouch('tcrm')
+}
+
+function usePouch(database: string): any {
+    const localPouch: PouchDB.Database = new PouchDB(database)
+
+    const remoteDatabase: PouchDB.Database = new PouchDB(`http://127.0.0.1:5984/${database}`);
 
     async function getInfo() {
         console.log('Local db info:', await localPouch.info());
@@ -33,7 +54,7 @@ export function usePouch(): any {
         }
     }
 
-    console.log(getInfo())
+    getInfo()
 
     // Setup database sync
     localPouch.sync(remoteDatabase, {
@@ -46,22 +67,3 @@ export function usePouch(): any {
 
     return {localPouch, get, put};
 }
-
-
-
-// const initializePouch = async (env: string) => {
-//     const localDb = new PouchDB('tcrm');
-//     GlobalContext.add(localDb)
-//     let remoteDb
-//     if (env == 'local') {
-//         remoteDb = new PouchDB('http://127.0.0.1:5984/tcrm');
-//     } else {
-//         remoteDb = new PouchDB('https://9847c227-5837-4157-b1ef-08b18c937630-bluemix.cloudant.com/testdb');
-//     }
-//
-//     const localInfo = await localDb.info();
-//     console.log('local info:',localInfo);
-//
-//     const remoteInfo = await remoteDb.info();
-//     console.log('remote info:',remoteInfo);
-// };

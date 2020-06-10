@@ -12,9 +12,3 @@ export const withProps = () => (
     <EditField label="Name" id="1" value="Mr. Sir" />
   </MockForm>
 );
-
-export const noProps = () => (
-  <MockForm>
-    <EditField />
-  </MockForm>
-);

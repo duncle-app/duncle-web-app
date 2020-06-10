@@ -1,6 +1,6 @@
 import React from "react";
 import useStyles from "../../global-styles";
-import { Library } from "../../model/library";
+import Library from "../../model/library";
 import { ListItem, List, Divider, ListItemText } from "@material-ui/core";
 
 interface drawerProps {

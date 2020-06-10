@@ -7,10 +7,10 @@ import {LibraryDetailController} from "./library-detail/control/library-detail-c
 import {AppState} from "./control/app-state";
 import {LibraryManager} from "./control/library-manager";
 import LibraryEditController from "./library-edit/control/library-edit-controller";
-import Login from "./login/controller/login-controller";
+import Login from "./login/controller/Login";
 import LibraryAppbar from "./library-appbar/LibraryAppbar";
 import LibraryCreate from "./library-create/LibraryCreate";
-import {PouchReturnProps, usePouch} from "./control/hooks/UsePouch";
+import {PouchReturnProps, useLibraryPouch} from "./control/hooks/UsePouch";
 import {GlobalContext, initialValues} from "./control/GlobalContext";
 
 const appState: AppState = new AppState();
@@ -21,7 +21,7 @@ const libraryManager: LibraryManager = new LibraryManager(
 );
 
 function App() {
-    const pouch: PouchReturnProps = usePouch()
+    const pouch: PouchReturnProps = useLibraryPouch()
     console.log('pouch:', pouch)
     const mrSir = pouch.get('0380009f-0b66-4ac3-b363-d648e24208a2');
     console.log("Testing POUCH GET from local", mrSir)
@@ -32,7 +32,12 @@ function App() {
                 <BrowserRouter>
                     <LibraryAppbar/>
                     <Switch>
-                        <Route exact path="/" children={<Login/>}/>
+                        <Route
+                            exact
+                            path="/"
+                            // @ts-ignore
+                            children={<Login/>}
+                        />
                         <Route
                             exact
                             path="/library"
