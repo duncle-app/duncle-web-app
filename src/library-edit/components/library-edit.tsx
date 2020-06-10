@@ -1,13 +1,11 @@
 import React from "react";
 import Library from "../../model/library";
 import { Grid } from "@material-ui/core";
-import EditField from "./EditField";
-import {LibraryManager} from "../../control/library-manager";
-import EmailTextField from '../../atoms/TextField/EmailTextField'
+import CustomTextField from "../../atoms/TextField/CustomTextField";
+import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
 
 interface LibraryEditProps {
   library: Library;
-  libraryManager: LibraryManager
 }
 
 export default function LibraryEdit(props: LibraryEditProps) {
@@ -70,19 +68,16 @@ export default function LibraryEdit(props: LibraryEditProps) {
     <>
       <Grid container direction="column" spacing={1}>
         <div>Library Edit</div>
-        <EmailTextField/>
         {formLabels.map((field) => {
           return (
-            <EditField
-              label={field.label}
-              id={field.identifier}
-              key={field.identifier}
-              value={field.propName}
+            <CustomTextField
+              name={field.label}
+              isRequired
             />
           );
         })}
       </Grid>
-      <button>Submit</button>
+      <FormSubmitButton DisplayText="Save Library"/>
     </>
   );
 }

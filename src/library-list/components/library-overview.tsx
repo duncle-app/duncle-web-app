@@ -1,5 +1,5 @@
 import React from "react";
-import { Library } from "../../model/library";
+import Library from "../../model/library";
 import { ListItem } from "@material-ui/core";
 
 interface LibraryOverviewProps {

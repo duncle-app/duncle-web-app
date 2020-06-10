@@ -1,5 +1,5 @@
-import { Contact } from "./contact";
-import { Sale } from "./sale";
+import Contact  from "./contact";
+import Sale from "./sale";
 
 export default class Library {
   public static None: Library = new Library(

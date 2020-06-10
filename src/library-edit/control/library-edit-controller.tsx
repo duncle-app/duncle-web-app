@@ -51,7 +51,7 @@ function LibraryEditController(props: LibraryEditControllerProps) {
                     <>
                         <form onSubmit={handleSubmit}>
                             <LibraryEdit
-                                library={selectedLibrary} libraryManager={libraryManager}/>
+                                library={selectedLibrary}/>
                         </form>
                     </>
                 )}

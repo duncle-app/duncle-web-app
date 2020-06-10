@@ -24,6 +24,7 @@ export default function CustomTextField({name, isRequired = false}: TextFieldPro
                         fullWidth
                         id={lowercaseName}
                         label={name}
+                        key={lowercaseName}
                     />
                 </>
             )}

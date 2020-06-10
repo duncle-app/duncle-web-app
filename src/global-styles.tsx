@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core";
 const patsGold: string = "#ffb612";
 
 const useStyles = makeStyles((theme) => ({
-  /* ...style2, */
   appHeader: {
     color: patsGold,
     background: "black",
@@ -20,6 +19,23 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 400,
     /* backgroundColor: theme.palette.background.paper, */
     background: "#FFFDD0",
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
   },
 }));
 

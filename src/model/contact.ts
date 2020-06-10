@@ -1,6 +1,4 @@
-export class Contact {
-
-
+export default  class Contact {
     public static None: Contact = new Contact('', '', '', '');
 
     constructor(firstName: string, lastName: string, phoneNumber: string, emailAddress: string) {
@@ -14,5 +12,4 @@ export class Contact {
     public lastName: string;
     public phoneNumber: string;
     public emailAddress: string;
-
 }
