@@ -1,6 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import {Field, FieldInputProps} from "react-final-form";
+import camelize from "../../control/camelize";
 
 interface TextFieldProps {
     name: string;
@@ -8,10 +9,10 @@ interface TextFieldProps {
 }
 
 export default function CustomTextField({name, isRequired = false}: TextFieldProps) {
-    const lowercaseName: string = name.toLowerCase();
+    const camelizedName: string = camelize(name);
 
     return (
-        <Field name={lowercaseName}>
+        <Field name={camelizedName}>
             {(props: FieldInputProps<any>) => (
                 <>
                     <TextField
@@ -22,9 +23,9 @@ export default function CustomTextField({name, isRequired = false}: TextFieldPro
                         margin="normal"
                         required={isRequired}
                         fullWidth
-                        id={lowercaseName}
+                        id={camelizedName}
                         label={name}
-                        key={lowercaseName}
+                        key={camelizedName}
                     />
                 </>
             )}

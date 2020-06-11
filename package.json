@@ -15,6 +15,7 @@
     "final-form": "^4.18.7",
     "material-table": "^1.57.2",
     "pouchdb": "^7.2.1",
+    "pouchdb-find": "^7.2.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-final-form": "^6.3.5",

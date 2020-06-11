@@ -1,14 +1,14 @@
 import React from 'react'
-import {RenderedForm} from "./RenderedForm";
+import {LogInForm} from "./LogInForm";
 import MockForm from "../../storybook-mocks/mockForm";
 
 export default {
     title: `Login/Form`,
-    component: RenderedForm,
+    component: LogInForm,
 };
 
 export const withProps = () => (
     <MockForm>
-        <RenderedForm/>
+        <LogInForm/>
     </MockForm>
 );

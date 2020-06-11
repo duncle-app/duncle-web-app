@@ -1,10 +1,18 @@
 import React from 'react'
 import TextField from "@material-ui/core/TextField";
 import {Field, FieldInputProps} from "react-final-form";
+import camelize from "../../control/camelize";
 
-export default function PasswordTextField() {
+type PasswordProps = {
+    fieldName?: string;
+}
+
+export default function ({ fieldName = "Password" } : PasswordProps) {
+    console.log("field name", fieldName)
+    const camelizedFieldName = camelize(fieldName)
+
     return (
-        <Field name="password">
+        <Field name={camelizedFieldName}>
             {(props: FieldInputProps<any>) => (
                 <>
                     <TextField
@@ -15,9 +23,9 @@ export default function PasswordTextField() {
                         margin="normal"
                         required
                         fullWidth
-                        label="Password"
+                        label={fieldName}
                         type="password"
-                        id="password"
+                        id={camelizedFieldName}
                         autoComplete="current-password"
                     />
                 </>

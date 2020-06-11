@@ -10,15 +10,33 @@ export type PouchReturnProps = {
 export function useUserPouch(): any {
     const { localPouch } = usePouch('user')
 
-    async function addUser(username: string, password: string, ) {
+    async function logInUser(username: string, password: string, ) {
         try {
-            return await localPouch.put({_id: new Date().toISOString(), username, password})
+            console.log(`Finding username: ${username}`)
+            /**
+             * TODO - left off at "find is not a function"
+              */
+            const findUser = await localPouch.find({
+                selector: username,
+                fields: ['_id', 'username', 'password'],
+                sort: ['name']
+            });
+            console.log('findUser', findUser)
         } catch(err) {
             console.log(err);
         }
     }
 
-    return {localPouch, addUser}
+    async function addUser(username: string, password: string, ) {
+        try {
+            return await localPouch.put({_id: `org.duncle.${username}`, username, password})
+            // return await localPouch.put({_id: new Date().toISOString(), username, password})
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    return {localPouch, addUser, logInUser}
 }
 
 /**

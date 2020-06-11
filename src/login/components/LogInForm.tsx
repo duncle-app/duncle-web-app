@@ -1,4 +1,3 @@
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import React from "react";
@@ -7,7 +6,7 @@ import PasswordTextField from "../../atoms/TextField/PasswordTextField";
 import useStyles from "../../global-styles";
 import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
 
-export const RenderedForm = (props: any) => {
+export const LogInForm = (props: any) => {
     const classes = useStyles();
     const {handleSubmit} = props;
 
