@@ -3,7 +3,7 @@ import MockForm from "../../storybook-mocks/mockForm";
 import {SignUpForm} from "./SignUpForm";
 
 export default {
-    title: "organisms/SignUp",
+    title: "Organisms/SignUpForm",
     component: SignUpForm,
 };
 

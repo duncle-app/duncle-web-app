@@ -7,7 +7,7 @@ import {LibraryDetailController} from "./library-detail/control/library-detail-c
 import {AppState} from "./control/app-state";
 import {LibraryManager} from "./control/library-manager";
 import LibraryEditController from "./library-edit/control/library-edit-controller";
-import Login from "./login/controller/Login";
+import Login from "./pages/LogIn/Login";
 import LibraryAppbar from "./library-appbar/LibraryAppbar";
 import LibraryCreate from "./library-create/LibraryCreate";
 import {PouchReturnProps, useLibraryPouch} from "./control/hooks/UsePouch";
