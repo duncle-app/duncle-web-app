@@ -10,13 +10,14 @@ import {useUserPouch} from "../../control/hooks/UsePouch";
 import {LogInForm} from "../../organisms/LogIn/LogInForm";
 import {Avatar} from "@material-ui/core";
 import useStyles from "../../global-styles";
+import User from "../../model/user";
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                Duncle
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -26,11 +27,11 @@ function Copyright() {
 
 export default function Login() {
     const classes = useStyles();
-    const {addUser, logInUser}: any = useUserPouch();
+    const { logInUser }: any = useUserPouch();
 
-    function submitForm(values: any) {
-        console.log(values)
-        const {email, password} = values;
+    function submitForm(user: User) {
+        console.log(user)
+        const {email, password} = user;
         const response = logInUser(email, password)
         console.log(response)
         alert(`${email} + ${password}`)

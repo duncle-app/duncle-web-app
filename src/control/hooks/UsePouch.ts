@@ -1,5 +1,6 @@
 // todo - create local / dev / prod env
 import PouchDB from "pouchdb";
+import User from "../../model/user";
 
 export type PouchReturnProps = {
     localDB: PouchDB.Database,
@@ -7,30 +8,27 @@ export type PouchReturnProps = {
     put: Function,
 }
 
+const USER_ID_PREFIX = "org.duncle.";
+
 export function useUserPouch(): any {
     const { localPouch } = usePouch('user')
 
-    async function logInUser(username: string, password: string, ) {
+    async function logInUser(email: string, password: string, ) {
         try {
-            console.log(`Finding username: ${username}`)
+            console.log(`Finding username: ${email}`);
             /**
-             * TODO - left off at "find is not a function"
+             * TODO - now to make sure the password is the same, validate that way
               */
-            const findUser = await localPouch.find({
-                selector: username,
-                fields: ['_id', 'username', 'password'],
-                sort: ['name']
-            });
-            console.log('findUser', findUser)
+            const user: User =  await localPouch.get(`${USER_ID_PREFIX}${email}`);
+            console.log('user', user);
         } catch(err) {
             console.log(err);
         }
     }
 
-    async function addUser(username: string, password: string, ) {
+    async function addUser({email, password, firstName, lastName}: User) {
         try {
-            return await localPouch.put({_id: `org.duncle.${username}`, username, password})
-            // return await localPouch.put({_id: new Date().toISOString(), username, password})
+            return await localPouch.put({_id: `${USER_ID_PREFIX}${email}`, email, password, firstName, lastName})
         } catch(err) {
             console.log(err);
         }
