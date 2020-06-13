@@ -13,14 +13,11 @@ const USER_ID_PREFIX = "org.duncle.";
 export function useUserPouch(): any {
     const { localPouch } = usePouch('user')
 
-    async function logInUser(email: string, password: string, ) {
+    async function logInUser(inputEmail: string, inputPassword: string) {
         try {
-            console.log(`Finding username: ${email}`);
-            /**
-             * TODO - now to make sure the password is the same, validate that way
-              */
-            const user: User =  await localPouch.get(`${USER_ID_PREFIX}${email}`);
-            console.log('user', user);
+            console.log(`Finding username: ${inputEmail}`);
+            const user : User =  await localPouch.get(`${USER_ID_PREFIX}${inputEmail}`);
+            return inputPassword === user.password ? user : "RETURN ACTUAL THING";
         } catch(err) {
             console.log(err);
         }

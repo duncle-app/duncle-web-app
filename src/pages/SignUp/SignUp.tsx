@@ -1,6 +1,6 @@
 import React from 'react'
 import useStyles from "../../global-styles";
-import {useUserPouch} from "../../control/hooks/UsePouch";
+import {useUserPouch} from "../../common/hooks/UsePouch";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {Avatar} from "@material-ui/core";

@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {useUserPouch} from "../../control/hooks/UsePouch";
+import {useUserPouch} from "../../common/hooks/UsePouch";
 import {LogInForm} from "../../organisms/LogIn/LogInForm";
 import {Avatar} from "@material-ui/core";
 import useStyles from "../../global-styles";

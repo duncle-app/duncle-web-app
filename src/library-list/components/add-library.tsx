@@ -1,7 +1,7 @@
 import React from 'react'
 import Library from "../../model/library";
 import {Form} from "react-final-form";
-import {DynamicTextField} from "../../control/DynamicComponents/DynamicTextField";
+import {DynamicTextField} from "../../common/DynamicComponents/DynamicTextField";
 
 interface AddLibraryProps {
     onCancel(): void,

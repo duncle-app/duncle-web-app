@@ -3,9 +3,9 @@ import Library from "../../model/library";
 
 import {useHistory, useLocation} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
-import {LibraryManager} from "../../control/library-manager";
+import {LibraryManager} from "../../common/library-manager";
 
-import {GlobalContext} from "../../control/GlobalContext";
+import {GlobalContext} from "../../common/GlobalContext";
 
 interface LibraryDetailProps {
     libraryManager: LibraryManager

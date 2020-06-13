@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Library from "../../model/library";
 import LibraryEdit from "../components/library-edit";
-import {LibraryManager} from "../../control/library-manager";
+import {LibraryManager} from "../../common/library-manager";
 import {useLocation} from "react-router-dom";
 import {Form} from "react-final-form";
 

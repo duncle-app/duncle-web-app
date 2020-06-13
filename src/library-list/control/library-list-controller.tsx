@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import Library from '../../model/library'
 import LibraryList from "../library-list";
-import {LibraryManager} from "../../control/library-manager";
+import {LibraryManager} from "../../common/library-manager";
 
 interface LibraryOverviewProps {
     libraryManager: LibraryManager;

@@ -1,5 +1,5 @@
 import React from 'react'
-import {LibraryManager} from "../control/library-manager";
+import {LibraryManager} from "../common/library-manager";
 
 
 interface LibraryCreateProps {
