@@ -12,6 +12,7 @@ import {Avatar} from "@material-ui/core";
 import useStyles from "../../../global-styles";
 import User from "../../../model/user";
 import {Err, Ok, Result, ResultAsync} from "neverthrow";
+import LoginService from "../../../services/LoginService";
 
 function Copyright() {
     return (
@@ -27,25 +28,29 @@ function Copyright() {
 }
 
 export default function Login() {
-    const classes = useStyles();
+    const {paper, avatar} = useStyles();
     const { fetchUser } = useUserPouch();
+    const loginService = new LoginService();
 
     async function submitForm(user: User) {
-        console.log(user)
-        const {email} = user;
-        const response = await fetchUser(email)
-        if (response.isOk()) {
-            console.log('success',response)
-            alert('success')
-        } else {
-            alert('failure')
+        try {
+            const res = await loginService.logInUser(user);
+        } catch (e) {
+            alert(`in log in page: ${e.message}`)
         }
+        // if (res.isOk()) {
+        //     console.log("move onto the next page")
+        //     alert("Success - logging in")
+        // } else {
+        //     console.log("Error - try again")
+        //     alert("Try again - show valiation here")
+        // }
     }
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
+            <div className={paper}>
+                <Avatar className={avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
