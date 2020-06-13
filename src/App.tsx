@@ -1,15 +1,15 @@
 import React from "react";
 import "./App.css";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import LibraryListController from "./library-list/control/library-list-controller";
+import LibraryListController from "./components/library-list/control/library-list-controller";
 import {DummyLibraryService} from "./common/dummy-library-service";
-import {LibraryDetailController} from "./library-detail/control/library-detail-controller";
+import {LibraryDetailController} from "./components/library-detail/control/library-detail-controller";
 import {AppState} from "./common/app-state";
 import {LibraryManager} from "./common/library-manager";
-import LibraryEditController from "./library-edit/control/library-edit-controller";
-import Login from "./pages/LogIn/Login";
-import LibraryAppbar from "./library-appbar/LibraryAppbar";
-import LibraryCreate from "./library-create/LibraryCreate";
+import LibraryEditController from "./components/library-edit/control/library-edit-controller";
+import Login from "./components/pages/LogIn/Login";
+import LibraryAppbar from "./components/library-appbar/LibraryAppbar";
+import LibraryCreate from "./components/library-create/LibraryCreate";
 import {PouchReturnProps, useLibraryPouch} from "./common/hooks/UsePouch";
 import {GlobalContext, initialValues} from "./common/GlobalContext";
 
