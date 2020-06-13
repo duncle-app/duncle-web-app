@@ -1,6 +1,7 @@
 // todo - create local / dev / prod env
 import PouchDB from "pouchdb";
 import User from "../../model/user";
+import {Err, err, ok, Result, ResultAsync} from "neverthrow";
 
 export type PouchReturnProps = {
     localDB: PouchDB.Database,
@@ -10,17 +11,14 @@ export type PouchReturnProps = {
 
 const USER_ID_PREFIX = "org.duncle.";
 
-export function useUserPouch(): any {
+export function useUserPouch() {
     const { localPouch } = usePouch('user')
 
-    async function logInUser(inputEmail: string, inputPassword: string) {
-        try {
-            console.log(`Finding username: ${inputEmail}`);
-            const user : User =  await localPouch.get(`${USER_ID_PREFIX}${inputEmail}`);
-            return inputPassword === user.password ? user : "RETURN ACTUAL THING";
-        } catch(err) {
-            console.log(err);
-        }
+    function fetchUser(inputEmail: string): ResultAsync<User, Error> {
+        console.log(`Finding username: ${inputEmail}`);
+        return ResultAsync.fromPromise(
+            localPouch.get(`${USER_ID_PREFIX}${inputEmail}`),
+            () => new Error("Attempt to find user failed"));
     }
 
     async function addUser({email, password, firstName, lastName}: User) {
@@ -31,7 +29,7 @@ export function useUserPouch(): any {
         }
     }
 
-    return {localPouch, addUser, logInUser}
+    return {localPouch, addUser, fetchUser}
 }
 
 /**

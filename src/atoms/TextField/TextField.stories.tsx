@@ -23,7 +23,7 @@ export const passwordField = () => (
 
 export const customTextField = () => (
     <MockForm>
-        <CustomTextField name={"Enter your custom text here"}/>
+        <CustomTextField name={"Custom Text"}/>
     </MockForm>
 )
 

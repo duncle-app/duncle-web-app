@@ -11,6 +11,7 @@ import {LogInForm} from "../../organisms/LogIn/LogInForm";
 import {Avatar} from "@material-ui/core";
 import useStyles from "../../global-styles";
 import User from "../../model/user";
+import {Err, Ok, Result, ResultAsync} from "neverthrow";
 
 function Copyright() {
     return (
@@ -27,14 +28,18 @@ function Copyright() {
 
 export default function Login() {
     const classes = useStyles();
-    const { logInUser }: any = useUserPouch();
+    const { fetchUser } = useUserPouch();
 
-    function submitForm(user: User) {
+    async function submitForm(user: User) {
         console.log(user)
-        const {email, password} = user;
-        const response = logInUser(email, password)
-        console.log(response)
-        alert(`${email} + ${password}`)
+        const {email} = user;
+        const response = await fetchUser(email)
+        if (response.isOk()) {
+            console.log('success',response)
+            alert('success')
+        } else {
+            alert('failure')
+        }
     }
     return (
         <Container component="main" maxWidth="xs">
