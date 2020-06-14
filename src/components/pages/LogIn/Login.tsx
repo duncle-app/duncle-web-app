@@ -36,15 +36,9 @@ export default function Login() {
         try {
             const res = await loginService.logInUser(user);
         } catch (e) {
-            alert(`in log in page: ${e.message}`)
+            console.error("error:",e)
+            alert(`Failed to find: ${e.message}`)
         }
-        // if (res.isOk()) {
-        //     console.log("move onto the next page")
-        //     alert("Success - logging in")
-        // } else {
-        //     console.log("Error - try again")
-        //     alert("Try again - show valiation here")
-        // }
     }
     return (
         <Container component="main" maxWidth="xs">
