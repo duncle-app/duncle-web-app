@@ -4,16 +4,19 @@ const patsGold: string = "#ffb612";
 
 const useStyles = makeStyles((theme) => ({
   appHeader: {
-    color: patsGold,
-    background: "black",
+    flexGrow: 1,
+    // color: patsGold,
+    // background: "black",
   },
   cardHeader: {
-    color: patsGold,
-    background: "#203731",
+    // color: patsGold,
+    // background: "#203731",
   },
-  appBarItem: {
-    marginRight: theme.spacing(2),
+  horizontalListItem: {
+    flexDirection: 'row',
+    display: 'flex',
   },
+
   drawer: {
     width: 150,
     maxWidth: 400,
@@ -36,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
   },
 }));
 

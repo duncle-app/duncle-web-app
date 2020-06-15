@@ -8,10 +8,11 @@ import {AppState} from "./common/app-state";
 import {LibraryManager} from "./common/library-manager";
 import LibraryEditController from "./components/library-edit/control/library-edit-controller";
 import Login from "./components/pages/LogIn/Login";
-import LibraryAppbar from "./components/library-appbar/LibraryAppbar";
 import LibraryCreate from "./components/library-create/LibraryCreate";
 import {PouchReturnProps, useLibraryPouch} from "./common/hooks/UsePouch";
 import {GlobalContext, initialValues} from "./common/GlobalContext";
+import SignUp from "./components/pages/SignUp/SignUp";
+import Navbar from "./components/molecules/Navbar/Navbar";
 
 const appState: AppState = new AppState();
 const libraryService: DummyLibraryService = new DummyLibraryService();
@@ -30,14 +31,15 @@ function App() {
         <div className="App">
             <GlobalContext.Provider value={initialValues}>
                 <BrowserRouter>
-                    <LibraryAppbar/>
+                    <Navbar/>
                     <Switch>
                         <Route
                             exact
-                            path="/"
-                            // @ts-ignore
-                            children={<Login/>}
-                        />
+                            path="/"><Login/></Route>
+                        <Route
+                            exact
+                            path="/signup"
+                        ><SignUp/></Route>
                         <Route
                             exact
                             path="/library"

@@ -1,6 +1,7 @@
 import React from 'react'
 import {LogInForm} from "./LogInForm";
 import MockForm from "../../storybook-mocks/mockForm";
+import {BrowserRouter} from "react-router-dom";
 
 export default {
     title: `Organisms/LogInForm`,
@@ -9,6 +10,8 @@ export default {
 
 export const withProps = () => (
     <MockForm>
-        <LogInForm/>
+        <BrowserRouter>
+            <LogInForm/>
+        </BrowserRouter>
     </MockForm>
 );

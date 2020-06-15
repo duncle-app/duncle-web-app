@@ -1,7 +1,6 @@
 // todo - create local / dev / prod env
 import PouchDB from "pouchdb";
 import User from "../../model/user";
-import {Either, err, ok} from "../utils/Either";
 
 export type PouchReturnProps = {
     localDB: PouchDB.Database,
@@ -10,15 +9,6 @@ export type PouchReturnProps = {
 }
 
 const USER_ID_PREFIX = "org.duncle.";
-
-export type PouchError = {
-    docId: string;
-    error: boolean;
-    message: string;
-    name: string;
-    reason: string;
-    status: number;
-}
 
 export function useUserPouch() {
     const { localPouch } = usePouch('user')
@@ -29,7 +19,7 @@ export function useUserPouch() {
             return await localPouch.get(`${USER_ID_PREFIX}${inputEmail}`);
         } catch (e) {
             console.error("error:",e)
-            throw new Error(`Error when making database call: status: ${e.status}, exception: ${e.name}, message: ${e.message}`);
+            throw new RecordNotFoundError("Error when making database call", e);
         }
     }
 
@@ -37,11 +27,33 @@ export function useUserPouch() {
         try {
             return await localPouch.put({_id: `${USER_ID_PREFIX}${email}`, email, password, firstName, lastName})
         } catch(err) {
-            console.log(err);
+            console.error(err);
+            throw new Error(`Unable to save user: ${err}`)
+
         }
     }
 
     return {localPouch, addUser, fetchUser}
+}
+
+export type PouchError = {
+    docId: string;
+    error: boolean;
+    message: string;
+    name: string;
+    reason: string;
+    status: number;
+}
+
+class RecordNotFoundError extends Error {
+    private pouchError: PouchError;
+
+    constructor(message: string, pouchError: PouchError) {
+        const {status, name, message: pouchMessage} = pouchError
+
+        super(`${message}: status: ${status}, exception: ${name}, message: ${pouchMessage} `);
+        this.pouchError = pouchError;
+    }
 }
 
 /**
