@@ -15,17 +15,24 @@ interface LibraryListProps {
 }
 
 function LibraryList(props: LibraryListProps) {
-    const {onLibraryClick, libraries} = props;
     const {cardHeader} = useStyles();
+
+    const {onLibraryClick, libraries} = props;
+
     const tableColumns = [
         {title: "Library", field: "libraryName"},
-        {title: "Contact", field: "contact.firstName"},
+        {
+            title: "Contact",
+            field: "contactName",
+            render: (rowData: Library) =>
+                `${rowData.contact.firstName} ${ rowData.contact.lastName }`
+        },
         {title: "Phone", field: "contact.phoneNumber"}
     ];
     return (
         <div>
             <Grid container justify="center">
-                <Grid item xs={10}>
+                <Grid item xs={11}>
                     <Card variant="outlined">
                         <CardHeader title="Libraries" className={cardHeader}/>
                         <MaterialTable

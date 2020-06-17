@@ -13,15 +13,17 @@ export default function Navbar() {
 
     return (
         <Grid container justify="center">
-            <AppBar position="static" className={appHeader}>
-                <Toolbar>
-                    <List component="nav" className={horizontalListItem}>
-                        <NavbarItem displayText="Dashboard" url="/"></NavbarItem>
-                        <NavbarItem displayText="Libraries" url="/library"></NavbarItem>
-                        <NavbarItem displayText="Add Library" url="/library/create"></NavbarItem>
-                    </List>
-                </Toolbar>
-            </AppBar>
+            <Grid item xs={11}>
+                <AppBar position="static" className={appHeader}>
+                    <Toolbar>
+                        <List component="nav" className={horizontalListItem}>
+                            <NavbarItem displayText="Dashboard" url="/"/>
+                            <NavbarItem displayText="Libraries" url="/library"/>
+                            <NavbarItem displayText="Add Library" url="/library/create"/>
+                        </List>
+                    </Toolbar>
+                </AppBar>
+            </Grid>
         </Grid>
     );
 }

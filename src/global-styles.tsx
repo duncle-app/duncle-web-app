@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   drawer: {
-    width: 150,
-    maxWidth: 400,
-    /* backgroundColor: theme.palette.background.paper, */
-    background: "#FFFDD0",
+    width: "15%",
+    maxWidth: "50%",
+    backgroundColor: theme.palette.background.paper,
+    // background: "#FFFDD0",
   },
   paper: {
     marginTop: theme.spacing(8),

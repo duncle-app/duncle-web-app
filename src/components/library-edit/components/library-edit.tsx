@@ -15,7 +15,6 @@ export default function LibraryEdit(props: LibraryEditProps) {
     county,
     level,
     libraryName,
-    size,
     state,
     zip,
   } = props.library;
@@ -57,11 +56,11 @@ export default function LibraryEdit(props: LibraryEditProps) {
       label: "Level",
       propName: level,
     },
-    {
-      identifier: "size",
-      label: "Size",
-      propName: size,
-    },
+    // {
+    //   identifier: "size",
+    //   label: "Size",
+    //   propName: size,
+    // },
   ];
 
   return (

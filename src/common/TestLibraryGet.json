@@ -1,57 +1,70 @@
 {
-  "libraries" : [
-    { "libraryName": "Deity Steve's Libarry",
+  "libraries": [
+    {
+      "libraryName": "Deity Steve's Libarry",
       "id": "1",
       "level": "K - 8",
-      "size":  "1200",
       "city": "Burnsville",
-      "state":  "MN",
+      "state": "MN",
       "county": "Dakota County",
-
       "zip": "55306",
       "address": "412 Crystal Lake Rd E",
       "contact": {
         "firstName": "Mr",
-        "lastName":"Sir",
+        "lastName": "Sir",
         "phoneNumber": "619-867-5309",
-        "emailAddress":"donteatpeople@hotmail.com"
+        "emailAddress": "donteatpeople@hotmail.com"
+      },
+      "salesRep":  {
+        "email": "jaredjohnson@gmail.com",
+        "firstName": "Jared",
+        "lastName": "Johnson"
       },
       "notes": "Be careful talking to Jeffrey. I don't like the way he looks at me when I talk to him.",
       "sales": []
     },
-    { "libraryName": "Dr. Mama's Libarry",
+    {
+      "libraryName": "Dr. Mama's Libarry",
       "id": "2",
-
       "level": "6 - 12",
-      "size":  "2500",
       "city": "Minneapolis",
-      "state":  "MN",
+      "state": "MN",
       "county": "Hennepin",
       "zip": "55404",
       "address": "2322 11th ave s",
       "contact": {
         "firstName": "Robert",
-        "lastName":"Baratheon",
+        "lastName": "Baratheon",
         "phoneNumber": "952-768-0309",
         "emailAddress": "Ilikewine@gmail.com"
+      },
+      "salesRep":  {
+        "email": "mrsir@gmail.com",
+        "firstName": "Mr",
+        "lastName": "Sir"
       },
       "notes": "Robert recently took the place of Aerys, who was very difficult difficult to deal with.",
       "sales": []
     },
-    { "libraryName": "Zorro Libarry",
+    {
+      "libraryName": "Zorro Libarry",
       "id": "3",
       "level": "K - 6",
-      "size":  "400",
       "city": "St Peter",
-      "state":  "MN",
+      "state": "MN",
       "county": "Dakota County",
       "zip": "56082",
       "address": "125 S 3rd St",
       "contact": {
         "firstName": "Jonny",
-        "lastName":"Depp",
+        "lastName": "Depp",
         "phoneNumber": "358-876-9899",
-        "emailAddress":"jdepp@gmail.com"
+        "emailAddress": "jdepp@gmail.com"
+      },
+      "salesRep":  {
+        "email": "tsuiter@gmail.com",
+        "firstName": "Terry",
+        "lastName": "Suiter"
       },
       "notes": "",
       "sales": []

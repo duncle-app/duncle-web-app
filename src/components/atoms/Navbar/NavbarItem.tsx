@@ -16,7 +16,7 @@ export default function NavbarItem({url, displayText}: NavbarItemProps) {
     return (
         <ListItem button onClick={() => navigate()}>
             <ListItemText>
-                <Typography color="inherit" variant="h5">
+                <Typography color="inherit" variant="h6">
                     {displayText}
                 </Typography>
             </ListItemText>

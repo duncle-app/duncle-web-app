@@ -4,7 +4,7 @@ import {newLibrary} from "../../storybook-mocks/constants";
 import MockForm from "../../storybook-mocks/mockForm";
 
 export default {
-    title: "Drawer",
+    title: "Atoms/Drawer",
     component: Drawer,
 };
 
