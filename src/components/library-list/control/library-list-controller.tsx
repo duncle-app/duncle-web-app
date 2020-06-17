@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Library from '../../../model/library'
 import LibraryList from "../library-list";
 import {LibraryManager} from "../../../common/library-manager";
+import {useLibraryPouch} from "../../../common/hooks/UsePouch";
 
 interface LibraryOverviewProps {
     libraryManager: LibraryManager;
@@ -10,15 +11,22 @@ interface LibraryOverviewProps {
 
 function LibraryListController(props: LibraryOverviewProps) {
     const initialLibrary: Library[] = [];
+    const [showAddLibraryComponent, setShowAddLibraryComponent] = useState(false);
+
     const [libraries, setLibraries]:
         [Library[], React.Dispatch<React.SetStateAction<Library[]>>] = useState(initialLibrary);
-    const [showAddLibraryComponent, setShowAddLibraryComponent] = useState(false);
     let history = useHistory();
 
+    // use library
+    const { getAll } = useLibraryPouch()
+
+    async function doLibraryCall() {
+        const list: Library[] = await getAll()
+        console.log(list)
+    }
+
     useEffect(() => {
-        props.libraryManager.getLibraries().subscribe(response => {
-            setLibraries(response);
-        })
+        doLibraryCall()
     });
 
     function routeToLibraryDetail(library: Library): void {

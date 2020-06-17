@@ -8,7 +8,6 @@ import {AppState} from "./common/app-state";
 import {LibraryManager} from "./common/library-manager";
 import LibraryEditController from "./components/library-edit/control/library-edit-controller";
 import Login from "./components/pages/LogIn/Login";
-import LibraryCreate from "./components/library-create/LibraryCreate";
 import {PouchReturnProps, useLibraryPouch} from "./common/hooks/UsePouch";
 import {GlobalContext, initialValues} from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
@@ -45,11 +44,11 @@ function App() {
                             path="/library"
                             children={<LibraryListController libraryManager={libraryManager}/>}
                         />
-                        <Route
-                            exact
-                            path="/library/create"
-                            children={<LibraryCreate libraryManager={libraryManager}/>}
-                        />
+                        {/*<Route*/}
+                        {/*    exact*/}
+                        {/*    path="/library/create"*/}
+                        {/*    children={<LibraryCreate libraryManager={libraryManager}/>}*/}
+                        {/*/>*/}
                         <Route
                             exact
                             path="/library/:libraryId"

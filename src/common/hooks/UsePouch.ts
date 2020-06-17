@@ -1,6 +1,7 @@
 // todo - create local / dev / prod env
 import PouchDB from "pouchdb";
 import User from "../../model/user";
+import Library from "../../model/library";
 
 export type PouchReturnProps = {
     localDB: PouchDB.Database,
@@ -60,7 +61,17 @@ class RecordNotFoundError extends Error {
  * Returns
  */
 export function useLibraryPouch(): any {
-    return usePouch('tcrm')
+    const { localPouch } = usePouch('tcrm')
+
+    async function getAll():Promise<Library[]> {
+        try {
+            return await localPouch.allDocs({include_docs: true})
+        } catch (err) {
+            throw new Error("Failed to get all docs")
+        }
+    }
+
+    return { getAll }
 }
 
 function usePouch(database: string): any {

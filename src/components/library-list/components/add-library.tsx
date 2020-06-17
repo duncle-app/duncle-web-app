@@ -5,7 +5,6 @@ import {DynamicTextField} from "../../../common/DynamicComponents/DynamicTextFie
 
 interface AddLibraryProps {
     onCancel(): void,
-
     onSubmit(library: Library): void
 }
 
