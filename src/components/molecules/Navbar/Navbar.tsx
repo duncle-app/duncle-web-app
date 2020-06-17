@@ -9,6 +9,11 @@ import NavbarItem from "../../atoms/Navbar/NavbarItem";
 type AppbarProps = {}
 
 export default function Navbar() {
+    // on handle change, do this & also history.push the new route
+    // const handleChange = (event: any, newValue: number) => setCurrentTab(newValue);
+    // <Tabs value={currentTab} onChange={handleChange}>
+
+
     const {appHeader, horizontalListItem} = useStyles()
 
     return (
