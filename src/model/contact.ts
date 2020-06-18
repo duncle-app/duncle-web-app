@@ -1,15 +1,13 @@
 export default class Contact {
-    public static None: Contact = new Contact('', '', '', '');
+    public static None: Contact = new Contact('None', 'None', 'None');
 
-    constructor(firstName: string, lastName: string, phoneNumber: string, emailAddress: string) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public librarian: string;
+    public phoneNumber: string;
+    public emailAddress: string;
+
+    constructor(librarian: string, phoneNumber: string, emailAddress: string) {
+        this.librarian = librarian;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
     }
-
-    public firstName: string;
-    public lastName: string;
-    public phoneNumber: string;
-    public emailAddress: string;
 }

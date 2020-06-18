@@ -17,17 +17,13 @@ import LoginService from "../../../services/LoginService";
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-                Duncle
-            {new Date().getFullYear()}
-            {'.'}
+            `Copyright © Duncle {new Date().getFullYear()}.`
         </Typography>
     );
 }
 
 export default function Login() {
     const {paper, avatar} = useStyles();
-    const { fetchUser } = useUserPouch();
     const loginService = new LoginService();
 
     async function submitForm(user: User) {

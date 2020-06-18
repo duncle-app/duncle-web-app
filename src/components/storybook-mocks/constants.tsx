@@ -11,8 +11,7 @@ export const newLibrary: Library = new Library(
   "Mr.Sir",
   "111111",
     new Contact(
-        "Juneau",
-        "Mauston",
+        "Juneau Mauston",
         "608-847-5616",
         "bluehman@maustonschools.org"
     ),

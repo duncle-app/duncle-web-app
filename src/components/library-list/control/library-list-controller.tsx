@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Library from '../../../model/library'
 import LibraryList from "../library-list";
 import {LibraryManager} from "../../../common/library-manager";
@@ -9,36 +9,53 @@ interface LibraryOverviewProps {
     libraryManager: LibraryManager;
 }
 
+type stink = {
+    doc?: any;
+    id: string;
+    key: string;
+    value: {
+        rev: string;
+        deleted?: boolean;
+    }
+}
+
 function LibraryListController(props: LibraryOverviewProps) {
     const initialLibrary: Library[] = [];
     const [showAddLibraryComponent, setShowAddLibraryComponent] = useState(false);
 
-    const [libraries, setLibraries]:
-        [Library[], React.Dispatch<React.SetStateAction<Library[]>>] = useState(initialLibrary);
+    const [libraries, setLibraries] = useState(initialLibrary);
     let history = useHistory();
 
     // use library
-    const { getAll } = useLibraryPouch()
-
-    async function doLibraryCall() {
-        const list: Library[] = await getAll()
-        console.log(list)
-    }
+    const {getAll} = useLibraryPouch()
 
     useEffect(() => {
-        doLibraryCall()
+        async function doLibraryCall() {
+            const response = await getAll()
+            let docs: Library[] = []
+            console.log("Got back list", response.rows)
+            response.rows.map((pouchRow: stink) => {
+                console.log("actual doc", pouchRow.doc)
+               docs.push(pouchRow.doc)
+            })
+            setLibraries(docs)
+        }
+        // doLibraryCall()
     });
 
     function routeToLibraryDetail(library: Library): void {
         history.push(`/library/${library.id}`);
     }
+
     function onAddLibraryClicked(): void {
         console.log('add library clicked');
         setShowAddLibraryComponent(true);
     }
+
     function onAddLibraryCancel(): void {
         setShowAddLibraryComponent(false);
     }
+
     function onAddLibrarySubmit(library: Library): void {
         props.libraryManager.addLibrary(library);
     }

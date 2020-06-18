@@ -11,7 +11,7 @@ export default ({ library }: drawerProps) => {
   const { drawer } = useStyles();
 
   const { libraryName, city, state, address, contact } = library;
-  const { emailAddress, firstName, lastName, phoneNumber } = contact;
+  const { emailAddress, librarian, phoneNumber } = contact;
   return (
     <div className={drawer}>
       <List>
@@ -32,7 +32,7 @@ export default ({ library }: drawerProps) => {
         {}
         <ListItem>
           <ListItemText
-            primary={`${firstName} ${lastName}`}
+            primary={`${librarian}`}
             secondary={`${emailAddress} ${phoneNumber}`}
           />
         </ListItem>

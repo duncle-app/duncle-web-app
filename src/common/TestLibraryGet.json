@@ -10,12 +10,11 @@
       "zip": "55306",
       "address": "412 Crystal Lake Rd E",
       "contact": {
-        "firstName": "Mr",
-        "lastName": "Sir",
+        "librarian": "Mr Sir",
         "phoneNumber": "619-867-5309",
         "emailAddress": "donteatpeople@hotmail.com"
       },
-      "salesRep":  {
+      "salesRep": {
         "email": "jaredjohnson@gmail.com",
         "firstName": "Jared",
         "lastName": "Johnson"
@@ -33,12 +32,11 @@
       "zip": "55404",
       "address": "2322 11th ave s",
       "contact": {
-        "firstName": "Robert",
-        "lastName": "Baratheon",
+        "librarian": "Robert Baratheon",
         "phoneNumber": "952-768-0309",
         "emailAddress": "Ilikewine@gmail.com"
       },
-      "salesRep":  {
+      "salesRep": {
         "email": "mrsir@gmail.com",
         "firstName": "Mr",
         "lastName": "Sir"
@@ -56,12 +54,11 @@
       "zip": "56082",
       "address": "125 S 3rd St",
       "contact": {
-        "firstName": "Jonny",
-        "lastName": "Depp",
+        "librarian": "Jonny Depp",
         "phoneNumber": "358-876-9899",
         "emailAddress": "jdepp@gmail.com"
       },
-      "salesRep":  {
+      "salesRep": {
         "email": "tsuiter@gmail.com",
         "firstName": "Terry",
         "lastName": "Suiter"

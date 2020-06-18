@@ -7,6 +7,7 @@ export default {
     component: Navbar,
 };
 
+
 export const withProps = () => (
     <BrowserRouter>
         <Navbar/>

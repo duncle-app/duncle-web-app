@@ -24,11 +24,11 @@ function LibraryList(props: LibraryListProps) {
         {
             title: "Contact",
             field: "contactName",
-            render: (rowData: Library) =>
-                `${rowData.contact.firstName} ${ rowData.contact.lastName }`
+            render: (rowData: Library) => `${rowData.contact.librarian}`
         },
         {title: "Phone", field: "contact.phoneNumber"}
     ];
+
     return (
         <div>
             <Grid container justify="center">

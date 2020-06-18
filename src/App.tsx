@@ -8,7 +8,6 @@ import {AppState} from "./common/app-state";
 import {LibraryManager} from "./common/library-manager";
 import LibraryEditController from "./components/library-edit/control/library-edit-controller";
 import Login from "./components/pages/LogIn/Login";
-import {PouchReturnProps, useLibraryPouch} from "./common/hooks/UsePouch";
 import {GlobalContext, initialValues} from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/molecules/Navbar/Navbar";
@@ -21,11 +20,6 @@ const libraryManager: LibraryManager = new LibraryManager(
 );
 
 function App() {
-    const pouch: PouchReturnProps = useLibraryPouch()
-    console.log('pouch:', pouch)
-    const mrSir = pouch.get('0380009f-0b66-4ac3-b363-d648e24208a2');
-    console.log("Testing POUCH GET from local", mrSir)
-
     return (
         <div className="App">
             <GlobalContext.Provider value={initialValues}>

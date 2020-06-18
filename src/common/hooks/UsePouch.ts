@@ -61,9 +61,13 @@ class RecordNotFoundError extends Error {
  * Returns
  */
 export function useLibraryPouch(): any {
-    const { localPouch } = usePouch('tcrm')
+    /**
+     * COMMENTED OUT UNTIL I GET A BETTER DEFINED DB SCHEMA
+     */
+    // const { localPouch } = usePouch('tcrm')
+    const { localPouch } = usePouch('tcrm-dev')
 
-    async function getAll():Promise<Library[]> {
+    async function getAll():Promise<PouchDB.Core.AllDocsResponse<Library>> {
         try {
             return await localPouch.allDocs({include_docs: true})
         } catch (err) {
