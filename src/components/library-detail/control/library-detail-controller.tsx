@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Library from "../../../model/library";
-
-import {useHistory, useLocation} from 'react-router-dom';
+import {useHistory, useLocation, useParams} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
 import {LibraryManager} from "../../../common/library-manager";
 
@@ -11,17 +10,15 @@ interface LibraryDetailProps {
     libraryManager: LibraryManager
 }
 
-function wait(ms: number) {
-    var start = new Date().getTime();
-    var end = start;
-    while (end < start + ms) {
-        end = new Date().getTime();
-    }
+type p = {
+    libraryId: string;
 }
 
 export function LibraryDetailController(props: LibraryDetailProps) {
     const {libraryManager} = props
     const [selectedLibrary, setSelectedLibrary] = useState(Library.None);
+
+    const { libraryId }: p = useParams()
 
     let route = useLocation();
     let history = useHistory();
@@ -33,14 +30,8 @@ export function LibraryDetailController(props: LibraryDetailProps) {
     function onEdit(library: Library): void {
         console.log('on edit clicked...');
         // console.log(`setting library to: ${library}`)
-        history.push(`/library/${library.id}/edit`)
+        history.push(`/library/${libraryId}/edit`)
     }
-    //
-    // function onNewSales(sale: Sale): void {
-    //     console.log('on new Sales Clicked.');
-    //     libraryManager.addSale(sale)
-    //     // TODO: Show the new Sales component...
-    // }
 
     useEffect(() => {
         /*
