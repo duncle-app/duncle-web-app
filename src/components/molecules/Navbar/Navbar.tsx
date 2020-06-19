@@ -13,7 +13,7 @@ export default function Navbar() {
     const navbarTabs: NavbarProps[] = [
         {name: "Dashboard", route: "/"},
         {name: "All Libraries", route: "/library",},
-        {name: "Add Library", route: "/library/create"}
+        {name: "Add Library", route: "/library/dog"}
     ]
 
     const [currentTab, setCurrentTab] = useState(0);
@@ -33,11 +33,6 @@ export default function Navbar() {
                     ))}
                 </Tabs>
             </AppBar>
-            {/*{tabs.map(({route}: TabObject, i) => (*/}
-            {/*    <TabPanel value={currentTab} index={i} key={i}>*/}
-            {/*        {route}*/}
-            {/*    </TabPanel>*/}
-            {/*))}*/}
         </>
     );
 }

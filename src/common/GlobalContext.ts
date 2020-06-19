@@ -1,13 +1,14 @@
-import React, {Context} from "react";
+import React, {Context, useCallback, useState} from "react";
+import useAuth, {useAuthReturn} from "./hooks/useAuth";
 
 type ContextProps = {
-    authenticated: boolean,
+    useAuth(): useAuthReturn,
     lang: string,
     theme: string
 }
 
 export const initialValues: ContextProps = {
-    authenticated: true,
+    useAuth,
     lang: 'en',
     theme: 'dark'
 }
