@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component, useContext} from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import useAuth from "../../../common/hooks/useAuth";
+import {GlobalContext} from "../../../common/GlobalContext";
 
 // @ts-ignore
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const {isAuthenticated} = useAuth()
+    const {isAuthenticated} = useContext(GlobalContext)
     console.log("isAuthenticated",isAuthenticated)
 
     return (

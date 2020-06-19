@@ -7,15 +7,15 @@ export type useAuthReturn = {
 
 export default function useAuth() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    console.log(`isAuthenticated`, isAuthenticated)
 
     return {
         isAuthenticated,
-        setIsAuthenticated,
-        // authenticate: () => {
-        //     console.log("in use auth before", isAuthenticated)
-        //     setIsAuthenticated(true)
-        //     console.log("in use auth after", isAuthenticated)
-        // },
+        authenticate: useCallback(() => {
+            console.log("in use auth before", isAuthenticated)
+            setIsAuthenticated(true)
+            console.log("in use auth after", isAuthenticated)
+        },[isAuthenticated]),
         // signout: useCallback(
         //     () =>
         //         setIsAuthenticated(false), []

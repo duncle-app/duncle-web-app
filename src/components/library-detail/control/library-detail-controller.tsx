@@ -52,15 +52,5 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         return () => subscription.unsubscribe();
     });
 
-    return (
-        <>
-            <GlobalContext.Consumer>
-                {
-                    ({authenticated}) => {
-                        return authenticated ? <LibraryDetail library={selectedLibrary} onBack={onBack} onEdit={onEdit}/> : <h1>You need to sign in</h1>;
-                    }
-                }
-            </GlobalContext.Consumer>
-        </>
-    )
+    return <LibraryDetail library={selectedLibrary} onBack={onBack} onEdit={onEdit}/>
 }

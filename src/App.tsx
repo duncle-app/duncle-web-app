@@ -7,7 +7,7 @@ import {AppState} from "./common/app-state";
 import {LibraryManager} from "./common/library-manager";
 import LibraryEditController from "./components/library-edit/control/library-edit-controller";
 import Login from "./components/pages/LogIn/Login";
-import {GlobalContext, initialValues} from "./common/GlobalContext";
+import {GlobalProvider} from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/molecules/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
@@ -31,7 +31,7 @@ const Unauthorized = () => (
 function App() {
     return (
         <div className="App">
-            <GlobalContext.Provider value={initialValues}>
+            <GlobalProvider>
                 <Router>
                     <Navbar/>
                     <button><Link to="/protected">Protected Page</Link></button>
@@ -84,7 +84,7 @@ function App() {
                         />
                     </Switch>
                 </Router>
-            </GlobalContext.Provider>
+            </GlobalProvider>
         </div>
     );
 }

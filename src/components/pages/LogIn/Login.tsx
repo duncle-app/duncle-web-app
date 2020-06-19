@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -11,16 +11,17 @@ import useStyles from "../../../global-styles";
 import User from "../../../model/user";
 import LoginService from "../../../services/LoginService";
 import useAuth from "../../../common/hooks/useAuth";
+import {GlobalContext} from "../../../common/GlobalContext";
 
 export default function Login() {
     const {paper, avatar} = useStyles();
     const loginService = new LoginService();
-    const {isAuthenticated, setIsAuthenticated, authenticate, signout} = useAuth()
+    const {isAuthenticated, authenticate} = useContext(GlobalContext)
 
     async function submitForm(user: User) {
         try {
             const res = await loginService.logInUser(user);
-            setIsAuthenticated(true)
+            authenticate()
         } catch (e) {
             console.error("error:",e)
             alert(`Failed to find: ${e.message}`)
