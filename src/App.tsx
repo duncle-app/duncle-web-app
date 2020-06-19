@@ -1,16 +1,16 @@
 import React from "react";
 import "./App.css";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import LibraryListController from "./components/library-list/control/library-list-controller";
+import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
 import {DummyLibraryService} from "./common/dummy-library-service";
 import {LibraryDetailController} from "./components/library-detail/control/library-detail-controller";
 import {AppState} from "./common/app-state";
 import {LibraryManager} from "./common/library-manager";
 import LibraryEditController from "./components/library-edit/control/library-edit-controller";
 import Login from "./components/pages/LogIn/Login";
-import {GlobalContext, initialValues} from "./common/GlobalContext";
+import {GlobalProvider} from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/molecules/Navbar/Navbar";
+import PrivateRoute from "./components/atoms/Route/PrivateRoute";
 
 const appState: AppState = new AppState();
 const libraryService: DummyLibraryService = new DummyLibraryService();
@@ -19,24 +19,47 @@ const libraryManager: LibraryManager = new LibraryManager(
     appState
 );
 
+const MrSir = () => <h3>Mr Sir</h3>
+const Protected = () => <h3>Protected</h3>
+const Unauthorized = () => (
+    <>
+        <h1>You are not authorized. </h1>
+        <Link to="/login"><button>Home Page</button></Link>
+    </>
+)
+
 function App() {
     return (
         <div className="App">
-            <GlobalContext.Provider value={initialValues}>
-                <BrowserRouter>
+            <GlobalProvider>
+                <Router>
                     <Navbar/>
+                    <button><Link to="/protected">Protected Page</Link></button>
                     <Switch>
-                        <Route
-                            exact
-                            path="/"><Login/></Route>
+                        <Redirect exact from="/" to="login"/>
                         <Route
                             exact
                             path="/signup"
-                        ><SignUp/></Route>
+                        >
+                            {/* TODO - PUBLIC ROUTE */}
+                            <SignUp/>
+                        </Route>
                         <Route
                             exact
+                            path="/login">
+                            {/* TODO - REDIRECT */}
+                            <Login/>
+                        </Route>
+                        <PrivateRoute
+                            exact
+                            path="/protected"
+                            component={Protected}
+                        />
+                        <PrivateRoute
+                            exact
                             path="/library"
-                            children={<LibraryListController libraryManager={libraryManager}/>}
+                            component={MrSir}
+                            // component={<LibraryListController libraryManager={libraryManager}/>}
                         />
                         {/*<Route*/}
                         {/*    exact*/}
@@ -55,9 +78,13 @@ function App() {
                             path="/library/:libraryId/edit"
                             children={<LibraryEditController libraryManager={libraryManager}/>}
                         />
+                        <Route
+                            path="/unauthorized"
+                            children={<Unauthorized/>}
+                        />
                     </Switch>
-                </BrowserRouter>
-            </GlobalContext.Provider>
+                </Router>
+            </GlobalProvider>
         </div>
     );
 }
