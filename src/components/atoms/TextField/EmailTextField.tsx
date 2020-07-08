@@ -5,12 +5,12 @@ import {Field, FieldInputProps} from "react-final-form";
 export default function EmailTextField() {
     return (
         <Field name="email">
-            {(props: FieldInputProps<any>) => (
+            {({input}: FieldInputProps<any>) => (
                 <>
                     <TextField
-                        onChange={props.input.onChange}
-                        value={props.input.value}
-                        name={props.input.name}
+                        onChange={input.onChange}
+                        value={input.value}
+                        name={input.name}
                         variant="outlined"
                         margin="normal"
                         required
