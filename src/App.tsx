@@ -56,12 +56,19 @@ function App() {
                             path="/protected"
                             component={Protected}
                         />
-                        <PrivateRoute
+                        <Route
                             exact
                             path="/library"
                             // component={MrSir}
-                            component={<LibraryListController libraryManager={libraryManager}/>}
+                            children={<LibraryListController libraryManager={libraryManager}/>}
                         />
+                        // todo - add private route, remove the need to pass in libraryManager?
+                        {/*<PrivateRoute*/}
+                        {/*    exact*/}
+                        {/*    path="/library"*/}
+                        {/*    // component={MrSir}*/}
+                        {/*    component={LibraryListController}*/}
+                        {/*/>*/}
                         {/*<Route*/}
                         {/*    exact*/}
                         {/*    path="/library/create"*/}

@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import Library from '../../../model/library'
 import LibraryList from "../library-list";
 import {LibraryManager} from "../../../common/library-manager";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
+import {GlobalContext} from "../../../common/GlobalContext";
 
 interface LibraryOverviewProps {
     libraryManager: LibraryManager;
@@ -19,9 +20,10 @@ type stink = {
     }
 }
 
-function LibraryListController(props: LibraryOverviewProps) {
+function LibraryListController({libraryManager}: LibraryOverviewProps) {
     const initialLibrary: Library[] = [];
     const [showAddLibraryComponent, setShowAddLibraryComponent] = useState(false);
+    const {libraryManager2} = useContext(GlobalContext)
 
     const [libraries, setLibraries] = useState(initialLibrary);
     let history = useHistory();
@@ -57,7 +59,7 @@ function LibraryListController(props: LibraryOverviewProps) {
     }
 
     function onAddLibrarySubmit(library: Library): void {
-        props.libraryManager.addLibrary(library);
+        libraryManager.addLibrary(library);
     }
 
 

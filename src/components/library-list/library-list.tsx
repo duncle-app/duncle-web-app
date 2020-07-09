@@ -4,6 +4,7 @@ import {Card, CardHeader} from "@material-ui/core";
 import useStyles from "../../global-styles";
 import Grid from "@material-ui/core/Grid/Grid";
 import MaterialTable from "material-table";
+import Table from "../atoms/Table/Table";
 
 interface LibraryListProps {
     libraries: Library[];
@@ -35,19 +36,7 @@ function LibraryList(props: LibraryListProps) {
                 <Grid item xs={11}>
                     <Card variant="outlined">
                         <CardHeader title="Libraries" className={cardHeader}/>
-                        <MaterialTable
-                            title="Libraries"
-                            columns={tableColumns}
-                            data={libraries}
-                            actions={[
-                                {
-                                    icon: 'create',
-                                    tooltip: 'Edit User',
-                                    // @ts-ignore
-                                    onClick: (event, rowData) => onLibraryClick(rowData)
-                                }
-                            ]}
-                        />
+                        <Table columns={tableColumns} libraries={libraries}/>
                     </Card>
                 </Grid>
             </Grid>

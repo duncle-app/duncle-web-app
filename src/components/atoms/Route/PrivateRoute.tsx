@@ -4,6 +4,7 @@ import {GlobalContext} from "../../../common/GlobalContext";
 
 // figure out how to pass the component ??
 // maybe need a redesign of the components, becauase most y components will have params passed in?
+// @ts-ignore
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const {isAuthenticated} = useContext(GlobalContext)
     console.log("isAuthenticated",isAuthenticated)

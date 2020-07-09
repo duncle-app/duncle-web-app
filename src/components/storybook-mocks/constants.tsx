@@ -23,5 +23,29 @@ export const newLibrary: Library = new Library(
         "id",
         "rev"
     )
-
 );
+
+export const newLibrary2: Library = new Library(
+  "Northwestern Side Elementary",
+  "K - 2",
+  "500",
+  "Hennepin City",
+  "MN",
+  "55408",
+  "1200 east road",
+    new Contact(
+        "Steve Duncan",
+        "608-847-5616",
+        "bluehman@maustonschools.org"
+    ),
+    new User(
+        "doggie@gmail.com",
+        "secret",
+        "Doggie",
+        "Hudson",
+        "id",
+        "rev"
+    )
+);
+
+
