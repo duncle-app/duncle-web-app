@@ -4,7 +4,7 @@ import Library from "../../../model/library";
 import {newLibrary, newLibrary2} from "../../storybook-mocks/constants";
 
 export default {
-    title: "Atoms/Table",
+    title: "Molecules/Table",
     component: Table,
 };
 
