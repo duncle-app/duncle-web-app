@@ -11,6 +11,7 @@ import {GlobalProvider} from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/molecules/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
+import AllLibraries from "./components/pages/LibraryList/AllLibraries";
 
 const appState: AppState = new AppState();
 const libraryService: DummyLibraryService = new DummyLibraryService();
@@ -58,9 +59,16 @@ function App() {
                         <PrivateRoute
                             exact
                             path="/library"
-                            component={MrSir}
-                            // component={<LibraryListController libraryManager={libraryManager}/>}
+                            // component={MrSir}
+                            component={AllLibraries}
                         />
+                        // todo - add private route, remove the need to pass in libraryManager?
+                        {/*<PrivateRoute*/}
+                        {/*    exact*/}
+                        {/*    path="/library"*/}
+                        {/*    // component={MrSir}*/}
+                        {/*    component={LibraryListController}*/}
+                        {/*/>*/}
                         {/*<Route*/}
                         {/*    exact*/}
                         {/*    path="/library/create"*/}
