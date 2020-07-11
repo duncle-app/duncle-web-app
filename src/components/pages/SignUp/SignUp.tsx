@@ -16,9 +16,9 @@ export default function SignUp() {
     const loginService = new LoginService();
 
     function submitForm(newUser: User) {
+        alert(`${newUser.email} + ${newUser.password} + ${newUser.firstName} + ${newUser.lastName}`)
         const response = loginService.signUpUser(newUser)
         console.log(response)
-        alert(`${newUser.email} + ${newUser.password} + ${newUser.firstName} + ${newUser.lastName}`)
     }
     return (
         <Container component="main" maxWidth="xs">

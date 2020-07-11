@@ -1,6 +1,6 @@
 import {useUserPouch} from "../common/hooks/UsePouch";
 import User from "../model/user";
-import {hash} from "argon2";
+import bcrypt from 'bcryptjs'
 
 type LoginServiceProps = {}
 
@@ -13,7 +13,6 @@ export default class LoginService {
         console.log(`actual password: ${password}`)
         console.log(`passed in: ${user.password}`)
 
-        // if (await argon2.verify(password, user.password)) {
         if (password === user.password) {
             alert("log in successful! Passwords match")
             return user
@@ -30,9 +29,9 @@ export default class LoginService {
             Please set up this environment variable to securely save passwords`)
         }
 
-        const hasedPassword = await hash(saltVariable + password);
+        const hashedPassword = await bcrypt.hashSync(saltVariable + password);
 
         const { addUser }: any = useUserPouch();
-        return addUser(email, hasedPassword, firstName, lastName)
+        return addUser(new User(email, hashedPassword, firstName, lastName))
     }
 }
