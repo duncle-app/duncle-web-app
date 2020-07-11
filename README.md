@@ -7,7 +7,7 @@ Populate your app with these variables with an .env file at the root.
 ```
 REACT_APP_CLOUDANT_USERNAME=
 REACT_APP_CLOUDANT_PASSWORD=
-REACT_APP_CLOUDANT_URL=
+REACT_APP_DATABASE_URL=
 ```
 
 ## Available Scripts

@@ -17,7 +17,7 @@ type stink = {
     }
 }
 
-function AllLibraries() {
+export default function() {
     const [libraries, setLibraries] = useState([Library.None]);
 
     const {getAll} = useLibraryPouch()
@@ -63,5 +63,3 @@ function AllLibraries() {
         </div>
     );
 }
-
-export default AllLibraries;
