@@ -29,6 +29,9 @@ const Unauthorized = () => (
     </>
 )
 
+console.log("all process env", process.env)
+console.log(`un & pw: ${process.env.USERNAME} ${process.env.PASS_WORD}`)
+
 function App() {
     return (
         <div className="App">
