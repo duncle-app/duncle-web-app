@@ -9,13 +9,14 @@ import {Form} from "react-final-form";
 import {SignUpForm} from "../../organisms/SignUp/SignUpForm";
 import {AccountCircle} from "@material-ui/icons";
 import User from "../../../model/user";
+import LoginService from "../../../services/LoginService";
 
 export default function SignUp() {
     const classes = useStyles();
-    const { addUser }: any = useUserPouch();
+    const loginService = new LoginService();
 
     function submitForm(newUser: User) {
-        const response = addUser(newUser)
+        const response = loginService.signUpUser(newUser)
         console.log(response)
         alert(`${newUser.email} + ${newUser.password} + ${newUser.firstName} + ${newUser.lastName}`)
     }
