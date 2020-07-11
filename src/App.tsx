@@ -29,17 +29,15 @@ const Unauthorized = () => (
     </>
 )
 
-console.log("all process env", process.env)
-console.log(`un & pw: ${process.env.USERNAME} ${process.env.PASS_WORD}`)
-
 function App() {
     return (
         <div className="App">
             <GlobalProvider>
                 <Router>
                     <Navbar/>
-                    <button><Link to="/protected">Protected Page</Link></button>
                     <Switch>
+                        {/* todo - auto route to dashboard page */}
+                        {/* todo - but then if we're not logged in, then route to login page */}
                         <Redirect exact from="/" to="login"/>
                         <Route
                             exact

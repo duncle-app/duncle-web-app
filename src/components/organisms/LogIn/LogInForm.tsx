@@ -7,6 +7,7 @@ import useStyles from "../../../global-styles";
 import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
 import {Link} from "react-router-dom";
 import {LinkTo} from "@storybook/addon-links";
+import Typography from "@material-ui/core/Typography";
 
 export const LogInForm = (props: any) => {
     const classes = useStyles();
@@ -20,16 +21,16 @@ export const LogInForm = (props: any) => {
             <Grid container>
                 <Grid item xs>
                     <Link to="/password/reset">
-                        <MuiLink variant="body2">
+                        <Typography variant="body2">
                             Forgot password?
-                        </MuiLink>
+                        </Typography>
                     </Link>
                 </Grid>
                 <Grid item>
                     <Link to="/signup">
-                        <MuiLink variant="body2">
+                        <Typography variant="body2">
                             Don't have an account? Sign Up
-                        </MuiLink>
+                        </Typography>
                     </Link>
                 </Grid>
             </Grid>

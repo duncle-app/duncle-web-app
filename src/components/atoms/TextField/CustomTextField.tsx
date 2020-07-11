@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import {Field, FieldInputProps} from "react-final-form";
-import camelize from "../../../common/utils/camelize";
+import camelize from "../../../utils/camelize";
 
 interface TextFieldProps {
     name: string;

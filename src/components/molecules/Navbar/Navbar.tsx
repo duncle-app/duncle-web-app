@@ -29,7 +29,7 @@ export default function Navbar() {
             <AppBar position="static">
                 <Tabs value={currentTab} onChange={handleChange} centered>
                     {navbarTabs.map(({name}) => (
-                        <Tab label={name}/>
+                        <Tab key={name} label={name}/>
                     ))}
                 </Tabs>
             </AppBar>
