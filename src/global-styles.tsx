@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   closeInput: {
-    margin: theme.spacing(0.75)
+    paddingRight: "1em"
   },
   drawer: {
     width: "15%",
