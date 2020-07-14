@@ -29,7 +29,7 @@ function LibraryEditController(props: LibraryEditControllerProps) {
         const subscription = libraryManager.getLibraries().subscribe((libraries: Library[]) => {
             console.log('calling LibraryEditController subscription');
             const libraryId = route.pathname.split('/')[2];
-            const library: Library | undefined = libraries.find(x => x.id === libraryId);
+            const library: Library | undefined = libraries.find(x => x._id === libraryId);
             if (library) setSelectedLibrary(library);
             else setSelectedLibrary(Library.None);
         });

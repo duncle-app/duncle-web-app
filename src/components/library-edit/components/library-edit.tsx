@@ -10,7 +10,7 @@ interface LibraryEditProps {
 
 export default function LibraryEdit(props: LibraryEditProps) {
   const {
-    address,
+    street,
     city,
     county,
     level,
@@ -29,7 +29,7 @@ export default function LibraryEdit(props: LibraryEditProps) {
     {
       identifier: "address",
       label: "Address",
-      propName: address,
+      propName: street,
     },
     {
       identifier: "city",

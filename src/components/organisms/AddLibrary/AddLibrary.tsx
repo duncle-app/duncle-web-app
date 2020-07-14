@@ -1,8 +1,5 @@
 import React from 'react'
 import CustomTextField from "../../atoms/TextField/CustomTextField";
-import Contact from "../../../model/contact";
-import User from "../../../model/user";
-import Sale from "../../../model/sale";
 import EmailTextField from "../../atoms/TextField/EmailTextField";
 import Grid from "@material-ui/core/Grid/Grid";
 import {Card, Divider, Typography} from "@material-ui/core";

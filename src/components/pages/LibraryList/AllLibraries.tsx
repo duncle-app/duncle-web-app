@@ -38,7 +38,7 @@ export default function() {
     })
 
     function routeToLibraryDetail(library: Library): void {
-        history.push(`/library/${library.id}`);
+        history.push(`/library/${library._id}`);
     }
 
     const tableColumns = [

@@ -1,10 +1,10 @@
 // @ts-ignore
 import User from "../src/model/user";
 
-interface Library {
+interface Table {
     _id: string;
     _rev?: string;
-    library: string;
+    libraryName: string;
     librarian: string;
     assistant: string;
     street: string;
@@ -14,33 +14,29 @@ interface Library {
     state: string; // default to WI
     zip: number;
     email: string;
-    phone: number; // but display as (XXX)-XXX-XXXX
+    phoneNumber: string; // but display as (XXX)-XXX-XXXX
     extension: string;
     level: string;
     size: number;
-    date_next_contact: string; // todo - ??? or date
-    notes: Object;
-        user: User;
-        date_created: string; // todo - ??? or date
-    total_sales: number;
-    last_sale: number;
-    date_updated: string; // todo - ??? or date
-    rep: Object;
-    user2: User;
+    dateNextContact?: string; // todo - ??? or date
+    // notes?: Notes 1..*
+        // user._id: string;
+        message: string
+        dateCreated: string; // todo - ??? or date
+    totalSales?: number;
+    lastSale?: number;
+    dateLastSale?: string; // todo - ??? or date
+    dateUpdated: string; // todo - ??? or date
+    // assignedRep: user.first_name;
 }
+
 interface User { // TABLE
     _id: string;
     _rev?: string;
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    date_created: string;
-    date_updated: string;
+    dateCreated: string;
+    dateUpdated: string;
     role: Object;
-}
-interface Role {
-    _id: string;
-    _rev?: string;
-    admin: string;
-    user3: string;
 }
