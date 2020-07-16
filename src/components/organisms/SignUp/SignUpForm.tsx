@@ -11,7 +11,7 @@ export const SignUpForm = (props: any) => {
 
     return (
         <>
-            <form className={classes.form} noValidate onSubmit={handleSubmit}>
+            <form className={classes.form} onSubmit={handleSubmit}>
                 <CustomTextField name="First Name" isRequired/>
                 <CustomTextField name="Last Name" isRequired/>
                 <EmailTextField/>

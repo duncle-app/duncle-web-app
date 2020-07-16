@@ -1,14 +1,14 @@
 import React from "react";
-import AddLibrary from "./AddLibrary"
 import MockForm from "../../storybook-mocks/mockForm";
+import AddLibraryForm from "./AddLibraryForm";
 
 export default {
-    title: "Organisms/AddLibrary",
-    component: AddLibrary,
+    title: "Organisms/AddLibraryForm",
+    component: AddLibraryForm,
 };
 
 export const withProps = () => (
     <MockForm>
-        <AddLibrary/>
+        <AddLibraryForm/>
     </MockForm>
 );

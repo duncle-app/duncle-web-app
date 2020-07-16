@@ -1,12 +1,13 @@
 import React from 'react'
 import CustomTextField from "../../atoms/TextField/CustomTextField";
-import EmailTextField from "../../atoms/TextField/EmailTextField";
 import Grid from "@material-ui/core/Grid/Grid";
-import {Card, Divider, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import useStyles from "../../../global-styles";
+import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
 
-export default function () {
-    const {closeInput} = useStyles();
+export default function (props: any) {
+    const {handleSubmit} = props;
+    const {closeInput, form} = useStyles();
     const isRequired: boolean = true;
 
     const librarianFields = [
@@ -24,29 +25,24 @@ export default function () {
         {label: "Level"},
         {label: "Size"},
         {label: "Email", isRequired},
-    ]
+    ];
 
     return (
-        <>
+        <form className={form} noValidate onSubmit={handleSubmit}>
             <Grid container justify="center">
-                <Typography component="h1" variant="h5">Rep: Mr Sir</Typography>
+                <Typography component="h1" variant="h5">Rep: Terry</Typography>
             </Grid>
             <Grid container justify="center">
                 {
                     librarianFields.map(
                         ({label, isRequired}) =>
-                            <>
-                                <Grid item xs={3}
-                                      className={closeInput}
-                                >
-                                    {/*<Divider variant="inset" component="li"/>*/}
-                                    <CustomTextField key={label} name={label} isRequired={isRequired}/>
-                                </Grid>
-                            </>
+                            <Grid item xs={3} className={closeInput}>
+                                <CustomTextField key={label} name={label} isRequired={isRequired}/>
+                            </Grid>
                     )
                 }
-                <EmailTextField/>
             </Grid>
-        </>
+            <FormSubmitButton DisplayText="Create Library"/>
+        </form>
     )
 }

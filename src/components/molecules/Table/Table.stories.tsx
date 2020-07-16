@@ -13,9 +13,9 @@ const tableColumns = [
     {
         title: "Contact",
         field: "contactName",
-        render: (rowData: Library) => `${rowData.contact.librarian}`
+        render: (rowData: Library) => `${rowData.librarian}`
     },
-    {title: "Phone", field: "contact.phoneNumber"}
+    {title: "Phone", field: "phoneNumber"}
 ];
 
 

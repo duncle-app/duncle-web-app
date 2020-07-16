@@ -1,70 +1,54 @@
 {
   "libraries": [
     {
-      "libraryName": "Deity Steve's Libarry",
-      "id": "1",
-      "level": "K - 8",
-      "city": "Burnsville",
-      "state": "MN",
-      "county": "Dakota County",
-      "zip": "55306",
-      "address": "412 Crystal Lake Rd E",
-      "contact": {
-        "librarian": "Mr Sir",
-        "phoneNumber": "619-867-5309",
-        "emailAddress": "donteatpeople@hotmail.com"
-      },
-      "salesRep": {
-        "email": "jaredjohnson@gmail.com",
-        "firstName": "Jared",
-        "lastName": "Johnson"
-      },
-      "notes": "Be careful talking to Jeffrey. I don't like the way he looks at me when I talk to him.",
-      "sales": []
-    },
-    {
       "libraryName": "Dr. Mama's Libarry",
-      "id": "2",
-      "level": "6 - 12",
-      "city": "Minneapolis",
-      "state": "MN",
-      "county": "Hennepin",
-      "zip": "55404",
-      "address": "2322 11th ave s",
-      "contact": {
-        "librarian": "Robert Baratheon",
-        "phoneNumber": "952-768-0309",
-        "emailAddress": "Ilikewine@gmail.com"
-      },
-      "salesRep": {
-        "email": "mrsir@gmail.com",
-        "firstName": "Mr",
-        "lastName": "Sir"
-      },
-      "notes": "Robert recently took the place of Aerys, who was very difficult difficult to deal with.",
-      "sales": []
+      "librarian": "Dr. Mama",
+      "assistant": "Deity Steve",
+      "street": "100 W 31st",
+      "district": "Blue light district",
+      "city": "amsterdam",
+      "county": "Sherriff County",
+      "state": "Wisconsin",
+      "zip": "55443",
+      "email": "sr@gmail.com",
+      "phoneNumber": 9553332323,
+      "level": "K - 12",
+      "size": 110,
+      "dateUpdated": "2000-00-00T00:00:00+0000",
+      "assignedRep": "Terry"
     },
     {
-      "libraryName": "Zorro Libarry",
-      "id": "3",
-      "level": "K - 6",
-      "city": "St Peter",
-      "state": "MN",
-      "county": "Dakota County",
-      "zip": "56082",
-      "address": "125 S 3rd St",
-      "contact": {
-        "librarian": "Jonny Depp",
-        "phoneNumber": "358-876-9899",
-        "emailAddress": "jdepp@gmail.com"
-      },
-      "salesRep": {
-        "email": "tsuiter@gmail.com",
-        "firstName": "Terry",
-        "lastName": "Suiter"
-      },
-      "notes": "",
-      "sales": []
-    }
-  ]
+      "libraryName": "Deity Steve's Libarry",
+      "librarian": "Laysha",
+      "assistant": "Deity Steve",
+      "street": "200 W 31st",
+      "district": "Green light district",
+      "city": "Amsterdam",
+      "county": "Bounty County",
+      "state": "Wisconsin",
+      "zip": "55443",
+      "email": "aabbcc@gmail.com",
+      "phoneNumber": 9553332323,
+      "level": "K - 4",
+      "size": 1100,
+      "dateUpdated": "2000-00-00T00:00:00+0000",
+      "assignedRep": "Steve"
+    },
+    {
+      "libraryName": "Diana's Library",
+      "librarian": "Danica",
+      "assistant": "Sergio",
+      "street": "1030 W 31st",
+      "district": "Green light district",
+      "city": "amsterdam",
+      "county": "LeSueur County",
+      "state": "Wisconsin",
+      "zip": "55443",
+      "email": "ilovedogs@gmail.com",
+      "phoneNumber": 9553332323,
+      "level": "10 - 12",
+      "size": 1450,
+      "dateUpdated": "2000-00-00T00:00:00+0000",
+      "assignedRep": "Terry"
+    }  ]
 }
