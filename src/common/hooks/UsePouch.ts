@@ -30,7 +30,6 @@ export function useUserPouch() {
         } catch(err) {
             console.error(err);
             throw new Error(`Unable to save user: ${err}`)
-
         }
     }
 

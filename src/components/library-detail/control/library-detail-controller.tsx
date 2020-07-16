@@ -5,6 +5,7 @@ import LibraryDetail from "../components/library-detail";
 import {LibraryManager} from "../../../common/library-manager";
 
 import {GlobalContext} from "../../../common/GlobalContext";
+import {NoLibrary} from "../../storybook-mocks/constants";
 
 interface LibraryDetailProps {
     libraryManager: LibraryManager
@@ -16,7 +17,7 @@ type p = {
 
 export function LibraryDetailController(props: LibraryDetailProps) {
     const {libraryManager} = props
-    const [selectedLibrary, setSelectedLibrary] = useState(Library.None);
+    const [selectedLibrary, setSelectedLibrary] = useState(NoLibrary);
 
     const { libraryId }: p = useParams()
 
@@ -44,9 +45,9 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         * */
         const subscription = libraryManager.getLibraries().subscribe((libraries: Library[]) => {
             const libraryId = route.pathname.split('/')[2];
-            const library: Library | undefined = libraries.find(x => x.id === libraryId);
+            const library: Library | undefined = libraries.find(x => x._id === libraryId);
             if (library) setSelectedLibrary(library);
-            else setSelectedLibrary(Library.None);
+            else setSelectedLibrary(NoLibrary);
         });
 
         return () => subscription.unsubscribe();
