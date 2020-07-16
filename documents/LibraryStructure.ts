@@ -1,32 +1,42 @@
 // @ts-ignore
 import User from "../src/model/user";
 
-interface Library {
+interface Table {
+    _id: string;
+    _rev?: string;
+    libraryName: string;
     librarian: string;
     assistant: string;
-    library: string;
-    address: string;
-    email: string;
-    phone: number; // but display as (XXX)-XXX-XXXX
-    extension: string;
+    street: string;
     district: string;
     city: string;
     county: string;
     state: string; // default to WI
+    zip: number;
+    email: string;
+    phoneNumber: string; // but display as (XXX)-XXX-XXXX
+    extension: string;
     level: string;
     size: number;
-    date_next_contact: string; // todo - ??? or date
-    notes: Object;
-        user: User;
-        date_created: string; // todo - ??? or date
-    sales: Object;
-        total_sales: number;
-        last_sale: number;
-        date_updated: string; // todo - ??? or date
-    user2: Object; // display as Rep
-        first_name: string;
-        last_name: string;
-        role: Object;
-            admin: string;
-            user3: string;
+    dateNextContact?: string; // todo - ??? or date
+    // notes?: Notes 1..*
+        // user._id: string;
+        message: string
+        dateCreated: string; // todo - ??? or date
+    totalSales?: number;
+    lastSale?: number;
+    dateLastSale?: string; // todo - ??? or date
+    dateUpdated: string; // todo - ??? or date
+    // assignedRep: user.first_name;
+}
+
+interface User { // TABLE
+    _id: string;
+    _rev?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateCreated: string;
+    dateUpdated: string;
+    role: Object;
 }

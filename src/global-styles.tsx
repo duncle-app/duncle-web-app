@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
 
+  closeInput: {
+    paddingRight: "1em"
+  },
   drawer: {
     width: "15%",
     maxWidth: "50%",

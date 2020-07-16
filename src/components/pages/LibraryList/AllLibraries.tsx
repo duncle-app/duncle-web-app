@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid/Grid";
 import Table from "../../molecules/Table/Table";
 import {useHistory} from "react-router-dom";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
+import {NoLibrary} from "../../storybook-mocks/constants";
 
 type stink = {
     doc?: any;
@@ -18,7 +19,7 @@ type stink = {
 }
 
 export default function() {
-    const [libraries, setLibraries] = useState([Library.None]);
+    const [libraries, setLibraries] = useState([NoLibrary]);
 
     const {getAll} = useLibraryPouch()
     const history = useHistory();
@@ -38,7 +39,7 @@ export default function() {
     })
 
     function routeToLibraryDetail(library: Library): void {
-        history.push(`/library/${library.id}`);
+        history.push(`/library/${library._id}`);
     }
 
     const tableColumns = [
@@ -46,9 +47,9 @@ export default function() {
         {
             title: "Contact",
             field: "contactName",
-            render: (rowData: Library) => `${rowData.contact.librarian}`
+            render: (rowData: Library) => `${rowData.librarian}`
         },
-        {title: "Phone", field: "contact.phoneNumber"}
+        {title: "Phone", field: "phoneNumber"}
     ];
 
     return (

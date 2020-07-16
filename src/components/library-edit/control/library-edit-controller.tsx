@@ -4,6 +4,7 @@ import LibraryEdit from "../components/library-edit";
 import {LibraryManager} from "../../../common/library-manager";
 import {useLocation} from "react-router-dom";
 import {Form} from "react-final-form";
+import {NoLibrary} from "../../storybook-mocks/constants";
 
 interface LibraryEditControllerProps {
     libraryManager: LibraryManager
@@ -11,7 +12,7 @@ interface LibraryEditControllerProps {
 
 function LibraryEditController(props: LibraryEditControllerProps) {
     // todo - srn - move this to a custom hook
-    const [selectedLibrary, setSelectedLibrary] = useState(Library.None);
+    const [selectedLibrary, setSelectedLibrary] = useState(NoLibrary);
     const {libraryManager} = props;
 
     let route = useLocation();
@@ -29,9 +30,9 @@ function LibraryEditController(props: LibraryEditControllerProps) {
         const subscription = libraryManager.getLibraries().subscribe((libraries: Library[]) => {
             console.log('calling LibraryEditController subscription');
             const libraryId = route.pathname.split('/')[2];
-            const library: Library | undefined = libraries.find(x => x.id === libraryId);
+            const library: Library | undefined = libraries.find(x => x._id === libraryId);
             if (library) setSelectedLibrary(library);
-            else setSelectedLibrary(Library.None);
+            else setSelectedLibrary(NoLibrary);
         });
         return () => subscription.unsubscribe();
     }, []);

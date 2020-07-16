@@ -4,12 +4,12 @@ import { newLibrary } from "../../storybook-mocks/constants";
 import MockForm from "../../storybook-mocks/mockForm";
 
 export default {
-  title: "Library Edit",
+  title: "Organisms/LibraryEdit",
   component: LibraryEdit,
 };
 
 export const Props = () => (
   <MockForm>
-    <LibraryEdit library={newLibrary} />
+    <LibraryEdit library={newLibrary}/>
   </MockForm>
 );

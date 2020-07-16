@@ -1,56 +1,27 @@
-import Contact from "./contact";
-import Sale from "./sale";
-import User from "./user";
+import Note from "./note";
 
-export default class Library {
-    public address: string;
-    public id: string;
-    public libraryName: string;
-    public notes: string;
-    public level: string;
-    public city: string;
-    public zip: string;
-    public state: string;
-    public county: string;
-    public contact: Contact;
-    public salesRep: User;
-    public sales: Sale[];
-
-    public static None: Library = new Library(
-        "None",
-        "None",
-        "None",
-        "None",
-        "None",
-        "None",
-        "None",
-        Contact.None,
-        User.None
-    );
-
-    constructor(
-        libraryName: string,
-        level: string,
-        city: string,
-        state: string,
-        county: string,
-        zip: string,
-        address: string,
-        contact: Contact = Contact.None,
-        salesRep: User = User.None
-    ) {
-        this.libraryName = libraryName;
-        this.level = level;
-        this.city = city;
-        this.state = state;
-        this.county = county;
-        this.zip = zip;
-        this.address = address;
-        this.id = "";
-        this.notes = "";
-        this.contact = contact;
-        this.salesRep = salesRep;
-        this.sales = [];
-    }
-
+export default interface Library {
+    libraryName: string,
+    librarian: string,
+    assistant: string,
+    street: string,
+    district: string,
+    city: string,
+    county: string,
+    state: string,
+    zip: string,
+    email: string,
+    phoneNumber: number,
+    extension?: string,
+    level: string,
+    size: number,
+    dateUpdated: string,
+    assignedRep: string,
+    _id?: string,
+    _rev?: string,
+    totalSales?: number,
+    lastSale?: number,
+    dateLastSale?: string,
+    dateNextContact?: string,
+    notes?: Note[],
 }

@@ -1,10 +1,11 @@
 import Library from "../model/library";
 import {BehaviorSubject, Observable} from 'rxjs';
+import {newLibrary} from "../components/storybook-mocks/constants";
 
 export class AppState {
     private isInitialized = false;
     private librariesSubject: BehaviorSubject<Library[]> = new BehaviorSubject<Library[]>([]);
-    private selectedLibrary: Library = Library.None;
+    private selectedLibrary: Library = newLibrary;
 
     public setLibraries(libraries: Library[]) {
         this.isInitialized = true;

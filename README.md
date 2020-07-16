@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Duncle
 
 ## Local ENV setup
 
@@ -17,7 +17,6 @@ In the project directory, you can run:
 
 ### `npm start`
 #### NOTE: this is used to start up a node.js server, which Heroku uses to serve up static build files  
-
 
 ### `npm start:dev`
 
@@ -47,3 +46,4 @@ echo NOTE: hard coding development for both the NODE_ENV and BABEL_ENV.. see htt
 ## Learn More
 ```
 
+This project, like literally every single other ReactJS app, was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,12 +1,10 @@
 import Grid from "@material-ui/core/Grid";
-import {default as MuiLink} from "@material-ui/core/Link";
 import React from "react";
 import EmailTextField from "../../atoms/TextField/EmailTextField";
 import PasswordTextField from "../../atoms/TextField/PasswordTextField";
 import useStyles from "../../../global-styles";
 import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
 import {Link} from "react-router-dom";
-import {LinkTo} from "@storybook/addon-links";
 import Typography from "@material-ui/core/Typography";
 
 export const LogInForm = (props: any) => {
@@ -14,7 +12,7 @@ export const LogInForm = (props: any) => {
     const {handleSubmit} = props;
 
     return (
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit}>
             <EmailTextField/>
             <PasswordTextField/>
             <FormSubmitButton DisplayText="Sign in"/>
