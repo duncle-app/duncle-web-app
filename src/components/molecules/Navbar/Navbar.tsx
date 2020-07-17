@@ -13,7 +13,7 @@ export default function Navbar() {
     const navbarTabs: NavbarProps[] = [
         {name: "Dashboard", route: "/"},
         {name: "All Libraries", route: "/library",},
-        {name: "Add Library", route: "/library/dog"}
+        {name: "Add Library", route: "/library/new"}
     ]
 
     const [currentTab, setCurrentTab] = useState(0);

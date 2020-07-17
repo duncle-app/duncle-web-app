@@ -10,6 +10,7 @@ export default {
 
 const tableColumns = [
     {title: "Library", field: "libraryName"},
+    {title: "City", field: "city"},
     {
         title: "Contact",
         field: "contactName",

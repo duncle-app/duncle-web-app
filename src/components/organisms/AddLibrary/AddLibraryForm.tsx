@@ -19,7 +19,7 @@ export default function (props: any) {
         {label: "Street", isRequired},
         {label: "City", isRequired},
         {label: "County", isRequired},
-        {label: "District"},
+        {label: "District", isRequired},
         {label: "Zip", isRequired},
         {label: "State", isRequired},
         {label: "Level"},
