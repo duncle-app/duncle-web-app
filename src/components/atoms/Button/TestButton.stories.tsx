@@ -22,7 +22,7 @@ const get = async (url: string) => {
 }
 
 
-const TestButton = () => {
+const PingRemoteDB = () => {
     const [text, setText] = useState("No response");
 
     return (
@@ -38,9 +38,9 @@ const TestButton = () => {
 }
 
 export default {
-    title: "Test/TestButton",
-    component: TestButton,
+    title: "Test/PingRemoteDB",
+    component: PingRemoteDB,
 };
 export const withProps = () => (
-    <TestButton/>
+    <PingRemoteDB/>
 );
