@@ -5,22 +5,21 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import {outlookResponse} from "./calendarConstants";
 
 interface OutlookEvent {
-    "@odata.id": string,
     "@odata.etag": string,
-    "Id": string,
-    "Subject": string,
-    "Start": {
-        "DateTime": string,
-        "TimeZone": string
+    id: string,
+    subject: string,
+    start: {
+        dateTime: string,
+        timeZone: string
     },
-    "End": {
-        "DateTime": string,
-        "TimeZone": string
+    end: {
+        dateTime: string,
+        timeZone: string
     },
-    "Organizer": {
-        "EmailAddress": {
-            "Name": string,
-            "Address": string
+    organizer: {
+        emailAddress: {
+            name: string,
+            address: string
         }
     }
 }
