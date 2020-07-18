@@ -1,5 +1,7 @@
 import React from 'react'
+// @ts-ignore
 import {momentLocalizer, Calendar, Event as CalendarEvent} from 'react-big-calendar'
+// @ts-ignore
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import moment from 'moment'
 
@@ -16,6 +18,7 @@ type props = {
     events: CalendarEvent[];
 }
 
+// @ts-ignore
 const onEventResize = (data) => {
     const { start, end } = data;
 
