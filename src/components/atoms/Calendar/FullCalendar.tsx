@@ -1,19 +1,68 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import {events} from "./calendarConstants";
+import {outlookResponse} from "./calendarConstants";
 
-export default () => (
-    <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        }}
-        events={events}
-    />
-)
+interface OutlookEvent {
+    "@odata.id": string,
+    "@odata.etag": string,
+    "Id": string,
+    "Subject": string,
+    "Start": {
+        "DateTime": string,
+        "TimeZone": string
+    },
+    "End": {
+        "DateTime": string,
+        "TimeZone": string
+    },
+    "Organizer": {
+        "EmailAddress": {
+            "Name": string,
+            "Address": string
+        }
+    }
+}
+
+export type FullCalendarProps = {
+    outlookResponse: OutlookResponse
+}
+
+export interface OutlookResponse {
+    "@odata.context": string,
+    value: OutlookEvent[],
+}
+
+interface CalendarEvent {
+    title: string,
+    start: string,
+    end: string,
+}
+
+export default ({outlookResponse: {value, ["@odata.context"]: mrsir}}: FullCalendarProps) => {
+// export default ({outlookResponse}: FullCalendarProps) => {
+    const [events, setEvents] = useState<CalendarEvent[]>([]);
+
+    console.log(mrsir)
+
+    useEffect(() => {
+        const newArray = value.map(({Subject, Start, End}) =>
+            ({start: Start.DateTime, end: End.DateTime, title: Subject}))
+        setEvents(newArray)
+    }, events)
+
+    return (
+        <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin]}
+            initialView="dayGridMonth"
+            headerToolbar={{
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            }}
+            events={events}
+        />
+    )
+}
 
