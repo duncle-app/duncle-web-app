@@ -14,47 +14,104 @@ export const events = [
     },
 ]
 
+// https://graph.microsoft.com/v1.0/me/events?$select=subject,organizer,start,end
 export const outlookResponse: OutlookResponse = {
-    "@odata.context": "https://outlook.office.com/api/beta/$metadata#Me/Events(Subject,Organizer,Start,End)",
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('sergnioa%40gmail.com')/events(subject,organizer,start,end)",
     "value": [
         {
-            "@odata.id": "https://outlook.office.com/api/beta/Users('ddfcd489-628b-40d7-b48b-57002df800e5@1717622f-1d94-4d0c-9d74-709fad664b77')/Events('AAMkAGI28tEyDAAA=')",
-            "@odata.etag": "W/\"nfZyf7VcrEKLNoU37KWlkQAA/LpDWw==\"",
-            "Id": "AAMkAGI28tEyDAAA=",
-            "Subject": "Scrum",
-            "Start": {
-                "DateTime": "2020-07-18T17:00:00",
-                "TimeZone": "Pacific Standard Time"
+            "@odata.etag": "W/\"cu93d2JG20qH6ZI0k1tbIwABhOPRGA==\"",
+            "id": "AQMkADAwATMwMAItMTljZC1iMTRjLTAwAi0wMAoARgAAA9ti9fRLfGhDntco2Bn73LMHAHLvd3cAYkbbSofpkjSTW1sAIwAAAgENAAAAcu93dwBiRttKh_mSNJNbWwAjAAGE5gpaAAAA",
+            "subject": "repeat event",
+            "start": {
+                "dateTime": "2020-07-29T15:00:00.0000000",
+                "timeZone": "UTC"
             },
-            "End": {
-                "DateTime": "2020-07-18T17:30:00",
-                "TimeZone": "Pacific Standard Time"
+            "end": {
+                "dateTime": "2020-07-29T15:30:00.0000000",
+                "timeZone": "UTC"
             },
-            "Organizer": {
-                "EmailAddress": {
-                    "Name": "user0TestUser",
-                    "Address": "user0@a830edad9050849NDA1.onmicrosoft.com"
+            "organizer": {
+                "emailAddress": {
+                    "name": "sergio najera",
+                    "address": "outlook_D7FC0A00C2A69999@outlook.com"
                 }
             }
         },
         {
-            "@odata.id": "https://outlook.office.com/api/beta/Users('ddfcd489-628b-40d7-b48b-57002df800e5@1717622f-1d94-4d0c-9d74-709fad664b77')/Events('AAMkAGI28tEyCAAA=')",
-            "@odata.etag": "W/\"nfZyf7VcrEKLNoU37KWlkQAA/LpDWg==\"",
-            "Id": "AAMkAGI28tEyCAAA=",
-            "Subject": "team lunch",
-            "Start": {
-                "DateTime": "2020-07-18T00:00:00",
-                "TimeZone": "Pacific Standard Time"
+            "@odata.etag": "W/\"cu93d2JG20qH6ZI0k1tbIwABhOPRMg==\"",
+            "id": "AQMkADAwATMwMAItMTljZC1iMTRjLTAwAi0wMAoARgAAA9ti9fRLfGhDntco2Bn73LMHAHLvd3cAYkbbSofpkjSTW1sAIwAAAgENAAAAcu93dwBiRttKh_mSNJNbWwAjAAGE5gpZAAAA",
+            "subject": "new event",
+            "start": {
+                "dateTime": "2020-07-28T19:30:00.0000000",
+                "timeZone": "UTC"
             },
-            "End": {
-                "DateTime": "2020-07-23T00:00:00",
-                "TimeZone": "Pacific Standard Time"
+            "end": {
+                "dateTime": "2020-07-28T21:00:00.0000000",
+                "timeZone": "UTC"
             },
-            "Organizer": {
-                "EmailAddress": {
-                    "Name": "user0TestUser",
-                    "Address": "user0@a830edad9050849NDA1.onmicrosoft.com"
+            "organizer": {
+                "emailAddress": {
+                    "name": "sergio najera",
+                    "address": "outlook_D7FC0A00C2A69999@outlook.com"
                 }
             }
         },
+        {
+            "@odata.etag": "W/\"cu93d2JG20qH6ZI0k1tbIwABhOPRDg==\"",
+            "id": "AQMkADAwATMwMAItMTljZC1iMTRjLTAwAi0wMAoARgAAA9ti9fRLfGhDntco2Bn73LMHAHLvd3cAYkbbSofpkjSTW1sAIwAAAgENAAAAcu93dwBiRttKh_mSNJNbWwAjAAGE5gpYAAAA",
+            "subject": "doggie",
+            "start": {
+                "dateTime": "2020-07-23T00:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2020-07-27T00:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "organizer": {
+                "emailAddress": {
+                    "name": "sergio najera",
+                    "address": "outlook_D7FC0A00C2A69999@outlook.com"
+                }
+            }
+        },
+        {
+            "@odata.etag": "W/\"cu93d2JG20qH6ZI0k1tbIwABhOPRCQ==\"",
+            "id": "AQMkADAwATMwMAItMTljZC1iMTRjLTAwAi0wMAoARgAAA9ti9fRLfGhDntco2Bn73LMHAHLvd3cAYkbbSofpkjSTW1sAIwAAAgENAAAAcu93dwBiRttKh_mSNJNbWwAjAAGE5gpXAAAA",
+            "subject": "Mister Sirrrr",
+            "start": {
+                "dateTime": "2020-07-21T15:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2020-07-21T20:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "organizer": {
+                "emailAddress": {
+                    "name": "sergio najera",
+                    "address": "outlook_D7FC0A00C2A69999@outlook.com"
+                }
+            }
+        },
+        {
+            "@odata.etag": "W/\"cu93d2JG20qH6ZI0k1tbIwABhOPQjQ==\"",
+            "id": "AQMkADAwATMwMAItMTljZC1iMTRjLTAwAi0wMAoARgAAA9ti9fRLfGhDntco2Bn73LMHAHLvd3cAYkbbSofpkjSTW1sAIwAAAgENAAAAcu93dwBiRttKh_mSNJNbWwAjAAGE5gpWAAAA",
+            "subject": "Mr sir",
+            "start": {
+                "dateTime": "2020-07-20T15:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2020-07-20T15:30:00.0000000",
+                "timeZone": "UTC"
+            },
+            "organizer": {
+                "emailAddress": {
+                    "name": "sergio najera",
+                    "address": "outlook_D7FC0A00C2A69999@outlook.com"
+                }
+            }
+        }
     ]
+}
