@@ -9,28 +9,11 @@ interface LibraryDetailProps {
     libraryManager: LibraryManager
 }
 
-type p = {
-    libraryId: string;
-}
-
 export function LibraryDetailController(props: LibraryDetailProps) {
     const {libraryManager} = props
     const [selectedLibrary, setSelectedLibrary] = useState(NoLibrary);
 
-    const {libraryId}: p = useParams()
-
     let route = useLocation();
-    let history = useHistory();
-
-    function onBack(): void {
-        history.goBack();
-    }
-
-    function onEdit(library: Library): void {
-        console.log('on edit clicked...');
-        // console.log(`setting library to: ${library}`)
-        history.push(`/library/${libraryId}/edit`)
-    }
 
     useEffect(() => {
         /*
@@ -53,5 +36,5 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         return () => subscription.unsubscribe();
     });
 
-    return <ViewLibrary library={selectedLibrary} onBack={onBack} onEdit={onEdit}/>
+    return <ViewLibrary library={selectedLibrary}/>
 }

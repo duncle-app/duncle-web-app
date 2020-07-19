@@ -10,14 +10,14 @@ interface drawerProps {
 export default ({ library }: drawerProps) => {
   const { drawer } = useStyles();
 
-  const { libraryName, city, state, street, email, librarian, phoneNumber } = library;
+  const { libraryName, city, state, street, zip, email, librarian, phoneNumber } = library;
   return (
     <div className={drawer}>
       <List>
         <ListItem>
           <ListItemText
             primary={libraryName}
-            secondary={` ${street} ${city}, ${state}`}
+            secondary={` ${street} ${city}, ${state}, ${zip}`}
             primaryTypographyProps={{ variant: "h4" }}
           />
         </ListItem>
@@ -28,7 +28,6 @@ export default ({ library }: drawerProps) => {
             primaryTypographyProps={{ variant: "h4" }}
           />
         </ListItem>
-        {}
         <ListItem>
           <ListItemText
             primary={`${librarian}`}
