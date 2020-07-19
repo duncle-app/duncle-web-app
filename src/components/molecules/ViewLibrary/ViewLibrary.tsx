@@ -1,6 +1,6 @@
 import React from "react";
 import Library from "../../../model/library";
-import OpDrawer from "../../library-detail/components/OpDrawer";
+import OpDrawer from "../../atoms/ContactDrawer/ContactDrawer";
 
 interface LibraryDetailProps {
   library: Library;
