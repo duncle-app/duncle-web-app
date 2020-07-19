@@ -3,8 +3,6 @@ import Library from "../../../model/library";
 import {useHistory, useLocation, useParams} from 'react-router-dom';
 import LibraryDetail from "../components/library-detail";
 import {LibraryManager} from "../../../common/library-manager";
-
-import {GlobalContext} from "../../../common/GlobalContext";
 import {NoLibrary} from "../../storybook-mocks/constants";
 
 interface LibraryDetailProps {
@@ -19,7 +17,7 @@ export function LibraryDetailController(props: LibraryDetailProps) {
     const {libraryManager} = props
     const [selectedLibrary, setSelectedLibrary] = useState(NoLibrary);
 
-    const { libraryId }: p = useParams()
+    const {libraryId}: p = useParams()
 
     let route = useLocation();
     let history = useHistory();
@@ -43,12 +41,14 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         * example through getting internet connection, then the behavior subject will be updated, and will emit its new
         * value. This subscription will get the new value and update the UI seamlessly.
         * */
-        const subscription = libraryManager.getLibraries().subscribe((libraries: Library[]) => {
-            const libraryId = route.pathname.split('/')[2];
-            const library: Library | undefined = libraries.find(x => x._id === libraryId);
-            if (library) setSelectedLibrary(library);
-            else setSelectedLibrary(NoLibrary);
-        });
+        const subscription = libraryManager
+            .getLibraries()
+            .subscribe((libraries: Library[]) => {
+                const libraryId = route.pathname.split('/')[2];
+                const library: Library | undefined = libraries.find(x => x._id === libraryId);
+                if (library) setSelectedLibrary(library);
+                else setSelectedLibrary(NoLibrary);
+            });
 
         return () => subscription.unsubscribe();
     });
