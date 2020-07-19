@@ -6,6 +6,7 @@ import ErrorMessage from './ErrorMessage';
 import Welcome from './Welcome';
 import 'bootstrap/dist/css/bootstrap.css';
 import withAuthProvider, { AuthComponentProps } from './AuthProvider';
+import Calendar from './MOCalendar';
 
 class App extends Component<AuthComponentProps> {
     render() {
@@ -18,6 +19,12 @@ class App extends Component<AuthComponentProps> {
 
         return (
             <Router>
+                <Route exact path="/calendar"
+                       render={(props) =>
+                           this.props.isAuthenticated ?
+                               <Calendar {...props} /> :
+                               <Redirect to="/" />
+                       } />
                 <div>
                     <NavBar
                         isAuthenticated={this.props.isAuthenticated}
