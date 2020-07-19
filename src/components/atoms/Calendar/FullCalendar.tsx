@@ -46,8 +46,8 @@ export default ({outlookResponse: {value, ["@odata.context"]: mrsir}}: FullCalen
     console.log(mrsir)
 
     useEffect(() => {
-        const newArray = value.map(({Subject, Start, End}) =>
-            ({start: Start.DateTime, end: End.DateTime, title: Subject}))
+        const newArray = value.map(({subject, start, end}) =>
+            ({start: start.dateTime, end: end.dateTime, title: subject}))
         setEvents(newArray)
     }, events)
 
