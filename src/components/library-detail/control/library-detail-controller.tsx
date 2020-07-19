@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Library from "../../../model/library";
 import {useHistory, useLocation, useParams} from 'react-router-dom';
-import LibraryDetail from "../components/library-detail";
+import ViewLibrary from "../../molecules/ViewLibrary/ViewLibrary";
 import {LibraryManager} from "../../../common/library-manager";
 import {NoLibrary} from "../../storybook-mocks/constants";
 
@@ -53,5 +53,5 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         return () => subscription.unsubscribe();
     });
 
-    return <LibraryDetail library={selectedLibrary} onBack={onBack} onEdit={onEdit}/>
+    return <ViewLibrary library={selectedLibrary} onBack={onBack} onEdit={onEdit}/>
 }

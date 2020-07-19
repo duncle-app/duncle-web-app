@@ -1,6 +1,6 @@
 import React from "react";
 import Library from "../../../model/library";
-import OpDrawer from "./OpDrawer";
+import OpDrawer from "../../library-detail/components/OpDrawer";
 
 interface LibraryDetailProps {
   library: Library;
@@ -10,7 +10,7 @@ interface LibraryDetailProps {
   onEdit(library: Library): void;
 }
 
-function LibraryDetail(props: LibraryDetailProps) {
+function ViewLibrary(props: LibraryDetailProps) {
   return (
     <>
       <div>
@@ -23,4 +23,4 @@ function LibraryDetail(props: LibraryDetailProps) {
   );
 }
 
-export default LibraryDetail;
+export default ViewLibrary;
