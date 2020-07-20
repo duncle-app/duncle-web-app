@@ -14,20 +14,18 @@ export default function CustomTextField({name, isRequired = false}: TextFieldPro
     return (
         <Field name={camelizedName}>
             {(props: FieldInputProps<any>) => (
-                <>
-                    <TextField
-                        onChange={props.input.onChange}
-                        value={props.input.value}
-                        name={props.input.name}
-                        variant="outlined"
-                        margin="normal"
-                        required={isRequired}
-                        fullWidth
-                        id={camelizedName}
-                        label={name}
-                        key={camelizedName}
-                    />
-                </>
+                <TextField
+                    onChange={props.input.onChange}
+                    value={props.input.value}
+                    name={props.input.name}
+                    variant="outlined"
+                    margin="normal"
+                    required={isRequired}
+                    fullWidth
+                    id={camelizedName}
+                    label={name}
+                    key={camelizedName}
+                />
             )}
         </Field>
     );
