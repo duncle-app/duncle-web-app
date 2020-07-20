@@ -18,7 +18,7 @@ export default function ({name, placeholderText, message}: TextAreaType) {
             {(props: FieldInputProps<any>) => (
                 <TextareaAutosize
                     onChange={props.input.onChange}
-                    value={message}
+                    defaultValue={message}
                     name={props.input.name}
                     id={camelizedName}
                     key={camelizedName}

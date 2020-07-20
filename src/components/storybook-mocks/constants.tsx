@@ -1,5 +1,6 @@
-import { Library } from "../../model";
-import User from "../../model/user";
+import {Library} from "../../model";
+import {NoteProps} from "../atoms/Note/Note";
+import {dateNowIso, readableDate} from "../../utils/dateUtil";
 
 export const newLibrary: Library = {
     libraryName: "West Side Elementary",
@@ -55,3 +56,47 @@ export const NoLibrary: Library = {
     dateUpdated: "2000-00-00T00:00:00+0000",
     assignedRep: "Default",
 }
+
+export const newNote: NoteProps = {
+    message: "Bought $5,050 and wants more where that came from.",
+    dateCreated: readableDate(dateNowIso()),
+    author: "Mr Sir"
+}
+
+export const newNotes: NoteProps[] = [
+    {
+        message: "Personal foul on #69 - he was giving him the business",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr. Sir"
+    },
+    {
+        message: "Attempted to call person, but there was no answer",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Terry"
+    },
+    {
+        message: "Bought $5,050 and wants more where that came from.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr Sir"
+    },
+    {
+        message: "Significant understanding likes to have a shower in the morning.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Jeff"
+    },
+    {
+        message: "The legend of the raven's roar visits Japan in the winter.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Jeff"
+    },
+    {
+        message: "Nothing of importance gambles with lives, happiness, and even destiny itself!",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Terry"
+    },
+    {
+        message: "Lonely Henry is interdependant on the relatedness of motivation, subcultures, and management.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr Sir"
+    },
+]
