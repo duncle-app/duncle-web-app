@@ -26,15 +26,18 @@ export default function ({message, author, dateCreated}: NoteProps) {
     let content =
         isEditing
             ?
+            // todo - make this prettier
             <CardContent>
                 <Form
                     onSubmit={() => alert("Saving Message")}
                     initialValues={message}
                     render={({form, handleSubmit}) => (
-                <TextArea name="note" placeholderText="A note is required"/>
+                        <>
+                            <TextArea name="note" placeholderText="A note is required" message={message}/>
+                            <Button type="submit" onClick={handleSubmit}>Submit</Button>
+                        </>
                     )}
                 />
-                <Button type="submit">Submit</Button>
             </CardContent>
             :
             <>
