@@ -17,8 +17,7 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: "1em"
     },
     content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
     },
     horizontalListItem: {
         flexDirection: 'row',
@@ -31,8 +30,11 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: drawerWidth,
     },
-    flex: {
-        display: 'flex',
+    alignToDrawer: {
+        paddingLeft: drawerWidth
+    },
+    padBottom: {
+        paddingBottom: theme.spacing(2)
     },
     paper: {
         marginTop: theme.spacing(8),

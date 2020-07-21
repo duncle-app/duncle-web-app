@@ -16,7 +16,7 @@ type p = {
 }
 
 function ViewLibrary({library}: LibraryDetailProps) {
-    const {content, flex} = useStyles()
+    const {content, alignToDrawer} = useStyles()
     let history = useHistory();
     const {libraryId}: p = useParams()
 
@@ -30,14 +30,16 @@ function ViewLibrary({library}: LibraryDetailProps) {
     }
 
     return (
-        <div className={flex}>
+        <div
+            className={alignToDrawer}
+        >
             <button onClick={onBack}>Back</button>
             <button onClick={() => onEdit(library)}>Edit</button>
 
             <ContactDrawer library={library}/>
-            {/*<main className={content}>*/}
+            <main className={content}>
                 <NoteList notes={newNotes}/>
-            {/*</main>*/}
+            </main>
         </div>
     );
 }
