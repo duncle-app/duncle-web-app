@@ -6,6 +6,9 @@ import NoteList from "../../molecules/NoteList/NoteList";
 import {newNotes} from "../../storybook-mocks/constants";
 import useStyles from "../../../global-styles";
 import SalesArea from "../../atoms/Sales/SalesArea";
+import {NoteProps} from "../../atoms/Note/Note";
+import Button from "@material-ui/core/Button";
+import NewNote from "../../atoms/Note/NewNote";
 
 interface LibraryDetailProps {
     library: Library;
@@ -30,16 +33,23 @@ function ViewLibrary({library}: LibraryDetailProps) {
         history.push(`/library/${libraryId}/edit`)
     }
 
+    function submitNewNote(note: NoteProps) {
+        alert("new note submitted")
+    }
+
     return (
         <div
             className={alignToDrawer}
         >
-            <button onClick={onBack}>Back</button>
-            <button onClick={() => onEdit(library)}>Edit</button>
+            <Button onClick={onBack}>Back</Button>
+            <Button onClick={() => onEdit(library)}>Edit</Button>
             <ContactDrawer library={library}/>
             <main className={content}>
                 <div className={padBottom}>
                     <SalesArea totalSales={totalSales} lastSale={lastSale}/>
+                </div>
+                <div className={padBottom}>
+                    <NewNote/>
                 </div>
                 <NoteList notes={newNotes}/>
             </main>

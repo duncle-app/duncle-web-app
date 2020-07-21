@@ -6,11 +6,11 @@ import TextField from "@material-ui/core/TextField";
 
 type TextAreaType = {
     name: string;
-    message: string;
     placeholderText: string;
+    message?: string;
 }
 
-export default function ({name, placeholderText, message}: TextAreaType) {
+export default function ({name, placeholderText, message = ""}: TextAreaType) {
     const camelizedName: string = camelize(name);
 
     return (
