@@ -1,7 +1,6 @@
 import React from "react";
 import ViewLibrary from "./ViewLibrary"
 import {BrowserRouter as Router} from "react-router-dom";
-import {GlobalProvider} from "../../../common/GlobalContext";
 import {newLibrary} from "../../storybook-mocks/constants";
 
 export default {
