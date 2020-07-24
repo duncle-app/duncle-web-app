@@ -6,7 +6,7 @@ export default class OutlookAuthenticationProvider implements AuthenticationProv
      * This should return a Promise that resolves to an accessToken (in case of success) or rejects with error (in case of failure)
      * Basically this method will contain the implementation for getting and refreshing accessTokens
      */
+    // @ts-ignore
     public async getAccessToken(): Promise<string> {}
 
 }
-

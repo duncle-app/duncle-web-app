@@ -25,7 +25,7 @@ export default class LoginService {
 
     public async signUpUser({email, password, firstName, lastName}: User) {
         // @ts-ignore
-        const hashedPassword = await this.hash(manualSalt(password));
+        const hashedPassword = await this.hash(this.manualSalt(password));
 
         const { addUser }: any = useUserPouch();
         return addUser(new User(email, hashedPassword, firstName, lastName))

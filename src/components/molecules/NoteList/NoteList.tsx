@@ -11,8 +11,8 @@ export default function({notes}: NoteListProps){
     return (
         <>
             {
-                notes.map((props) =>
-                    <div className={padBottom}>
+                notes.map((props: NoteProps, index: number) =>
+                    <div key={index} className={padBottom}>
                         <Note {...props}/>
                     </div>
                 )
