@@ -49,9 +49,9 @@ const TestButton = () => {
             <Button variant="outlined" onClick={
                 async () => {
                     setText("graph api button")
-                    let res = await client.api('/me/calendar')
-                        .get();
-                    setText(res);
+                    // let res = await Client.api('/me/calendar')
+                    //     .get();
+                    // setText(res);
                 }}>Ping Outlook Graph</Button>
             <div>{text}</div>
         </>

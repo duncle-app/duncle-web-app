@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Edit from '@material-ui/icons/Edit';
 import TextArea from "../TextArea/TextArea";
 import {Form} from "react-final-form";
+import Clear from "@material-ui/icons/Clear";
 
 export type NoteProps = {
     message: string;
@@ -23,6 +24,8 @@ export default function ({message, author, dateCreated}: NoteProps) {
         pos: ""
     }
 
+    const cancel = () => setisEditing(false)
+
     let content =
         isEditing
             ?
@@ -35,6 +38,8 @@ export default function ({message, author, dateCreated}: NoteProps) {
                         <>
                             <TextArea name="note" placeholderText="A note is required" message={message}/>
                             <Button type="submit" onClick={handleSubmit}>Submit</Button>
+                            <Button type="submit" onClick={cancel}><Clear/></Button>
+
                         </>
                     )}
                 />

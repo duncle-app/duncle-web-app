@@ -1,14 +1,15 @@
-import { Library } from "../../model";
-import User from "../../model/user";
+import {Library} from "../../model";
+import {NoteProps} from "../atoms/Note/Note";
+import {dateNowIso, readableDate} from "../../utils/dateUtil";
 
 export const newLibrary: Library = {
     libraryName: "West Side Elementary",
     librarian: "K - 2",
     assistant: "Mr. Sir",
-    street: "Mr. Sir City",
+    street: "Randolph Street",
     district: "District",
-    city: "City",
-    county: "County",
+    city: "Mute City",
+    county: "Orange County",
     state: "Wisconsin",
     zip: "54545",
     email: "se@gg.com",
@@ -17,6 +18,8 @@ export const newLibrary: Library = {
     size: 100,
     dateUpdated: "2020-07-14T22:04:54+0000",
     assignedRep: "Mr. Sir",
+    totalSales: 50205,
+    lastSale: 2050,
 }
 
 
@@ -36,6 +39,8 @@ export const newLibrary2: Library = {
     size: 9000,
     dateUpdated: "2020-07-22T22:04:54+0000",
     assignedRep: "Terry",
+    totalSales: 100205,
+    lastSale: 10000,
 }
 
 export const NoLibrary: Library = {
@@ -54,4 +59,50 @@ export const NoLibrary: Library = {
     size: 0,
     dateUpdated: "2000-00-00T00:00:00+0000",
     assignedRep: "Default",
+    totalSales: 0,
+    lastSale: 0,
 }
+
+export const newNote: NoteProps = {
+    message: "Bought $5,050 and wants more where that came from.",
+    dateCreated: readableDate(dateNowIso()),
+    author: "Mr Sir"
+}
+
+export const newNotes: NoteProps[] = [
+    {
+        message: "Personal foul on #69 - he was giving him the business",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr. Sir"
+    },
+    {
+        message: "Attempted to call person, but there was no answer",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Terry"
+    },
+    {
+        message: "Bought $5,050 and wants more where that came from.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr Sir"
+    },
+    {
+        message: "Significant understanding likes to have a shower in the morning.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Jeff"
+    },
+    {
+        message: "The legend of the raven's roar visits Japan in the winter.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Jeff"
+    },
+    {
+        message: "Nothing of importance gambles with lives, happiness, and even destiny itself!",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Terry"
+    },
+    {
+        message: "Lonely Henry is interdependant on the relatedness of motivation, subcultures, and management.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr Sir"
+    },
+]
