@@ -36,5 +36,6 @@ export function LibraryDetailController(props: LibraryDetailProps) {
         return () => subscription.unsubscribe();
     });
 
-    return <ViewLibrary library={selectedLibrary}/>
+    // return <ViewLibrary library={selectedLibrary}/>
+    return <ViewLibrary />
 }

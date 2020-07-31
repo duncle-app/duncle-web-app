@@ -3,6 +3,8 @@ import useAuth, {useAuthReturn} from "./hooks/useAuth";
 import {LibraryManager} from "./library-manager";
 import {AppState} from "./app-state";
 import {DummyLibraryService} from "./dummy-library-service";
+import Library from "../model/library";
+import {NoLibrary} from "../components/storybook-mocks/constants";
 
 type ContextProps = {
     isAuthenticated: boolean,
@@ -16,6 +18,7 @@ type ContextProps = {
 // @ts-ignore
 export function GlobalProvider({children}) {
     const {isAuthenticated, authenticate} = useAuth()
+    const [currentLibrary, setCurrentLibrary] = useState<Library>(NoLibrary)
     // todo - pick one libraryManager impl or the other
     const appState: AppState = new AppState();
     const libraryService: DummyLibraryService = new DummyLibraryService();
@@ -24,7 +27,15 @@ export function GlobalProvider({children}) {
         appState
     );
     return (
-        <GlobalContext.Provider value={{lang: 'en', theme: 'dark', isAuthenticated, authenticate, libraryManager2}}>
+        <GlobalContext.Provider value={{
+            lang: 'en',
+            theme: 'dark',
+            isAuthenticated,
+            authenticate,
+            libraryManager2,
+            currentLibrary,
+            setCurrentLibrary
+        }}>
             {children}
         </GlobalContext.Provider>
     )

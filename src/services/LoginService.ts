@@ -5,9 +5,7 @@ import bcrypt from 'bcryptjs'
 export default class LoginService {
     public async logInUser(user: User) {
         const {fetchUser} = useUserPouch();
-        const response: User = await fetchUser(user.email);
-
-        const {password} = response
+        const {password}: User = await fetchUser(user.email);
 
         console.log(`actual password: ${password}`)
         console.log(`passed in: ${user.password}`)
@@ -26,7 +24,7 @@ export default class LoginService {
     public async signUpUser({email, password, firstName, lastName}: User) {
         // @ts-ignore
         const hashedPassword = await LoginService.hash(password);
-        const { addUser }: any = useUserPouch();
+        const {addUser}: any = useUserPouch();
         return addUser(new User(email, hashedPassword, firstName, lastName))
     }
 
