@@ -4,7 +4,7 @@ import {dateNowIso, readableDate} from "../../utils/dateUtil";
 
 export const newLibrary: Library = {
     libraryName: "West Side Elementary",
-    librarian: "K - 2",
+    librarian: "Dontell Smith",
     assistant: "Mr. Sir",
     street: "Randolph Street",
     district: "District",
