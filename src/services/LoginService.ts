@@ -15,7 +15,7 @@ export default class LoginService {
 
         // @ts-ignore
         // todo - better typing? maybe password shouldn't be optional?
-        if (this.compare(user.password, password)) {
+        if (LoginService.compare(user.password, password)) {
             alert("log in successful! Passwords match")
             return user
         } else {
@@ -25,27 +25,17 @@ export default class LoginService {
 
     public async signUpUser({email, password, firstName, lastName}: User) {
         // @ts-ignore
-        const hashedPassword = await this.hash(this.manualSalt(password));
-
+        const hashedPassword = await LoginService.hash(password);
         const { addUser }: any = useUserPouch();
         return addUser(new User(email, hashedPassword, firstName, lastName))
     }
 
     // todo - could move these to another class.
-    private hash(password: string) {
-        return bcrypt.hashSync(this.manualSalt(password));
+    private static hash(password: string): string {
+        return bcrypt.hashSync(password);
     }
 
-    private compare(password: string, hash: string) {
-        return bcrypt.compareSync(this.manualSalt(password), hash)
-    }
-
-    private manualSalt(password: string): string {
-        const saltVariable = process.env.REACT_APP_SALT;
-        if (!saltVariable) {
-            throw new Error(`REACT_APP_SALT is not properly set. 
-            Please set up this environment variable to securely save passwords`)
-        }
-        return saltVariable + password;
+    public static compare(password: string, hash: string): boolean {
+        return bcrypt.compareSync(password, hash)
     }
 }

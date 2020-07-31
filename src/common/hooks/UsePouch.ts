@@ -102,7 +102,7 @@ function usePouch(database: string): any {
         throw new EnvVariableNotSetError("REACT_APP_DATABASE_PASSWORD")
     }
 
-    const remoteDatabase: PouchDB.Database = new PouchDB(`http://${dbUsername}:${dbPassword}@${remoteDb}/tcrm`);
+    const remoteDatabase: PouchDB.Database = new PouchDB(`http://${dbUsername}:${dbPassword}@${remoteDb}/${database}`);
 
     async function getInfo() {
         console.log('Local db info:', await localPouch.info());
