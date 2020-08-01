@@ -8,7 +8,7 @@ import useStyles from "../../../global-styles";
 type TableProps = {
     columns: object[];
     libraries: Library[];
-    onEdit?(): void;
+    onEdit?(library: Library): void;
 }
 export default ({columns, libraries, onEdit}: TableProps) => {
     const {cardHeader} = useStyles();
@@ -28,7 +28,7 @@ export default ({columns, libraries, onEdit}: TableProps) => {
                         icon: tableIcons.Create,
                         tooltip: 'Edit User',
                         // @ts-ignore
-                        onClick: (event, rowData) => onEdit() //onLibraryClick(rowData)
+                        onClick: (event, rowData) => onEdit(rowData)
                     }
                 ]}
             />

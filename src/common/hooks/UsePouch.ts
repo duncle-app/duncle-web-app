@@ -56,6 +56,13 @@ class RecordNotFoundError extends Error {
     }
 }
 
+class EnvVariableNotSetError extends Error {
+    constructor(envVar: string) {
+        super(`${envVar} is not properly set. 
+        Please set up this environment variable to connect to a remote database`);
+    }
+}
+
 /**
  * Returns
  */
@@ -63,8 +70,9 @@ export function useLibraryPouch(): any {
     /**
      * COMMENTED OUT UNTIL I GET A BETTER DEFINED DB SCHEMA
      */
-    // const { localPouch } = usePouch('tcrm')
-    const { localPouch } = usePouch('tcrm-dev')
+    const { localPouch } = usePouch('tcrm')
+    // const { localPouch } = usePouch('tcrm-dev')
+
 
     async function getAll():Promise<PouchDB.Core.AllDocsResponse<Library>> {
         try {
@@ -80,7 +88,21 @@ export function useLibraryPouch(): any {
 function usePouch(database: string): any {
     const localPouch: PouchDB.Database = new PouchDB(database)
 
-    const remoteDatabase: PouchDB.Database = new PouchDB(`http://127.0.0.1:5984/${database}`);
+    const remoteDb = process.env.REACT_APP_DATABASE_URL
+    const dbUsername = process.env.REACT_APP_DATABASE_USERNAME
+    const dbPassword = process.env.REACT_APP_DATABASE_PASSWORD
+
+    if (!remoteDb) {
+        throw new EnvVariableNotSetError("REACT_APP_DATABASE_URL")
+    }
+    if (!dbUsername) {
+        throw new EnvVariableNotSetError("REACT_APP_DATABASE_USERNAME")
+    }
+    if (!dbPassword) {
+        throw new EnvVariableNotSetError("REACT_APP_DATABASE_PASSWORD")
+    }
+
+    const remoteDatabase: PouchDB.Database = new PouchDB(`http://${dbUsername}:${dbPassword}@${remoteDb}/${database}`);
 
     async function getInfo() {
         console.log('Local db info:', await localPouch.info());

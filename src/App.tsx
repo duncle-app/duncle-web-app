@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
 import {DummyLibraryService} from "./common/dummy-library-service";
-import {LibraryDetailController} from "./components/library-detail/control/library-detail-controller";
 import {AppState} from "./common/app-state";
 import {LibraryManager} from "./common/library-manager";
 import LibraryEditController from "./components/library-edit/control/library-edit-controller";
@@ -13,6 +12,7 @@ import Navbar from "./components/molecules/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
 import AllLibraries from "./components/pages/LibraryList/AllLibraries";
 import AddLibrary from "./components/pages/AddLibrary/AddLibrary";
+import ViewLibrary from "./components/organisms/ViewLibrary/ViewLibrary";
 
 const appState: AppState = new AppState();
 const libraryService: DummyLibraryService = new DummyLibraryService();
@@ -75,13 +75,18 @@ function App() {
                             path="/library/new"
                             component={AddLibrary}
                         />
-                        <Route
+                        <PrivateRoute
                             exact
                             path="/library/:libraryId"
-                            children={
-                                <LibraryDetailController libraryManager={libraryManager}/>
-                            }
+                            component={ViewLibrary}
                         />
+                        {/*<Route*/}
+                        {/*    exact*/}
+                        {/*    path="/library/:libraryId"*/}
+                        {/*    children={*/}
+                        {/*        <LibraryDetailController libraryManager={libraryManager}/>*/}
+                        {/*    }*/}
+                        {/*/>*/}
                         <Route
                             exact
                             path="/library/:libraryId/edit"

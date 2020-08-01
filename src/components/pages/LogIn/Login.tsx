@@ -10,7 +10,6 @@ import {Avatar} from "@material-ui/core";
 import useStyles from "../../../global-styles";
 import User from "../../../model/user";
 import LoginService from "../../../services/LoginService";
-import useAuth from "../../../common/hooks/useAuth";
 import {GlobalContext} from "../../../common/GlobalContext";
 
 export default function Login() {
