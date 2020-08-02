@@ -13,5 +13,5 @@ export const withProps = () =>
         message="Sally wasn't feeling so great. I had to give her the people's elbow and show her what real pain looks like"
         author="Mr. Sir"
         dateCreated={date}
-        onSubmit={(note) => alert(`Submitted ${note.message}`)}
+        SubmitForm={(note) => alert(`Submitted ${note.message}`)}
     />

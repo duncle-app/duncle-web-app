@@ -48,6 +48,8 @@ export const newNotes: NoteDAO[] = [
 ]
 
 export const newLibrary: Library = {
+    _id: "fakeid",
+    _rev: "fakerev",
     libraryName: "West Side Elementary",
     librarian: "Dontell Smith",
     assistant: "Mr. Sir",
@@ -69,6 +71,8 @@ export const newLibrary: Library = {
 }
 
 export const newLibrary2: Library = {
+    _id: "fakeid",
+    _rev: "fakerev",
     libraryName: "Northwest Elementary",
     librarian: "K only",
     assistant: "Mrs. Thicc",
@@ -89,6 +93,8 @@ export const newLibrary2: Library = {
 }
 
 export const NoLibrary: Library = {
+    _id: "noid",
+    _rev: "norev",
     libraryName: "Default Library",
     librarian: "Default",
     assistant: "Default",

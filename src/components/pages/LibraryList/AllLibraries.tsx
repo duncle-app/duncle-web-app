@@ -9,7 +9,7 @@ import {useLibraryPouch} from "../../../common/hooks/UsePouch";
 import {NoLibrary} from "../../storybook-mocks/constants";
 import {GlobalContext} from "../../../common/GlobalContext";
 
-type stink = {
+type PouchRow = {
     doc?: any;
     id: string;
     key: string;
@@ -21,22 +21,20 @@ type stink = {
 
 export default function () {
     const [libraries, setLibraries] = useState([NoLibrary]);
-
     const {setCurrentLibrary} = useContext(GlobalContext)
-
     const {getAll} = useLibraryPouch()
     const history = useHistory();
 
     useEffect(() => {
         async function doLibraryCall() {
             const response = await getAll()
-            let docs: Library[] = []
-            console.log("Got back list", response.rows)
-            response.rows.map((pouchRow: stink) => {
-                console.log("actual doc", pouchRow.doc)
-                docs.push(pouchRow.doc)
+            let libraries: Library[] = []
+
+            response.rows.map(({doc}: PouchRow) => {
+                libraries.push(doc)
             })
-            setLibraries(docs)
+            setLibraries(libraries)
+            console.log("all libraries", libraries)
         }
         doLibraryCall()
     }, [])

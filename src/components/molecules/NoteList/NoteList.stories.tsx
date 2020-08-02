@@ -1,13 +1,13 @@
 import React from "react";
 import NoteList from "./NoteList"
-import {NoteProps} from "../../atoms/Note/EditableNote";
 import {newNotes} from "../../storybook-mocks/constants";
+import NoteDAO from "../../../model/noteDAO";
 
 export default {
     title: "Molecules/NoteList",
     component: NoteList,
 };
 
-const notes: NoteProps[] = newNotes
+const notes: NoteDAO[] = newNotes
 export const withProps = () =>
-    <NoteList notes={notes}/>
+    <NoteList notes={notes} SubmitForm={(note) => alert(`Submitted ${note.message}`)}/>;
