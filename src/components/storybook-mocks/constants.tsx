@@ -47,7 +47,6 @@ export const newNotes: NoteDAO[] = [
     },
 ]
 
-
 export const newLibrary: Library = {
     libraryName: "West Side Elementary",
     librarian: "Dontell Smith",
@@ -68,7 +67,6 @@ export const newLibrary: Library = {
     lastSale: 2050,
     notes: newNotes,
 }
-
 
 export const newLibrary2: Library = {
     libraryName: "Northwest Elementary",
