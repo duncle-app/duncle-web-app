@@ -12,14 +12,14 @@ export type PouchReturnProps = {
 const USER_ID_PREFIX = "org.duncle.";
 
 export function useUserPouch() {
-    const { localPouch } = usePouch('user')
+    const {localPouch} = usePouch('user')
 
     async function fetchUser(inputEmail: string): Promise<User> {
         console.log(`Finding username: ${inputEmail}`);
         try {
             return await localPouch.get(`${USER_ID_PREFIX}${inputEmail}`);
         } catch (e) {
-            console.error("error:",e)
+            console.error("error:", e)
             throw new RecordNotFoundError("Error when making database call", e);
         }
     }
@@ -27,7 +27,7 @@ export function useUserPouch() {
     async function addUser({email, password, firstName, lastName}: User) {
         try {
             return await localPouch.put({_id: `${USER_ID_PREFIX}${email}`, email, password, firstName, lastName})
-        } catch(err) {
+        } catch (err) {
             console.error(err);
             throw new Error(`Unable to save user: ${err}`)
         }
@@ -67,14 +67,9 @@ class EnvVariableNotSetError extends Error {
  * Returns
  */
 export function useLibraryPouch(): any {
-    /**
-     * COMMENTED OUT UNTIL I GET A BETTER DEFINED DB SCHEMA
-     */
-    const { localPouch } = usePouch('tcrm')
-    // const { localPouch } = usePouch('tcrm-dev')
+    const {localPouch} = usePouch('tcrm')
 
-
-    async function getAll():Promise<PouchDB.Core.AllDocsResponse<Library>> {
+    async function getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>> {
         try {
             return await localPouch.allDocs({include_docs: true})
         } catch (err) {
@@ -82,7 +77,15 @@ export function useLibraryPouch(): any {
         }
     }
 
-    return { getAll }
+    async function saveEditedLibrary(library: Library) {
+        try {
+            return await localPouch.put(library);
+        } catch (err) {
+            throw new Error("Failed to get all docs")
+        }
+    }
+
+    return {getAll, saveEditedLibrary}
 }
 
 function usePouch(database: string): any {
@@ -109,7 +112,7 @@ function usePouch(database: string): any {
         console.log('Remote db info:', await remoteDatabase.info());
     }
 
-    async function get(docId: any){
+    async function get(docId: any) {
         try {
             return await localPouch.get(docId);
         } catch (err) {
@@ -120,7 +123,7 @@ function usePouch(database: string): any {
     async function put(docId: string, title: string) {
         try {
             return await localPouch.put({_id: docId, title})
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
     }
@@ -130,9 +133,9 @@ function usePouch(database: string): any {
     // Setup database sync
     localPouch.sync(remoteDatabase, {
         live: true,
-    }).on('change', function() {
+    }).on('change', function () {
         console.log('db changed');
-    }).on('error', function() {
+    }).on('error', function () {
         console.log('sync error');
     });
 

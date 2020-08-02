@@ -1,6 +1,8 @@
-import Note from "./note";
+import NoteDAO from "./noteDAO";
 
 export default interface Library {
+    _id: string,
+    _rev: string,
     libraryName: string,
     librarian: string,
     assistant: string,
@@ -17,11 +19,9 @@ export default interface Library {
     size: number,
     dateUpdated: string,
     assignedRep: string,
-    _id?: string,
-    _rev?: string,
     totalSales: number,
     lastSale: number,
     dateLastSale?: string,
     dateNextContact?: string,
-    notes?: Note[],
+    notes?: NoteDAO[],
 }

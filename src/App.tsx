@@ -12,7 +12,7 @@ import Navbar from "./components/molecules/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
 import AllLibraries from "./components/pages/LibraryList/AllLibraries";
 import AddLibrary from "./components/pages/AddLibrary/AddLibrary";
-import ViewLibrary from "./components/organisms/ViewLibrary/ViewLibrary";
+import ViewLibrary from "./components/pages/ViewLibrary/ViewLibrary";
 
 const appState: AppState = new AppState();
 const libraryService: DummyLibraryService = new DummyLibraryService();

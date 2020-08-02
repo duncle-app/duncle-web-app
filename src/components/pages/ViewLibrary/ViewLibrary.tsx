@@ -6,10 +6,13 @@ import NoteList from "../../molecules/NoteList/NoteList";
 import {newNotes} from "../../storybook-mocks/constants";
 import useStyles from "../../../global-styles";
 import SalesArea from "../../atoms/Sales/SalesArea";
-import {NoteProps} from "../../atoms/Note/Note";
+import {EditableNoteSubmitValues, NoteProps} from "../../atoms/Note/EditableNote";
 import Button from "@material-ui/core/Button";
 import NewNote from "../../atoms/Note/NewNote";
 import {GlobalContext} from "../../../common/GlobalContext";
+import library from "../../../model/library";
+import NoteService from "../../../services/NoteService";
+import NoteDAO from "../../../model/noteDAO";
 
 interface LibraryDetailProps {
     library: Library;
@@ -36,14 +39,13 @@ function ViewLibrary() {
         history.push(`/library/${libraryId}/edit`)
     }
 
-    function submitNewNote(note: NoteProps) {
-        alert("new note submitted")
+    function submitNewEditableNote(note: NoteDAO) {
+        console.log(note)
+        NoteService.editNote(currentLibrary, note)
     }
 
     return (
-        <div
-            className={alignToDrawer}
-        >
+        <div className={alignToDrawer}>
             <Button onClick={onBack}>Back</Button>
             <Button onClick={() => onEdit(currentLibrary)}>Edit</Button>
             <ContactDrawer library={currentLibrary}/>
@@ -54,7 +56,7 @@ function ViewLibrary() {
                 <div className={padBottom}>
                     <NewNote/>
                 </div>
-                <NoteList notes={newNotes}/>
+                <NoteList notes={currentLibrary.notes} SubmitForm={submitNewEditableNote}/>
             </main>
         </div>
     );
