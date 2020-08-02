@@ -66,7 +66,13 @@ class EnvVariableNotSetError extends Error {
 /**
  * Returns
  */
-export function useLibraryPouch(): any {
+interface useLibraryPouchReturn {
+    getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>>
+    getLibrary(libraryId: string): any
+    saveLibrary(library: Library): Promise<PouchDB.Core.Response | Error>
+}
+
+export function useLibraryPouch(): useLibraryPouchReturn {
     const {localPouch} = usePouch('tcrm')
 
     async function getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>> {
@@ -77,15 +83,23 @@ export function useLibraryPouch(): any {
         }
     }
 
-    async function saveEditedLibrary(library: Library) {
+    async function getLibrary(libraryId: string): Promise<PouchDB.Core.AllDocsResponse<Library>> {
         try {
-            return await localPouch.put(library);
+            return await localPouch.get(libraryId)
         } catch (err) {
             throw new Error("Failed to get all docs")
         }
     }
 
-    return {getAll, saveEditedLibrary}
+    async function saveLibrary(library: Library): Promise<PouchDB.Core.Response | Error> {
+        try {
+            return await localPouch.put(library);
+        } catch (err) {
+            throw new Error(`Failed to save the library: ${err}`)
+        }
+    }
+
+    return {getAll, getLibrary, saveLibrary}
 }
 
 function usePouch(database: string): any {
