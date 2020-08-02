@@ -1,15 +1,14 @@
 import React from "react";
-import LibraryEdit from "./library-edit";
-import { newLibrary } from "../../storybook-mocks/constants";
+import {mockFunction, newLibrary} from "../../storybook-mocks/constants";
 import MockForm from "../../storybook-mocks/mockForm";
+import EditLibrary from "./EditLibrary";
 
 export default {
-  title: "Organisms/LibraryEdit",
-  component: LibraryEdit,
+    title: "Organisms/EditLibrary",
 };
 
 export const Props = () => (
-  <MockForm>
-    <LibraryEdit library={newLibrary}/>
-  </MockForm>
+    <MockForm>
+        <EditLibrary library={newLibrary} formSubmit={mockFunction}/>
+    </MockForm>
 );

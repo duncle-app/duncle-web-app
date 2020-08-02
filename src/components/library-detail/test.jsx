@@ -1,6 +1,5 @@
 import React from 'react'
-import LibraryEdit from "../library-edit/components";
-import {Library} from "../../model";
+import LibraryEdit from "../library-edit/components/LibraryEdit";
 import {NoLibrary} from "../storybook-mocks/constants";
 
 export default function test() {
