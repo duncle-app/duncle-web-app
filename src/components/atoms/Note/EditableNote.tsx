@@ -8,15 +8,19 @@ import Edit from '@material-ui/icons/Edit';
 import TextArea from "../TextArea/TextArea";
 import {Form} from "react-final-form";
 import Clear from "@material-ui/icons/Clear";
+import NoteDAO from "../../../model/noteDAO";
 
-export type NoteProps = {
-    message: string;
-    dateCreated: string;
-    author: string;
+export interface NoteProps extends NoteDAO {
+    SubmitForm(values: NoteDAO): any;
 }
 
-export default function ({message, author, dateCreated}: NoteProps) {
+export interface EditableNoteSubmitValues {
+    note: string
+}
+
+export default function ({id, message, author, dateCreated, SubmitForm}: NoteProps) {
     const [isEditing, setisEditing] = useState(false)
+    const [currentMessage, setCurrentMessage] = useState<string>(message)
 
     const classes = {
         root: "",
@@ -32,11 +36,18 @@ export default function ({message, author, dateCreated}: NoteProps) {
             // todo - make this prettier
             <CardContent>
                 <Form
-                    onSubmit={() => alert("Saving Message")}
+                    onSubmit={({note}: EditableNoteSubmitValues) => {
+                        // @ts-ignore - this can't be undefined
+                        const newNote: NoteDAO = {id, note, author, dateCreated}
+                        SubmitForm(newNote)
+                        setCurrentMessage(note)
+                        setisEditing(false)
+                    }}
+                    // @ts-ignore
                     initialValues={message}
                     render={({form, handleSubmit}) => (
                         <>
-                            <TextArea name="note" placeholderText="A note is required" message={message}/>
+                            <TextArea name="note" placeholderText="A note is required" message={currentMessage}/>
                             <Button type="submit" onClick={handleSubmit}>Submit</Button>
                             <Button type="submit" onClick={cancel}><Clear/></Button>
 
@@ -51,9 +62,10 @@ export default function ({message, author, dateCreated}: NoteProps) {
                         Created by {author}
                     </Typography>
                     <Typography variant="h5" component="h2">
-                        {message}
+                        {currentMessage}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
+                        {/* Only show the formatted date, but store the iso date */}
                         {dateCreated}
                     </Typography>
                 </CardContent>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Library from "../../../model/library";
 import {useHistory, useLocation, useParams} from 'react-router-dom';
-import ViewLibrary from "../../organisms/ViewLibrary/ViewLibrary";
+import ViewLibrary from "../../pages/ViewLibrary/ViewLibrary";
 import {LibraryManager} from "../../../common/library-manager";
 import {NoLibrary} from "../../storybook-mocks/constants";
 

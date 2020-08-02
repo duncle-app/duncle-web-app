@@ -1,6 +1,6 @@
 import React from "react";
 import NoteList from "./NoteList"
-import {NoteProps} from "../../atoms/Note/Note";
+import {NoteProps} from "../../atoms/Note/EditableNote";
 import {newNotes} from "../../storybook-mocks/constants";
 
 export default {

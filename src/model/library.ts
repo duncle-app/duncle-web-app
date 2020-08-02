@@ -1,4 +1,4 @@
-import Note from "./note";
+import NoteDAO from "./noteDAO";
 
 export default interface Library {
     libraryName: string,
@@ -23,5 +23,5 @@ export default interface Library {
     lastSale: number,
     dateLastSale?: string,
     dateNextContact?: string,
-    notes?: Note[],
+    notes?: NoteDAO[],
 }

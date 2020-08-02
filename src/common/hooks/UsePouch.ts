@@ -67,12 +67,7 @@ class EnvVariableNotSetError extends Error {
  * Returns
  */
 export function useLibraryPouch(): any {
-    /**
-     * COMMENTED OUT UNTIL I GET A BETTER DEFINED DB SCHEMA
-     */
     const { localPouch } = usePouch('tcrm')
-    // const { localPouch } = usePouch('tcrm-dev')
-
 
     async function getAll():Promise<PouchDB.Core.AllDocsResponse<Library>> {
         try {
@@ -81,6 +76,8 @@ export function useLibraryPouch(): any {
             throw new Error("Failed to get all docs")
         }
     }
+
+
 
     return { getAll }
 }

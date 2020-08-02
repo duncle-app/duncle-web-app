@@ -1,6 +1,52 @@
 import {Library} from "../../model";
-import {NoteProps} from "../atoms/Note/Note";
 import {dateNowIso, readableDate} from "../../utils/dateUtil";
+import NoteDAO from "../../model/noteDAO";
+
+export const newNotes: NoteDAO[] = [
+    {
+        id: '1',
+        message: "Personal foul on #69 - he was giving him the business",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr. Sir"
+    },
+    {
+        id: '2',
+        message: "Attempted to call person, but there was no answer",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Terry"
+    },
+    {
+        id: '3',
+        message: "Bought $5,050 and wants more where that came from.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr Sir"
+    },
+    {
+        id: '4',
+        message: "Significant understanding likes to have a shower in the morning.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Jeff"
+    },
+    {
+        id: '5',
+        message: "The legend of the raven's roar visits Japan in the winter.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Jeff"
+    },
+    {
+        id: '6',
+        message: "Nothing of importance gambles with lives, happiness, and even destiny itself!",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Terry"
+    },
+    {
+        id: '7',
+        message: "Lonely Henry is interdependant on the relatedness of motivation, subcultures, and management.",
+        dateCreated: readableDate(dateNowIso()),
+        author: "Mr Sir"
+    },
+]
+
 
 export const newLibrary: Library = {
     libraryName: "West Side Elementary",
@@ -20,6 +66,7 @@ export const newLibrary: Library = {
     assignedRep: "Mr. Sir",
     totalSales: 50205,
     lastSale: 2050,
+    notes: newNotes,
 }
 
 
@@ -63,46 +110,9 @@ export const NoLibrary: Library = {
     lastSale: 0,
 }
 
-export const newNote: NoteProps = {
+export const newNote: NoteDAO = {
+    id: '88',
     message: "Bought $5,050 and wants more where that came from.",
     dateCreated: readableDate(dateNowIso()),
     author: "Mr Sir"
 }
-
-export const newNotes: NoteProps[] = [
-    {
-        message: "Personal foul on #69 - he was giving him the business",
-        dateCreated: readableDate(dateNowIso()),
-        author: "Mr. Sir"
-    },
-    {
-        message: "Attempted to call person, but there was no answer",
-        dateCreated: readableDate(dateNowIso()),
-        author: "Terry"
-    },
-    {
-        message: "Bought $5,050 and wants more where that came from.",
-        dateCreated: readableDate(dateNowIso()),
-        author: "Mr Sir"
-    },
-    {
-        message: "Significant understanding likes to have a shower in the morning.",
-        dateCreated: readableDate(dateNowIso()),
-        author: "Jeff"
-    },
-    {
-        message: "The legend of the raven's roar visits Japan in the winter.",
-        dateCreated: readableDate(dateNowIso()),
-        author: "Jeff"
-    },
-    {
-        message: "Nothing of importance gambles with lives, happiness, and even destiny itself!",
-        dateCreated: readableDate(dateNowIso()),
-        author: "Terry"
-    },
-    {
-        message: "Lonely Henry is interdependant on the relatedness of motivation, subcultures, and management.",
-        dateCreated: readableDate(dateNowIso()),
-        author: "Mr Sir"
-    },
-]
