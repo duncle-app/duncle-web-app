@@ -1,6 +1,5 @@
 import React, {Context, useState} from "react";
 import useAuth, {useAuthReturn} from "./hooks/useAuth";
-import {LibraryManager} from "./library-manager";
 import Library from "../model/library";
 import {NoLibrary} from "../components/storybook-mocks/constants";
 
@@ -10,7 +9,6 @@ type ContextProps = {
     useAuth(): useAuthReturn,
     lang: string,
     theme: string,
-    libraryManager: LibraryManager;
 }
 
 // @ts-ignore

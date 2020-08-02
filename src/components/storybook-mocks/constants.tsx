@@ -90,6 +90,7 @@ export const newLibrary2: Library = {
     assignedRep: "Terry",
     totalSales: 100205,
     lastSale: 10000,
+    notes: []
 }
 
 export const NoLibrary: Library = {
@@ -112,6 +113,7 @@ export const NoLibrary: Library = {
     assignedRep: "Default",
     totalSales: 0,
     lastSale: 0,
+    notes: []
 }
 
 export const newNote: NoteDAO = {

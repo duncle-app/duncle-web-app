@@ -3,8 +3,6 @@ import "./App.css";
 import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
 import {DummyLibraryService} from "./common/dummy-library-service";
 import {AppState} from "./common/app-state";
-import {LibraryManager} from "./common/library-manager";
-import LibraryEditController from "./components/library-edit/control/library-edit-controller";
 import Login from "./components/pages/LogIn/Login";
 import {GlobalProvider} from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
@@ -16,10 +14,6 @@ import ViewLibrary from "./components/pages/ViewLibrary/ViewLibrary";
 
 const appState: AppState = new AppState();
 const libraryService: DummyLibraryService = new DummyLibraryService();
-const libraryManager: LibraryManager = new LibraryManager(
-    libraryService,
-    appState
-);
 
 const MrSir = () => <h3>Mr Sir</h3>
 const Protected = () => <h3>Protected</h3>
@@ -87,11 +81,11 @@ function App() {
                         {/*        <LibraryDetailController libraryManager={libraryManager}/>*/}
                         {/*    }*/}
                         {/*/>*/}
-                        <Route
-                            exact
-                            path="/library/:libraryId/edit"
-                            children={<LibraryEditController libraryManager={libraryManager}/>}
-                        />
+                        {/*<Route*/}
+                        {/*    exact*/}
+                        {/*    path="/library/:libraryId/edit"*/}
+                        {/*    children={<LibraryEditController libraryManager={libraryManager}/>}*/}
+                        {/*/>*/}
                         <Route
                             path="/unauthorized"
                             children={<Unauthorized/>}

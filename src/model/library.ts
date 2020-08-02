@@ -1,27 +1,6 @@
-import NoteDAO from "./noteDAO";
+import NewLibrary from "./newLibrary";
 
-export default interface Library {
+export default interface Library extends NewLibrary {
     _id: string,
     _rev: string,
-    libraryName: string,
-    librarian: string,
-    assistant: string,
-    street: string,
-    district: string,
-    city: string,
-    county: string,
-    state: string,
-    zip: string,
-    email: string,
-    phoneNumber: number,
-    extension?: string,
-    level: string,
-    size: number,
-    dateUpdated: string,
-    assignedRep: string,
-    totalSales: number,
-    lastSale: number,
-    dateLastSale?: string,
-    dateNextContact?: string,
-    notes?: NoteDAO[],
 }

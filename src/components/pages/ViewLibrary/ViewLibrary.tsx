@@ -3,15 +3,12 @@ import Library from "../../../model/library";
 import ContactDrawer from "../../atoms/ContactDrawer/ContactDrawer";
 import {useHistory, useParams} from "react-router-dom";
 import NoteList from "../../molecules/NoteList/NoteList";
-import {newNotes} from "../../storybook-mocks/constants";
 import useStyles from "../../../global-styles";
 import SalesArea from "../../atoms/Sales/SalesArea";
-import {EditableNoteSubmitValues, NoteProps} from "../../atoms/Note/EditableNote";
 import Button from "@material-ui/core/Button";
 import NewNote from "../../atoms/Note/NewNote";
 import {GlobalContext} from "../../../common/GlobalContext";
-import library from "../../../model/library";
-import NoteService from "../../../services/NoteService";
+import {editNote, saveNote} from "../../../services/NoteService";
 import NoteDAO from "../../../model/noteDAO";
 
 interface LibraryDetailProps {
@@ -24,7 +21,7 @@ interface p {
 
 function ViewLibrary() {
     // todo - consult with aaron, there's probably a better way to do this
-    const {currentLibrary} = useContext(GlobalContext)
+    const {currentLibrary, setCurrentLibrary} = useContext(GlobalContext)
     const {content, alignToDrawer, padBottom} = useStyles()
     const {libraryId}: p = useParams()
     const {totalSales, lastSale} = currentLibrary
@@ -40,8 +37,16 @@ function ViewLibrary() {
     }
 
     function submitNewEditableNote(note: NoteDAO) {
-        console.log(note)
-        NoteService.editNote(currentLibrary, note)
+        console.log("submitting editable note", note)
+        editNote(currentLibrary, note)
+    }
+
+    // @ts-ignore
+    async function submitNewNote({newNote: message}) {
+        console.log("submitting new note", message)
+        const updatedLibrary = await saveNote(currentLibrary, message, "TODO")
+        console.log("updatedlib after saving", updatedLibrary)
+        setCurrentLibrary(updatedLibrary)
     }
 
     return (
@@ -54,7 +59,7 @@ function ViewLibrary() {
                     <SalesArea totalSales={totalSales} lastSale={lastSale}/>
                 </div>
                 <div className={padBottom}>
-                    <NewNote/>
+                    <NewNote formSubmit={submitNewNote}/>
                 </div>
                 <NoteList notes={currentLibrary.notes} SubmitForm={submitNewEditableNote}/>
             </main>
