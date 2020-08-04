@@ -6,9 +6,10 @@ import camelize from "../../../utils/camelize";
 interface TextFieldProps {
     name: string;
     isRequired?: boolean
+    defaultValue?: string | number
 }
 
-export default function CustomTextField({name, isRequired = false}: TextFieldProps) {
+export default function CustomTextField({name, isRequired = false, defaultValue = undefined}: TextFieldProps) {
     const camelizedName: string = camelize(name);
 
     return (
@@ -16,8 +17,8 @@ export default function CustomTextField({name, isRequired = false}: TextFieldPro
             {(props: FieldInputProps<any>) => (
                 <TextField
                     onChange={props.input.onChange}
-                    value={props.input.value}
                     name={props.input.name}
+                    defaultValue={defaultValue}
                     variant="outlined"
                     margin="normal"
                     required={isRequired}
@@ -30,3 +31,4 @@ export default function CustomTextField({name, isRequired = false}: TextFieldPro
         </Field>
     );
 }
+

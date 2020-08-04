@@ -122,3 +122,7 @@ export const newNote: NoteDAO = {
     dateCreated: readableDate(dateNowIso()),
     author: "Mr Sir"
 }
+
+export const mockFunction = () => {
+    console.log("calling function!")
+}

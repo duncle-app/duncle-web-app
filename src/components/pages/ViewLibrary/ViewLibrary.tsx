@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Library from "../../../model/library";
 import ContactDrawer from "../../atoms/ContactDrawer/ContactDrawer";
 import {useHistory, useParams} from "react-router-dom";
@@ -10,6 +10,7 @@ import NewNote from "../../atoms/Note/NewNote";
 import {GlobalContext} from "../../../common/GlobalContext";
 import {editNote, saveNote} from "../../../services/NoteService";
 import NoteDAO from "../../../model/noteDAO";
+import {NoLibrary} from "../../storybook-mocks/constants";
 
 interface LibraryDetailProps {
     library: Library;
@@ -46,7 +47,22 @@ function ViewLibrary() {
         console.log("submitting new note", message)
         const updatedLibrary = await saveNote(currentLibrary, message, "TODO")
         console.log("updatedlib after saving", updatedLibrary)
+        // todo - this ain't right.. this is needed, otherwise - see below note
+        setCurrentLibrary(NoLibrary)
+        // todo - not sure why.. but when this renders, it duplicates the note at the bottom instead of adding a new note to the top..
         setCurrentLibrary(updatedLibrary)
+    }
+
+    function sortLatestComesFirst(notes: NoteDAO[]) {
+        console.log("notes being sorted", notes)
+        notes.sort(function (a, b) {
+            var keyA = new Date(a.dateCreated),
+                keyB = new Date(b.dateCreated);
+            // Compare the 2 dates
+            if (keyA < keyB) return 1;
+            if (keyA > keyB) return -1;
+            return 0;
+        });
     }
 
     return (
