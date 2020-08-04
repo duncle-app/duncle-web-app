@@ -37,16 +37,22 @@ function ViewLibrary() {
         history.push(`/library/${libraryId}/edit`)
     }
 
-    function submitNewEditableNote(note: NoteDAO) {
+    async function submitNewEditableNote(note: NoteDAO) {
         console.log("submitting editable note", note)
-        editNote(currentLibrary, note)
+        const updatedLibrary: Library = await editNote(currentLibrary, note)
+        jankUpdateLibrary(updatedLibrary);
     }
 
     // @ts-ignore
     async function submitNewNote({newNote: message}) {
         console.log("submitting new note", message)
-        const updatedLibrary = await saveNote(currentLibrary, message, "TODO")
+        const updatedLibrary: Library = await saveNote(currentLibrary, message, "TODO")
         console.log("updatedlib after saving", updatedLibrary)
+
+        jankUpdateLibrary(updatedLibrary)
+    }
+
+    function jankUpdateLibrary(updatedLibrary: Library) {
         // todo - this ain't right.. this is needed, otherwise - see below note
         setCurrentLibrary(NoLibrary)
         // todo - not sure why.. but when this renders, it duplicates the note at the bottom instead of adding a new note to the top..
