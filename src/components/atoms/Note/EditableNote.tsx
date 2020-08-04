@@ -23,6 +23,8 @@ export default function ({id, message, author, dateCreated, SubmitForm}: NotePro
     const [isEditing, setisEditing] = useState(false)
     const [currentMessage, setCurrentMessage] = useState<string>(message)
 
+    console.log("in edit note", message, author, dateCreated)
+
     const classes = {
         root: "",
         title: "",
@@ -39,7 +41,7 @@ export default function ({id, message, author, dateCreated, SubmitForm}: NotePro
                 <Form
                     onSubmit={({note}: EditableNoteSubmitValues) => {
                         // @ts-ignore - this can't be undefined
-                        const newNote: NoteDAO = {id, note, author, dateCreated}
+                        const newNote: NoteDAO = {id, message: note, author, dateCreated}
                         SubmitForm(newNote)
                         setCurrentMessage(note)
                         setisEditing(false)
