@@ -1,8 +1,6 @@
 import React from "react";
 import "./App.css";
 import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
-import {DummyLibraryService} from "./common/dummy-library-service";
-import {AppState} from "./common/app-state";
 import Login from "./components/pages/LogIn/Login";
 import {GlobalProvider} from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";

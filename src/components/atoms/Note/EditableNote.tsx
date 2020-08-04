@@ -9,6 +9,7 @@ import TextArea from "../TextArea/TextArea";
 import {Form} from "react-final-form";
 import Clear from "@material-ui/icons/Clear";
 import NoteDAO from "../../../model/noteDAO";
+import {isIsoDate, readableDate} from "../../../utils/dateUtil";
 
 export interface NoteProps extends NoteDAO {
     SubmitForm(values: NoteDAO): any;
@@ -66,7 +67,7 @@ export default function ({id, message, author, dateCreated, SubmitForm}: NotePro
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
                         {/* Only show the formatted date, but store the iso date */}
-                        {dateCreated}
+                        {isIsoDate(dateCreated) ? readableDate(dateCreated) : dateCreated}
                     </Typography>
                 </CardContent>
                 <CardActions>

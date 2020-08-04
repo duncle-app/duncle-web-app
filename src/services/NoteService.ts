@@ -24,7 +24,7 @@ export async function saveNote(library: Library, message: string, author: string
         dateCreated: dateNowIso(),
         author
     }
-    library.notes?.push(newSavedNote)
+    library.notes.unshift(newSavedNote)
     // todo save here
     try {
         const response = await saveLibrary(library)
