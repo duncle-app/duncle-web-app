@@ -67,6 +67,7 @@
     "@storybook/addons": "^5.3.18",
     "@storybook/preset-create-react-app": "^3.0.0",
     "@storybook/react": "^5.3.19",
+    "@testing-library/react-hooks": "^3.4.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/microsoft-graph": "^1.13.0",
     "@types/react-big-calendar": "^0.24.3",
@@ -74,6 +75,7 @@
     "@types/uuid": "^8.0.0",
     "bootstrap": "^4.4.1",
     "eslint-plugin-react-hooks": "^2.5.0",
+    "react-test-renderer": "^16.13.1",
     "reactstrap": "^8.4.1",
     "serve": "^11.3.2"
   }

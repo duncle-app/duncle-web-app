@@ -1,5 +1,5 @@
 import React, {Context, useState} from "react";
-import useAuth, {useAuthReturn} from "./hooks/useAuth";
+import useAuth, {useAuthReturn} from "./hooks/Auth/useAuth";
 import Library from "../model/library";
 import {NoLibrary} from "../components/storybook-mocks/constants";
 
