@@ -1,7 +1,8 @@
 // todo - create local / dev / prod env
 import PouchDB from "pouchdb";
-import User from "../../model/user";
+import UserDAO from "../../model/userDAO";
 import Library from "../../model/library";
+import User from "../../model/user";
 
 export type PouchReturnProps = {
     localDB: PouchDB.Database,
@@ -14,7 +15,7 @@ const USER_ID_PREFIX = "org.duncle.";
 export function useUserPouch() {
     const {localPouch} = usePouch('user')
 
-    async function fetchUser(inputEmail: string): Promise<User> {
+    async function fetchUser(inputEmail: string): Promise<UserDAO> {
         console.log(`Finding username: ${inputEmail}`);
         try {
             return await localPouch.get(`${USER_ID_PREFIX}${inputEmail}`);

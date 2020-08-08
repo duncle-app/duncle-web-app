@@ -8,14 +8,14 @@ import Typography from "@material-ui/core/Typography";
 import {Form} from "react-final-form";
 import {SignUpForm} from "../../organisms/SignUp/SignUpForm";
 import {AccountCircle} from "@material-ui/icons";
-import User from "../../../model/user";
+import UserDAO from "../../../model/userDAO";
 import LoginService from "../../../services/LoginService";
 
 export default function SignUp() {
     const classes = useStyles();
     const loginService = new LoginService();
 
-    function submitForm(newUser: User) {
+    function submitForm(newUser: UserDAO) {
         alert(`${newUser.email} + ${newUser.password} + ${newUser.firstName} + ${newUser.lastName}`)
         const response = loginService.signUpUser(newUser)
         console.log(response)

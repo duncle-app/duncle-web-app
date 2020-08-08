@@ -1,5 +1,5 @@
 // @ts-ignore
-import User from "../src/model/user";
+import UserDAO from "../src/model/userDAO";
 
 interface Table {
     _id: string;

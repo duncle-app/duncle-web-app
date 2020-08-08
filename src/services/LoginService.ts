@@ -1,21 +1,18 @@
 import {useUserPouch} from "../common/hooks/UsePouch";
-import User from "../model/user";
 import bcrypt from 'bcryptjs'
+import UserDAO from "../model/userDAO";
+import User from "../model/user";
 
 export default class LoginService {
-    public async logInUser(user: User) {
+    public async logInUser(user: User): Promise<UserDAO | Error> {
         const {fetchUser} = useUserPouch();
-        const {password}: User = await fetchUser(user.email);
+        const daoUser: UserDAO = await fetchUser(user.email);
 
-        console.log(`actual password: ${password}`)
+        console.log(`actual password: ${daoUser.password}`)
         console.log(`passed in: ${user.password}`)
-        console.log(`hashed passed in: ${user.password}`)
 
-        // @ts-ignore
-        // todo - better typing? maybe password shouldn't be optional?
-        if (LoginService.compare(user.password, password)) {
-            alert("log in successful! Passwords match")
-            return user
+        if (LoginService.compare(user.password, daoUser.password)) {
+            return daoUser
         } else {
             throw new Error("Wrong password. Try again or click Forgot password to reset it")
         }
@@ -25,7 +22,7 @@ export default class LoginService {
         // @ts-ignore
         const hashedPassword = await LoginService.hash(password);
         const {addUser}: any = useUserPouch();
-        return addUser(new User(email, hashedPassword, firstName, lastName))
+        return addUser(email, hashedPassword, firstName, lastName)
     }
 
     // todo - could move these to another class.

@@ -40,6 +40,7 @@ function ViewLibrary() {
     async function submitNewEditableNote(note: NoteDAO) {
         console.log("submitting editable note", note)
         const updatedLibrary: Library = await editNote(currentLibrary, note)
+        console.log("log for me", updatedLibrary)
         jankUpdateLibrary(updatedLibrary);
     }
 

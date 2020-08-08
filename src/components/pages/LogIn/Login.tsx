@@ -8,9 +8,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {LogInForm} from "../../organisms/LogIn/LogInForm";
 import {Avatar} from "@material-ui/core";
 import useStyles from "../../../global-styles";
-import User from "../../../model/user";
+import UserDAO from "../../../model/userDAO";
 import LoginService from "../../../services/LoginService";
 import {GlobalContext} from "../../../common/GlobalContext";
+import User from "../../../model/user";
 
 export default function Login() {
     const {paper, avatar} = useStyles();
@@ -19,13 +20,14 @@ export default function Login() {
 
     async function submitForm(user: User) {
         try {
-            const res = await loginService.logInUser(user);
-            authenticate()
+            const returnedUser: UserDAO | Error = await loginService.logInUser(user);
+            authenticate(returnedUser)
         } catch (e) {
-            console.error("error:",e)
+            console.error("error:", e)
             alert(`Failed to find: ${e.message}`)
         }
     }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
