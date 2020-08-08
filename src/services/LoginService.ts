@@ -4,19 +4,15 @@ import UserDAO from "../model/userDAO";
 import User from "../model/user";
 
 export default class LoginService {
-    public async logInUser(user: User) {
+    public async logInUser(user: User): Promise<UserDAO | Error> {
         const {fetchUser} = useUserPouch();
-        const {password}: UserDAO = await fetchUser(user.email);
+        const daoUser: UserDAO = await fetchUser(user.email);
 
-        console.log(`actual password: ${password}`)
+        console.log(`actual password: ${daoUser.password}`)
         console.log(`passed in: ${user.password}`)
-        console.log(`hashed passed in: ${user.password}`)
 
-        // @ts-ignore
-        // todo - better typing? maybe password shouldn't be optional?
-        if (LoginService.compare(user.password, password)) {
-            alert("log in successful! Passwords match")
-            return user
+        if (LoginService.compare(user.password, daoUser.password)) {
+            return daoUser
         } else {
             throw new Error("Wrong password. Try again or click Forgot password to reset it")
         }

@@ -1,6 +1,7 @@
 import {Library} from "../../model";
 import {dateNowIso, readableDate} from "../../utils/dateUtil";
 import NoteDAO from "../../model/noteDAO";
+import UserDAO from "../../model/userDAO";
 
 export const newNotes: NoteDAO[] = [
     {
@@ -114,6 +115,15 @@ export const NoLibrary: Library = {
     totalSales: 0,
     lastSale: 0,
     notes: []
+}
+
+export const dummyUserDAO: UserDAO = {
+    _id: "dummy",
+    _rev: "dummy",
+    email: "dummy",
+    password: "dummy",
+    firstName: "dummy",
+    lastName: "dummy"
 }
 
 export const newNote: NoteDAO = {

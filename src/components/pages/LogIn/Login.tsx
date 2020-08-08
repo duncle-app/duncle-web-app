@@ -11,16 +11,17 @@ import useStyles from "../../../global-styles";
 import UserDAO from "../../../model/userDAO";
 import LoginService from "../../../services/LoginService";
 import {GlobalContext} from "../../../common/GlobalContext";
+import User from "../../../model/user";
 
 export default function Login() {
     const {paper, avatar} = useStyles();
     const loginService = new LoginService();
     const {isAuthenticated, authenticate} = useContext(GlobalContext)
 
-    async function submitForm(user: UserDAO) {
+    async function submitForm(user: User) {
         try {
-            const res = await loginService.logInUser(user);
-            authenticate()
+            const returnedUser: UserDAO | Error = await loginService.logInUser(user);
+            authenticate(returnedUser)
         } catch (e) {
             console.error("error:", e)
             alert(`Failed to find: ${e.message}`)

@@ -1,4 +1,5 @@
 import React, {Dispatch, SetStateAction, useCallback, useState} from 'react'
+import UserDAO from "../../../model/userDAO";
 
 export type useAuthReturn = {
     isAuthenticated: boolean;
@@ -9,31 +10,42 @@ var authCredentials = {
     token: "fasdjklfjasdklfjalksdfjlkasdfjkl"
 }
 
+interface localStorageItem {
+    value: UserDAO
+    expiry: number
+}
+
+// tutorial on setting local storage tokens with expiry dates
+// https://www.sohamkamani.com/blog/javascript-localstorage-with-ttl-expiry/
 export default function useAuth() {
-    // tutorial on setting local storage tokens with expiry dates
-    // https://www.sohamkamani.com/blog/javascript-localstorage-with-ttl-expiry/
+    const TOKEN_ID: string = 'authCredentials';
     return {
-        isAuthenticated: useCallback((user) : boolean => {
-            console.log("user passed in", user)
-            return typeof getWithExpiry('authCredentials') !== 'undefined' && getWithExpiry('authCredentials') !== null
+        isAuthenticated: useCallback(() : boolean => {
+            console.log("Checking if is authenticated")
+            // todo - set the global user if we're authenticated. If not, clear it.
+            return typeof getWithExpiry(TOKEN_ID) !== 'undefined' && getWithExpiry(TOKEN_ID) !== null
             // return key === user.id
         },[]),
-        authenticate: useCallback(() => {
+        authenticate: useCallback((user: UserDAO) => {
+            console.log("authenticating")
             const now = new Date()
-            const fiveSeconds = 5000
+            const oneMinute = 60000
+            const oneHour = oneMinute * 60
+            const twoHours = oneHour * 2
+
 
             // `item` is an object which contains the original value
             // as well as the time when it's supposed to expire
-            const item = {
+            const item: localStorageItem = {
                 // set user info, along with token
-                value: 'value101',
-                expiry: now.getTime() + fiveSeconds
+                value: user,
+                expiry: now.getTime() + twoHours
             }
-            localStorage.setItem('authCredentials', JSON.stringify(item))
+            localStorage.setItem(TOKEN_ID, JSON.stringify(item))
         }, []),
         signout: useCallback(
             () =>
-                localStorage.removeItem('authCredentials'), []
+                localStorage.removeItem(TOKEN_ID), []
         )
     }
 }
