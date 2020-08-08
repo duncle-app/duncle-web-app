@@ -26,7 +26,7 @@ export default ({columns, libraries, onEdit}: TableProps) => {
                     {
                         // @ts-ignore
                         icon: tableIcons.Create,
-                        tooltip: 'Edit User',
+                        tooltip: 'Edit UserDAO',
                         // @ts-ignore
                         onClick: (event, rowData) => onEdit(rowData)
                     }

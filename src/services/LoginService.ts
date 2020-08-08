@@ -1,11 +1,12 @@
 import {useUserPouch} from "../common/hooks/UsePouch";
-import User from "../model/user";
 import bcrypt from 'bcryptjs'
+import UserDAO from "../model/userDAO";
+import User from "../model/user";
 
 export default class LoginService {
     public async logInUser(user: User) {
         const {fetchUser} = useUserPouch();
-        const {password}: User = await fetchUser(user.email);
+        const {password}: UserDAO = await fetchUser(user.email);
 
         console.log(`actual password: ${password}`)
         console.log(`passed in: ${user.password}`)
@@ -25,7 +26,7 @@ export default class LoginService {
         // @ts-ignore
         const hashedPassword = await LoginService.hash(password);
         const {addUser}: any = useUserPouch();
-        return addUser(new User(email, hashedPassword, firstName, lastName))
+        return addUser(email, hashedPassword, firstName, lastName)
     }
 
     // todo - could move these to another class.

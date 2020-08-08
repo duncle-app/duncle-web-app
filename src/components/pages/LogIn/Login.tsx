@@ -8,7 +8,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {LogInForm} from "../../organisms/LogIn/LogInForm";
 import {Avatar} from "@material-ui/core";
 import useStyles from "../../../global-styles";
-import User from "../../../model/user";
+import UserDAO from "../../../model/userDAO";
 import LoginService from "../../../services/LoginService";
 import {GlobalContext} from "../../../common/GlobalContext";
 
@@ -17,15 +17,16 @@ export default function Login() {
     const loginService = new LoginService();
     const {isAuthenticated, authenticate} = useContext(GlobalContext)
 
-    async function submitForm(user: User) {
+    async function submitForm(user: UserDAO) {
         try {
             const res = await loginService.logInUser(user);
             authenticate()
         } catch (e) {
-            console.error("error:",e)
+            console.error("error:", e)
             alert(`Failed to find: ${e.message}`)
         }
     }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
