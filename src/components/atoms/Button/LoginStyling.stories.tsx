@@ -1,6 +1,6 @@
 import React from "react";
 
-import './sting.css'
+import './outlineText.css'
 
 export default {
     title: "Atoms/Test/LoginStyling"

@@ -7,18 +7,18 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 
-const rows = [
-    createData('Minneapolis Washburn', 'March 5th', '14:00', 'Terry'),
-    createData('Westside Elementary', 'August 9th', '12:00', 'Terry'),
-    createData('Mr. Sir High School', 'August 25th', '8:00', 'Terry'),
-    createData('Lakeville North', 'September 1st', '18:30', 'Terry'),
-];
-
-function createData(name: string, day: string, time: string, rep: string) {
-    return { name, day, time, rep };
+interface Props {
+    events: Event[]
 }
 
-export default function UserEvents() {
+interface Event {
+    name: string,
+    day: string,
+    time: string,
+    rep: string
+}
+
+export default function UserEvents({events}: Props) {
     return (
         <TableContainer component={Paper}>
             <Table size="small" aria-label="a dense table">
@@ -31,7 +31,7 @@ export default function UserEvents() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {events.map((row) => (
                         <TableRow key={row.name}>
                             <TableCell component="th" scope="row">{row.name}</TableCell>
                             <TableCell component="th" scope="row">{row.day}</TableCell>
