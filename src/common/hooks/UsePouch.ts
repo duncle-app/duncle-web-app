@@ -3,6 +3,7 @@ import PouchDB from "pouchdb";
 import UserDAO from "../../model/userDAO";
 import Library from "../../model/library";
 import User from "../../model/user";
+import NewLibrary from "../../model/newLibrary";
 
 export type PouchReturnProps = {
     localDB: PouchDB.Database,
@@ -71,6 +72,7 @@ interface useLibraryPouchReturn {
     getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>>
     getLibrary(libraryId: string): any
     saveLibrary(library: Library): Promise<PouchDB.Core.Response | Error>
+    addLibrary(library: NewLibrary): Promise<PouchDB.Core.Response | Error>
 }
 
 export function useLibraryPouch(): useLibraryPouchReturn {
@@ -99,8 +101,15 @@ export function useLibraryPouch(): useLibraryPouchReturn {
             throw new Error(`Failed to save the library: ${err}`)
         }
     }
+    async function addLibrary(library: NewLibrary): Promise<PouchDB.Core.Response | Error> {
+        try {
+            return await localPouch.put(library);
+        } catch (err) {
+            throw new Error(`Failed to add the library: ${err}`)
+        }
+    }
 
-    return {getAll, getLibrary, saveLibrary}
+    return {getAll, getLibrary, saveLibrary, addLibrary}
 }
 
 function usePouch(database: string): any {

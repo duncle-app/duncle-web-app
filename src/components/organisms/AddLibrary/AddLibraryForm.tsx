@@ -11,9 +11,10 @@ export default function (props: any) {
     const isRequired: boolean = true;
 
     const librarianFields = [
-        {label: "Library", isRequired},
+        {label: "Library Name", isRequired},
         {label: "Librarian", isRequired},
         {label: "Assistant"},
+        {label: "Email", isRequired},
         {label: "Phone Number", isRequired},
         {label: "Extension"},
         {label: "Street", isRequired},
@@ -24,7 +25,6 @@ export default function (props: any) {
         {label: "State", isRequired},
         {label: "Level"},
         {label: "Size"},
-        {label: "Email", isRequired},
     ];
 
     return (

@@ -1,9 +1,9 @@
 import NoteDAO from "./noteDAO";
 
 export default interface NewLibrary {
+    _id: string,
     libraryName: string,
     librarian: string,
-    assistant: string,
     street: string,
     district: string,
     city: string,
@@ -12,13 +12,14 @@ export default interface NewLibrary {
     zip: string,
     email: string,
     phoneNumber: number,
-    extension?: string,
-    level: string,
-    size: number,
     dateUpdated: string,
     assignedRep: string,
     totalSales: number,
     lastSale: number,
+    level?: string,
+    size?: number,
+    assistant?: string,
+    extension?: string,
     dateLastSale?: string,
     dateNextContact?: string,
     notes: NoteDAO[],
