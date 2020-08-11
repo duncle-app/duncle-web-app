@@ -23,10 +23,11 @@ console.log("month here")
 console.log(month)
 
 const rows = [
-    createData('Minneapolis Washburn', normalDate, 'Terry'),
-    createData('Westside Elementary', normalDate, 'Terry'),
-    createData('Mr. Sir High School', normalDate, 'Terry'),
+    // have one last month, this month, and next month
     createData('Lakeville North', normalDate, 'Terry'),
+    createData('Should be red, one month old', moment().subtract(1, "month").toDate(), 'Terry'),
+    createData('Should be yellow, one month ahead', moment().add(1, "month").toDate(), 'Terry'),
+    createData('Should be green, this is today', normalDate, 'Terry'),
 ];
 
 export const withProps = () =>
