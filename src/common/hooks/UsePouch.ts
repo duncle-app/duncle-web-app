@@ -155,8 +155,10 @@ function usePouch(database: string): any {
     getInfo()
 
     // Setup database sync
+    // Read more at https://pouchdb.com/guides/replication.html
     localPouch.sync(remoteDatabase, {
         live: true,
+        retry: true
     }).on('change', function () {
         console.log('db changed');
     }).on('error', function () {

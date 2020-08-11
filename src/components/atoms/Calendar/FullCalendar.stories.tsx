@@ -1,14 +1,11 @@
 import React from "react";
 import FullCalendar from "./FullCalendar"
-import {outlookResponse} from "./calendarConstants";
+import {events} from "./calendarConstants";
 
 export default {
-    title: "Test/FullCalendar",
-    component: FullCalendar,
+    title: "Test/FullCalendar"
 };
 
-
-
 export const withProps = () => (
-    <FullCalendar outlookResponse={outlookResponse}/>
+    <FullCalendar events={events}/>
 );

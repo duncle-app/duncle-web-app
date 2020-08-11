@@ -1,11 +1,11 @@
 import moment from "moment";
-import {OutlookResponse} from "./FullCalendar";
+import {CalendarEvent} from "./FullCalendar";
 
-export const events = [
+export const events: CalendarEvent[] = [
     {
-        start: moment().toDate(),
+        start: moment().toISOString(),
         end: moment().add(1, "days").toDate(),
-        title: "Two day event",
+        title: "passed in iso",
     },
     {
         start: moment().add(2, "days").toDate(),
@@ -114,4 +114,33 @@ export const outlookResponse: OutlookResponse = {
             }
         }
     ]
+}
+
+interface OutlookEvent {
+    "@odata.etag": string,
+    id: string,
+    subject: string,
+    start: {
+        dateTime: string,
+        timeZone: string
+    },
+    end: {
+        dateTime: string,
+        timeZone: string
+    },
+    organizer: {
+        emailAddress: {
+            name: string,
+            address: string
+        }
+    }
+}
+
+export type FullCalendarProps = {
+    outlookResponse: OutlookResponse
+}
+
+export interface OutlookResponse {
+    "@odata.context": string,
+    value: OutlookEvent[],
 }

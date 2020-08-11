@@ -1,3 +1,7 @@
+import moment from "moment";
+
+// todo - test if these are the same
+// export const dateNowIso = () => moment().toISOString();
 export const dateNowIso = () => new Date().toISOString();
 
 export function isIsoDate(str: string): boolean {
