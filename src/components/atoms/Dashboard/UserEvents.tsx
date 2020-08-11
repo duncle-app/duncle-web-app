@@ -6,16 +6,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
+import moment from "moment";
 
 interface Props {
-    events: Event[]
-}
-
-interface Event {
-    name: string,
-    day: string,
-    time: string,
-    rep: string
+    events: {
+        name: string,
+        meetingTime: Date,
+        rep: string
+    }[]
 }
 
 export default function UserEvents({events}: Props) {
@@ -25,20 +23,23 @@ export default function UserEvents({events}: Props) {
                 <TableHead>
                     <TableRow>
                         <TableCell><b>Library Name</b></TableCell>
-                        <TableCell><b>Day</b></TableCell>
-                        <TableCell><b>Time</b></TableCell>
+                        <TableCell><b>Meeting Time</b></TableCell>
                         <TableCell><b>Rep</b></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {events.map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">{row.name}</TableCell>
-                            <TableCell component="th" scope="row">{row.day}</TableCell>
-                            <TableCell component="th" scope="row">{row.time}</TableCell>
-                            <TableCell component="th" scope="row">{row.rep}</TableCell>
-                        </TableRow>
-                    ))}
+                    {events.map(({name, meetingTime, rep}) => {
+                        // see docs for further details - https://momentjs.com/docs/#/displaying/format/
+                        const readableFormat = moment(meetingTime).format("MMMM do, H:mm")
+                        return (
+                                <TableRow key={name}>
+                                    <TableCell component="th" scope="row">{name}</TableCell>
+                                    <TableCell component="th" scope="row">{readableFormat}</TableCell>
+                                    <TableCell component="th" scope="row">{rep}</TableCell>
+                                </TableRow>
+                            )
+                        }
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>
