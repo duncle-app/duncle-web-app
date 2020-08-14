@@ -1,6 +1,5 @@
 import React from "react";
 import {MyCalendar} from "./BigCalendar"
-import moment from "moment";
 import {events} from "./calendarConstants";
 
 export default {
@@ -8,6 +7,6 @@ export default {
     component: MyCalendar,
 };
 
-export const withProps = () => (
-    <MyCalendar events={events}/>
-);
+// export const withProps = () => (
+//     <MyCalendar events={events}/>
+// );

@@ -6,6 +6,6 @@ export default {
     title: "Test/FullCalendar"
 };
 
-export const withProps = () => (
-    <FullCalendar events={events}/>
-);
+// export const withProps = () => (
+//     <FullCalendar events={events}/>
+// );

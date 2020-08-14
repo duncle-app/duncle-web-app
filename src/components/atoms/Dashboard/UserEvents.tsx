@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default function UserEvents({events}: Props) {
-``    events.sort((a, b) => {
+    events.sort((a, b) => {
         // @ts-ignore
         return a.meetingTime - b.meetingTime
     })
@@ -28,6 +28,7 @@ export default function UserEvents({events}: Props) {
             return "red"
         } else if (currentMonth === meetingTimeMonth) {
             return "#4caf50"
+        // maybe this should just be white
         } else if (currentMonth + 1 === meetingTimeMonth) {
             return "yellow";
         } else {
@@ -55,6 +56,7 @@ export default function UserEvents({events}: Props) {
                             <TableRow key={name} style={{background: backgroundColor}}>
                                 <TableCell component="th" scope="row">{name}</TableCell>
                                 <TableCell component="th" scope="row">{readableFormat}</TableCell>
+                                {/* Consider adding an end date too */}
                                 <TableCell component="th" scope="row">{rep}</TableCell>
                             </TableRow>
                         )

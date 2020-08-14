@@ -1,11 +1,11 @@
 import moment from "moment";
-import {CalendarEvent} from "./FullCalendar";
+// import {CalendarEvent} from "./FullCalendar";
 
-export const events: CalendarEvent[] = [
+export const events = [
     {
         start: moment().toISOString(),
         end: moment().add(1, "days").toDate(),
-        title: "passed in iso",
+        title: "Iso date",
     },
     {
         start: moment().add(2, "days").toDate(),
