@@ -47,3 +47,13 @@ echo NOTE: hard coding development for both the NODE_ENV and BABEL_ENV.. see htt
 ```
 
 This project, like literally every single other ReactJS app, was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Useful GCloud commands
+### gcloud config unset project
+Resets configuration for the current project. This is useful if you need to switch accounts
+
+### gcloud init
+Initializes all configuration to deploy the app to the cloud
+
+### gcloud app deploy
+deploys the app to the specified environment
