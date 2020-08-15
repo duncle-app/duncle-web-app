@@ -5,10 +5,12 @@
 ### `.env` file
 Populate your app with these variables with an .env file at the root.
 ```
-REACT_APP_CLOUDANT_USERNAME=
-REACT_APP_CLOUDANT_PASSWORD=
 REACT_APP_DATABASE_URL=
+REACT_APP_DATABASE_USERNAME=
+REACT_APP_DATABASE_PASSWORD=
+
 REACT_APP_SALT=
+REACT_APP_ENCRYPTION_PASSWORD=
 ```
 
 ## Available Scripts
