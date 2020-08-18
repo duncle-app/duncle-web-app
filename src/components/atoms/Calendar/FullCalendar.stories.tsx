@@ -3,9 +3,9 @@ import FullCalendar from "./FullCalendar"
 import {events} from "./calendarConstants";
 
 export default {
-    title: "Test/FullCalendar"
+    title: "Atoms/Calendar"
 };
 
-// export const withProps = () => (
-//     <FullCalendar events={events}/>
-// );
+export const withProps = () => (
+    <FullCalendar/>
+);
