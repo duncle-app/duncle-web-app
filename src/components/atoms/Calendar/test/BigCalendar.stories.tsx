@@ -1,6 +1,6 @@
 import React from "react";
 import {MyCalendar} from "./BigCalendar"
-import {events} from "./calendarConstants";
+import {events} from "../calendarConstants";
 
 export default {
     title: "Test/BigCalendar",
