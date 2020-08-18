@@ -10,13 +10,15 @@ import AllLibraries from "./components/pages/LibraryList/AllLibraries";
 import AddLibrary from "./components/pages/AddLibrary/AddLibrary";
 import ViewLibrary from "./components/pages/ViewLibrary/ViewLibrary";
 import EditLibraryController from "./components/pages/EditLibrary/EditLibraryController";
+import DemoApp from "./components/atoms/Calendar/FullCalendar";
+import DefaultButton from "./components/atoms/Button/DefaultButton";
 
 const Protected = () => <h3>Protected</h3>
 const Unauthorized = () =>
     <>
         <h1>You are not authorized. </h1>
         <Link to="/login">
-            <button>Home Page</button>
+            <DefaultButton>Sign in</DefaultButton>
         </Link>
     </>
 
@@ -47,6 +49,11 @@ function App() {
                             exact
                             path="/protected"
                             component={Protected}
+                        />
+                        <PrivateRoute
+                            exact
+                            path="/dashboard"
+                            component={DemoApp}
                         />
                         <PrivateRoute
                             exact

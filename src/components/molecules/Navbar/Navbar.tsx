@@ -11,7 +11,7 @@ type NavbarProps = {
 export default function Navbar() {
     const {appHeader, horizontalListItem} = useStyles()
     const navbarTabs: NavbarProps[] = [
-        {name: "Dashboard", route: "/"},
+        {name: "Dashboard", route: "/dashboard"},
         {name: "All Libraries", route: "/library",},
         {name: "Add Library", route: "/library/new"}
     ]
