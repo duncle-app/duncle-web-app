@@ -7,34 +7,35 @@ import {INITIAL_EVENTS, createEventId} from './utils'
 import './main.css'
 import CalendarDialog from "../CalendarDialog/CalendarDialog";
 
-interface DemoAppState {
-    weekendsVisible: boolean
-    currentEvents: EventApi[]
-}
-
 export default function () {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
+    const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
     const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
+    const [isOpen, setIsOpen] = React.useState<boolean>(false);
+    const handleClose = () => {
+        if (selectedDates) {
+            let calendarApi = selectedDates.view.calendar
+
+            calendarApi.unselect() // clear date selection
+
+            calendarApi.addEvent({
+                id: createEventId(),
+                title: "DOGGIE",
+                start: selectedDates.startStr,
+                end: selectedDates.endStr,
+                allDay: selectedDates.allDay
+            })
+        }
+        setIsOpen(false);
+    }
 
     const handleWeekendsToggle = () => {
         setWeekendsVisible(!weekendsVisible)
     }
 
     const handleDateSelect = (selectInfo: DateSelectArg) => {
-        let title = prompt('Please enter a new title for your event')
-        let calendarApi = selectInfo.view.calendar
-
-        calendarApi.unselect() // clear date selection
-
-        if (title) {
-            calendarApi.addEvent({
-                id: createEventId(),
-                title,
-                start: selectInfo.startStr,
-                end: selectInfo.endStr,
-                allDay: selectInfo.allDay
-            })
-        }
+        setIsOpen(true)
+        setSelectedDates(selectInfo)
     }
 
     const handleEventClick = (clickInfo: EventClickArg) => {
@@ -52,7 +53,7 @@ export default function () {
     return (
         <div className='demo-app'>
             {renderSidebar()}
-            <CalendarDialog/>
+            <CalendarDialog handleClose={handleClose} isOpen={isOpen}/>
             <div className='demo-app-main'>
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -91,7 +92,7 @@ export default function () {
                             type='checkbox'
                             checked={weekendsVisible}
                             onChange={handleWeekendsToggle}
-                        ></input>
+                        />
                         toggle weekends
                     </label>
                 </div>
@@ -108,7 +109,7 @@ export default function () {
     function renderEventContent(eventContent: EventContentArg) {
         return (
             <>
-                <b>{eventContent.timeText}</b>
+                <strong>{eventContent.timeText}</strong>
                 <i>{eventContent.event.title}</i>
             </>
         )
@@ -117,7 +118,7 @@ export default function () {
     function renderSidebarEvent(event: EventApi) {
         return (
             <li key={event.id}>
-                <b>{formatDate(event.start!, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+                <strong>{formatDate(event.start!, {year: 'numeric', month: 'short', day: 'numeric'})}</strong>
                 <i>{event.title}</i>
             </li>
         )
