@@ -9,9 +9,19 @@ const useStyles = makeStyles((theme) => ({
         // color: patsGold,
         // background: "black",
     },
+    calendarIcon: {
+        height: '2em',
+        width: '2em',
+        "&:hover, &:focus": {
+            color: () => theme.palette.primary.main
+        },
+    },
     cardHeader: {
         // color: patsGold,
         // background: "#203731",
+    },
+    center: {
+        textAlign: 'center'
     },
     closeInput: {
         paddingRight: "1em"

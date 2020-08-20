@@ -1,5 +1,5 @@
 import React from "react";
-import FullCalendar from "./FullCalendar"
+import FullCalendar from "./Calendar"
 import {events} from "./calendarConstants";
 
 export default {

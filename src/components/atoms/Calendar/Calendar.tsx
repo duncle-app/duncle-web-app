@@ -5,29 +5,12 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import {INITIAL_EVENTS, createEventId} from './utils'
 import './main.css'
-import CalendarDialog from "../CalendarDialog/CalendarDialog";
 
 export default function () {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
-    const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
     const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
+    const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
-    const handleClose = () => {
-        if (selectedDates) {
-            let calendarApi = selectedDates.view.calendar
-
-            calendarApi.unselect() // clear date selection
-
-            calendarApi.addEvent({
-                id: createEventId(),
-                title: "DOGGIE",
-                start: selectedDates.startStr,
-                end: selectedDates.endStr,
-                allDay: selectedDates.allDay
-            })
-        }
-        setIsOpen(false);
-    }
 
     const handleWeekendsToggle = () => {
         setWeekendsVisible(!weekendsVisible)
@@ -52,8 +35,7 @@ export default function () {
 
     return (
         <div className='demo-app'>
-            {renderSidebar()}
-            <CalendarDialog handleClose={handleClose} isOpen={isOpen}/>
+            {/*{renderSidebar()}*/}
             <div className='demo-app-main'>
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -124,4 +106,3 @@ export default function () {
         )
     }
 }
-
