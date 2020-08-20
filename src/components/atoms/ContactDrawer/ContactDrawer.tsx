@@ -4,9 +4,9 @@ import Library from "../../../model/library";
 import {ListItem, List, Divider, ListItemText} from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import EventNote from "@material-ui/icons/EventNote";
-import DialogueWrapper from "../Dialogs/DialogueWrapper";
 import {createEventId} from "../Calendar/utils";
 import {DateSelectArg} from "@fullcalendar/react";
+import CalendarDialog from "../Dialogs/CalendarDialog";
 
 interface drawerProps {
     library: Library;
@@ -17,6 +17,8 @@ export default ({library}: drawerProps) => {
     const {libraryName, city, state, street, zip, email, librarian, phoneNumber} = library;
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
+
+    const cancel = () => setIsOpen(false)
 
     const handleClose = () => {
         if (selectedDates) {
@@ -43,7 +45,7 @@ export default ({library}: drawerProps) => {
                 paper: drawerPaper,
             }}
         >
-            {/*<DialogueWrapper handleClose={handleClose} isOpen={isOpen}/>*/}
+            <CalendarDialog handleSubmit={handleClose} handleCancel={cancel} isOpen={isOpen}/>
             <div>
                 <List>
                     <ListItem>

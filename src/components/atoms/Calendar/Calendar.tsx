@@ -3,8 +3,9 @@ import FullCalendar, {EventApi, DateSelectArg, EventClickArg, EventContentArg, f
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import {INITIAL_EVENTS, createEventId} from './utils'
+import {INITIAL_EVENTS} from './utils'
 import './main.css'
+import DateTimeDialog from "../Dialogs/DateTimeDialog";
 
 export default function () {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
@@ -21,6 +22,13 @@ export default function () {
         setSelectedDates(selectInfo)
     }
 
+    const handleClose = () => {
+        // do some other stuff here, like save the date or something
+        setIsOpen(false)
+    }
+
+    const cancel = () => setIsOpen(false)
+
     const handleEventClick = (clickInfo: EventClickArg) => {
         // @ts-ignore
         // eslint-disable-next-line
@@ -36,6 +44,7 @@ export default function () {
     return (
         <div className='demo-app'>
             {/*{renderSidebar()}*/}
+            <DateTimeDialog isOpen={isOpen} handleSubmit={handleClose} handleCancel={cancel}/>
             <div className='demo-app-main'>
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

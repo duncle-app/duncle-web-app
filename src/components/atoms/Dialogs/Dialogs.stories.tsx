@@ -6,7 +6,16 @@ export default {
     title: "Atoms/Dialogs"
 };
 
-export const calendarDialog = () => <CalendarDialog/>
+export const calendarDialog = () =>
+    <CalendarDialog
+        isOpen={true}
+        handleSubmit={() => console.log("submitting")}
+        handleCancel={() => console.log("closing")}
+    />
 
-
-export const dateTimeDialog = () => <DateTimeDialog/>
+export const dateTimeDialog = () =>
+    <DateTimeDialog
+        isOpen={true}
+        handleSubmit={() => console.log("submitting")}
+        handleCancel={() => console.log("closing")}
+    />

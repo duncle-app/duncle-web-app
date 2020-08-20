@@ -1,9 +1,8 @@
 import React from 'react'
 import Calendar from "../Calendar/Calendar";
-import DialogueWrapper from "./DialogueWrapper";
+import DialogueWrapper, {DialogProps} from "./DialogueWrapper";
 
-
-export default () =>
-    <DialogueWrapper isOpen={true} handleClose={() => console.log("mr sir")}>
+export default (props: DialogProps) =>
+    <DialogueWrapper {...props}>
         <Calendar/>
     </DialogueWrapper>
