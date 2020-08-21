@@ -7,7 +7,7 @@ type ButtonProps = {
 }
 
 export default function FormSubmitButton({ DisplayText }: ButtonProps){
-    const classes = useStyles();
+    const {submit} = useStyles();
 
     return (
         <Button
@@ -15,7 +15,7 @@ export default function FormSubmitButton({ DisplayText }: ButtonProps){
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            className={submit}
         >
             { DisplayText }
         </Button>

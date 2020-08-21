@@ -12,9 +12,11 @@ import UserDAO from "../../../model/userDAO";
 import LoginService from "../../../services/LoginService";
 import {GlobalContext} from "../../../common/GlobalContext";
 import User from "../../../model/user";
+import {useHistory} from "react-router-dom";
 
 export default function Login() {
     const {paper, avatar} = useStyles();
+    const history = useHistory();
     const loginService = new LoginService();
     const {isAuthenticated, authenticate} = useContext(GlobalContext)
 
@@ -22,6 +24,7 @@ export default function Login() {
         try {
             const returnedUser: UserDAO | Error = await loginService.logInUser(user);
             authenticate(returnedUser)
+            history.push('/dashboard')
         } catch (e) {
             console.error("error:", e)
             alert(`Failed to find: ${e.message}`)

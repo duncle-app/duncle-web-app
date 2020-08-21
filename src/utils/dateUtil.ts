@@ -1,8 +1,6 @@
 import moment from "moment";
 
-// todo - test if these are the same
-// export const dateNowIso = () => moment().toISOString();
-export const dateNowIso = () => new Date().toISOString();
+export const dateNowIso = () => moment().format();
 
 export function isIsoDate(str: string): boolean {
     if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(str)) return false;
@@ -10,6 +8,7 @@ export function isIsoDate(str: string): boolean {
     return d.toISOString() === str;
 }
 
+// todo - deprecated if using moment - see docs for further details - https://momentjs.com/docs/#/displaying/format/
 export function readableDate(isoDate: string): string {
     var b = isoDate.split(/\D+/);
     // @ts-ignore

@@ -20,7 +20,7 @@ type PouchRow = {
 }
 
 export default function () {
-    const [libraries, setLibraries] = useState([NoLibrary]);
+    const [libraries, setLibraries] = useState<Library[]>([]);
     const {setCurrentLibrary} = useContext(GlobalContext)
     const {getAll} = useLibraryPouch()
     const history = useHistory();
