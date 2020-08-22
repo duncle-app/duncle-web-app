@@ -1,14 +1,18 @@
-import React from 'react'
+import React, {ReactNode} from 'react'
 import {Form as FinalForm} from "react-final-form";
 
-// @ts-ignore
-export default props =>
+interface Props {
+    onSubmit(...args : any[]): any
+    children: ReactNode
+}
+
+export default ({onSubmit, children}: Props) =>
     <FinalForm
-        onSubmit={props.onSubmit}
+        onSubmit={onSubmit}
         // @ts-ignore
         render={({handleSubmit}) => (
             <>
-                <form onSubmit={handleSubmit}>{props.children}</form>
+                <form onSubmit={handleSubmit}>{children}</form>
             </>
         )}
     />

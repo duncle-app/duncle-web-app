@@ -3,9 +3,10 @@ import FullCalendar, {EventApi, DateSelectArg, EventClickArg, EventContentArg, f
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import {INITIAL_EVENTS} from './utils'
-import './main.css'
 import DateTimeDialog from "../Dialogs/DateTimeDialog";
+import {INITIAL_EVENTS} from "./utils";
+
+import './main.css'
 
 export default function () {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
@@ -22,8 +23,23 @@ export default function () {
         setSelectedDates(selectInfo)
     }
 
-    const handleClose = () => {
-        // do some other stuff here, like save the date or something
+    // @ts-ignore
+    const handleSubmit = ({mr}) => {
+        console.log({mr})
+        //// add to calendar events
+        // let calendarApi = selectInfo.view.calendar
+        //
+        // calendarApi.unselect() // clear date selection
+        //
+        // if (title) {
+        //     calendarApi.addEvent({
+        //         id: createEventId(),
+        //         title,
+        //         start: selectInfo.startStr,
+        //         end: selectInfo.endStr,
+        //         allDay: selectInfo.allDay
+        //     })
+        // }
         setIsOpen(false)
     }
 
@@ -44,7 +60,7 @@ export default function () {
     return (
         <div className='demo-app'>
             {/*{renderSidebar()}*/}
-            <DateTimeDialog isOpen={isOpen} handleSubmit={handleClose} handleCancel={cancel}/>
+            <DateTimeDialog isOpen={isOpen} handleSubmit={handleSubmit} handleCancel={cancel}/>
             <div className='demo-app-main'>
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -64,9 +80,13 @@ export default function () {
                     eventContent={renderEventContent} // custom render function
                     eventClick={handleEventClick}
                     eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+                    eventChange={function(r){
+                        console.log({r})
+                    }}
+                    eventAdd={function(r){
+                        console.log({r})
+                    }}
                     /* you can update a remote database when these fire:
-                    eventAdd={function(){}}
-                    eventChange={function(){}}
                     eventRemove={function(){}}
                     */
                 />
