@@ -4,6 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import {Field, FieldInputProps} from "react-final-form";
 import camelize from "../../../utils/camelize";
 
+export interface DatePickerReturn {
+    nextAppointment: string
+}
+
 export default function DatePicker() {
     const label = "Next appointment"
     const camelizedName: string = camelize(label);

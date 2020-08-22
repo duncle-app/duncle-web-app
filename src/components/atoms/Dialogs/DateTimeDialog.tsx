@@ -14,11 +14,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 
 export default (props: DialogProps) =>
     <DialogueWrapper {...props}>
-            <DialogContentText>
-                Librarian: Nancy Torvald
-            </DialogContentText>
-            <DatePicker/>
-            <Button type="submit" color="primary">
-                <strong>Sting</strong>
-            </Button>
+        <DialogContentText>
+            Librarian: Nancy Torvald
+        </DialogContentText>
+        <DatePicker/>
+        <Button type="submit" color="primary">
+            <strong>Sting</strong>
+        </Button>
     </DialogueWrapper>

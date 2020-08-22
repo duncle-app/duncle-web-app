@@ -7,8 +7,9 @@ import DateTimeDialog from "../Dialogs/DateTimeDialog";
 import {INITIAL_EVENTS} from "./utils";
 
 import './main.css'
+import {DatePickerReturn} from "../DatePicker/DatePicker";
 
-export default function () {
+export default function() {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
     const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
     const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
@@ -24,8 +25,8 @@ export default function () {
     }
 
     // @ts-ignore
-    const handleSubmit = ({mr}) => {
-        console.log({mr})
+    const handleSubmit = ({nextAppointment}: DatePickerReturn) => {
+        console.log({nextAppointment})
         //// add to calendar events
         // let calendarApi = selectInfo.view.calendar
         //

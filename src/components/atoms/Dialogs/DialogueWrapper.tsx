@@ -12,9 +12,7 @@ interface WrapperProps extends DialogProps {
 
 export interface DialogProps {
     isOpen: boolean
-
     handleSubmit(...args: any[]): any
-
     handleCancel(...args: any[]): any
 }
 
