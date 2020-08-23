@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
-import FullCalendar, {EventApi, DateSelectArg, EventClickArg, EventContentArg, formatDate} from '@fullcalendar/react'
+import FullCalendar, {DateSelectArg, EventApi, EventClickArg, EventContentArg, formatDate} from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import DateTimeDialog from "../Dialogs/DateTimeDialog";
-import {INITIAL_EVENTS} from "./utils";
+import DateTimeDialog, {DateDialogReturn} from "../Dialogs/DateTimeDialog";
+import {createEventId, INITIAL_EVENTS} from "./utils";
 
 import './main.css'
-import {DatePickerReturn} from "../DatePicker/DatePicker";
 
 export default function() {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
@@ -24,23 +23,25 @@ export default function() {
         setSelectedDates(selectInfo)
     }
 
-    // @ts-ignore
-    const handleSubmit = ({nextAppointment}: DatePickerReturn) => {
-        console.log({nextAppointment})
+    // todo - pass in name here, and set that as a title
+    const handleSubmit = ({appointmentTitle}: DateDialogReturn) => {
+        console.log({appointmentTitle})
         //// add to calendar events
-        // let calendarApi = selectInfo.view.calendar
-        //
-        // calendarApi.unselect() // clear date selection
-        //
-        // if (title) {
-        //     calendarApi.addEvent({
-        //         id: createEventId(),
-        //         title,
-        //         start: selectInfo.startStr,
-        //         end: selectInfo.endStr,
-        //         allDay: selectInfo.allDay
-        //     })
-        // }
+        // @ts-ignore - todo, better way to tell this isn't undefined, possibly pass in as parameter?
+        const {calendar} = selectedDates.view;
+        calendar.unselect() // clear date selection
+
+        if (selectedDates) {
+            console.log({selectedDates})
+            calendar.addEvent({
+                id: createEventId(),
+                title: appointmentTitle,
+                // todo - set date from nextAppointment
+                start: selectedDates.startStr,
+                end: selectedDates.endStr,
+                allDay: false
+            })
+        }
         setIsOpen(false)
     }
 
