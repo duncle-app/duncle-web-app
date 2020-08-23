@@ -1,18 +1,26 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import FullCalendar, {DateSelectArg, EventApi, EventClickArg, EventContentArg, formatDate} from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import DateTimeDialog, {DateDialogReturn} from "../Dialogs/DateTimeDialog";
 import {createEventId, INITIAL_EVENTS} from "./utils";
+import { v4 as uuidv4 } from 'uuid';
 
 import './main.css'
+import {GlobalContext} from "../../../common/GlobalContext";
+import event from "../../../model/event";
+import {dateNowIso} from "../../../utils/dateUtil";
+import UserDAO from "../../../model/userDAO";
+import {useUserPouch} from "../../../common/hooks/UsePouch";
 
 export default function() {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
     const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
     const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
+    const {getAuthenticatedUser} = useContext(GlobalContext)
+    const {updateUser} = useUserPouch()
 
     const handleWeekendsToggle = () => {
         setWeekendsVisible(!weekendsVisible)
@@ -24,7 +32,7 @@ export default function() {
     }
 
     // todo - pass in name here, and set that as a title
-    const handleSubmit = ({appointmentTitle}: DateDialogReturn) => {
+    const handleSubmit = async ({appointmentTitle}: DateDialogReturn) => {
         console.log({appointmentTitle})
         //// add to calendar events
         // @ts-ignore - todo, better way to tell this isn't undefined, possibly pass in as parameter?
@@ -33,12 +41,34 @@ export default function() {
 
         if (selectedDates) {
             console.log({selectedDates})
+
+            const newId = uuidv4()
+            const startDate = selectedDates.startStr
+            const endDate = selectedDates.endStr
+            const now = dateNowIso()
+
+            const newEvent: event = {
+                name: appointmentTitle,
+                startDate: startDate,
+                endDate: endDate,
+                libraryId: 'NEED LIB ID',
+                hasContacted: false,
+                dateCreated: now,
+                dateUpdated: now,
+            }
+
+            const currentUser: UserDAO = getAuthenticatedUser()
+            currentUser.events.push(newEvent)
+
+            // todo - add snackbar for error message here
+            const response = await updateUser(currentUser)
+
             calendar.addEvent({
-                id: createEventId(),
+                id: newId,
                 title: appointmentTitle,
                 // todo - set date from nextAppointment
-                start: selectedDates.startStr,
-                end: selectedDates.endStr,
+                start: startDate,
+                end: endDate,
                 allDay: false
             })
         }
@@ -77,7 +107,7 @@ export default function() {
                     selectMirror={true}
                     dayMaxEvents={true}
                     weekends={weekendsVisible}
-                    initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+                    initialEvents={getAuthenticatedUser().events} // alternatively, use the `events` setting to fetch from a feed
                     select={handleDateSelect}
                     eventContent={renderEventContent} // custom render function
                     eventClick={handleEventClick}

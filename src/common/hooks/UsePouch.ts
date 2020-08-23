@@ -13,6 +13,7 @@ export type PouchReturnProps = {
 
 export interface UseUserReturnProps {
     addUser(props : User) : Promise<PouchDB.Core.Response | Error>
+    updateUser(props : UserDAO) : Promise<PouchDB.Core.Response | Error>
     localPouch: any
     fetchUser(props: any): any
 }
@@ -49,7 +50,16 @@ export function useUserPouch() : UseUserReturnProps {
         }
     }
 
-    return {localPouch, addUser, fetchUser}
+    async function updateUser(props: UserDAO): Promise<PouchDB.Core.Response | Error> {
+        try {
+            return await localPouch.put(props)
+        } catch (err) {
+            console.error(err);
+            throw new Error(`Unable to save event: ${err}`)
+        }
+    }
+
+    return {localPouch, addUser, fetchUser, updateUser}
 }
 
 export type PouchError = {

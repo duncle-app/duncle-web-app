@@ -8,9 +8,10 @@ interface TextFieldProps {
     isRequired?: boolean
     defaultValue?: string | number
     alsoInitialValue?: boolean
+    autoFocus?: boolean
 }
 
-export default function CustomTextField({name, isRequired = false, defaultValue = undefined, alsoInitialValue = true}: TextFieldProps) {
+export default function CustomTextField({name, isRequired = false, defaultValue = undefined, alsoInitialValue = false, autoFocus = false}: TextFieldProps) {
     const camelizedName: string = camelize(name);
 
     /**
@@ -38,6 +39,7 @@ export default function CustomTextField({name, isRequired = false, defaultValue 
                     id={camelizedName}
                     label={name}
                     key={camelizedName}
+                    autoFocus={autoFocus}
                 />
             )}
         </Field>
