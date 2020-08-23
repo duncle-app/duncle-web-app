@@ -11,9 +11,22 @@ export type PouchReturnProps = {
     put: Function,
 }
 
+export interface UseUserReturnProps {
+    addUser(props : User) : Promise<PouchDB.Core.Response | Error>
+    localPouch: any
+    fetchUser(props: any): any
+}
+
+interface AddUserProps {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+}
+
 const USER_ID_PREFIX = "org.duncle.";
 
-export function useUserPouch() {
+export function useUserPouch() : UseUserReturnProps {
     const {localPouch} = usePouch('user')
 
     async function fetchUser(inputEmail: string): Promise<UserDAO> {
@@ -26,9 +39,10 @@ export function useUserPouch() {
         }
     }
 
-    async function addUser({email, password, firstName, lastName}: User) {
+
+    async function addUser(props: User): Promise<PouchDB.Core.Response | Error> {
         try {
-            return await localPouch.put({_id: `${USER_ID_PREFIX}${email}`, email, password, firstName, lastName})
+            return await localPouch.put({_id: `${USER_ID_PREFIX}${props.email}`, ...props})
         } catch (err) {
             console.error(err);
             throw new Error(`Unable to save user: ${err}`)

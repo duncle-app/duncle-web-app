@@ -18,7 +18,7 @@ export default function Login() {
     const {paper, avatar} = useStyles();
     const history = useHistory();
     const loginService = new LoginService();
-    const {isAuthenticated, authenticate} = useContext(GlobalContext)
+    const {authenticate} = useContext(GlobalContext)
 
     async function submitForm(user: User) {
         try {
