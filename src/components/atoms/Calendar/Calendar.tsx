@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import FullCalendar, {DateSelectArg, EventApi, EventClickArg, EventContentArg, formatDate} from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -14,10 +14,14 @@ import {dateNowIso} from "../../../utils/dateUtil";
 import UserDAO from "../../../model/userDAO";
 import {useUserPouch} from "../../../common/hooks/UsePouch";
 
-export default function() {
+// todo - fix this
+export default function({initialEvents}: any) {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
     const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
     const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
+
+    console.log("are events even making it through here", initialEvents)
+
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const {getAuthenticatedUser} = useContext(GlobalContext)
     const {updateUser} = useUserPouch()
@@ -31,7 +35,7 @@ export default function() {
         setSelectedDates(selectInfo)
     }
 
-    // todo - pass in name here, and set that as a title
+    // todo - pass in title here, and set that as a title
     const handleSubmit = async ({appointmentTitle}: DateDialogReturn) => {
         console.log({appointmentTitle})
         //// add to calendar events
@@ -48,16 +52,18 @@ export default function() {
             const now = dateNowIso()
 
             const newEvent: event = {
-                name: appointmentTitle,
-                startDate: startDate,
-                endDate: endDate,
+                id: newId,
+                title: appointmentTitle,
+                start: startDate,
+                end: endDate,
                 libraryId: 'NEED LIB ID',
                 hasContacted: false,
                 dateCreated: now,
                 dateUpdated: now,
             }
 
-            const currentUser: UserDAO = getAuthenticatedUser()
+            const currentUser: UserDAO = await getAuthenticatedUser()
+            console.log("SUBMITTING NEW EVENT", currentUser)
             currentUser.events.push(newEvent)
 
             // todo - add snackbar for error message here
@@ -107,16 +113,16 @@ export default function() {
                     selectMirror={true}
                     dayMaxEvents={true}
                     weekends={weekendsVisible}
-                    initialEvents={getAuthenticatedUser().events} // alternatively, use the `events` setting to fetch from a feed
+                    initialEvents={initialEvents} // alternatively, use the `events` setting to fetch from a feed
                     select={handleDateSelect}
                     eventContent={renderEventContent} // custom render function
                     eventClick={handleEventClick}
                     eventsSet={handleEvents} // called after events are initialized/added/changed/removed
-                    eventChange={function(r){
-                        console.log({r})
+                    eventChange={function(eventChange){
+                        console.log({eventChange})
                     }}
-                    eventAdd={function(r){
-                        console.log({r})
+                    eventAdd={function(eventAdd){
+                        console.log({eventAdd})
                     }}
                     /* you can update a remote database when these fire:
                     eventRemove={function(){}}

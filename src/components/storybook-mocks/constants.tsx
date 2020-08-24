@@ -119,9 +119,10 @@ export const NoLibrary: Library = {
 }
 
 export const dummyEvent: event = {
-    name: "dummy",
-    startDate: "dummy",
-    endDate: "dummy",
+    id: "dummy",
+    title: "dummy",
+    start: "dummy",
+    end: "dummy",
     dateCreated: "dummy",
     dateUpdated: "dummy",
     libraryId: "dummy",

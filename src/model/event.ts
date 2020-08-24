@@ -1,7 +1,8 @@
 export default interface event {
-    name: string;
-    startDate: string;
-    endDate?: string;
+    id: string;
+    title: string;
+    start: string;
+    end?: string;
     libraryId: string;
     hasContacted: boolean;
     dateCreated: string;

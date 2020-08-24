@@ -23,6 +23,7 @@ export default function Login() {
     async function submitForm(user: User) {
         try {
             const returnedUser: UserDAO | Error = await loginService.logInUser(user);
+            console.log("login.tsx is authenticating user:", returnedUser)
             authenticate(returnedUser)
             history.push('/dashboard')
         } catch (e) {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import useStyles from "../../../global-styles";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,16 +9,19 @@ import {SignUpForm} from "../../organisms/SignUp/SignUpForm";
 import {AccountCircle} from "@material-ui/icons";
 import LoginService from "../../../services/LoginService";
 import NewUser from "../../../model/newUser";
+import {GlobalContext} from "../../../common/GlobalContext";
 
 export default function SignUp() {
     const classes = useStyles();
     const loginService = new LoginService();
+    const {authenticate} = useContext(GlobalContext)
 
     function submitForm(newUser: NewUser) {
         alert(`${newUser.email} + ${newUser.password} + ${newUser.firstName} + ${newUser.lastName}`)
         // todo - do validation the passwords actually match
         delete newUser.confirmPassword
         const response = loginService.signUpUser(newUser)
+        // todo - authenticate if success here
         console.log(response)
     }
     return (
