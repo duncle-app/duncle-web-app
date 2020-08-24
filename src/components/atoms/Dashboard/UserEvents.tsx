@@ -10,17 +10,18 @@ import moment from "moment";
 
 interface Props {
     events: {
-        name: string,
-        meetingTime: Date,
+        title: string,
+        start: Date,
         rep: string
     }[]
 }
 
 export default function UserEvents({events}: Props) {
-    events.sort((a, b) => {
-        // @ts-ignore
-        return a.meetingTime - b.meetingTime
-    })
+    console.log("wtf is ", events)
+        events.sort((a, b) => {
+            // @ts-ignore
+            return a.start - b.start
+        })
 
     function getColor(meetingTimeMonth: number): string {
         const currentMonth: number = moment().toDate().getMonth()
@@ -28,7 +29,7 @@ export default function UserEvents({events}: Props) {
             return "red"
         } else if (currentMonth === meetingTimeMonth) {
             return "#4caf50"
-        // maybe this should just be white
+            // maybe this should just be white
         } else if (currentMonth + 1 === meetingTimeMonth) {
             return "yellow";
         } else {
@@ -41,20 +42,20 @@ export default function UserEvents({events}: Props) {
             <Table size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell><b>Library Name</b></TableCell>
+                        <TableCell><b>Meeting Title</b></TableCell>
                         <TableCell><b>Meeting Time</b></TableCell>
                         <TableCell><b>Rep</b></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {events.map(({name, meetingTime, rep}) => {
-                        const backgroundColor: string = getColor(meetingTime.getMonth())
+                    {events.map(({title, start, rep}) => {
+                        const backgroundColor: string = getColor(start.getMonth())
 
                         // see docs for further details - https://momentjs.com/docs/#/displaying/format/
-                        const readableFormat = moment(meetingTime).format("MMMM do, H:mm")
+                        const readableFormat = moment(start).format("MMMM do, H:mm")
                         return (
-                            <TableRow key={name} style={{background: backgroundColor}}>
-                                <TableCell component="th" scope="row">{name}</TableCell>
+                            <TableRow key={title} style={{background: backgroundColor}}>
+                                <TableCell component="th" scope="row">{title}</TableCell>
                                 <TableCell component="th" scope="row">{readableFormat}</TableCell>
                                 {/* Consider adding an end date too */}
                                 <TableCell component="th" scope="row">{rep}</TableCell>

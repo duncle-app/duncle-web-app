@@ -5,7 +5,7 @@ import {GlobalContext} from "../../../common/GlobalContext";
 import event from "../../../model/event";
 
 export default function () {
-    let INITIAL_EVENT_STATE = [null];
+    const INITIAL_EVENT_STATE = [null];
     const [events, setEvents] = React.useState(INITIAL_EVENT_STATE)
     const {getAuthenticatedUser} = useContext(GlobalContext)
 

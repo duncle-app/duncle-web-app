@@ -6,8 +6,8 @@ export default {
     title: "Atoms/UserEvents"
 };
 
-function createData(name: string, meetingTime: Date, rep: string) {
-    return {name, meetingTime, rep};
+function createData(title: string, start: Date, rep: string) {
+    return {title, start, rep};
 }
 
 const normalDate = moment().toDate()
