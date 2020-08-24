@@ -6,7 +6,6 @@ import MockForm from "../../storybook-mocks/mockForm";
 
 export default {
     title: "Atoms/TextField",
-    component: CustomTextField,
 };
 
 export const emailField = () => (
@@ -24,6 +23,12 @@ export const passwordField = () => (
 export const customTextField = () => (
     <MockForm>
         <CustomTextField name={"Custom Text"}/>
+    </MockForm>
+)
+
+export const customTextFieldError = () => (
+    <MockForm>
+        <CustomTextField name={"Custom Text"} alsoInitialValue={true}/>
     </MockForm>
 )
 

@@ -14,7 +14,7 @@ export default function ({name, placeholderText, message = ""}: TextAreaType) {
     const camelizedName: string = camelize(name);
 
     return (
-        <Field name={camelizedName}>
+        <Field name={camelizedName} initialValue={message}>
             {(props: FieldInputProps<any>) => (
                 <TextareaAutosize
                     onChange={props.input.onChange}

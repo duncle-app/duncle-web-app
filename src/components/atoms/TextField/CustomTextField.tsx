@@ -7,13 +7,26 @@ interface TextFieldProps {
     name: string;
     isRequired?: boolean
     defaultValue?: string | number
+    alsoInitialValue?: boolean
+    autoFocus?: boolean
 }
 
-export default function CustomTextField({name, isRequired = false, defaultValue = undefined}: TextFieldProps) {
+export default function CustomTextField({name, isRequired = false, defaultValue = undefined, alsoInitialValue = false, autoFocus = false}: TextFieldProps) {
     const camelizedName: string = camelize(name);
 
+    /**
+     * InitialValue on our Final Form Field sets the Form value, such that when we don't change anything on the field,
+     * we will submit whichever the value is on the form.
+     * This is useful for setting default values on forms, without requiring user input.
+     *
+     * todo - check if we always want to be submitting both values anyway, or if there are cases where we don't
+     */
+    if (alsoInitialValue && defaultValue === undefined) {
+        throw new Error("If alsoInitialValue is specified, defaultValue must exist")
+    }
+
     return (
-        <Field name={camelizedName}>
+        <Field name={camelizedName} initialValue={alsoInitialValue ? defaultValue : undefined}>
             {(props: FieldInputProps<any>) => (
                 <TextField
                     onChange={props.input.onChange}
@@ -26,6 +39,7 @@ export default function CustomTextField({name, isRequired = false, defaultValue 
                     id={camelizedName}
                     label={name}
                     key={camelizedName}
+                    autoFocus={autoFocus}
                 />
             )}
         </Field>

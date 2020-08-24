@@ -8,7 +8,7 @@ type PasswordProps = {
 }
 
 export default function ({ fieldName = "Password" } : PasswordProps) {
-    console.log("field name", fieldName)
+    console.log("field title", fieldName)
     const camelizedFieldName = camelize(fieldName)
 
     return (

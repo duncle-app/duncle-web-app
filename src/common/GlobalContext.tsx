@@ -13,7 +13,7 @@ type ContextProps = {
 
 // @ts-ignore
 export function GlobalProvider({children}) {
-    const {isAuthenticated, authenticate} = useAuth()
+    const {isAuthenticated, authenticate, getAuthenticatedUser} = useAuth()
     const [currentLibrary, setCurrentLibrary] = useState<Library>(NoLibrary)
     // todo - pick one libraryManager impl or the other
     return (
@@ -22,6 +22,7 @@ export function GlobalProvider({children}) {
             theme: 'dark',
             isAuthenticated,
             authenticate,
+            getAuthenticatedUser,
             currentLibrary,
             setCurrentLibrary
         }}>

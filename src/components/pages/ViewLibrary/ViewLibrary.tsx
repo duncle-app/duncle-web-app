@@ -47,7 +47,7 @@ function ViewLibrary() {
     // @ts-ignore
     async function submitNewNote({newNote: message}) {
         console.log("submitting new note", message)
-        const updatedLibrary: Library = await saveNote(currentLibrary, message, "TODO")
+        const updatedLibrary: Library = await saveNote(currentLibrary, message, "Terry")
         console.log("updatedlib after saving", updatedLibrary)
 
         jankUpdateLibrary(updatedLibrary)

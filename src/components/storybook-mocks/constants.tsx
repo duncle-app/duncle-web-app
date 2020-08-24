@@ -2,6 +2,7 @@ import {Library} from "../../model";
 import {dateNowIso, readableDate} from "../../utils/dateUtil";
 import NoteDAO from "../../model/noteDAO";
 import UserDAO from "../../model/userDAO";
+import event from "../../model/event";
 
 export const newNotes: NoteDAO[] = [
     {
@@ -117,13 +118,28 @@ export const NoLibrary: Library = {
     notes: []
 }
 
+export const dummyEvent: event = {
+    id: "dummy",
+    title: "dummy",
+    start: "dummy",
+    end: "dummy",
+    dateCreated: "dummy",
+    dateUpdated: "dummy",
+    libraryId: "dummy",
+    hasContacted: false,
+}
+
 export const dummyUserDAO: UserDAO = {
     _id: "dummy",
     _rev: "dummy",
     email: "dummy",
     password: "dummy",
     firstName: "dummy",
-    lastName: "dummy"
+    lastName: "dummy",
+    dateCreated: "dummy",
+    dateUpdated: "dummy",
+    role: 'admin',
+    events: [dummyEvent],
 }
 
 export const newNote: NoteDAO = {

@@ -12,6 +12,9 @@ import ViewLibrary from "./components/pages/ViewLibrary/ViewLibrary";
 import EditLibraryController from "./components/pages/EditLibrary/EditLibraryController";
 import DefaultButton from "./components/atoms/Button/DefaultButton";
 import Calendar from "./components/atoms/Calendar/Calendar";
+import CalendarController from "./components/atoms/Calendar/CalendarController";
+import UserEvents from "./components/atoms/Dashboard/UserEvents";
+import UserEventsController from "./components/atoms/Dashboard/UserEventsController";
 
 const Protected = () => <h3>Protected</h3>
 const Unauthorized = () =>
@@ -53,7 +56,12 @@ function App() {
                         <PrivateRoute
                             exact
                             path="/dashboard"
-                            component={Calendar}
+                            component={UserEventsController}
+                        />
+                        <PrivateRoute
+                            exact
+                            path="/calendar"
+                            component={CalendarController}
                         />
                         <PrivateRoute
                             exact

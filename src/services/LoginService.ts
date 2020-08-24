@@ -2,6 +2,8 @@ import {useUserPouch} from "../common/hooks/UsePouch";
 import bcrypt from 'bcryptjs'
 import UserDAO from "../model/userDAO";
 import User from "../model/user";
+import {dateNowIso} from "../utils/dateUtil";
+import {Simulate} from "react-dom/test-utils";
 
 export default class LoginService {
     public async logInUser(user: User): Promise<UserDAO | Error> {
@@ -18,11 +20,17 @@ export default class LoginService {
         }
     }
 
-    public async signUpUser({email, password, firstName, lastName}: User) {
+    public async signUpUser(newUser: User) {
         // @ts-ignore
-        const hashedPassword = await LoginService.hash(password);
-        const {addUser}: any = useUserPouch();
-        return addUser(email, hashedPassword, firstName, lastName)
+        const hashedPassword = await LoginService.hash(newUser.password);
+        const {addUser} = useUserPouch();
+        newUser.password = hashedPassword
+        newUser.dateCreated = dateNowIso()
+        newUser.dateUpdated = dateNowIso()
+        newUser.role = 'admin'
+        newUser.events = []
+        console.log({newUser})
+        return addUser(newUser)
     }
 
     // todo - could move these to another class.
