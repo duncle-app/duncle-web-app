@@ -99,6 +99,11 @@ interface useLibraryPouchReturn {
     addLibrary(library: NewLibrary): Promise<PouchDB.Core.Response | Error>
 }
 
+function roundDecimals(library: Library | NewLibrary) {
+    library.lastSale = Number(library.lastSale.toFixed(2))
+    library.totalSales = Number(library.totalSales.toFixed(2))
+}
+
 export function useLibraryPouch(): useLibraryPouchReturn {
     const {localPouch} = usePouch('tcrm')
 
@@ -120,13 +125,16 @@ export function useLibraryPouch(): useLibraryPouchReturn {
 
     async function saveLibrary(library: Library): Promise<PouchDB.Core.Response | Error> {
         try {
+            roundDecimals(library);
             return await localPouch.put(library);
         } catch (err) {
             throw new Error(`Failed to save the library: ${err}`)
         }
     }
+
     async function addLibrary(library: NewLibrary): Promise<PouchDB.Core.Response | Error> {
         try {
+            roundDecimals(library)
             return await localPouch.put(library);
         } catch (err) {
             throw new Error(`Failed to add the library: ${err}`)

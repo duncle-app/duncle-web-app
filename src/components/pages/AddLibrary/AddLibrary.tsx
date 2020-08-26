@@ -4,7 +4,7 @@ import AddLibraryForm from "../../organisms/AddLibrary/AddLibraryForm";
 import NewLibrary from "../../../model/newLibrary";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
 import {dateNowIso} from "../../../utils/dateUtil";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 export default function AddLibrary() {
     const {addLibrary} = useLibraryPouch()
@@ -20,7 +20,6 @@ export default function AddLibrary() {
             component={AddLibraryForm}
         />
     )
-
 }
 
 function addDefaults(library: NewLibrary) {

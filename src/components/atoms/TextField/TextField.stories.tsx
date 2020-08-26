@@ -3,6 +3,7 @@ import CustomTextField from "./CustomTextField";
 import EmailTextField from "./EmailTextField";
 import PasswordTextFieldProps from "./PasswordTextField";
 import MockForm from "../../storybook-mocks/mockForm";
+import NumberTextField from "./NumberTextField";
 
 export default {
     title: "Atoms/TextField",
@@ -13,6 +14,11 @@ export const emailField = () => (
         <EmailTextField/>
     </MockForm>
 );
+
+export const numberField = () =>
+    <MockForm>
+        <NumberTextField name="Numbers Only"/>
+    </MockForm>
 
 export const passwordField = () => (
     <MockForm>
