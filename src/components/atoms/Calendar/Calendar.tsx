@@ -1,11 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import FullCalendar, {DateSelectArg, EventApi, EventClickArg, EventContentArg, formatDate} from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import DateTimeDialog, {DateDialogReturn} from "../Dialogs/DateTimeDialog";
-import {createEventId, INITIAL_EVENTS} from "./utils";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 import './main.css'
 import {GlobalContext} from "../../../common/GlobalContext";
