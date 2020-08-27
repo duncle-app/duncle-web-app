@@ -22,6 +22,11 @@ export default ({columns, libraries, onEdit}: TableProps) => {
                 data={libraries}
                 // @ts-ignore
                 icons={tableIcons}
+                options={{
+                    // todo - might have to revisit this.. probably better to do 100 page size, with pagination options
+                    //  see docs - https://material-table.com/#/docs/all-props
+                    paging: false
+                }}
                 actions={[
                     {
                         // @ts-ignore
