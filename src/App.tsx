@@ -56,17 +56,12 @@ function App() {
                         <PrivateRoute
                             exact
                             path="/dashboard"
-                            component={UserEventsController}
+                            component={AllLibraries}
                         />
                         <PrivateRoute
                             exact
                             path="/calendar"
                             component={CalendarController}
-                        />
-                        <PrivateRoute
-                            exact
-                            path="/library"
-                            component={AllLibraries}
                         />
                         // todo - add private route, remove the need to pass in libraryManager?
                         {/*<PrivateRoute*/}

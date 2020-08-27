@@ -10,20 +10,36 @@ import {AccountCircle} from "@material-ui/icons";
 import LoginService from "../../../services/LoginService";
 import NewUser from "../../../model/newUser";
 import {GlobalContext} from "../../../common/GlobalContext";
+import UserDAO from "../../../model/userDAO";
+import {useHistory} from "react-router-dom";
 
 export default function SignUp() {
     const classes = useStyles();
+    const history = useHistory();
     const loginService = new LoginService();
     const {authenticate} = useContext(GlobalContext)
 
-    function submitForm(newUser: NewUser) {
-        alert(`${newUser.email} + ${newUser.password} + ${newUser.firstName} + ${newUser.lastName}`)
+    async function submitForm(newUser: NewUser) {
         // todo - do validation the passwords actually match
         delete newUser.confirmPassword
         const response = loginService.signUpUser(newUser)
-        // todo - authenticate if success here
-        console.log(response)
+
+        try {
+            const newlyCreatedUser: UserDAO = {
+                // @ts-ignore
+                _id: response.id,
+                // @ts-ignore
+                _rev: response.rev,
+                ...newUser
+            }
+
+            await authenticate(newlyCreatedUser)
+            history.push('/dashboard')
+        } catch (e) {
+            console.log(response)
+        }
     }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
