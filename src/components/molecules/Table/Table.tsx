@@ -5,6 +5,8 @@ import {tableIcons} from "../../../common/tableIcons";
 import {CardHeader} from "@material-ui/core";
 import useStyles from "../../../global-styles";
 import moment from "moment";
+import StackedField from "../../atoms/Table/StackedField";
+import {readableDate} from "../../../utils/dateUtil";
 
 type TableProps = {
     libraries: Library[];
@@ -13,16 +15,37 @@ type TableProps = {
 export default ({libraries, onEdit}: TableProps) => {
     const {cardHeader} = useStyles();
 
-    const tableColumns : Column<Library>[] = [
+    const tableColumns: Column<Library>[] = [
         {title: "Library", field: "libraryName"},
         {
             title: "Contact",
             field: "contactName",
-            render: (rowData: Library) => `${rowData.librarian}`
+            render: ({librarian}: Library) => `${librarian}`
         },
-        {title: "Phone / Email", field: "phoneNumber"},
+        {
+            title: "Phone / Email",
+            field: "contactInfo",
+            render: ({phoneNumber, email}: Library) => <StackedField top={phoneNumber} bottom={email}/>
+        },
+        {
+            title: "Last Sale / Date",
+            field: "lastSaleInfo",
+            render: ({lastSale, dateLastSale}: Library) => {
+                const formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 2
+                })
+                const formattedToDollars = formatter.format(lastSale)
+                if (dateLastSale !== undefined) {
+                    dateLastSale = readableDate(dateLastSale)
+                }
+                console.log({dateLastSale})
+                return <StackedField top={formattedToDollars} bottom={dateLastSale}/>;
+            }
+        },
         {title: "Last Contacted", field: "dateLastContact"},
-        {title: "Next Contact", field: "dateNextContact", defaultSort:'asc'},
+        {title: "Next Contact", field: "dateNextContact", defaultSort: 'asc'},
     ];
 
     function getColor(meetingTime: Date): string {
@@ -57,11 +80,9 @@ export default ({libraries, onEdit}: TableProps) => {
                     // todo - might have to revisit this.. probably better to do 100 page size, with pagination options
                     //  see docs - https://material-table.com/#/docs/all-props
                     paging: false,
-                    rowStyle: ({librarian, dateNextContact}: Library) => {
+                    rowStyle: ({dateNextContact}: Library) => {
                         const nextDate = moment(dateNextContact).toDate()
-                        console.log({nextDate}, {librarian})
                         const backgroundColor: string = getColor(nextDate)
-                        console.log({backgroundColor})
                         return {backgroundColor}
                     }
                 }}
