@@ -1,5 +1,5 @@
 import React from 'react'
-import MaterialTable from "material-table";
+import MaterialTable, {Column} from "material-table";
 import {Library} from "../../../model";
 import {tableIcons} from "../../../common/tableIcons";
 import {CardHeader} from "@material-ui/core";
@@ -13,7 +13,7 @@ type TableProps = {
 export default ({libraries, onEdit}: TableProps) => {
     const {cardHeader} = useStyles();
 
-    const tableColumns = [
+    const tableColumns : Column<Library>[] = [
         {title: "Library", field: "libraryName"},
         {
             title: "Contact",
@@ -22,7 +22,7 @@ export default ({libraries, onEdit}: TableProps) => {
         },
         {title: "Phone / Email", field: "phoneNumber"},
         {title: "Last Contacted", field: "dateLastContact"},
-        {title: "Next Contact", field: "dateNextContact"},
+        {title: "Next Contact", field: "dateNextContact", defaultSort:'asc'},
     ];
 
     function getColor(meetingTime: Date): string {
