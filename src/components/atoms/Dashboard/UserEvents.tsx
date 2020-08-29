@@ -23,6 +23,9 @@ export default function UserEvents({events}: Props) {
             return a.start - b.start
         })
 
+    /*
+     * Deprecated
+     */
     function getColor(meetingTimeMonth: number): string {
         const currentMonth: number = moment().toDate().getMonth()
         if (currentMonth > meetingTimeMonth) {

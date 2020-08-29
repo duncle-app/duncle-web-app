@@ -70,6 +70,7 @@ export const newLibrary: Library = {
     totalSales: 50205,
     lastSale: 2050,
     notes: newNotes,
+    dateNextContact: dateNowIso()
 }
 
 export const newLibrary2: Library = {

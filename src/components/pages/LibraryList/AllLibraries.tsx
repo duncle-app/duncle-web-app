@@ -44,22 +44,12 @@ export default function () {
         setCurrentLibrary(library)
     }
 
-    const tableColumns = [
-        {title: "Library", field: "libraryName"},
-        {
-            title: "Contact",
-            field: "contactName",
-            render: (rowData: Library) => `${rowData.librarian}`
-        },
-        {title: "Phone", field: "phoneNumber"}
-    ];
-
     return (
         <div>
             <Grid container justify="center">
                 <Grid item xs={11}>
                     <Card variant="outlined">
-                        <Table columns={tableColumns} libraries={libraries} onEdit={routeToLibraryDetail}/>
+                        <Table libraries={libraries} onEdit={routeToLibraryDetail}/>
                     </Card>
                 </Grid>
             </Grid>
