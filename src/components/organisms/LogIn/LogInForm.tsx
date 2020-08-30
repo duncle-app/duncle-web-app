@@ -6,6 +6,7 @@ import useStyles from "../../../global-styles";
 import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
 import {Link} from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import CustomTextField from "../../atoms/TextField/CustomTextField";
 
 export const LogInForm = (props: any) => {
     const classes = useStyles();
@@ -13,8 +14,8 @@ export const LogInForm = (props: any) => {
 
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
-            <EmailTextField/>
-            <PasswordTextField/>
+            <EmailTextField fullWidth/>
+            <PasswordTextField fullWidth/>
             <FormSubmitButton DisplayText="Sign in"/>
             <Grid container>
                 <Grid item xs>

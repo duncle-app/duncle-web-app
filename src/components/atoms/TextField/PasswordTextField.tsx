@@ -5,9 +5,10 @@ import camelize from "../../../utils/camelize";
 
 type PasswordProps = {
     fieldName?: string;
+    fullWidth?: boolean
 }
 
-export default function ({ fieldName = "Password" } : PasswordProps) {
+export default function ({ fieldName = "Password", fullWidth = false } : PasswordProps) {
     console.log("field title", fieldName)
     const camelizedFieldName = camelize(fieldName)
 
@@ -22,7 +23,7 @@ export default function ({ fieldName = "Password" } : PasswordProps) {
                         variant="outlined"
                         margin="normal"
                         required
-                        fullWidth
+                        fullWidth={fullWidth}
                         label={fieldName}
                         type="password"
                         id={camelizedFieldName}

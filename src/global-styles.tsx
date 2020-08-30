@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
     content: {
         padding: theme.spacing(1),
     },
+    editLibrary: {
+        maxWidth: '49%',
+        margin: "0px 0px 0px 11px"
+    },
     horizontalListItem: {
         flexDirection: 'row',
         display: 'flex',
