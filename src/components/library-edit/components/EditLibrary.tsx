@@ -6,7 +6,6 @@ import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
 import Form from "../../../common/Form";
 import Paper from "@material-ui/core/Paper";
 import useStyles from "../../../global-styles";
-import TextField from "@material-ui/core/TextField";
 
 interface LibraryEditProps {
     library: Library;

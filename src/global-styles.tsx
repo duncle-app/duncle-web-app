@@ -16,10 +16,6 @@ const useStyles = makeStyles((theme) => ({
             color: () => theme.palette.primary.main
         },
     },
-    cardHeader: {
-        // color: patsGold,
-        // background: "#203731",
-    },
     center: {
         textAlign: 'center'
     },

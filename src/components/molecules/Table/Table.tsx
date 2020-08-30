@@ -3,7 +3,6 @@ import MaterialTable, {Column} from "material-table";
 import {Library} from "../../../model";
 import {tableIcons} from "../../../common/tableIcons";
 import {CardHeader} from "@material-ui/core";
-import useStyles from "../../../global-styles";
 import moment from "moment";
 import StackedField from "../../atoms/Table/StackedField";
 import {readableDate} from "../../../utils/dateUtil";
@@ -13,8 +12,6 @@ type TableProps = {
     onEdit?(library: Library): void;
 }
 export default ({libraries, onEdit}: TableProps) => {
-    const {cardHeader} = useStyles();
-
     const tableColumns: Column<Library>[] = [
         {title: "Library", field: "libraryName"},
         {
@@ -78,7 +75,7 @@ export default ({libraries, onEdit}: TableProps) => {
 
     return (
         <>
-            <CardHeader title="Libraries" className={cardHeader}/>
+            <CardHeader title="Libraries"/>
             <MaterialTable
                 title=" "
                 columns={tableColumns}
