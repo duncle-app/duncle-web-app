@@ -1,13 +1,10 @@
 import {makeStyles} from "@material-ui/core";
 
-const patsGold: string = "#ffb612";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     appHeader: {
         flexGrow: 1,
-        // color: patsGold,
-        // background: "black",
     },
     calendarIcon: {
         height: '2em',

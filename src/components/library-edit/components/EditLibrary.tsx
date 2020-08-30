@@ -9,7 +9,14 @@ import useStyles from "../../../global-styles";
 
 interface LibraryEditProps {
     library: Library;
+
     formSubmit(values: any): any
+}
+
+interface LabelProps {
+    label: string
+    currentValue: string | number | undefined
+    isRequired: boolean
 }
 
 export default function ({library, formSubmit}: LibraryEditProps) {
@@ -18,36 +25,39 @@ export default function ({library, formSubmit}: LibraryEditProps) {
         zip, size, email, phoneNumber, assistant, assignedRep, extension
     } = library;
     const {content, editLibrary} = useStyles()
+    const isRequired: boolean = true;
 
-    const formLabels = [
-        {label: "Library Name", currentValue: libraryName,},
-        {label: "Librarian", currentValue: librarian,},
-        {label: "Assistant", currentValue: assistant,},
-        {label: "Street", currentValue: street,},
-        {label: "District", currentValue: district,},
-        {label: "City", currentValue: city,},
-        {label: "County", currentValue: county,},
-        {label: "State", currentValue: state,},
-        {label: "Zip", currentValue: zip,},
-        {label: "Email", currentValue: email,},
-        {label: "Phone Number", currentValue: phoneNumber,},
-        {label: "extension", currentValue: extension,},
-        {label: "Assigned Rep", currentValue: assignedRep,},
-        {label: "Level", currentValue: level,},
-        {label: "Size", currentValue: size,},
+    const formLabels: LabelProps[] = [
+        {label: "Library Name", currentValue: libraryName, isRequired},
+        {label: "Librarian", currentValue: librarian, isRequired},
+        {label: "Assistant", currentValue: assistant, isRequired: false},
+        {label: "Street", currentValue: street, isRequired},
+        {label: "District", currentValue: district, isRequired},
+        {label: "City", currentValue: city, isRequired},
+        {label: "County", currentValue: county, isRequired},
+        {label: "State", currentValue: state, isRequired},
+        {label: "Zip", currentValue: zip, isRequired},
+        {label: "Email", currentValue: email, isRequired},
+        {label: "Phone Number", currentValue: phoneNumber, isRequired},
+        {label: "extension", currentValue: extension, isRequired: false},
+        {label: "Assigned Rep", currentValue: assignedRep, isRequired},
+        {label: "Level", currentValue: level, isRequired: false},
+        {label: "Size", currentValue: size, isRequired: false},
     ];
 
     return (
         <Paper className={content}>
             <Form onSubmit={formSubmit}>
                 <Grid container>
-                    {formLabels.map(({label, currentValue}, index) => {
+                    {formLabels.map(({label, currentValue, isRequired}, index) => {
                         return (
                             <Grid xs={6} className={editLibrary}>
                                 <CustomTextField
                                     name={label}
                                     defaultValue={currentValue}
+                                    alsoInitialValue
                                     fullWidth={true}
+                                    isRequired={isRequired}
                                 />
                             </Grid>
                         );
