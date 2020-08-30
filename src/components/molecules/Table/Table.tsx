@@ -18,9 +18,9 @@ export default ({libraries, onEdit}: TableProps) => {
     const tableColumns: Column<Library>[] = [
         {title: "Library", field: "libraryName"},
         {
-            title: "Contact",
+            title: "Contact / Aide",
             field: "contactName",
-            render: ({librarian}: Library) => `${librarian}`
+            render: ({librarian, assistant}: Library) => <StackedField top={librarian} bottom={assistant}/>
         },
         {
             title: "Phone / Email",
@@ -45,7 +45,14 @@ export default ({libraries, onEdit}: TableProps) => {
             }
         },
         {title: "Last Contacted", field: "dateLastContact"},
-        {title: "Next Contact", field: "dateNextContact", defaultSort: 'asc'},
+        {
+            title: "Next Contact",
+            field: "dateNextContact",
+            defaultSort: 'asc',
+            render: ({dateNextContact}: Library) => {
+                return dateNextContact !== undefined ? readableDate(dateNextContact) : dateNextContact
+            }
+        },
     ];
 
     function getColor(meetingTime: Date): string {
