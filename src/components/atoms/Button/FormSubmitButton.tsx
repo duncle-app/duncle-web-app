@@ -4,15 +4,16 @@ import useStyles from "../../../global-styles";
 
 type ButtonProps = {
     DisplayText: string;
+    fullWidth?: boolean
 }
 
-export default function FormSubmitButton({ DisplayText }: ButtonProps){
+export default function ({ DisplayText, fullWidth = false }: ButtonProps){
     const {submit} = useStyles();
 
     return (
         <Button
             type="submit"
-            fullWidth
+            fullWidth={fullWidth}
             variant="contained"
             color="primary"
             className={submit}

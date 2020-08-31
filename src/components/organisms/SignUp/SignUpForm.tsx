@@ -14,9 +14,9 @@ export const SignUpForm = (props: any) => {
             <form className={classes.form} onSubmit={handleSubmit}>
                 <CustomTextField name="First Name" isRequired/>
                 <CustomTextField name="Last Name" isRequired/>
-                <EmailTextField/>
-                <PasswordTextField/>
-                <PasswordTextField fieldName="Confirm Password"/>
+                <EmailTextField fullWidth/>
+                <PasswordTextField fullWidth/>
+                <PasswordTextField fieldName="Confirm Password" fullWidth/>
                 <FormSubmitButton DisplayText="Create Account"/>
             </form>
         </>

@@ -7,7 +7,6 @@ import {GlobalContext} from "../../../common/GlobalContext";
 // @ts-ignore
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const {isAuthenticated} = useContext(GlobalContext)
-    console.log("isAuthenticated", isAuthenticated)
 
     return (
         <Route {...rest} render={(props) => (

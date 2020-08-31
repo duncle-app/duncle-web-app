@@ -57,7 +57,7 @@ export default function Login() {
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            `Copyright © Gumdrop CRM {new Date().getFullYear()}.`
+            Copyright © Gumdrop CRM {new Date().getFullYear()}.
         </Typography>
     );
 }

@@ -32,14 +32,12 @@ function App() {
                 <Router>
                     <Navbar/>
                     <Switch>
-                        {/* todo - auto route to dashboard page */}
-                        {/* todo - but then if we're not logged in, then route to login page */}
+                        {/* todo - auto route to login page if we're not logged in */}
                         <Redirect exact from="/" to="login"/>
                         <Route
                             exact
                             path="/signup"
                         >
-                            {/* TODO - PUBLIC ROUTE */}
                             <SignUp/>
                         </Route>
                         <Route
@@ -56,25 +54,13 @@ function App() {
                         <PrivateRoute
                             exact
                             path="/dashboard"
-                            component={UserEventsController}
+                            component={AllLibraries}
                         />
                         <PrivateRoute
                             exact
                             path="/calendar"
                             component={CalendarController}
                         />
-                        <PrivateRoute
-                            exact
-                            path="/library"
-                            component={AllLibraries}
-                        />
-                        // todo - add private route, remove the need to pass in libraryManager?
-                        {/*<PrivateRoute*/}
-                        {/*    exact*/}
-                        {/*    path="/library"*/}
-                        {/*    // component={MrSir}*/}
-                        {/*    component={LibraryListController}*/}
-                        {/*/>*/}
                         <PrivateRoute
                             exact
                             path="/library/new"
@@ -90,19 +76,6 @@ function App() {
                             path="/library/:libraryId/edit"
                             component={EditLibraryController}
                         />
-
-                        {/*<Route*/}
-                        {/*    exact*/}
-                        {/*    path="/library/:libraryId"*/}
-                        {/*    children={*/}
-                        {/*        <LibraryDetailController libraryManager={libraryManager}/>*/}
-                        {/*    }*/}
-                        {/*/>*/}
-                        {/*<Route*/}
-                        {/*    exact*/}
-                        {/*    path="/library/:libraryId/edit"*/}
-                        {/*    children={<LibraryEditController libraryManager={libraryManager}/>}*/}
-                        {/*/>*/}
                         <Route
                             path="/unauthorized"
                             children={<Unauthorized/>}

@@ -2,6 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import {Field, FieldInputProps} from "react-final-form";
 import camelize from "../../../utils/camelize";
+import useStyles from "../../../global-styles";
 
 interface TextFieldProps {
     name: string;
@@ -9,9 +10,18 @@ interface TextFieldProps {
     defaultValue?: string | number
     alsoInitialValue?: boolean
     autoFocus?: boolean
+    fullWidth?: boolean
 }
 
-export default function CustomTextField({name, isRequired = false, defaultValue = undefined, alsoInitialValue = false, autoFocus = false}: TextFieldProps) {
+export default function CustomTextField(
+    {
+        name,
+        isRequired = false,
+        defaultValue = undefined,
+        alsoInitialValue = false,
+        autoFocus = false,
+        fullWidth = false
+    }: TextFieldProps) {
     const camelizedName: string = camelize(name);
 
     /**
@@ -24,6 +34,7 @@ export default function CustomTextField({name, isRequired = false, defaultValue 
     if (alsoInitialValue && defaultValue === undefined) {
         throw new Error("If alsoInitialValue is specified, defaultValue must exist")
     }
+    const {menuButton} = useStyles()
 
     return (
         <Field name={camelizedName} initialValue={alsoInitialValue ? defaultValue : undefined}>
@@ -35,7 +46,7 @@ export default function CustomTextField({name, isRequired = false, defaultValue 
                     variant="outlined"
                     margin="normal"
                     required={isRequired}
-                    fullWidth
+                    fullWidth={fullWidth}
                     id={camelizedName}
                     label={name}
                     key={camelizedName}

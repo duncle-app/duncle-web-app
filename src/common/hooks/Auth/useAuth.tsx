@@ -80,7 +80,7 @@ function getWithExpiry(key) : UserDAO | null {
     const itemStr = localStorage.getItem(key)
     // if the item doesn't exist, return null
     if (!itemStr) {
-        console.log("returning null")
+        // console.log("returning null")
         return null
     }
     const item = JSON.parse(itemStr)
@@ -89,10 +89,10 @@ function getWithExpiry(key) : UserDAO | null {
     if (now.getTime() > item.expiry) {
         // If the item is expired, delete the item from storage
         // and return null
-        console.log("removing key")
+        // console.log("removing key")
         localStorage.removeItem(key)
         return null
     }
-    console.log("returning key", item.value)
+    // console.log("returning key", item.value)
     return item.value
 }

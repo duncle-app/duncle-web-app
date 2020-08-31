@@ -2,7 +2,11 @@ import React from 'react'
 import TextField from "@material-ui/core/TextField";
 import {Field, FieldInputProps} from "react-final-form";
 
-export default function EmailTextField() {
+interface Props {
+    fullWidth?: boolean
+}
+
+export default function EmailTextField({fullWidth = false}: Props) {
     return (
         <Field name="email">
             {({input}: FieldInputProps<any>) => (
@@ -14,7 +18,7 @@ export default function EmailTextField() {
                         variant="outlined"
                         margin="normal"
                         required
-                        fullWidth
+                        fullWidth={fullWidth}
                         label="Email Address"
                         id="email"
                         autoComplete="email"

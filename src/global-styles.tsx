@@ -1,13 +1,10 @@
 import {makeStyles} from "@material-ui/core";
 
-const patsGold: string = "#ffb612";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     appHeader: {
         flexGrow: 1,
-        // color: patsGold,
-        // background: "black",
     },
     calendarIcon: {
         height: '2em',
@@ -15,10 +12,6 @@ const useStyles = makeStyles((theme) => ({
         "&:hover, &:focus": {
             color: () => theme.palette.primary.main
         },
-    },
-    cardHeader: {
-        // color: patsGold,
-        // background: "#203731",
     },
     center: {
         textAlign: 'center'
@@ -28,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         padding: theme.spacing(1),
+    },
+    editLibrary: {
+        maxWidth: '49%',
+        margin: "0px 0px 0px 11px"
     },
     horizontalListItem: {
         flexDirection: 'row',
