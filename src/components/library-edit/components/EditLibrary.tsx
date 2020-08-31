@@ -9,7 +9,6 @@ import useStyles from "../../../global-styles";
 
 interface LibraryEditProps {
     library: Library;
-
     formSubmit(values: any): any
 }
 
@@ -17,6 +16,13 @@ interface LabelProps {
     label: string
     currentValue: string | number | undefined
     isRequired: boolean
+}
+
+export interface EditLibrarySubmitProps {
+    // @ts-ignore
+    street, city, county, level, libraryName, librarian, district, state,
+    // @ts-ignore
+    zip, size, email, phoneNumber, assistant, assignedRep, extension
 }
 
 export default function ({library, formSubmit}: LibraryEditProps) {
