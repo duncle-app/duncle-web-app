@@ -7,11 +7,6 @@ import axios from 'axios'
 //     stateSetter(response.quote)
 // }
 
-const getFetch = async (url: string) => {
-    const response = await fetch(url)
-    return await response.json()
-}
-
 const get = async (url: string) => {
     return await axios.get(url, {
         auth: {
@@ -20,7 +15,6 @@ const get = async (url: string) => {
         }
     })
 }
-
 
 const PingRemoteDB = () => {
     const [text, setText] = useState("No response");

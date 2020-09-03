@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import useStyles from "../../../global-styles";
 import Library from "../../../model/library";
-import {ListItem, List, Divider, ListItemText} from "@material-ui/core";
+import {Divider, List, ListItem, ListItemText} from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import EventNote from "@material-ui/icons/EventNote";
 import {createEventId} from "../Calendar/utils";
@@ -13,10 +13,10 @@ interface drawerProps {
 }
 
 export default ({library}: drawerProps) => {
-    const {muiDrawer, drawerPaper, calendarIcon, center} = useStyles()
+    const {muiDrawer, drawerPaper, calendarIcon} = useStyles()
     const {libraryName, city, state, street, zip, email, librarian, phoneNumber} = library;
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
-    const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
+    const [selectedDates] = useState<DateSelectArg>()
 
     const cancel = () => setIsOpen(false)
 

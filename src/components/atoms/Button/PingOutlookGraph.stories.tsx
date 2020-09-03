@@ -1,7 +1,5 @@
 import React, {useState} from "react";
 import {Button} from "@material-ui/core";
-import {Client, ClientOptions} from "@microsoft/microsoft-graph-client";
-import OutlookAuthenticationProvider from "../../../services/OutlookAuthenticationProvider";
 
 import {UserAgentApplication} from "msal";
 // Application (client) ID : 9914f345-76dc-4873-b39f-5a7e22a41136

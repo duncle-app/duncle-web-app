@@ -6,10 +6,7 @@ export interface DateDialogReturn {
     appointmentTitle: string
 }
 
-export default (props: DialogProps) => {
-    const librarian: string = "Nancy Torvald"
-
-    return <DialogueWrapper {...props}>
+export default (props: DialogProps) =>
+    <DialogueWrapper {...props}>
         <CustomTextField name="Appointment Title" isRequired autoFocus/>
     </DialogueWrapper>
-}

@@ -10,7 +10,7 @@ interface CalendarEvent {
     end: string,
 }
 
-export default ({outlookResponse: {value, ["@odata.context"]: mrsir}}: FullCalendarProps) => {
+export default ({outlookResponse: {value, "@odata.context": mrsir}}: FullCalendarProps) => {
 // export default ({outlookResponse}: FullCalendarProps) => {
     const [events, setEvents] = useState<CalendarEvent[]>([]);
 

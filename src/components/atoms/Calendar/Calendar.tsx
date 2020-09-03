@@ -131,29 +131,6 @@ export default function({initialEvents}: any) {
         </div>
     )
 
-    function renderSidebar() {
-        return (
-            <div className='demo-app-sidebar'>
-                <div className='demo-app-sidebar-section'>
-                    <label>
-                        <input
-                            type='checkbox'
-                            checked={weekendsVisible}
-                            onChange={handleWeekendsToggle}
-                        />
-                        toggle weekends
-                    </label>
-                </div>
-                <div className='demo-app-sidebar-section'>
-                    <h2>All Events ({currentEvents.length})</h2>
-                    <ul>
-                        {currentEvents.map(renderSidebarEvent)}
-                    </ul>
-                </div>
-            </div>
-        )
-    }
-
     function renderEventContent(eventContent: EventContentArg) {
         return (
             <>

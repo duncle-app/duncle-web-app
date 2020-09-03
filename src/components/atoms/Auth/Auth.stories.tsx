@@ -1,4 +1,4 @@
-import React, {useCallback, useContext} from "react";
+import React, {useContext} from "react";
 import {GlobalContext, GlobalProvider} from "../../../common/GlobalContext";
 import PingAnything from "../Button/PingAnything";
 
