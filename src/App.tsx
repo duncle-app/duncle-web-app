@@ -17,10 +17,10 @@ import useSuccessSnackbar from "./components/atoms/Snackbar/Snackbar";
 const Protected = () => <h3>Protected</h3>
 
 const Unauthorized = () => {
-    const {setSnackbarMessage} = useSuccessSnackbar()
+    const {message, setMessage} = React.useContext(GlobalContext)
 
     const handle = () => {
-        setSnackbarMessage("Mr sir")
+        setMessage("Mr sir")
     }
     return <>
         <h1>You are not authorized. </h1>
@@ -39,6 +39,7 @@ function App() {
             <GlobalProvider>
                 <Router>
                     <Navbar/>
+                    <Snackbar/>
                     <Switch>
                         {/* todo - auto route to login page if we're not logged in */}
                         <Redirect exact from="/" to="login"/>
