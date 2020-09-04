@@ -15,7 +15,8 @@ type ContextProps = {
 export function GlobalProvider({children}) {
     const {isAuthenticated, authenticate, getAuthenticatedUser} = useAuth()
     const [currentLibrary, setCurrentLibrary] = useState<Library>(NoLibrary)
-    // todo - pick one libraryManager impl or the other
+    const [message, setMessage] = useState<String>('')
+
     return (
         <GlobalContext.Provider value={{
             lang: 'en',
@@ -24,7 +25,9 @@ export function GlobalProvider({children}) {
             authenticate,
             getAuthenticatedUser,
             currentLibrary,
-            setCurrentLibrary
+            setCurrentLibrary,
+            message,
+            setMessage
         }}>
             {children}
         </GlobalContext.Provider>

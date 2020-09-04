@@ -12,17 +12,28 @@ import ViewLibrary from "./components/pages/ViewLibrary/ViewLibrary";
 import EditLibraryController from "./components/pages/EditLibrary/EditLibraryController";
 import DefaultButton from "./components/atoms/Button/DefaultButton";
 import CalendarController from "./components/atoms/Calendar/CalendarController";
+import useSuccessSnackbar from "./components/atoms/Snackbar/Snackbar";
 
 const Protected = () => <h3>Protected</h3>
-const Unauthorized = () =>
-    <>
+
+const Unauthorized = () => {
+    const {setSnackbarMessage} = useSuccessSnackbar()
+
+    const handle = () => {
+        setSnackbarMessage("Mr sir")
+    }
+    return <>
         <h1>You are not authorized. </h1>
+        <DefaultButton onClick={handle}>
+            Mr Sir
+        </DefaultButton>
         <Link to="/login">
             <DefaultButton>Sign in</DefaultButton>
         </Link>
     </>
-
+}
 function App() {
+
     return (
         <div className="App">
             <GlobalProvider>
