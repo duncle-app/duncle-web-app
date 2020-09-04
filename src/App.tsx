@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
 import Login from "./components/pages/LogIn/Login";
-import {GlobalProvider} from "./common/GlobalContext";
+import {GlobalContext, GlobalProvider} from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/molecules/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
@@ -12,15 +12,18 @@ import ViewLibrary from "./components/pages/ViewLibrary/ViewLibrary";
 import EditLibraryController from "./components/pages/EditLibrary/EditLibraryController";
 import DefaultButton from "./components/atoms/Button/DefaultButton";
 import CalendarController from "./components/atoms/Calendar/CalendarController";
-import useSuccessSnackbar from "./components/atoms/Snackbar/Snackbar";
+import Snackbar from "./components/atoms/Snackbar/Snackbar";
 
 const Protected = () => <h3>Protected</h3>
 
 const Unauthorized = () => {
-    const {message, setMessage} = React.useContext(GlobalContext)
+    const {message, setdoggie} = React.useContext(GlobalContext)
 
     const handle = () => {
-        setMessage("Mr sir")
+        setdoggie({
+            message: "Mr sir",
+            severity: 'error'
+        })
     }
     return <>
         <h1>You are not authorized. </h1>

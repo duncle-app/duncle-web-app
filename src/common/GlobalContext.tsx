@@ -2,6 +2,7 @@ import React, {Context, useState} from "react";
 import useAuth, {useAuthReturn} from "./hooks/Auth/useAuth";
 import Library from "../model/library";
 import {NoLibrary} from "../components/storybook-mocks/constants";
+import {Color as Severity} from "@material-ui/lab";
 
 type ContextProps = {
     isAuthenticated: boolean,
@@ -27,7 +28,9 @@ export function GlobalProvider({children}) {
             currentLibrary,
             setCurrentLibrary,
             message,
-            setMessage
+            setMessage,
+            doggie,
+            setdoggie
         }}>
             {children}
         </GlobalContext.Provider>
