@@ -17,6 +17,7 @@ export default function () {
             return;
         }
 
+        // todo - a bug where if anything other than success, it flashes green for a split second
         setdoggie(initialMessageState);
     };
 
