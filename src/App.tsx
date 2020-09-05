@@ -12,29 +12,34 @@ import ViewLibrary from "./components/pages/ViewLibrary/ViewLibrary";
 import EditLibraryController from "./components/pages/EditLibrary/EditLibraryController";
 import DefaultButton from "./components/atoms/Button/DefaultButton";
 import CalendarController from "./components/atoms/Calendar/CalendarController";
-import Snackbar from "./components/atoms/Snackbar/Snackbar";
+import Snackbar, {useNotification} from "./components/atoms/Snackbar/Snackbar";
 
 const Protected = () => <h3>Protected</h3>
 
 const Unauthorized = () => {
-    const {message, setdoggie} = React.useContext(GlobalContext)
+    const {setError, setSuccess} = useNotification()
 
     const handle = () => {
-        setdoggie({
-            message: "Mr sir",
-            severity: 'error'
-        })
+        setError('Mr Sir and stinkerton')
     }
+    const handleSuccess = () => {
+        setSuccess('This is a great success')
+    }
+
     return <>
         <h1>You are not authorized. </h1>
         <DefaultButton onClick={handle}>
             Mr Sir
+        </DefaultButton>
+        <DefaultButton onClick={handleSuccess}>
+            Success
         </DefaultButton>
         <Link to="/login">
             <DefaultButton>Sign in</DefaultButton>
         </Link>
     </>
 }
+
 function App() {
 
     return (

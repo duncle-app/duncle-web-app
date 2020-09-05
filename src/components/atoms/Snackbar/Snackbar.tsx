@@ -4,6 +4,16 @@ import React, {useContext} from "react";
 import {isEqual} from 'lodash'
 import {GlobalContext, initialMState as initialMessageState} from "../../../common/GlobalContext";
 
+export function useNotification() {
+    const {setdoggie} = useContext(GlobalContext)
+
+    return {
+        setSuccess: (newMessage: string) => setdoggie({message: newMessage, severity: 'success'}),
+        setError: (newMessage: string) => setdoggie({message: newMessage, severity: 'error'}),
+        clearMessage: () => setdoggie(initialMessageState)
+    }
+}
+
 function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }

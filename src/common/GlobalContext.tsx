@@ -27,8 +27,6 @@ export function GlobalProvider({children}) {
             getAuthenticatedUser,
             currentLibrary,
             setCurrentLibrary,
-            message,
-            setMessage,
             doggie,
             setdoggie
         }}>
