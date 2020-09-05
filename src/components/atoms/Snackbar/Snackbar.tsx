@@ -5,12 +5,12 @@ import {isEqual} from 'lodash'
 import {GlobalContext, initialMState as initialMessageState} from "../../../common/GlobalContext";
 
 export function useNotification() {
-    const {setdoggie} = useContext(GlobalContext)
+    const {setMessage} = useContext(GlobalContext)
 
     return {
-        setSuccess: (newMessage: string) => setdoggie({message: newMessage, severity: 'success'}),
-        setError: (newMessage: string) => setdoggie({message: newMessage, severity: 'error'}),
-        clearMessage: () => setdoggie(initialMessageState)
+        setSuccess: (newMessage: string) => setMessage({message: newMessage, severity: 'success'}),
+        setError: (newMessage: string) => setMessage({message: newMessage, severity: 'error'}),
+        clearMessage: () => setMessage(initialMessageState)
     }
 }
 
@@ -19,8 +19,8 @@ function Alert(props: AlertProps) {
 }
 
 export default function () {
-    const {doggie, setdoggie} = useContext(GlobalContext)
-    const isOpen: boolean = !isEqual(doggie.message, initialMessageState.message)
+    const {message, setMessage} = useContext(GlobalContext)
+    const isOpen: boolean = !isEqual(message.message, initialMessageState.message)
 
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
@@ -28,13 +28,13 @@ export default function () {
         }
 
         // todo - a bug where if anything other than success, it flashes green for a split second
-        setdoggie(initialMessageState);
+        setMessage(initialMessageState);
     };
 
     return (
         <Snackbar open={isOpen} autoHideDuration={4000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity={doggie.severity}>
-                {doggie.message}
+            <Alert onClose={handleClose} severity={message.severity}>
+                {message.message}
             </Alert>
         </Snackbar>
     );

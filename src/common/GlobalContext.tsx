@@ -27,8 +27,8 @@ export function GlobalProvider({children}) {
             getAuthenticatedUser,
             currentLibrary,
             setCurrentLibrary,
-            doggie,
-            setdoggie
+            message,
+            setMessage
         }}>
             {children}
         </GlobalContext.Provider>
