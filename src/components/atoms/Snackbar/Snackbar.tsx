@@ -2,7 +2,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, {AlertProps} from '@material-ui/lab/Alert';
 import React, {useContext} from "react";
 import {isEqual} from 'lodash'
-import {GlobalContext, initialMState as initialMessageState} from "../../../common/GlobalContext";
+import {GlobalContext, initialState as initialMessageState} from "../../../common/GlobalContext";
 
 export function useNotification() {
     const {setMessage} = useContext(GlobalContext)
@@ -19,7 +19,9 @@ function Alert(props: AlertProps) {
 }
 
 export default function () {
-    const {message, setMessage} = useContext(GlobalContext)
+    const {message} = useContext(GlobalContext)
+    const {clearMessage} = useNotification()
+
     const isOpen: boolean = !isEqual(message.message, initialMessageState.message)
 
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -28,7 +30,7 @@ export default function () {
         }
 
         // todo - a bug where if anything other than success, it flashes green for a split second
-        setMessage(initialMessageState);
+        clearMessage();
     };
 
     return (
