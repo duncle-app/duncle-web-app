@@ -8,7 +8,7 @@ interface OldDatePickerReturn {
     nextAppointment: string
 }
 
-export default function DatePicker() {
+export default function() {
     const label = "Next appointment"
     const camelizedName: string = camelize(label);
     const defaultDate = moment().format('yyyy-MM-DD[T]HH:mm');

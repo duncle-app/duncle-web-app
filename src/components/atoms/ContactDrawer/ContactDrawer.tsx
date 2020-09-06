@@ -8,17 +8,30 @@ import {createEventId} from "../Calendar/utils";
 import {DateSelectArg} from "@fullcalendar/react";
 import CalendarDialog from "../Dialogs/CalendarDialog";
 import {isEmpty} from "lodash";
+import {readableDate} from "../../../utils/dateUtil";
+import Typography from "@material-ui/core/Typography";
+import DatePicker from "../DatePicker/DatePicker";
+import {useNotification} from "../Snackbar/Snackbar";
+import DefaultButton from "../Button/DefaultButton";
+import Form from "../../../common/Form";
 
 interface drawerProps {
     library: Library;
 }
 
-export default ({library: {libraryName, city, state, street, zip, email, librarian, phoneNumber, assistant}}: drawerProps) => {
+export default ({library: {libraryName, city, state, street, zip, email, librarian, phoneNumber, assistant, dateNextContact}}: drawerProps) => {
     const {muiDrawer, drawerPaper, calendarIcon} = useStyles()
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [selectedDates] = useState<DateSelectArg>()
+    const {setSuccess} = useNotification()
 
     const cancel = () => setIsOpen(false)
+
+    // @ts-ignore
+    const handleScheduleNextAppointment = (props) => {
+        console.log(props)
+        setSuccess(`Great success! ${props}`)
+    }
 
     const handleClose = () => {
         if (selectedDates) {
@@ -57,27 +70,51 @@ export default ({library: {libraryName, city, state, street, zip, email, librari
                                     <div>{state}, {zip}</div>
                                 </>
                             }
-                            primaryTypographyProps={{variant: "h4"}}
+                            primaryTypographyProps={{variant: "h5"}}
                         />
                     </ListItem>
                     <Divider/>
                     <ListItem>
                         <ListItemText
+                            primary="Contact Dates"
+                            secondary={
+                                <>
+                                    <Typography variant="body1">
+                                        <div>Next Contact Date:</div>
+                                        {/*@ts-ignore - we're checking for undefined using isEmpty*/}
+                                        <div>{!isEmpty(dateNextContact) ? readableDate(dateNextContact) : 'N/A'}</div>
+                                    </Typography>
+                                    <Typography variant="h6" style={{color: 'black'}}>
+                                        Schedule next contact date
+                                    </Typography>
+                                    <Form onSubmit={handleScheduleNextAppointment}>
+                                        <DatePicker/>
+                                        <DefaultButton type="submit">
+                                            Schedule
+                                        </DefaultButton>
+                                    </Form>
+                                </>
+                            }
+                            primaryTypographyProps={{variant: "h5"}}
+                        />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText
                             primary="Contacts"
                             secondary={
                                 <>
-                                    <div>{librarian}</div>
+                                    <div>{}</div>
                                     <div>{email} {phoneNumber}</div>
                                     <div>Assistant: {!isEmpty(assistant) ? assistant : 'N/A'}</div>
                                 </>
                             }
-                            primaryTypographyProps={{variant: "h4"}}
+                            primaryTypographyProps={{variant: "h5"}}
                         />
                     </ListItem>
                     <ListItem>
                         <ListItemText
                             primary="View Calendar"
-                            primaryTypographyProps={{variant: "h5"}}
+                            primaryTypographyProps={{variant: "h6"}}
                         />
                         <EventNote
                             className={calendarIcon}
