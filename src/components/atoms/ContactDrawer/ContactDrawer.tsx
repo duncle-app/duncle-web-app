@@ -93,6 +93,19 @@ export default ({library}: drawerProps) => {
                             primaryTypographyProps={{variant: "h5"}}
                         />
                     </ListItem>
+                    <ListItem>
+                        <ListItemText
+                            primary="Contacts"
+                            secondary={
+                                <>
+                                    <div>{librarian}</div>
+                                    <div>{email} {phoneNumber}</div>
+                                    <div>Assistant: {!isEmpty(assistant) ? assistant : 'N/A'}</div>
+                                </>
+                            }
+                            primaryTypographyProps={{variant: "h5"}}
+                        />
+                    </ListItem>
                     <Divider/>
                     <ListItem>
                         <ListItemText
@@ -113,19 +126,6 @@ export default ({library}: drawerProps) => {
                                             Schedule
                                         </DefaultButton>
                                     </Form>
-                                </>
-                            }
-                            primaryTypographyProps={{variant: "h5"}}
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <ListItemText
-                            primary="Contacts"
-                            secondary={
-                                <>
-                                    <div>{librarian}</div>
-                                    <div>{email} {phoneNumber}</div>
-                                    <div>Assistant: {!isEmpty(assistant) ? assistant : 'N/A'}</div>
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
