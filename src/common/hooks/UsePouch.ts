@@ -40,13 +40,16 @@ export function useUserPouch() : UseUserReturnProps {
         }
     }
 
-
     async function addUser(props: User): Promise<PouchDB.Core.Response | Error> {
         try {
             return await localPouch.put({_id: `${USER_ID_PREFIX}${props.email}`, ...props})
         } catch (err) {
-            console.error(err);
-            throw new Error(`Unable to save user: ${err}`)
+            if (err.status === 409) {
+                return new Error("Email address is already in use")
+            }
+            console.error("Pouch error", err);
+            // todo - gonna have to return this error
+            return new Error(`Unable to save user: ${err}`)
         }
     }
 

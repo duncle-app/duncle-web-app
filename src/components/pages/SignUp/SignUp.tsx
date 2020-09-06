@@ -12,31 +12,38 @@ import NewUser from "../../../model/newUser";
 import {GlobalContext} from "../../../common/GlobalContext";
 import UserDAO from "../../../model/userDAO";
 import {useHistory} from "react-router-dom";
+import {useNotification} from "../../atoms/Snackbar/Snackbar";
+import {isEqual} from 'lodash'
 
 export default function SignUp() {
     const classes = useStyles();
     const history = useHistory();
     const loginService = new LoginService();
     const {authenticate} = useContext(GlobalContext)
+    const {setError, setSuccess} = useNotification()
 
     async function submitForm(newUser: NewUser) {
-        // todo - do validation the passwords actually match
-        delete newUser.confirmPassword
-        const response = loginService.signUpUser(newUser)
+        if (!isEqual(newUser.confirmPassword, newUser.password)) {
+            // todo - replace with form validation
+            setError("Passwords are not equal")
+            return
+        }
+        delete newUser.confirmPassword;
+        const response = await loginService.signUpUser(newUser)
+        console.log("Response in sign up tsx - should be error", response)
 
-        try {
+        if (response instanceof Error) {
+            setError(`Error: ${response.message}`)
+        } else {
             const newlyCreatedUser: UserDAO = {
-                // @ts-ignore
                 _id: response.id,
-                // @ts-ignore
                 _rev: response.rev,
                 ...newUser
             }
 
             await authenticate(newlyCreatedUser)
             history.push('/dashboard')
-        } catch (e) {
-            console.log(response)
+            setSuccess(`Sign up successful. Welcome ${newUser.firstName}!`)
         }
     }
 
