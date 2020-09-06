@@ -35,8 +35,11 @@ export function useUserPouch() : UseUserReturnProps {
         try {
             return await localPouch.get(`${USER_ID_PREFIX}${inputEmail}`);
         } catch (e) {
-            console.error("error:", e)
-            throw new RecordNotFoundError("Error when making database call", e);
+            if (e.status === 404) {
+                throw new Error(`User not found ${inputEmail}`)
+            }
+            console.error("error:", e);
+            throw new Error(`Error when making database call ${e}`);
         }
     }
 

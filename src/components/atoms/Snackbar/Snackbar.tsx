@@ -34,7 +34,7 @@ export default function () {
     };
 
     return (
-        <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={isOpen} autoHideDuration={4500} onClose={handleClose}>
             <Alert onClose={handleClose} severity={message.severity}>
                 {message.message}
             </Alert>

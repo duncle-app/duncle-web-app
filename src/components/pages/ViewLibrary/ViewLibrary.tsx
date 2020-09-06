@@ -24,7 +24,7 @@ interface p {
 function ViewLibrary() {
     // todo - consult with aaron, there's probably a better way to do this
     const {currentLibrary, setCurrentLibrary} = useContext(GlobalContext)
-    const {content, alignToDrawer, padBottom} = useStyles()
+    const {content, alignToDrawer, paddingOne, paddingTopTiny} = useStyles()
 
     const [totalSales, setTotalSales] = useState<number>(currentLibrary.totalSales)
     const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale)
@@ -106,14 +106,16 @@ function ViewLibrary() {
 
     return (
         <div className={alignToDrawer}>
-            <Button onClick={onBack}>Back</Button>
-            <Button onClick={() => onEdit(currentLibrary)}>Edit</Button>
+            <div className={paddingTopTiny}>
+                <Button variant='outlined' onClick={onBack}>Back</Button>
+                <Button variant='outlined' onClick={() => onEdit(currentLibrary)}>Edit</Button>
+            </div>
             <ContactDrawer library={currentLibrary}/>
             <main className={content}>
-                <div className={padBottom}>
+                <div className={paddingOne}>
                     <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale}/>
                 </div>
-                <div className={padBottom}>
+                <div className={paddingOne}>
                     <NewNote formSubmit={submitNewNote}/>
                 </div>
                 <NoteList notes={currentLibrary.notes} SubmitForm={submitNewEditableNote}/>
