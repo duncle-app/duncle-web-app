@@ -11,7 +11,7 @@ interface OldDatePickerReturn {
 export default function() {
     const label = "Next appointment"
     const camelizedName: string = camelize(label);
-    const defaultDate = moment().format('yyyy-MM-DD[T]HH:mm');
+    const defaultDate = moment().format('yyyy-MM-DD[T]HH:mm:ss');
 
     return (
         // We need to set the initial value of the Field so FF

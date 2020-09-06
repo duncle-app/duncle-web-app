@@ -9,6 +9,7 @@ export function useNotification() {
 
     return {
         setSuccess: (newMessage: string) => setMessage({message: newMessage, severity: 'success'}),
+        setInfo: (newMessage: string) => setMessage({message: newMessage, severity: 'info'}),
         setError: (newMessage: string) => setMessage({message: newMessage, severity: 'error'}),
         clearMessage: () => setMessage(initialMessageState)
     }
@@ -28,7 +29,6 @@ export default function () {
         if (reason === 'clickaway') {
             return;
         }
-
         // todo - a bug where if anything other than success, it flashes green for a split second
         clearMessage();
     };
