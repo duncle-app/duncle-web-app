@@ -9,7 +9,6 @@ type PasswordProps = {
 }
 
 export default function ({ fieldName = "Password", fullWidth = false } : PasswordProps) {
-    console.log("field title", fieldName)
     const camelizedFieldName = camelize(fieldName)
 
     return (

@@ -13,12 +13,14 @@ import LoginService from "../../../services/LoginService";
 import {GlobalContext} from "../../../common/GlobalContext";
 import User from "../../../model/user";
 import {useHistory} from "react-router-dom";
+import {useNotification} from "../../atoms/Snackbar/Snackbar";
 
 export default function Login() {
     const {paper, avatar} = useStyles();
     const history = useHistory();
     const loginService = new LoginService();
     const {authenticate} = useContext(GlobalContext)
+    const {setError, setSuccess} = useNotification()
 
     async function submitForm(user: User) {
         try {
@@ -26,9 +28,9 @@ export default function Login() {
             console.log("login.tsx is authenticating user:", returnedUser)
             authenticate(returnedUser)
             history.push('/dashboard')
+            setSuccess(`Login successful. Welcome ${user.firstName}`)
         } catch (e) {
-            console.error("error:", e)
-            alert(`Failed to find: ${e.message}`)
+            setError(e.message)
         }
     }
 

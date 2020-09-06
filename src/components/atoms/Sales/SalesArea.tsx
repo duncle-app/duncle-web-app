@@ -3,6 +3,7 @@ import {Paper} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Form from "../../../common/Form";
 import NumberTextField from "../TextField/NumberTextField";
+import useStyles from "../../../global-styles";
 
 export interface addSaleInputProps {
     newSale: number
@@ -15,8 +16,10 @@ interface props {
 }
 
 export default ({totalSales, lastSale, addSale}: props) => {
+    const {paddingTwo} = useStyles()
+
     return <Form onSubmit={addSale}>
-        <Paper>
+        <Paper className={paddingTwo}>
             <Typography variant="h5" component="h2">
                 Total Sales: ${totalSales} Last Sale: ${lastSale}
             </Typography>

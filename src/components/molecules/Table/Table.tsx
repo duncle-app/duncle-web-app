@@ -37,7 +37,6 @@ export default ({libraries, onEdit}: TableProps) => {
                 if (dateLastSale !== undefined) {
                     dateLastSale = readableDate(dateLastSale)
                 }
-                console.log({dateLastSale})
                 return <StackedField top={formattedToDollars} bottom={dateLastSale}/>;
             }
         },

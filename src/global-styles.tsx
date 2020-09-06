@@ -43,6 +43,15 @@ const useStyles = makeStyles((theme) => ({
     padBottom: {
         paddingBottom: theme.spacing(2)
     },
+    paddingOne: {
+        padding: theme.spacing(1)
+    },
+    paddingTwo: {
+        padding: theme.spacing(2)
+    },
+    paddingTopTiny: {
+        paddingTop: theme.spacing(.5)
+    },
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
