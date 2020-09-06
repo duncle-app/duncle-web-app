@@ -4,10 +4,12 @@ import EditLibrary, {EditLibrarySubmitProps} from "../../library-edit/components
 import {useHistory} from 'react-router-dom';
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
 import {cloneDeep, isEqual} from 'lodash'
+import {useNotification} from "../../atoms/Snackbar/Snackbar";
 
 export default function EditLibraryController() {
     const {currentLibrary, setCurrentLibrary} = useContext(GlobalContext)
     const {saveLibrary} = useLibraryPouch()
+    const {setSuccess, setInfo, setError} = useNotification()
     const history = useHistory()
 
     async function saveEditedLibrary(values: EditLibrarySubmitProps) {
@@ -21,13 +23,14 @@ export default function EditLibraryController() {
                 const {rev} = await saveLibrary(editedLibrary);
                 currentLibrary._rev = rev
                 setCurrentLibrary(currentLibrary)
-                console.log("Saving, since there's a difference")
+                setSuccess('Successfully saved library')
+            } else {
+                setInfo('No updates were made, contents were identical')
             }
-            // todo - add success snackbar
             // navigate to previous page
             history.goBack()
         } catch (e) {
-            throw new Error(`Failed to update library: ${e}`)
+            setError(e)
         }
     }
 
