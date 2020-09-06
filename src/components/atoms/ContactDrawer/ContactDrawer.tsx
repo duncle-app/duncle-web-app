@@ -12,9 +12,8 @@ interface drawerProps {
     library: Library;
 }
 
-export default ({library}: drawerProps) => {
+export default ({library: {libraryName, city, state, street, zip, email, librarian, phoneNumber, assistant}}: drawerProps) => {
     const {muiDrawer, drawerPaper, calendarIcon} = useStyles()
-    const {libraryName, city, state, street, zip, email, librarian, phoneNumber} = library;
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [selectedDates] = useState<DateSelectArg>()
 
@@ -59,13 +58,13 @@ export default ({library}: drawerProps) => {
                     <ListItem>
                         <ListItemText
                             primary="Contacts"
+                            secondary={
+                                <>
+                                    <div>{librarian} {email} {phoneNumber}</div>
+                                    <div>Assistant: {assistant !== '' ? assistant: 'N/A'}</div>
+                                </>
+                            }
                             primaryTypographyProps={{variant: "h4"}}
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <ListItemText
-                            primary={librarian}
-                            secondary={`${email} ${phoneNumber}`}
                         />
                     </ListItem>
                     <ListItem>

@@ -34,7 +34,6 @@ export default function({initialEvents}: any) {
         setSelectedDates(selectInfo)
     }
 
-    // todo - pass in title here, and set that as a title
     const handleSubmit = async ({appointmentTitle}: DateDialogReturn) => {
         console.log({appointmentTitle})
         //// add to calendar events
@@ -96,8 +95,8 @@ export default function({initialEvents}: any) {
 
     return (
         <div className='demo-app'>
-            {/*{renderSidebar()}*/}
-            <DateTimeDialog isOpen={isOpen} handleSubmit={handleSubmit} handleCancel={cancel}/>
+            {/*Removing the date time dialog for now*/}
+            {/*<DateTimeDialog isOpen={isOpen} handleSubmit={handleSubmit} handleCancel={cancel}/>*/}
             <div className='demo-app-main'>
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -137,15 +136,6 @@ export default function({initialEvents}: any) {
                 <strong>{eventContent.timeText}</strong>
                 <i>{eventContent.event.title}</i>
             </>
-        )
-    }
-
-    function renderSidebarEvent(event: EventApi) {
-        return (
-            <li key={event.id}>
-                <strong>{formatDate(event.start!, {year: 'numeric', month: 'short', day: 'numeric'})}</strong>
-                <i>{event.title}</i>
-            </li>
         )
     }
 }
