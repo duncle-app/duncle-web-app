@@ -7,6 +7,7 @@ import EventNote from "@material-ui/icons/EventNote";
 import {createEventId} from "../Calendar/utils";
 import {DateSelectArg} from "@fullcalendar/react";
 import CalendarDialog from "../Dialogs/CalendarDialog";
+import {isEmpty} from "lodash";
 
 interface drawerProps {
     library: Library;
@@ -44,13 +45,18 @@ export default ({library: {libraryName, city, state, street, zip, email, librari
                 paper: drawerPaper,
             }}
         >
-            <CalendarDialog handleSubmit={handleClose} handleCancel={cancel} isOpen={isOpen}/>
+            <CalendarDialog handleCancel={cancel} isOpen={isOpen}/>
             <div>
                 <List>
                     <ListItem>
                         <ListItemText
                             primary={libraryName}
-                            secondary={` ${street} ${city}, ${state}, ${zip}`}
+                            secondary={
+                                <>
+                                    <div>{street} {city}</div>
+                                    <div>{state}, {zip}</div>
+                                </>
+                            }
                             primaryTypographyProps={{variant: "h4"}}
                         />
                     </ListItem>
@@ -60,8 +66,9 @@ export default ({library: {libraryName, city, state, street, zip, email, librari
                             primary="Contacts"
                             secondary={
                                 <>
-                                    <div>{librarian} {email} {phoneNumber}</div>
-                                    <div>Assistant: {assistant !== '' ? assistant: 'N/A'}</div>
+                                    <div>{librarian}</div>
+                                    <div>{email} {phoneNumber}</div>
+                                    <div>Assistant: {!isEmpty(assistant) ? assistant : 'N/A'}</div>
                                 </>
                             }
                             primaryTypographyProps={{variant: "h4"}}
