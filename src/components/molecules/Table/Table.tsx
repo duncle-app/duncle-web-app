@@ -40,7 +40,13 @@ export default ({libraries, onEdit}: TableProps) => {
                 return <StackedField top={formattedToDollars} bottom={dateLastSale}/>;
             }
         },
-        {title: "Last Contacted", field: "dateLastContact"},
+        {
+            title: "Last Contacted",
+            field: "dateLastContact",
+            render: ({dateLastContact}: Library) => {
+                return dateLastContact !== undefined ? readableDate(dateLastContact) : dateLastContact
+            }
+        },
         {
             title: "Next Contact",
             field: "dateNextContact",

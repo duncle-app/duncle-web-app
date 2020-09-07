@@ -13,6 +13,8 @@ import NoteDAO from "../../../model/noteDAO";
 import {NoLibrary} from "../../storybook-mocks/constants";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
 import userDAO from "../../../model/userDAO";
+import {useNotification} from "../../atoms/Snackbar/Snackbar";
+import {dateNowIso} from "../../../utils/dateUtil";
 
 interface LibraryDetailProps {
     library: Library;
@@ -31,6 +33,8 @@ function ViewLibrary() {
     const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale)
 
     const {saveLibrary} = useLibraryPouch()
+
+    const {setSuccess, setError} = useNotification()
 
     const {libraryId}: p = useParams()
     let history = useHistory();
@@ -63,6 +67,21 @@ function ViewLibrary() {
         setCurrentLibrary(NoLibrary)
         // todo - not sure why.. but when this renders, it duplicates the note at the bottom instead of adding a new note to the top..
         setCurrentLibrary(updatedLibrary)
+    }
+
+
+    const handleNoSale = async () => {
+        try {
+            currentLibrary.dateLastContact = dateNowIso()
+            // @ts-ignore
+            const {rev} = await saveLibrary(currentLibrary);
+            currentLibrary._rev = rev
+            jankUpdateLibrary(currentLibrary)
+            setSuccess('Successfully saved library')
+        } catch (e) {
+            setError(e)
+        }
+
     }
 
     function sortLatestComesFirst(notes: NoteDAO[]) {
@@ -112,7 +131,7 @@ function ViewLibrary() {
             <ContactDrawer library={currentLibrary}/>
             <main className={content}>
                 <div className={paddingOne}>
-                    <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale}/>
+                    <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale} handleNoSale={handleNoSale}/>
                 </div>
                 <div className={paddingOne}>
                     <NewNote formSubmit={submitNewNote}/>

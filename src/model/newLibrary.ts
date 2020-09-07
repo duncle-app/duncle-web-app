@@ -21,6 +21,7 @@ export default interface NewLibrary {
     assistant?: string,
     extension?: string,
     dateLastSale?: string,
+    dateLastContact?: string,
     dateNextContact?: string,
     notes: NoteDAO[],
 }

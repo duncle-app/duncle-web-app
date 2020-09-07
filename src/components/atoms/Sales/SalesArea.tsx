@@ -6,6 +6,9 @@ import NumberTextField from "../TextField/NumberTextField";
 import useStyles from "../../../global-styles";
 import {Close} from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
+import {useLibraryPouch} from "../../../common/hooks/UsePouch";
+import {cloneDeep, isEqual} from "lodash";
+import {useNotification} from "../Snackbar/Snackbar";
 
 export interface addSaleInputProps {
     newSale: number
@@ -15,9 +18,10 @@ interface props {
     totalSales: number,
     lastSale: number,
     addSale(arg: addSaleInputProps): void
+    handleNoSale(): void
 }
 
-export default ({totalSales, lastSale, addSale}: props) => {
+export default ({totalSales, lastSale, addSale, handleNoSale}: props) => {
     const {paddingTwo, smallerHeight, nextToTextField} = useStyles()
 
     return <Form onSubmit={addSale}>
@@ -29,7 +33,7 @@ export default ({totalSales, lastSale, addSale}: props) => {
                 <Form onSubmit={addSale}>
                     <NumberTextField name="New Sale"/>
                     <div>
-                        <Button variant='outlined' className={nextToTextField}>
+                        <Button onClick={handleNoSale} variant='outlined' className={nextToTextField}>
                             <Typography variant="subtitle2" component="h2">
                                 No Sale
                             </Typography>
