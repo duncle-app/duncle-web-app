@@ -46,6 +46,11 @@ const useStyles = makeStyles((theme) => ({
     paddingOne: {
         padding: theme.spacing(1)
     },
+    paddingOneChildren: {
+        "& *": {
+            margin: theme.spacing(1)
+        }
+    },
     paddingTwo: {
         padding: theme.spacing(2)
     },
