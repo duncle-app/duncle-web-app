@@ -12,6 +12,7 @@ import {editNote, saveNote} from "../../../services/NoteService";
 import NoteDAO from "../../../model/noteDAO";
 import {NoLibrary} from "../../storybook-mocks/constants";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
+import userDAO from "../../../model/userDAO";
 
 interface LibraryDetailProps {
     library: Library;
@@ -23,7 +24,7 @@ interface p {
 
 function ViewLibrary() {
     // todo - consult with aaron, there's probably a better way to do this
-    const {currentLibrary, setCurrentLibrary} = useContext(GlobalContext)
+    const {currentLibrary, setCurrentLibrary, getAuthenticatedUser} = useContext(GlobalContext)
     const {content, alignToDrawer, paddingOne, paddingTopTiny} = useStyles()
 
     const [totalSales, setTotalSales] = useState<number>(currentLibrary.totalSales)
@@ -52,10 +53,8 @@ function ViewLibrary() {
 
     // @ts-ignore
     async function submitNewNote({newNote: message}) {
-        console.log("submitting new note", message)
-        const updatedLibrary: Library = await saveNote(currentLibrary, message, "Terry")
-        console.log("updatedlib after saving", updatedLibrary)
-
+        const {firstName}: userDAO = await getAuthenticatedUser()
+        const updatedLibrary: Library = await saveNote(currentLibrary, message, firstName)
         jankUpdateLibrary(updatedLibrary)
     }
 

@@ -23,12 +23,6 @@ export default function ({id, message, author, dateCreated, SubmitForm}: NotePro
     const [isEditing, setisEditing] = useState(false)
     const [currentMessage, setCurrentMessage] = useState<string>(message)
 
-    const classes = {
-        root: "",
-        title: "",
-        pos: ""
-    }
-
     const cancel = () => setisEditing(false)
 
     let content =
@@ -46,12 +40,11 @@ export default function ({id, message, author, dateCreated, SubmitForm}: NotePro
                     }}
                     // @ts-ignore
                     initialValues={message}
-                    render={({form, handleSubmit}) => (
+                    render={({handleSubmit}) => (
                         <>
                             <TextArea name="note" placeholderText="A note is required" message={currentMessage}/>
                             <Button type="submit" onClick={handleSubmit}>Submit</Button>
                             <Button type="submit" onClick={cancel}><Clear/></Button>
-
                         </>
                     )}
                 />
@@ -59,13 +52,13 @@ export default function ({id, message, author, dateCreated, SubmitForm}: NotePro
             :
             <>
                 <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <Typography color="textSecondary" gutterBottom>
                         Created by {author}
                     </Typography>
                     <Typography variant="h5" component="h2">
                         {currentMessage}
                     </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    <Typography color="textSecondary">
                         {/* Only show the formatted date, but store the iso date */}
                         {isIsoDate(dateCreated) ? readableDate(dateCreated) : dateCreated}
                     </Typography>
@@ -76,7 +69,7 @@ export default function ({id, message, author, dateCreated, SubmitForm}: NotePro
             </>
 
     return (
-        <Card className={classes.root}>
+        <Card>
             {content}
         </Card>
     )

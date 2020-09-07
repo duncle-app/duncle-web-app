@@ -12,6 +12,8 @@ export default function EditLibraryController() {
     const {setSuccess, setInfo, setError} = useNotification()
     const history = useHistory()
 
+    // todo - when clearing a field completely, it thinks no changes were made
+
     async function saveEditedLibrary(values: EditLibrarySubmitProps) {
         // this contains a subset of the props, and just save those to the new object
         try {

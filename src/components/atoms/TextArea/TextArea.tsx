@@ -8,9 +8,10 @@ type TextAreaType = {
     name: string;
     placeholderText: string;
     message?: string;
+    className?: string;
 }
 
-export default function ({name, placeholderText, message = ""}: TextAreaType) {
+export default function ({name, placeholderText, className = '', message = ''}: TextAreaType) {
     const camelizedName: string = camelize(name);
 
     return (
@@ -18,6 +19,7 @@ export default function ({name, placeholderText, message = ""}: TextAreaType) {
             {(props: FieldInputProps<any>) => (
                 <TextareaAutosize
                     onChange={props.input.onChange}
+                    className={className}
                     defaultValue={message}
                     name={props.input.name}
                     id={camelizedName}

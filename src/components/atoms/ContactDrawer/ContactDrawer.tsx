@@ -78,7 +78,7 @@ export default ({library}: drawerProps) => {
                 paper: drawerPaper,
             }}
         >
-            <CalendarDialog handleCancel={cancel} isOpen={isOpen}/>
+            <CalendarDialog handleSubmit={handleClose}  handleCancel={cancel} isOpen={isOpen}/>
             <div>
                 <List>
                     <ListItem>
@@ -118,7 +118,7 @@ export default ({library}: drawerProps) => {
                                         <div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>
                                     </Typography>
                                     <Typography variant="h6" style={{color: 'black'}}>
-                                        Schedule next contact date
+                                        Schedule Appointment
                                     </Typography>
                                     <Form onSubmit={handleScheduleNextAppointment}>
                                         <DatePicker/>

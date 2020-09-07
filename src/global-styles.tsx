@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         display: 'flex',
     },
+    longWidth: {
+        minWidth: "23em"
+    },
     muiDrawer: {
         width: drawerWidth,
         flexShrink: 0,
@@ -79,6 +82,15 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
+    },
+    // Sales
+    smallerHeight: {
+        height: "6em"
+    },
+    nextToTextField: {
+        position: "relative",
+        right: "-12em",
+        top: "-4em"
     },
 }));
 

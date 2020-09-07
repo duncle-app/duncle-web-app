@@ -95,8 +95,7 @@ export default function({initialEvents}: any) {
 
     return (
         <div className='demo-app'>
-            {/*Removing the date time dialog for now*/}
-            {/*<DateTimeDialog isOpen={isOpen} handleSubmit={handleSubmit} handleCancel={cancel}/>*/}
+            <DateTimeDialog isOpen={isOpen} handleSubmit={handleSubmit} handleCancel={cancel}/>
             <div className='demo-app-main'>
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

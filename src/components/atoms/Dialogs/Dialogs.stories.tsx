@@ -10,6 +10,7 @@ export default {
 
 export const calendarDialog = () =>
     <CalendarDialog
+        handleSubmit={() => console.log("submitting")}
         isOpen={true}
         handleCancel={() => console.log("closing")}
     />
@@ -18,6 +19,7 @@ export const dateTimeDialog = () => {
     return (
         <MockForm>
             <DateTimeDialog
+                handleSubmit={() => console.log("submitting")}
                 isOpen={true}
                 handleCancel={() => console.log("cancelling")}
             />

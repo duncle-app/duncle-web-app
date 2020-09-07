@@ -12,24 +12,31 @@ interface WrapperProps extends DialogProps {
 
 export interface DialogProps {
     isOpen: boolean
+    handleSubmit(...args: any[]): any
     handleCancel(...args: any[]): any
 }
 
 // make more dynamic - https://dev.to/dmtrkovalenko/the-neatest-way-to-handle-alert-dialogs-in-react-1aoe
-export default ({isOpen, handleCancel, children}: WrapperProps) => {
+export default ({isOpen, handleCancel, handleSubmit, children}: WrapperProps) => {
     return (
         <div>
             <Dialog
                 style={{height: "100%", width: "100%"}}
                 open={isOpen} aria-labelledby="form-dialog-title">
-                <DialogContent>
-                    {children}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCancel} color="secondary">
-                        <strong>Close</strong>
-                    </Button>
-                </DialogActions>
+                <Form onSubmit={handleSubmit}>
+                    <DialogTitle id="form-dialog-title">Schedule New Event</DialogTitle>
+                    <DialogContent>
+                        {children}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCancel} color="secondary">
+                            <strong>Cancel</strong>
+                        </Button>
+                        <Button type="submit" color="primary">
+                            <strong>Save</strong>
+                        </Button>
+                    </DialogActions>
+                </Form>
             </Dialog>
         </div>
     );

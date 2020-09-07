@@ -13,12 +13,13 @@ interface props {
 }
 
 export default function ({formSubmit}: props) {
-    const {paddingTwo} = useStyles()
+    const {paddingTwo, longWidth} = useStyles()
 
     return <Form onSubmit={formSubmit}>
         <Paper className={paddingTwo}>
             <div>
                 <TextArea
+                    className={longWidth}
                     name="New Note"
                     placeholderText="Enter a new note here"
                 />
