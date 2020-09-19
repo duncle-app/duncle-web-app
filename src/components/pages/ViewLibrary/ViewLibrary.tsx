@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import Library from "../../../model/library";
 import ContactDrawer from "../../atoms/ContactDrawer/ContactDrawer";
 import {useHistory, useParams} from "react-router-dom";
@@ -8,17 +8,13 @@ import SalesArea, {addSaleInputProps} from "../../atoms/Sales/SalesArea";
 import Button from "@material-ui/core/Button";
 import NewNote from "../../atoms/Note/NewNote";
 import {GlobalContext} from "../../../common/GlobalContext";
-import {editNote, saveNote} from "../../../services/NoteService";
 import NoteDAO from "../../../model/noteDAO";
 import {NoLibrary} from "../../storybook-mocks/constants";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
 import userDAO from "../../../model/userDAO";
 import {useNotification} from "../../atoms/Snackbar/Snackbar";
 import {dateNowIso} from "../../../utils/dateUtil";
-
-interface LibraryDetailProps {
-    library: Library;
-}
+import {v4 as uuidv4} from "uuid";
 
 interface p {
     libraryId: string;
@@ -31,8 +27,7 @@ function ViewLibrary() {
 
     const [totalSales, setTotalSales] = useState<number>(currentLibrary.totalSales)
     const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale)
-
-    const {saveLibrary} = useLibraryPouch()
+    const {getLibrary, saveLibrary} = useLibraryPouch()
 
     const {setSuccess, setError} = useNotification()
 
@@ -69,6 +64,37 @@ function ViewLibrary() {
         setCurrentLibrary(updatedLibrary)
     }
 
+    async function editNote(library: Library, note: NoteDAO) {
+        library.dateUpdated = dateNowIso()
+        note.dateCreated = dateNowIso()
+
+        library.notes = library.notes.map(n => n.id === note.id ? note : n);
+        console.log("library notes", library.notes)
+
+        return await safeSaveLibrary(library)
+    }
+
+    async function saveNote(library: Library, message: string, author: string): Promise<Library> {
+        library.dateUpdated = dateNowIso()
+        const newSavedNote: NoteDAO = {
+            id: uuidv4(),
+            message,
+            dateCreated: dateNowIso(),
+            author
+        }
+        library.notes.unshift(newSavedNote)
+        return await safeSaveLibrary(library);
+    }
+
+    async function safeSaveLibrary(library: Library) {
+        try {
+            const response = await saveLibrary(library)
+            console.log("response from saving new note", response)
+            return await getLibrary(library._id)
+        } catch (e) {
+            throw new Error(`Error: ${e}`)
+        }
+    }
 
     const handleNoSale = async () => {
         try {
