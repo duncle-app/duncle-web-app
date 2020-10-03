@@ -50,9 +50,9 @@ export default function useAuth() {
             const token = getWithExpiry(TOKEN_ID)
             console.log("current user, context", token)
             if (token === null) {
-                throw new Error(`There is currently no user set. Token value: ${token}`)
+                throw new Error(`There is currently no user set. Token is ${token}`)
             }
-            // todo - get the id, and make a request to the database to get the most updated information.
+            // This just updates the token with the the most updated information.
             const userFromDatabase : userDAO = await fetchUser(token.email)
             if (isEqual(userFromDatabase, token)) {
                 return token

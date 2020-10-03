@@ -134,6 +134,7 @@ export const dummyUserDAO: UserDAO = {
     _id: "dummy",
     _rev: "dummy",
     email: "dummy",
+    username: "dummy",
     password: "dummy",
     firstName: "dummy",
     lastName: "dummy",

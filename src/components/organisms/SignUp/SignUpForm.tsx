@@ -12,9 +12,9 @@ export const SignUpForm = (props: any) => {
     return (
         <>
             <form className={classes.form} onSubmit={handleSubmit}>
+                <EmailTextField fullWidth/>
                 <CustomTextField name="First Name" isRequired/>
                 <CustomTextField name="Last Name" isRequired/>
-                <EmailTextField fullWidth/>
                 <PasswordTextField fullWidth/>
                 <PasswordTextField fieldName="Confirm Password" fullWidth/>
                 <FormSubmitButton DisplayText="Create Account"/>

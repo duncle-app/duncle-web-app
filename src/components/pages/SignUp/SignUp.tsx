@@ -13,7 +13,7 @@ import {GlobalContext} from "../../../common/GlobalContext";
 import UserDAO from "../../../model/userDAO";
 import {useHistory} from "react-router-dom";
 import {useNotification} from "../../atoms/Snackbar/Snackbar";
-import {isEqual} from 'lodash'
+import {isEmpty, isEqual} from 'lodash'
 
 export default function SignUp() {
     const classes = useStyles();
@@ -29,6 +29,8 @@ export default function SignUp() {
             return
         }
         delete newUser.confirmPassword;
+        newUser.username = getUsername(newUser.email)
+
         const response = await loginService.signUpUser(newUser)
         console.log("Response in sign up tsx - should be error", response)
 
@@ -44,6 +46,16 @@ export default function SignUp() {
             await authenticate(newlyCreatedUser)
             history.push('/dashboard')
             setSuccess(`Sign up successful. Welcome ${newUser.firstName}!`)
+        }
+    }
+
+    function getUsername(email: string): string {
+        const regex = /.+?(?=@)/
+        const result: RegExpMatchArray | null = email.match(regex);
+        if (result === null) {
+            throw new Error(`Failed to parse out a username from: ${email}`)
+        } else {
+            return result[0]
         }
     }
 
