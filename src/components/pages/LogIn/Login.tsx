@@ -24,11 +24,10 @@ export default function Login() {
 
     async function submitForm(user: User) {
         try {
-            const returnedUser: UserDAO | Error = await loginService.logInUser(user);
-            console.log("login.tsx is authenticating user:", returnedUser)
-            authenticate(returnedUser)
+            const returnedUser: UserDAO = await loginService.logInUser(user);
+            await authenticate(returnedUser)
             history.push('/dashboard')
-            setSuccess(`Login successful. Welcome ${user.firstName}`)
+            setSuccess(`Login successful. Welcome ${returnedUser.firstName}`)
         } catch (e) {
             setError(e.message)
         }

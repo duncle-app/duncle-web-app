@@ -116,7 +116,8 @@ export function useLibraryPouch(): useLibraryPouchReturn {
     // value.username
     const {getAuthenticatedUser} = useContext(GlobalContext)
 
-    const {localPouch} = usePouch(getAuthenticatedUser().username)
+    const USER_DB_PREFIX = 'user_'
+    const {localPouch} = usePouch(`${USER_DB_PREFIX}${getAuthenticatedUser().username}`)
 
     async function getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>> {
         try {

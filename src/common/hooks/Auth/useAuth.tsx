@@ -38,15 +38,16 @@ export default function useAuth() {
             value: user,
             expiry: now.getTime() + twoHours
         }
-        console.log("adding to local storage:", item)
         localStorage.setItem(TOKEN_ID, JSON.stringify(item))
     }
 
     return {
+        // todo - return a state object containing this, rather than calling the isValidToken function
+        //  everytime to get the state?
+        //  downsides - it re-renders every single time rather than just calling the local storage.
         isAuthenticated: (): boolean => isValidToken(),
         getAuthenticatedUser: (): UserDAO => {
             const token: UserDAO | null = getWithExpiry(TOKEN_ID)
-            console.log("current user, context", token)
             if (token === null) {
                 throw new Error(`There is currently no user set. Token is ${token}`)
             } else {
