@@ -103,8 +103,7 @@ class EnvVariableNotSetError extends Error {
 interface useLibraryPouchReturn {
     getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>>
     getLibrary(libraryId: string): any
-    saveLibrary(library: Library): Promise<PouchDB.Core.Response | Error>
-    addLibrary(library: NewLibrary): Promise<PouchDB.Core.Response | Error>
+    saveLibrary(library: Library | NewLibrary): Promise<Library>
 }
 
 function roundDecimals(library: Library | NewLibrary) {
@@ -135,25 +134,17 @@ export function useLibraryPouch(): useLibraryPouchReturn {
         }
     }
 
-    async function saveLibrary(library: Library): Promise<PouchDB.Core.Response | Error> {
+    async function saveLibrary(library: Library): Promise<Library> {
         try {
             roundDecimals(library);
-            return await localPouch.put(library);
+            const response: PouchDB.Core.Response = await localPouch.put(library);
+            return await localPouch.get(response.id)
         } catch (err) {
             throw new Error(`Failed to save the library: ${err}`)
         }
     }
 
-    async function addLibrary(library: NewLibrary): Promise<PouchDB.Core.Response | Error> {
-        try {
-            roundDecimals(library)
-            return await localPouch.put(library);
-        } catch (err) {
-            throw new Error(`Failed to add the library: ${err}`)
-        }
-    }
-
-    return {getAll, getLibrary, saveLibrary, addLibrary}
+    return {getAll, getLibrary, saveLibrary}
 }
 
 function usePouch(database: string): any {

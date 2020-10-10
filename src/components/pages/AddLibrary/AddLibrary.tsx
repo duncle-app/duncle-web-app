@@ -5,13 +5,23 @@ import NewLibrary from "../../../model/newLibrary";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
 import {dateNowIso} from "../../../utils/dateUtil";
 import {v4 as uuidv4} from 'uuid';
+import {useNotification} from "../../atoms/Snackbar/Snackbar";
+import {useHistory} from "react-router-dom";
 
 export default function AddLibrary() {
-    const {addLibrary} = useLibraryPouch()
+    const {saveLibrary} = useLibraryPouch()
+    const {setSuccess, setError} = useNotification()
+    const history = useHistory();
 
     async function submitForm(library: NewLibrary) {
         const updatedLibrary: NewLibrary = addDefaults(library)
-        await addLibrary(updatedLibrary)
+        try {
+            await saveLibrary(updatedLibrary)
+            setSuccess("Successfully saved library")
+            history.push('/dashboard')
+        } catch (e) {
+            setError(e)
+        }
     }
 
     return (
