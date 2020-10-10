@@ -4,6 +4,8 @@ import UserDAO from "../../model/userDAO";
 import Library from "../../model/library";
 import User from "../../model/user";
 import NewLibrary from "../../model/newLibrary";
+import {useContext} from "react";
+import {GlobalContext} from "../GlobalContext";
 
 export type PouchReturnProps = {
     localDB: PouchDB.Database,
@@ -111,7 +113,10 @@ function roundDecimals(library: Library | NewLibrary) {
 }
 
 export function useLibraryPouch(): useLibraryPouchReturn {
-    const {localPouch} = usePouch('tcrm')
+    // value.username
+    const {getAuthenticatedUser} = useContext(GlobalContext)
+
+    const {localPouch} = usePouch(getAuthenticatedUser().username)
 
     async function getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>> {
         try {

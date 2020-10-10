@@ -10,7 +10,7 @@ describe('Auth hooks - authentication flow tests', () => {
             act(() => {
                 callbackFunction()
             })
-            const authResult = result.current.isAuthenticated()
+            const authResult = result.current.isAuthenticated
             expect(authResult).toBe(expectedResult)
         })
     }

@@ -43,28 +43,16 @@ export default function useAuth() {
     }
 
     return {
-        isAuthenticated: useCallback((): boolean => {
-            return isValidToken();
-        }, []),
-        getAuthenticatedUser: useCallback(async (): Promise<UserDAO | Error> => {
-            const token = getWithExpiry(TOKEN_ID)
+        isAuthenticated: (): boolean => isValidToken(),
+        getAuthenticatedUser: (): UserDAO => {
+            const token: UserDAO | null = getWithExpiry(TOKEN_ID)
             console.log("current user, context", token)
             if (token === null) {
                 throw new Error(`There is currently no user set. Token is ${token}`)
-            }
-            // This just updates the token with the the most updated information.
-            const userFromDatabase : userDAO = await fetchUser(token.email)
-            if (isEqual(userFromDatabase, token)) {
-                return token
             } else {
-                setUserToken(userFromDatabase)
-                return userFromDatabase
+                return token
             }
-
-            // todo - just UPDATE the value object on the localstorage object authCredentials
-            // todo - check if there's a mismatch, to avoid making an extra request.
-
-        }, []),
+        },
         authenticate: useCallback((user: UserDAO) => {
             setUserToken(user);
         }, []),
