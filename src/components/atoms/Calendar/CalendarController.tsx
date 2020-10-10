@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Calendar from "./Calendar";
 import UserDAO from "../../../model/userDAO";
 import {GlobalContext} from "../../../common/GlobalContext";
@@ -9,21 +9,24 @@ export default function () {
     const [events, setEvents] = React.useState(INITIAL_EVENT_STATE)
     const {getAuthenticatedUser} = useContext(GlobalContext)
 
-    React.useEffect(() => {
-        getAuthenticatedUser()
-            .then((user: UserDAO) => {
-                console.log("All events", user.events)
-                const filteredEvents = user.events.map(({id, title, start, end}: event) => (
-                    {id, title, start, end})
-                )
+    useEffect(() => {
+        const user = getAuthenticatedUser()
+        const u2 = getAuthenticatedUser
 
-                if (filteredEvents !== null) {
-                    // @ts-ignore
-                    setEvents(filteredEvents)
-                } else {
-                    console.log("No events were present")
-                }
-            })
+        console.log({user})
+        console.log({u2})
+
+        console.log("All events", user.events)
+        const filteredEvents = user.events.map(({id, title, start, end}: event) => (
+            {id, title, start, end})
+        )
+
+        if (filteredEvents !== null) {
+            // @ts-ignore
+            setEvents(filteredEvents)
+        } else {
+            console.log("No events were present")
+        }
 
     }, [])
     return (
