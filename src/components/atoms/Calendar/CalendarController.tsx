@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react'
 import Calendar from "./Calendar";
-import UserDAO from "../../../model/userDAO";
 import {GlobalContext} from "../../../common/GlobalContext";
 import event from "../../../model/event";
 
@@ -11,12 +10,7 @@ export default function () {
 
     useEffect(() => {
         const user = getAuthenticatedUser()
-        const u2 = getAuthenticatedUser
 
-        console.log({user})
-        console.log({u2})
-
-        console.log("All events", user.events)
         const filteredEvents = user.events.map(({id, title, start, end}: event) => (
             {id, title, start, end})
         )

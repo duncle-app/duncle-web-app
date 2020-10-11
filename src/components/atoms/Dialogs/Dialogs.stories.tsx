@@ -15,7 +15,7 @@ export const calendarDialog = () =>
         handleCancel={() => console.log("closing")}
     />
 
-export const dateTimeDialog = () => {
+export const scheduleAppointmentDialog = () => {
     return (
         <MockForm>
             <DateTimeDialog

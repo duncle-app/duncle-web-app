@@ -9,6 +9,10 @@ export default {
 
 export const withProps = () =>
     <MockForm>
-        <DatePicker/>
-        <DefaultButton type="submit">Submit</DefaultButton>
+        <div>
+            <DatePicker/>
+        </div>
+        <div>
+            <DefaultButton type="submit">Submit</DefaultButton>
+        </div>
     </MockForm>
