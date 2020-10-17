@@ -10,11 +10,9 @@ import CalendarDialog from "../Dialogs/CalendarDialog";
 import {cloneDeep, isEmpty, isEqual} from "lodash";
 import {readableDate} from "../../../utils/dateUtil";
 import Typography from "@material-ui/core/Typography";
-import DatePicker from "../DatePicker/DatePicker";
 import {useNotification} from "../Snackbar/Snackbar";
-import DefaultButton from "../Button/DefaultButton";
-import Form from "../../../common/Form";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
+import ScheduleNext from "../../molecules/ScheduleNext";
 
 interface drawerProps {
     library: Library;
@@ -34,7 +32,7 @@ export default ({library}: drawerProps) => {
 
     // todo - this logic is duplicated from EditLibraryController
     // @ts-ignore
-    const handleScheduleNextAppointment = async ({nextAppointment}) => {
+    const handleScheduleNextContact = async ({nextAppointment}) => {
         try {
             const copy = cloneDeep(library)
             library.dateNextContact = nextAppointment
@@ -52,6 +50,10 @@ export default ({library}: drawerProps) => {
         } catch (e) {
             setError(`${e}`)
         }
+    }
+
+    const handleScheduleNextAppointment = () => {
+        alert("Gotta save off the user")
     }
 
     const handleClose = () => {
@@ -124,31 +126,22 @@ export default ({library}: drawerProps) => {
                                         />
                                     </div>
                                     <div className={paddingTop}>
-                                        <Typography variant="body1">
+                                        <Typography variant="h6">
                                             <div className={black}>Next Appointment:</div>
                                             {/*@ts-ignore - we're checking for undefined using isEmpty*/}
                                             {/*<div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>*/}
                                             <div>Put next appt here</div>
                                         </Typography>
                                     </div>
+                                    <ScheduleNext title="Schedule Appointment" handleSubmit={handleScheduleNextAppointment}/>
                                     <div className={paddingTop}>
-                                        <Typography variant="body1">
+                                        <Typography variant="h6">
                                             <div className={black}>Next Contact:</div>
                                             {/*@ts-ignore - we're checking for undefined using isEmpty*/}
                                             <div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>
                                         </Typography>
                                     </div>
-                                    <div className={paddingTop}>
-                                        <Typography variant="h6" style={{color: 'black'}}>
-                                            Schedule Appointment
-                                        </Typography>
-                                        <Form onSubmit={handleScheduleNextAppointment}>
-                                            <DatePicker/>
-                                            <DefaultButton type="submit">
-                                                Schedule
-                                            </DefaultButton>
-                                        </Form>
-                                    </div>
+                                    <ScheduleNext title="Schedule Next Contact" handleSubmit={handleScheduleNextContact}/>
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
