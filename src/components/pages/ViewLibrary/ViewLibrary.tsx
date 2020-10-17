@@ -15,6 +15,7 @@ import userDAO from "../../../model/userDAO";
 import {useNotification} from "../../atoms/Snackbar/Snackbar";
 import {dateNowIso} from "../../../utils/dateUtil";
 import {v4 as uuidv4} from "uuid";
+import {Grid} from "@material-ui/core";
 
 interface p {
     libraryId: string;
@@ -146,12 +147,19 @@ function ViewLibrary() {
             </div>
             <ContactDrawer library={currentLibrary}/>
             <main className={content}>
-                <div className={paddingOne}>
-                    <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale} handleNoSale={handleNoSale}/>
-                </div>
-                <div className={paddingOne}>
-                    <NewNote formSubmit={submitNewNote}/>
-                </div>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <div className={paddingOne}>
+                            <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale}
+                                       handleNoSale={handleNoSale}/>
+                        </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <div className={paddingOne}>
+                            <NewNote formSubmit={submitNewNote}/>
+                        </div>
+                    </Grid>
+                </Grid>
                 <NoteList notes={currentLibrary.notes} SubmitForm={submitNewEditableNote}/>
             </main>
         </div>
