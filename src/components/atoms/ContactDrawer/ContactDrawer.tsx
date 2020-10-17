@@ -92,6 +92,7 @@ export default ({library}: drawerProps) => {
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
+                            secondaryTypographyProps={{variant: "h6"}}
                         />
                     </ListItem>
                     <ListItem>
@@ -105,6 +106,7 @@ export default ({library}: drawerProps) => {
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
+                            secondaryTypographyProps={{variant: "h6"}}
                         />
                     </ListItem>
                     <Divider/>
