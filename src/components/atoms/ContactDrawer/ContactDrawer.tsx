@@ -22,7 +22,7 @@ interface drawerProps {
 
 export default ({library}: drawerProps) => {
     const {libraryName, city, state, street, zip, email, librarian, phoneNumber, assistant, dateNextContact} = library
-    const {muiDrawer, drawerPaper, calendarIcon} = useStyles()
+    const {black, muiDrawer, drawerPaper, calendarIcon, paddingTop} = useStyles()
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [nextContactDate, setNextContactDate] = useState<string | undefined>(dateNextContact)
     const [selectedDates] = useState<DateSelectArg>()
@@ -79,7 +79,7 @@ export default ({library}: drawerProps) => {
                 paper: drawerPaper,
             }}
         >
-            <CalendarDialog handleSubmit={handleClose}  handleCancel={cancel} isOpen={isOpen}/>
+            <CalendarDialog handleSubmit={handleClose} handleCancel={cancel} isOpen={isOpen}/>
             <div>
                 <List>
                     <ListItem>
@@ -110,36 +110,46 @@ export default ({library}: drawerProps) => {
                     <Divider/>
                     <ListItem>
                         <ListItemText
-                            primary="Contact Dates"
                             secondary={
                                 <>
-                                    <Typography variant="body1">
-                                        <div>Next Contact Date:</div>
-                                        {/*@ts-ignore - we're checking for undefined using isEmpty*/}
-                                        <div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>
-                                    </Typography>
-                                    <Typography variant="h6" style={{color: 'black'}}>
-                                        Schedule Appointment
-                                    </Typography>
-                                    <Form onSubmit={handleScheduleNextAppointment}>
-                                        <DatePicker/>
-                                        <DefaultButton type="submit">
-                                            Schedule
-                                        </DefaultButton>
-                                    </Form>
+                                    <div className={black}>
+                                        <Typography variant="h6">
+                                            View Calendar
+                                        </Typography>
+                                        <EventNote
+                                            className={`${calendarIcon} ${black}`}
+                                            onClick={() => setIsOpen(true)}
+                                        />
+                                    </div>
+                                    <div className={paddingTop}>
+                                        <Typography variant="body1">
+                                            <div className={black}>Next Appointment:</div>
+                                            {/*@ts-ignore - we're checking for undefined using isEmpty*/}
+                                            {/*<div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>*/}
+                                            <div>Put next appt here</div>
+                                        </Typography>
+                                    </div>
+                                    <div className={paddingTop}>
+                                        <Typography variant="body1">
+                                            <div className={black}>Next Contact:</div>
+                                            {/*@ts-ignore - we're checking for undefined using isEmpty*/}
+                                            <div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>
+                                        </Typography>
+                                    </div>
+                                    <div className={paddingTop}>
+                                        <Typography variant="h6" style={{color: 'black'}}>
+                                            Schedule Appointment
+                                        </Typography>
+                                        <Form onSubmit={handleScheduleNextAppointment}>
+                                            <DatePicker/>
+                                            <DefaultButton type="submit">
+                                                Schedule
+                                            </DefaultButton>
+                                        </Form>
+                                    </div>
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <ListItemText
-                            primary="View Calendar"
-                            primaryTypographyProps={{variant: "h6"}}
-                        />
-                        <EventNote
-                            className={calendarIcon}
-                            onClick={() => setIsOpen(true)}
                         />
                     </ListItem>
                 </List>

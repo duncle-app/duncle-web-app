@@ -6,6 +6,9 @@ const useStyles = makeStyles((theme) => ({
     appHeader: {
         flexGrow: 1,
     },
+    black: {
+        color: 'black'
+    },
     calendarIcon: {
         height: '2em',
         width: '2em',
@@ -59,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
     },
     paddingTopTiny: {
         paddingTop: theme.spacing(.5)
+    },
+    paddingTop: {
+        paddingTop: theme.spacing(1)
     },
     paper: {
         marginTop: theme.spacing(8),
