@@ -71,7 +71,7 @@ function ViewLibrary() {
         library.notes = library.notes.map(n => n.id === note.id ? note : n);
         console.log("library notes", library.notes)
 
-        return await safeSaveLibrary(library)
+        return await saveLibrary(library)
     }
 
     async function saveNote(library: Library, message: string, author: string): Promise<Library> {
@@ -83,17 +83,7 @@ function ViewLibrary() {
             author
         }
         library.notes.unshift(newSavedNote)
-        return await safeSaveLibrary(library);
-    }
-
-    async function safeSaveLibrary(library: Library) {
-        try {
-            const response = await saveLibrary(library)
-            console.log("response from saving new note", response)
-            return await getLibrary(library._id)
-        } catch (e) {
-            throw new Error(`Error: ${e}`)
-        }
+        return await saveLibrary(library);
     }
 
     const handleNoSale = async () => {

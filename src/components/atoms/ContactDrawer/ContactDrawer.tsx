@@ -35,22 +35,22 @@ export default ({library}: drawerProps) => {
     // todo - this logic is duplicated from EditLibraryController
     // @ts-ignore
     const handleScheduleNextAppointment = async ({nextAppointment}) => {
-        // this contains a subset of the props, and just save those to the new object
         try {
             const copy = cloneDeep(library)
             library.dateNextContact = nextAppointment
 
             if (!isEqual(copy, library)) {
-                // @ts-ignore
-                const {rev} = await saveLibrary(library);
-                library._rev = rev
+                const {_rev} = await saveLibrary(library);
+                // grab the latest revision from the newly saved library
+                // otherwise you'll be writing on an old revision
+                library._rev = _rev
                 setNextContactDate(nextAppointment)
                 setSuccess('Successfully saved library')
             } else {
                 setInfo('No updates were made, contents were identical')
             }
         } catch (e) {
-            setError(e)
+            setError(`${e}`)
         }
     }
 

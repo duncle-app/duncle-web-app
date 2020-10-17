@@ -6,6 +6,7 @@ import User from "../../model/user";
 import NewLibrary from "../../model/newLibrary";
 import {useContext} from "react";
 import {GlobalContext} from "../GlobalContext";
+import { isEmpty } from "lodash";
 
 export type PouchReturnProps = {
     localDB: PouchDB.Database,
@@ -135,6 +136,12 @@ export function useLibraryPouch(): useLibraryPouchReturn {
     }
 
     async function saveLibrary(library: Library): Promise<Library> {
+        if (isEmpty(library._rev) || library._rev === "norev") {
+            throw new Error(`Error code: NO_REV. _rev is undefined. Cannot save library`)
+        }
+        if (isEmpty(library._id) || library._id === "noid") {
+            throw new Error(`Error code: NO_ID. _id is undefined. Cannot save library`)
+        }
         try {
             roundDecimals(library);
             const response: PouchDB.Core.Response = await localPouch.put(library);

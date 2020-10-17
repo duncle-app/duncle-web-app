@@ -9,7 +9,7 @@ export function isIsoDate(str: string): boolean {
 
 export function readableDate(date: string): string {
     if (isIsoDate(date)) {
-        return moment(date).format("MMMM Do, H:mm")
+        return moment(date).format("MMMM Do, hh:mm a")
     } else {
         console.error(`The provided string ${date} is not in ISO format. Pass in an ISO string`)
         return date
