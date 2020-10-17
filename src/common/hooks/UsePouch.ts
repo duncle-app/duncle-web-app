@@ -137,10 +137,10 @@ export function useLibraryPouch(): useLibraryPouchReturn {
 
     async function saveLibrary(library: Library): Promise<Library> {
         if (isEmpty(library._rev) || library._rev === "norev") {
-            throw new Error(`Error code: NO_REV. _rev is undefined. Cannot save library`)
+            throw new Error(`Error code: 53. _rev is undefined. Cannot save library`)
         }
         if (isEmpty(library._id) || library._id === "noid") {
-            throw new Error(`Error code: NO_ID. _id is undefined. Cannot save library`)
+            throw new Error(`Error code: 51. _id is undefined. Cannot save library`)
         }
         try {
             roundDecimals(library);

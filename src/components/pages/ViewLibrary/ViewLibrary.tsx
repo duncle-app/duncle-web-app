@@ -87,7 +87,10 @@ function ViewLibrary() {
         return await saveLibrary(library);
     }
 
-    const handleNoSale = async () => {
+    /**
+     * Just logs the date to contacted, and nothing else
+     */
+    const handleContactedToday = async () => {
         try {
             currentLibrary.dateLastContact = dateNowIso()
             // @ts-ignore
@@ -122,21 +125,16 @@ function ViewLibrary() {
         currentLibrary.totalSales = withNewSale
 
         try {
-            console.log("currentLibrary.rev before", currentLibrary._rev)
-            // @ts-ignore todo - fix this stinkin type bug
-            const {rev} = await saveLibrary(currentLibrary);
-            console.log("currentLibrary.rev after", currentLibrary._rev)
-            currentLibrary._rev = rev
+            const {_rev} = await saveLibrary(currentLibrary);
+            currentLibrary._rev = _rev
             setlastSale(currentLibrary.lastSale)
             setTotalSales(currentLibrary.totalSales)
+            setSuccess(`Success! The total after S&H is ${withShippingAndHandling}`)
         } catch (e) {
-            console.log("Failed to add the new sale", e)
-            // do snackbar here, error
+            setError(`Failed to add the new sale ${e}`)
         }
 
-        // todo - confirmation dialog for what the sale is
-
-        // todo - add "undo last sale" button
+        // todo - add "undo last sale" button?
     }
 
     return (
@@ -151,7 +149,7 @@ function ViewLibrary() {
                     <Grid item xs={6}>
                         <div className={paddingOne}>
                             <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale}
-                                       handleNoSale={handleNoSale}/>
+                                       handleNoSale={handleContactedToday}/>
                         </div>
                     </Grid>
                     <Grid item xs={6}>

@@ -12,10 +12,10 @@ type NoteListProps = {
 export default function ({notes, SubmitForm}: NoteListProps) {
     const {paddingOne} = useStyles()
     return (
-        <Grid container>
+        <Grid container justify="center">
             {notes &&
             notes.map((props: NoteDAO, index: number) =>
-                <Grid item xs={6}>
+                <Grid item xs={7}>
                     <div key={index} className={paddingOne}>
                         {/* @ts-ignore */}
                         <EditableNote SubmitForm={SubmitForm} {...props}/>
