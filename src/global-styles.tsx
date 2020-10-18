@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     center: {
         textAlign: 'center'
     },
-    closeInput: {
+    paddingRight: {
         paddingRight: "1em"
     },
     content: {

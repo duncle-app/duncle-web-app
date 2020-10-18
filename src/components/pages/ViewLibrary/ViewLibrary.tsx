@@ -16,6 +16,7 @@ import {useNotification} from "../../atoms/Snackbar/Snackbar";
 import {dateNowIso} from "../../../utils/dateUtil";
 import {v4 as uuidv4} from "uuid";
 import {Grid} from "@material-ui/core";
+import DefaultButton from "../../atoms/Button/DefaultButton";
 
 interface p {
     libraryId: string;
@@ -24,7 +25,7 @@ interface p {
 function ViewLibrary() {
     // todo - consult with aaron, there's probably a better way to do this
     const {currentLibrary, setCurrentLibrary, getAuthenticatedUser} = useContext(GlobalContext)
-    const {content, alignToDrawer, paddingOne, paddingTopTiny} = useStyles()
+    const {content, alignToDrawer, paddingOne, paddingTopTiny, paddingRight} = useStyles()
 
     const [totalSales, setTotalSales] = useState<number>(currentLibrary.totalSales)
     const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale)
@@ -140,8 +141,8 @@ function ViewLibrary() {
     return (
         <div className={alignToDrawer}>
             <div className={paddingTopTiny}>
-                <Button variant='outlined' onClick={onBack}>Back</Button>
-                <Button variant='outlined' onClick={() => onEdit(currentLibrary)}>Edit</Button>
+                <DefaultButton onClick={onBack}>Back</DefaultButton>
+                <DefaultButton onClick={() => onEdit(currentLibrary)}>Edit</DefaultButton>
             </div>
             <ContactDrawer library={currentLibrary}/>
             <main className={content}>
