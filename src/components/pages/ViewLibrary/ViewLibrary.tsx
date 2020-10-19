@@ -15,6 +15,8 @@ import userDAO from "../../../model/userDAO";
 import {useNotification} from "../../atoms/Snackbar/Snackbar";
 import {dateNowIso} from "../../../utils/dateUtil";
 import {v4 as uuidv4} from "uuid";
+import {Grid} from "@material-ui/core";
+import DefaultButton from "../../atoms/Button/DefaultButton";
 
 interface p {
     libraryId: string;
@@ -23,7 +25,7 @@ interface p {
 function ViewLibrary() {
     // todo - consult with aaron, there's probably a better way to do this
     const {currentLibrary, setCurrentLibrary, getAuthenticatedUser} = useContext(GlobalContext)
-    const {content, alignToDrawer, paddingOne, paddingTopTiny} = useStyles()
+    const {content, alignToDrawer, paddingOne, paddingTopTiny, paddingRight} = useStyles()
 
     const [totalSales, setTotalSales] = useState<number>(currentLibrary.totalSales)
     const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale)
@@ -71,7 +73,7 @@ function ViewLibrary() {
         library.notes = library.notes.map(n => n.id === note.id ? note : n);
         console.log("library notes", library.notes)
 
-        return await safeSaveLibrary(library)
+        return await saveLibrary(library)
     }
 
     async function saveNote(library: Library, message: string, author: string): Promise<Library> {
@@ -83,20 +85,13 @@ function ViewLibrary() {
             author
         }
         library.notes.unshift(newSavedNote)
-        return await safeSaveLibrary(library);
+        return await saveLibrary(library);
     }
 
-    async function safeSaveLibrary(library: Library) {
-        try {
-            const response = await saveLibrary(library)
-            console.log("response from saving new note", response)
-            return await getLibrary(library._id)
-        } catch (e) {
-            throw new Error(`Error: ${e}`)
-        }
-    }
-
-    const handleNoSale = async () => {
+    /**
+     * Just logs the date to contacted, and nothing else
+     */
+    const handleContactedToday = async () => {
         try {
             currentLibrary.dateLastContact = dateNowIso()
             // @ts-ignore
@@ -131,37 +126,39 @@ function ViewLibrary() {
         currentLibrary.totalSales = withNewSale
 
         try {
-            console.log("currentLibrary.rev before", currentLibrary._rev)
-            // @ts-ignore todo - fix this stinkin type bug
-            const {rev} = await saveLibrary(currentLibrary);
-            console.log("currentLibrary.rev after", currentLibrary._rev)
-            currentLibrary._rev = rev
+            const {_rev} = await saveLibrary(currentLibrary);
+            currentLibrary._rev = _rev
             setlastSale(currentLibrary.lastSale)
             setTotalSales(currentLibrary.totalSales)
+            setSuccess(`Success! The total after S&H is ${withShippingAndHandling}`)
         } catch (e) {
-            console.log("Failed to add the new sale", e)
-            // do snackbar here, error
+            setError(`Failed to add the new sale ${e}`)
         }
 
-        // todo - confirmation dialog for what the sale is
-
-        // todo - add "undo last sale" button
+        // todo - add "undo last sale" button?
     }
 
     return (
         <div className={alignToDrawer}>
             <div className={paddingTopTiny}>
-                <Button variant='outlined' onClick={onBack}>Back</Button>
-                <Button variant='outlined' onClick={() => onEdit(currentLibrary)}>Edit</Button>
+                <DefaultButton onClick={onBack}>Back</DefaultButton>
+                <DefaultButton onClick={() => onEdit(currentLibrary)}>Edit</DefaultButton>
             </div>
             <ContactDrawer library={currentLibrary}/>
             <main className={content}>
-                <div className={paddingOne}>
-                    <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale} handleNoSale={handleNoSale}/>
-                </div>
-                <div className={paddingOne}>
-                    <NewNote formSubmit={submitNewNote}/>
-                </div>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <div className={paddingOne}>
+                            <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale}
+                                       handleNoSale={handleContactedToday}/>
+                        </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <div className={paddingOne}>
+                            <NewNote formSubmit={submitNewNote}/>
+                        </div>
+                    </Grid>
+                </Grid>
                 <NoteList notes={currentLibrary.notes} SubmitForm={submitNewEditableNote}/>
             </main>
         </div>

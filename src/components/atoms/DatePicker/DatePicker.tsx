@@ -3,7 +3,8 @@ import moment from "moment";
 import {Field, FieldInputProps} from "react-final-form";
 import camelize from "../../../utils/camelize";
 import {DateTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import DateFnsUtils from '@date-io/moment';
+import {dateNowIso} from "../../../utils/dateUtil";
 
 interface OldDatePickerReturn {
     nextAppointment: string
@@ -12,7 +13,7 @@ interface OldDatePickerReturn {
 export default function () {
     const label = "Next appointment"
     const camelizedName: string = camelize(label);
-    const defaultDate = moment().format('yyyy-MM-DD[T]HH:mm:ss');
+    const defaultDate = dateNowIso();
 
     return (
         // We need to set the initial value of the Field so FF
@@ -23,12 +24,17 @@ export default function () {
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         {/*@ ts-ignore */}
                         <DateTimePicker
-                            onChange={props.input.onChange}
+                            onChange={(momentDate) => {
+                                if (momentDate !== null) {
+                                    props.input.onChange(momentDate.format())
+                                }
+                            }}
                             defaultValue={defaultDate}
                             name={props.input.label}
                             // thank you mui-rff
                             // https://github.com/lookfirst/mui-rff/blob/master/src/DateTimePicker.tsx
                             value={props.input.value}
+                            disablePast
                             autoOk
                         />
                     </MuiPickersUtilsProvider>

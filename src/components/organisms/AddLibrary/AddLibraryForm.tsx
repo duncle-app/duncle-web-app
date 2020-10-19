@@ -7,7 +7,7 @@ import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
 
 export default function (props: any) {
     const {handleSubmit} = props;
-    const {closeInput, form} = useStyles();
+    const {paddingRight, form} = useStyles();
     const isRequired: boolean = true;
 
     const librarianFields = [
@@ -36,7 +36,7 @@ export default function (props: any) {
                 {
                     librarianFields.map(
                         ({label, isRequired}) =>
-                            <Grid item xs={3} className={closeInput}>
+                            <Grid item xs={3} className={paddingRight}>
                                 <CustomTextField key={label} name={label} isRequired={isRequired}/>
                             </Grid>
                     )

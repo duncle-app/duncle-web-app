@@ -10,11 +10,9 @@ import CalendarDialog from "../Dialogs/CalendarDialog";
 import {cloneDeep, isEmpty, isEqual} from "lodash";
 import {readableDate} from "../../../utils/dateUtil";
 import Typography from "@material-ui/core/Typography";
-import DatePicker from "../DatePicker/DatePicker";
 import {useNotification} from "../Snackbar/Snackbar";
-import DefaultButton from "../Button/DefaultButton";
-import Form from "../../../common/Form";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
+import ScheduleNext from "../../molecules/ScheduleNext";
 
 interface drawerProps {
     library: Library;
@@ -22,7 +20,7 @@ interface drawerProps {
 
 export default ({library}: drawerProps) => {
     const {libraryName, city, state, street, zip, email, librarian, phoneNumber, assistant, dateNextContact} = library
-    const {muiDrawer, drawerPaper, calendarIcon} = useStyles()
+    const {black, muiDrawer, drawerPaper, calendarIcon, paddingTop} = useStyles()
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [nextContactDate, setNextContactDate] = useState<string | undefined>(dateNextContact)
     const [selectedDates] = useState<DateSelectArg>()
@@ -34,24 +32,28 @@ export default ({library}: drawerProps) => {
 
     // todo - this logic is duplicated from EditLibraryController
     // @ts-ignore
-    const handleScheduleNextAppointment = async ({nextAppointment}) => {
-        // this contains a subset of the props, and just save those to the new object
+    const handleScheduleNextContact = async ({nextAppointment}) => {
         try {
             const copy = cloneDeep(library)
             library.dateNextContact = nextAppointment
 
             if (!isEqual(copy, library)) {
-                // @ts-ignore
-                const {rev} = await saveLibrary(library);
-                library._rev = rev
+                const {_rev} = await saveLibrary(library);
+                // grab the latest revision from the newly saved library
+                // otherwise you'll be writing on an old revision
+                library._rev = _rev
                 setNextContactDate(nextAppointment)
                 setSuccess('Successfully saved library')
             } else {
                 setInfo('No updates were made, contents were identical')
             }
         } catch (e) {
-            setError(e)
+            setError(`${e}`)
         }
+    }
+
+    const handleScheduleNextAppointment = () => {
+        alert("Gotta save off the user")
     }
 
     const handleClose = () => {
@@ -79,7 +81,7 @@ export default ({library}: drawerProps) => {
                 paper: drawerPaper,
             }}
         >
-            <CalendarDialog handleSubmit={handleClose}  handleCancel={cancel} isOpen={isOpen}/>
+            <CalendarDialog handleSubmit={handleClose} handleCancel={cancel} isOpen={isOpen}/>
             <div>
                 <List>
                     <ListItem>
@@ -92,6 +94,7 @@ export default ({library}: drawerProps) => {
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
+                            secondaryTypographyProps={{variant: "h6"}}
                         />
                     </ListItem>
                     <ListItem>
@@ -105,41 +108,43 @@ export default ({library}: drawerProps) => {
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
+                            secondaryTypographyProps={{variant: "h6"}}
                         />
                     </ListItem>
                     <Divider/>
                     <ListItem>
                         <ListItemText
-                            primary="Contact Dates"
                             secondary={
                                 <>
-                                    <Typography variant="body1">
-                                        <div>Next Contact Date:</div>
-                                        {/*@ts-ignore - we're checking for undefined using isEmpty*/}
-                                        <div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>
-                                    </Typography>
-                                    <Typography variant="h6" style={{color: 'black'}}>
-                                        Schedule Appointment
-                                    </Typography>
-                                    <Form onSubmit={handleScheduleNextAppointment}>
-                                        <DatePicker/>
-                                        <DefaultButton type="submit">
-                                            Schedule
-                                        </DefaultButton>
-                                    </Form>
+                                    <div className={black}>
+                                        <Typography variant="h6">
+                                            View Calendar
+                                        </Typography>
+                                        <EventNote
+                                            className={`${calendarIcon} ${black}`}
+                                            onClick={() => setIsOpen(true)}
+                                        />
+                                    </div>
+                                    <div className={paddingTop}>
+                                        <Typography variant="h6">
+                                            <div className={black}>Next Appointment:</div>
+                                            {/*@ts-ignore - we're checking for undefined using isEmpty*/}
+                                            {/*<div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>*/}
+                                            <div>Put next appt here</div>
+                                        </Typography>
+                                    </div>
+                                    <ScheduleNext title="Schedule Appointment" handleSubmit={handleScheduleNextAppointment}/>
+                                    <div className={paddingTop}>
+                                        <Typography variant="h6">
+                                            <div className={black}>Next Contact:</div>
+                                            {/*@ts-ignore - we're checking for undefined using isEmpty*/}
+                                            <div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>
+                                        </Typography>
+                                    </div>
+                                    <ScheduleNext title="Schedule Next Contact" handleSubmit={handleScheduleNextContact}/>
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <ListItemText
-                            primary="View Calendar"
-                            primaryTypographyProps={{variant: "h6"}}
-                        />
-                        <EventNote
-                            className={calendarIcon}
-                            onClick={() => setIsOpen(true)}
                         />
                     </ListItem>
                 </List>

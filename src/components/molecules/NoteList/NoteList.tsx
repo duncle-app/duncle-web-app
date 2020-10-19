@@ -2,6 +2,7 @@ import React from 'react'
 import EditableNote from "../../atoms/Note/EditableNote";
 import useStyles from "../../../global-styles";
 import NoteDAO from "../../../model/noteDAO";
+import {Grid} from "@material-ui/core";
 
 type NoteListProps = {
     notes: NoteDAO[];
@@ -9,17 +10,19 @@ type NoteListProps = {
 }
 
 export default function ({notes, SubmitForm}: NoteListProps) {
-    const {padBottom} = useStyles()
+    const {paddingOne} = useStyles()
     return (
-        <>
-            {!!notes &&
+        <Grid container justify="center">
+            {notes &&
             notes.map((props: NoteDAO, index: number) =>
-                <div key={index} className={padBottom}>
-                    {/* @ts-ignore */}
-                    <EditableNote SubmitForm={SubmitForm} {...props}/>
-                </div>
+                <Grid item xs={7}>
+                    <div key={index} className={paddingOne}>
+                        {/* @ts-ignore */}
+                        <EditableNote SubmitForm={SubmitForm} {...props}/>
+                    </div>
+                </Grid>
             )
             }
-        </>
+        </Grid>
     )
 }
