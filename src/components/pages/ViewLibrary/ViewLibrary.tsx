@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import Library from "../../../model/library";
-import ContactDrawer from "../../atoms/ContactDrawer/ContactDrawer";
+import ContactDrawer from "../../organisms/ContactDrawer/ContactDrawer";
 import {useHistory, useParams} from "react-router-dom";
 import NoteList from "../../molecules/NoteList/NoteList";
 import useStyles from "../../../global-styles";
