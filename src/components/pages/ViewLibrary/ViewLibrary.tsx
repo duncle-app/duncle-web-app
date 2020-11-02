@@ -144,7 +144,7 @@ function ViewLibrary() {
                 <DefaultButton onClick={onBack}>Back</DefaultButton>
                 <DefaultButton onClick={() => onEdit(currentLibrary)}>Edit</DefaultButton>
             </div>
-            <ContactDrawer library={currentLibrary}/>
+            <ContactDrawer library={currentLibrary} handleScheduleNextAppointment={() => alert("todo")}/>
             <main className={content}>
                 <Grid container>
                     <Grid item xs={6}>

@@ -9,14 +9,14 @@ import {useNotification} from "../../atoms/Snackbar/Snackbar";
 import {useHistory} from "react-router-dom";
 
 export default function AddLibrary() {
-    const {saveLibrary} = useLibraryPouch()
+    const {addNewLibrary} = useLibraryPouch()
     const {setSuccess, setError} = useNotification()
     const history = useHistory();
 
     async function submitForm(library: NewLibrary) {
         const updatedLibrary: NewLibrary = addDefaults(library)
         try {
-            await saveLibrary(updatedLibrary)
+            await addNewLibrary(updatedLibrary)
             setSuccess("Successfully saved library")
             history.push('/dashboard')
         } catch (e) {
