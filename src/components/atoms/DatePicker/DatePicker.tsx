@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from "moment";
 import {Field, FieldInputProps} from "react-final-form";
 import camelize from "../../../utils/camelize";
 import {DateTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
@@ -24,6 +23,7 @@ export default function () {
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         {/*@ ts-ignore */}
                         <DateTimePicker
+                            style={{minWidth: "200px"}}
                             onChange={(momentDate) => {
                                 if (momentDate !== null) {
                                     props.input.onChange(momentDate.format())

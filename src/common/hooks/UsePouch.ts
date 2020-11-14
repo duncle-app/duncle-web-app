@@ -16,7 +16,7 @@ export type PouchReturnProps = {
 
 export interface UseUserReturnProps {
     addUser(props : User) : Promise<PouchDB.Core.Response | Error>
-    updateUser(props : UserDAO) : Promise<PouchDB.Core.Response | Error>
+    updateUser(props : UserDAO) : Promise<PouchDB.Core.Response>
     localPouch: any
     fetchUser(props: any): any
 }
@@ -59,7 +59,7 @@ export function useUserPouch() : UseUserReturnProps {
         }
     }
 
-    async function updateUser(props: UserDAO): Promise<PouchDB.Core.Response | Error> {
+    async function updateUser(props: UserDAO): Promise<PouchDB.Core.Response> {
         try {
             return await localPouch.put(props)
         } catch (err) {
@@ -104,7 +104,8 @@ class EnvVariableNotSetError extends Error {
 interface useLibraryPouchReturn {
     getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>>
     getLibrary(libraryId: string): any
-    saveLibrary(library: Library | NewLibrary): Promise<Library>
+    saveLibrary(library: Library ): Promise<Library>
+    addNewLibrary(library:  NewLibrary): Promise<Library>
 }
 
 function roundDecimals(library: Library | NewLibrary) {
@@ -151,7 +152,17 @@ export function useLibraryPouch(): useLibraryPouchReturn {
         }
     }
 
-    return {getAll, getLibrary, saveLibrary}
+    async function addNewLibrary(library: NewLibrary): Promise<Library> {
+        try {
+            roundDecimals(library);
+            const response: PouchDB.Core.Response = await localPouch.put(library);
+            return await localPouch.get(response.id)
+        } catch (err) {
+            throw new Error(`Failed to save the library: ${err}`)
+        }
+    }
+
+    return {getAll, getLibrary, saveLibrary, addNewLibrary}
 }
 
 function usePouch(database: string): any {

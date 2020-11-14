@@ -4,21 +4,24 @@ import Library from "../../../model/library";
 import {Divider, List, ListItem, ListItemText} from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import EventNote from "@material-ui/icons/EventNote";
-import {createEventId} from "../Calendar/utils";
+import {createEventId} from "../../atoms/Calendar/utils";
 import {DateSelectArg} from "@fullcalendar/react";
-import CalendarDialog from "../Dialogs/CalendarDialog";
+import CalendarDialog from "../../atoms/Dialogs/CalendarDialog";
 import {cloneDeep, isEmpty, isEqual} from "lodash";
 import {readableDate} from "../../../utils/dateUtil";
 import Typography from "@material-ui/core/Typography";
-import {useNotification} from "../Snackbar/Snackbar";
+import {useNotification} from "../../atoms/Snackbar/Snackbar";
 import {useLibraryPouch} from "../../../common/hooks/UsePouch";
 import ScheduleNext from "../../molecules/ScheduleNext";
 
 interface drawerProps {
     library: Library;
+    handleScheduleNextAppointment(props: any): void
 }
 
-export default ({library}: drawerProps) => {
+// todo - srn - another option is to get the authenticated user and create a new event in here..
+//  which I like a little better
+export default ({library, handleScheduleNextAppointment}: drawerProps) => {
     const {libraryName, city, state, street, zip, email, librarian, phoneNumber, assistant, dateNextContact} = library
     const {black, muiDrawer, drawerPaper, calendarIcon, paddingTop} = useStyles()
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -50,10 +53,6 @@ export default ({library}: drawerProps) => {
         } catch (e) {
             setError(`${e}`)
         }
-    }
-
-    const handleScheduleNextAppointment = () => {
-        alert("Gotta save off the user")
     }
 
     const handleClose = () => {

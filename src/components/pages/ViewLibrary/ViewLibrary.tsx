@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import Library from "../../../model/library";
-import ContactDrawer from "../../atoms/ContactDrawer/ContactDrawer";
+import ContactDrawer from "../../organisms/ContactDrawer/ContactDrawer";
 import {useHistory, useParams} from "react-router-dom";
 import NoteList from "../../molecules/NoteList/NoteList";
 import useStyles from "../../../global-styles";
@@ -10,13 +10,16 @@ import NewNote from "../../atoms/Note/NewNote";
 import {GlobalContext} from "../../../common/GlobalContext";
 import NoteDAO from "../../../model/noteDAO";
 import {NoLibrary} from "../../storybook-mocks/constants";
-import {useLibraryPouch} from "../../../common/hooks/UsePouch";
+import {useLibraryPouch, useUserPouch} from "../../../common/hooks/UsePouch";
 import userDAO from "../../../model/userDAO";
 import {useNotification} from "../../atoms/Snackbar/Snackbar";
-import {dateNowIso} from "../../../utils/dateUtil";
+import {dateNowIso, readableDate} from "../../../utils/dateUtil";
 import {v4 as uuidv4} from "uuid";
 import {Grid} from "@material-ui/core";
 import DefaultButton from "../../atoms/Button/DefaultButton";
+import event from "../../../model/event";
+import UserDAO from "../../../model/userDAO";
+import moment from "moment";
 
 interface p {
     libraryId: string;
@@ -24,12 +27,13 @@ interface p {
 
 function ViewLibrary() {
     // todo - consult with aaron, there's probably a better way to do this
-    const {currentLibrary, setCurrentLibrary, getAuthenticatedUser} = useContext(GlobalContext)
+    const {currentLibrary, setCurrentLibrary, authenticate, getAuthenticatedUser} = useContext(GlobalContext)
     const {content, alignToDrawer, paddingOne, paddingTopTiny, paddingRight} = useStyles()
 
     const [totalSales, setTotalSales] = useState<number>(currentLibrary.totalSales)
     const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale)
     const {getLibrary, saveLibrary} = useLibraryPouch()
+    const {updateUser} = useUserPouch()
 
     const {setSuccess, setError} = useNotification()
 
@@ -117,6 +121,40 @@ function ViewLibrary() {
         });
     }
 
+    // @ts-ignore
+    async function handleNewAppointment({nextAppointment}) {
+        const newId = uuidv4()
+        const startDate = nextAppointment
+        // 2 hours later
+        const endDate = moment(nextAppointment).add(2,'hours').format()
+        const now = dateNowIso()
+
+        const newEvent: event = {
+            id: newId,
+            title: `Appointment with ${currentLibrary.librarian} at ${currentLibrary.libraryName}`,
+            start: startDate,
+            end: endDate,
+            libraryId: currentLibrary._id,
+            hasContacted: false,
+            dateCreated: now,
+            dateUpdated: now,
+        }
+
+        const currentUser: UserDAO = await getAuthenticatedUser()
+
+        try {
+        // todo - find out how to reuse this code (see Calendar.tsx:64)
+        //  calling hooks inside a service function is a no-no :(
+            const response = await updateUser(currentUser)
+            currentUser._rev = response.rev
+            currentUser.events.push(newEvent)
+            authenticate(currentUser)
+            setSuccess(`Successfully added appointment for: ${readableDate(startDate)}`)
+        } catch (e) {
+            setError(`Unable to add appointment: ${e}`)
+        }
+    }
+
     const addSale = async ({newSale}: addSaleInputProps) => {
         // subtract 7% for S&H
         const withShippingAndHandling: number = newSale * .93
@@ -144,7 +182,7 @@ function ViewLibrary() {
                 <DefaultButton onClick={onBack}>Back</DefaultButton>
                 <DefaultButton onClick={() => onEdit(currentLibrary)}>Edit</DefaultButton>
             </div>
-            <ContactDrawer library={currentLibrary}/>
+            <ContactDrawer library={currentLibrary} handleScheduleNextAppointment={handleNewAppointment}/>
             <main className={content}>
                 <Grid container>
                     <Grid item xs={6}>
