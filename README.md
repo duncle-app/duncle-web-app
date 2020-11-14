@@ -59,3 +59,12 @@ Initializes all configuration to deploy the app to the cloud
 
 ### gcloud app deploy
 deploys the app to the specified environment
+
+## Install certs on AWS instance
+1. Sudo `sudo su`
+2. Set these env variables
+```
+DOMAIN=api.sergionajera.com
+WILDCARD=*.$DOMAIN
+```
+3. Run certbot command `sudo certbot -d $DOMAIN -d $WILDCARD --manual --preferred-challenges dns certonly`
