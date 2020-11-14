@@ -68,3 +68,5 @@ DOMAIN=api.sergionajera.com
 WILDCARD=*.$DOMAIN
 ```
 3. Run certbot command `sudo certbot -d $DOMAIN -d $WILDCARD --manual --preferred-challenges dns certonly`
+
+Idea to automate: set up a scheduled job to run `certbot renew` every other month
