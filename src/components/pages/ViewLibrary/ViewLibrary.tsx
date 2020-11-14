@@ -145,6 +145,8 @@ function ViewLibrary() {
         try {
         // todo - find out how to reuse this code (see Calendar.tsx:64)
         //  calling hooks inside a service function is a no-no :(
+        //  create a new hook to do this for you
+        //  i.e. const {update} = useEventService() ... update(newEvent)
             const response = await updateUser(currentUser)
             currentUser._rev = response.rev
             currentUser.events.push(newEvent)
@@ -187,8 +189,7 @@ function ViewLibrary() {
                 <Grid container>
                     <Grid item xs={6}>
                         <div className={paddingOne}>
-                            <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale}
-                                       handleNoSale={handleContactedToday}/>
+                            <SalesArea totalSales={totalSales} lastSale={lastSale} addSale={addSale}/>
                         </div>
                     </Grid>
                     <Grid item xs={6}>

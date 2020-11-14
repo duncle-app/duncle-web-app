@@ -23,9 +23,10 @@ interface drawerProps {
 //  which I like a little better
 export default ({library, handleScheduleNextAppointment}: drawerProps) => {
     const {libraryName, city, state, street, zip, email, librarian, phoneNumber, assistant, dateNextContact} = library
-    const {black, muiDrawer, drawerPaper, calendarIcon, paddingTop} = useStyles()
+    const {black, muiDrawer, drawerPaper, calendarIcon, paddingTop, paddingTopTwo} = useStyles()
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [nextContactDate, setNextContactDate] = useState<string | undefined>(dateNextContact)
+    const [lastContactDate, setLastContactDate] = useState<string | undefined>(dateNextContact)
     const [selectedDates] = useState<DateSelectArg>()
     const {setSuccess, setInfo, setError} = useNotification()
 
@@ -132,7 +133,18 @@ export default ({library, handleScheduleNextAppointment}: drawerProps) => {
                                             <div>Put next appt here</div>
                                         </Typography>
                                     </div>
-                                    <ScheduleNext title="Schedule Appointment" handleSubmit={handleScheduleNextAppointment}/>
+                                    <ScheduleNext title="Schedule Appointment"
+                                                  handleSubmit={handleScheduleNextAppointment}/>
+                                    <div className={paddingTopTwo}>
+                                        <Divider/>
+                                    </div>
+                                    <div className={paddingTop}>
+                                        <Typography variant="h6">
+                                            <div className={black}>Last Contact:</div>
+                                            {/*@ts-ignore - we're checking for undefined using isEmpty*/}
+                                            <div>{!isEmpty(lastContactDate) ? readableDate(lastContactDate) : 'N/A'}</div>
+                                        </Typography>
+                                    </div>
                                     <div className={paddingTop}>
                                         <Typography variant="h6">
                                             <div className={black}>Next Contact:</div>
@@ -140,7 +152,8 @@ export default ({library, handleScheduleNextAppointment}: drawerProps) => {
                                             <div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>
                                         </Typography>
                                     </div>
-                                    <ScheduleNext title="Schedule Next Contact" handleSubmit={handleScheduleNextContact}/>
+                                    <ScheduleNext title="Schedule Next Contact"
+                                                  handleSubmit={handleScheduleNextContact}/>
                                 </>
                             }
                             primaryTypographyProps={{variant: "h5"}}
