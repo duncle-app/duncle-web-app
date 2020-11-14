@@ -17,6 +17,9 @@ import {dateNowIso} from "../../../utils/dateUtil";
 import {v4 as uuidv4} from "uuid";
 import {Grid} from "@material-ui/core";
 import DefaultButton from "../../atoms/Button/DefaultButton";
+import event from "../../../model/event";
+import UserDAO from "../../../model/userDAO";
+import moment from "moment";
 
 interface p {
     libraryId: string;
@@ -117,6 +120,32 @@ function ViewLibrary() {
         });
     }
 
+    // @ts-ignore
+    async function handleNewAppointment({nextAppointment}) {
+        const newId = uuidv4()
+        const startDate = nextAppointment
+        // 2 hours later
+        const endDate = moment(nextAppointment).add(2,'hours').format()
+        const now = dateNowIso()
+
+        const newEvent: event = {
+            id: newId,
+            title: `Appointment with ${currentLibrary.librarian} at ${currentLibrary.libraryName}`,
+            start: startDate,
+            end: endDate,
+            libraryId: currentLibrary._id,
+            hasContacted: false,
+            dateCreated: now,
+            dateUpdated: now,
+        }
+
+        const currentUser: UserDAO = await getAuthenticatedUser()
+        currentUser.events.push(newEvent)
+
+        // todo - add snackbar for error message here
+        // const response = await updateUser(currentUser)
+    }
+
     const addSale = async ({newSale}: addSaleInputProps) => {
         // subtract 7% for S&H
         const withShippingAndHandling: number = newSale * .93
@@ -144,7 +173,7 @@ function ViewLibrary() {
                 <DefaultButton onClick={onBack}>Back</DefaultButton>
                 <DefaultButton onClick={() => onEdit(currentLibrary)}>Edit</DefaultButton>
             </div>
-            <ContactDrawer library={currentLibrary} handleScheduleNextAppointment={() => alert("todo")}/>
+            <ContactDrawer library={currentLibrary} handleScheduleNextAppointment={handleNewAppointment}/>
             <main className={content}>
                 <Grid container>
                     <Grid item xs={6}>
