@@ -16,7 +16,7 @@ export type PouchReturnProps = {
 
 export interface UseUserReturnProps {
     addUser(props : User) : Promise<PouchDB.Core.Response | Error>
-    updateUser(props : UserDAO) : Promise<PouchDB.Core.Response | Error>
+    updateUser(props : UserDAO) : Promise<PouchDB.Core.Response>
     localPouch: any
     fetchUser(props: any): any
 }
@@ -59,7 +59,7 @@ export function useUserPouch() : UseUserReturnProps {
         }
     }
 
-    async function updateUser(props: UserDAO): Promise<PouchDB.Core.Response | Error> {
+    async function updateUser(props: UserDAO): Promise<PouchDB.Core.Response> {
         try {
             return await localPouch.put(props)
         } catch (err) {

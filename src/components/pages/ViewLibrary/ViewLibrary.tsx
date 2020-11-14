@@ -10,10 +10,10 @@ import NewNote from "../../atoms/Note/NewNote";
 import {GlobalContext} from "../../../common/GlobalContext";
 import NoteDAO from "../../../model/noteDAO";
 import {NoLibrary} from "../../storybook-mocks/constants";
-import {useLibraryPouch} from "../../../common/hooks/UsePouch";
+import {useLibraryPouch, useUserPouch} from "../../../common/hooks/UsePouch";
 import userDAO from "../../../model/userDAO";
 import {useNotification} from "../../atoms/Snackbar/Snackbar";
-import {dateNowIso} from "../../../utils/dateUtil";
+import {dateNowIso, readableDate} from "../../../utils/dateUtil";
 import {v4 as uuidv4} from "uuid";
 import {Grid} from "@material-ui/core";
 import DefaultButton from "../../atoms/Button/DefaultButton";
@@ -27,12 +27,13 @@ interface p {
 
 function ViewLibrary() {
     // todo - consult with aaron, there's probably a better way to do this
-    const {currentLibrary, setCurrentLibrary, getAuthenticatedUser} = useContext(GlobalContext)
+    const {currentLibrary, setCurrentLibrary, authenticate, getAuthenticatedUser} = useContext(GlobalContext)
     const {content, alignToDrawer, paddingOne, paddingTopTiny, paddingRight} = useStyles()
 
     const [totalSales, setTotalSales] = useState<number>(currentLibrary.totalSales)
     const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale)
     const {getLibrary, saveLibrary} = useLibraryPouch()
+    const {updateUser} = useUserPouch()
 
     const {setSuccess, setError} = useNotification()
 
@@ -140,10 +141,18 @@ function ViewLibrary() {
         }
 
         const currentUser: UserDAO = await getAuthenticatedUser()
-        currentUser.events.push(newEvent)
 
-        // todo - add snackbar for error message here
-        // const response = await updateUser(currentUser)
+        try {
+        // todo - find out how to reuse this code (see Calendar.tsx:64)
+        //  calling hooks inside a service function is a no-no :(
+            const response = await updateUser(currentUser)
+            currentUser._rev = response.rev
+            currentUser.events.push(newEvent)
+            authenticate(currentUser)
+            setSuccess(`Successfully added appointment for: ${readableDate(startDate)}`)
+        } catch (e) {
+            setError(`Unable to add appointment: ${e}`)
+        }
     }
 
     const addSale = async ({newSale}: addSaleInputProps) => {

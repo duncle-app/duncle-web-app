@@ -9,20 +9,20 @@ import {v4 as uuidv4} from 'uuid';
 import './main.css'
 import {GlobalContext} from "../../../common/GlobalContext";
 import event from "../../../model/event";
-import {dateNowIso} from "../../../utils/dateUtil";
+import {dateNowIso, readableDate} from "../../../utils/dateUtil";
 import UserDAO from "../../../model/userDAO";
 import {useUserPouch} from "../../../common/hooks/UsePouch";
+import {useNotification} from "../Snackbar/Snackbar";
 
 // todo - fix this
 export default function({initialEvents}: any) {
     const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true)
     const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
     const [selectedDates, setSelectedDates] = useState<DateSelectArg>()
-
-    console.log("are events even making it through here", initialEvents)
+    const {setSuccess, setError} = useNotification()
 
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
-    const {getAuthenticatedUser} = useContext(GlobalContext)
+    const {authenticate, getAuthenticatedUser} = useContext(GlobalContext)
     const {updateUser} = useUserPouch()
 
     const handleWeekendsToggle = () => {
@@ -61,11 +61,18 @@ export default function({initialEvents}: any) {
             }
 
             const currentUser: UserDAO = await getAuthenticatedUser()
-            console.log("SUBMITTING NEW EVENT", currentUser)
-            currentUser.events.push(newEvent)
 
-            // todo - add snackbar for error message here
-            const response = await updateUser(currentUser)
+            // todo - find out how to reuse this code (see ViewLibrary.tsx:146)
+            //  calling hooks inside a service function is a no-no :(
+            try {
+                const response = await updateUser(currentUser)
+                currentUser._rev = response.rev
+                currentUser.events.push(newEvent)
+                authenticate(currentUser)
+                setSuccess(`Successfully added event for: ${readableDate(startDate)}`)
+            } catch (e) {
+                setError(`Unable to add appointment: ${e}`)
+            }
 
             calendar.addEvent({
                 id: newId,
