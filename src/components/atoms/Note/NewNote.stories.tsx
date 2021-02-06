@@ -7,5 +7,5 @@ export default {
 };
 
 export const withProps = () => (
-    <NewNote formSubmit={() => alert("submitted!")}/>
+    <NewNote formSubmit={({newNote}) => alert(`submitted! message: ${newNote}`)}/>
 );

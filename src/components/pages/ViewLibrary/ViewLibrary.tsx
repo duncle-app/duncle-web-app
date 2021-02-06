@@ -5,20 +5,19 @@ import {useHistory, useParams} from "react-router-dom";
 import NoteList from "../../molecules/NoteList/NoteList";
 import useStyles from "../../../global-styles";
 import SalesArea, {addSaleInputProps} from "../../atoms/Sales/SalesArea";
-import Button from "@material-ui/core/Button";
 import NewNote from "../../atoms/Note/NewNote";
 import {GlobalContext} from "../../../common/GlobalContext";
 import NoteDAO from "../../../model/noteDAO";
-import {NoLibrary} from "../../storybook-mocks/constants";
+import {newNote, NoLibrary} from "../../storybook-mocks/constants";
 import {useLibraryPouch, useUserPouch} from "../../../common/hooks/UsePouch";
 import userDAO from "../../../model/userDAO";
+import UserDAO from "../../../model/userDAO";
 import {useNotification} from "../../atoms/Snackbar/Snackbar";
 import {dateNowIso, readableDate} from "../../../utils/dateUtil";
 import {v4 as uuidv4} from "uuid";
 import {Grid} from "@material-ui/core";
 import DefaultButton from "../../atoms/Button/DefaultButton";
 import event from "../../../model/event";
-import UserDAO from "../../../model/userDAO";
 import moment from "moment";
 
 interface p {
@@ -44,6 +43,10 @@ function ViewLibrary() {
         history.goBack();
     }
 
+    if (currentLibrary === NoLibrary) {
+        onBack()
+    }
+
     function onEdit(library: Library): void {
         console.log('on edit clicked...');
         history.push(`/library/${libraryId}/edit`)
@@ -59,6 +62,7 @@ function ViewLibrary() {
     // @ts-ignore
     async function submitNewNote({newNote: message}) {
         const {firstName}: userDAO = await getAuthenticatedUser()
+        console.log({newNote})
         const updatedLibrary: Library = await saveNote(currentLibrary, message, firstName)
         jankUpdateLibrary(updatedLibrary)
     }
