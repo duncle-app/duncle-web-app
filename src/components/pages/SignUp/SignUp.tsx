@@ -29,23 +29,27 @@ export default function SignUp() {
             return
         }
         delete newUser.confirmPassword;
-        newUser.username = getUsername(newUser.email)
+        try {
+            newUser.username = getUsername(newUser.email)
 
-        const response = await loginService.signUpUser(newUser)
-        console.log("Response in sign up tsx - should be error", response)
+            const response = await loginService.signUpUser(newUser)
+            console.log("Response in sign up tsx - should be error", response)
 
-        if (response instanceof Error) {
-            setError(`Error: ${response.message}`)
-        } else {
-            const newlyCreatedUser: UserDAO = {
-                _id: response.id,
-                _rev: response.rev,
-                ...newUser
+            if (response instanceof Error) {
+                setError(`Error: ${response.message}`)
+            } else {
+                const newlyCreatedUser: UserDAO = {
+                    _id: response.id,
+                    _rev: response.rev,
+                    ...newUser
+                }
+
+                await authenticate(newlyCreatedUser)
+                history.push('/dashboard')
+                setSuccess(`Sign up successful. Welcome ${newUser.firstName}!`)
             }
-
-            await authenticate(newlyCreatedUser)
-            history.push('/dashboard')
-            setSuccess(`Sign up successful. Welcome ${newUser.firstName}!`)
+        } catch (e) {
+            setError(e.message)
         }
     }
 
@@ -53,7 +57,8 @@ export default function SignUp() {
         const regex = /.+?(?=@)/
         const result: RegExpMatchArray | null = email.match(regex);
         if (result === null) {
-            throw new Error(`Failed to parse out a username from: ${email}`)
+            throw new Error(` Invalid username: Failed to parse out a username from: ${email}.
+            Use a valid email format. i.e. jsmith@example.com`)
         } else {
             return result[0]
         }
