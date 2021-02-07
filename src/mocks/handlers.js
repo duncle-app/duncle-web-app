@@ -11,7 +11,8 @@ export const handlers = [
             ctx.status(200),
         )
     }),
-
+     // todo - might need to do api.sergionajera.com/user
+     //  also need one probably for api.sergionajera.com/user_*
     rest.get('/user', (req, res, ctx) => {
         // Check if the user is authenticated in this session
         const isAuthenticated = sessionStorage.getItem('is-authenticated')
