@@ -6,12 +6,13 @@ interface Props {
     onClick?(props: any): any
     type?: "button" | "submit" | "reset" | undefined
     className?: string
+    color?: "primary" | "secondary"
 }
 
-export default ({children, onClick, type = undefined, className, ...rest}: Props) =>
+export default ({children, onClick, type = undefined, className, color = 'primary', ...rest}: Props) =>
     <Button
         variant="contained"
-        color="primary"
+        color={color}
         onClick={onClick}
         type={type}
         className={className}
