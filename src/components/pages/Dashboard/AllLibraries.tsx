@@ -33,6 +33,7 @@ export default function () {
             response.rows.map(({doc}: PouchRow) => {
                 libraries.push(doc)
             })
+
             setLibraries(libraries)
             console.log("all libraries", libraries)
         }

@@ -7,7 +7,6 @@ import DefaultButton from "../atoms/Button/DefaultButton";
 
 interface Props {
     title: string
-
     handleSubmit(props: any): any
 }
 
