@@ -32,7 +32,7 @@ export default function CustomTextField(
      * todo - check if we always want to be submitting both values anyway, or if there are cases where we don't
      */
     if (alsoInitialValue && defaultValue === undefined) {
-        throw new Error("If alsoInitialValue is specified, defaultValue must exist")
+        console.error(`If alsoInitialValue is specified, defaultValue must exist. field: ${name}, defaultValue: ${defaultValue}`)
     }
     const {menuButton} = useStyles()
 

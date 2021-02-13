@@ -8,7 +8,7 @@ import SalesArea, {addSaleInputProps} from "../../atoms/Sales/SalesArea";
 import NewNote from "../../atoms/Note/NewNote";
 import {GlobalContext} from "../../../common/GlobalContext";
 import NoteDAO from "../../../model/noteDAO";
-import {newNote, NoLibrary} from "../../storybook-mocks/constants";
+import {newLibrary, newLibrary2, newNote, NoLibrary} from "../../storybook-mocks/constants";
 import {useLibraryPouch, useUserPouch} from "../../../common/hooks/UsePouch";
 import userDAO from "../../../model/userDAO";
 import UserDAO from "../../../model/userDAO";
@@ -62,14 +62,13 @@ function ViewLibrary() {
     // @ts-ignore
     async function submitNewNote({newNote: message}) {
         const {firstName}: userDAO = await getAuthenticatedUser()
-        console.log({newNote})
-        const updatedLibrary: Library = await saveNote(currentLibrary, message, firstName)
+        const updatedLibrary: Library = await saveNote(currentLibrary, message, firstName);
         jankUpdateLibrary(updatedLibrary)
     }
 
     function jankUpdateLibrary(updatedLibrary: Library) {
-        // todo - this ain't right.. this is needed, otherwise - see below note
-        setCurrentLibrary(NoLibrary)
+        // todo - amazing challenge question because this ain't right.. this is needed, otherwise - see below note
+        setCurrentLibrary(newLibrary2)
         // todo - not sure why.. but when this renders, it duplicates the note at the bottom instead of adding a new note to the top..
         setCurrentLibrary(updatedLibrary)
     }
@@ -84,16 +83,21 @@ function ViewLibrary() {
         return await saveLibrary(library)
     }
 
-    async function saveNote(library: Library, message: string, author: string): Promise<Library> {
-        library.dateUpdated = dateNowIso()
+    async function saveNote({notes, ...rest}: Library, message: string, author: string): Promise<Library> {
         const newSavedNote: NoteDAO = {
             id: uuidv4(),
             message,
             dateCreated: dateNowIso(),
             author
         }
-        library.notes.unshift(newSavedNote)
-        return await saveLibrary(library);
+
+        const newLibrary = {
+            notes: [newSavedNote, ...notes],
+            ...rest,
+            dateUpdated: dateNowIso(),
+        }
+
+        return await saveLibrary(newLibrary);
     }
 
     /**
