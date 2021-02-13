@@ -28,6 +28,7 @@ export default function SignUp() {
             setError("Passwords are not equal")
             return
         }
+        // @ts-ignore - for now ignore bc new TS doesn't allow modifying an object
         delete newUser.confirmPassword;
         try {
             newUser.username = getUsername(newUser.email)

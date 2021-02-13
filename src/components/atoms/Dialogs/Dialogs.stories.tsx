@@ -2,7 +2,6 @@ import React from "react";
 import CalendarDialog from "./CalendarDialog";
 import DateTimeDialog from "./DateTimeDialog";
 import MockForm from "../../storybook-mocks/mockForm";
-import EmailTextField from "../TextField/EmailTextField";
 
 export default {
     title: "Atoms/Dialogs"
