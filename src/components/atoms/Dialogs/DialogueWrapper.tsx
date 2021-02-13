@@ -1,4 +1,4 @@
-import React, {ReactNode, useState} from 'react';
+import React, {ReactNode} from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,14 +6,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Form from "../../../common/Form";
 
-interface WrapperProps extends DialogProps {
-    children: ReactNode
-}
-
 export interface DialogProps {
     isOpen: boolean
     handleSubmit(...args: any[]): any
     handleCancel(...args: any[]): any
+}
+
+interface WrapperProps extends DialogProps {
+    children: ReactNode
 }
 
 // make more dynamic - https://dev.to/dmtrkovalenko/the-neatest-way-to-handle-alert-dialogs-in-react-1aoe
