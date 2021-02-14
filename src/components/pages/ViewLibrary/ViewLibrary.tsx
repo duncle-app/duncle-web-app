@@ -27,11 +27,11 @@ interface p {
 function ViewLibrary() {
     // todo - consult with aaron, there's probably a better way to do this
     const {currentLibrary, setCurrentLibrary, authenticate, getAuthenticatedUser} = useContext(GlobalContext)
-    const {content, alignToDrawer, paddingOne, paddingTopTiny, paddingRight} = useStyles()
+    const {content, alignToDrawer, paddingOne, paddingTopTiny} = useStyles()
 
     const [totalSales, setTotalSales] = useState<number>(currentLibrary.totalSales)
     const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale)
-    const {getLibrary, saveLibrary} = useLibraryPouch()
+    const {saveLibrary} = useLibraryPouch()
     const {updateUser} = useUserPouch()
 
     const {setSuccess, setError} = useNotification()

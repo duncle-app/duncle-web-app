@@ -22,9 +22,8 @@ export default function EditLibraryController() {
 
             if (!isEqual(copy, editedLibrary)) {
                 // @ts-ignore
-                const {rev} = await saveLibrary(editedLibrary);
-                currentLibrary._rev = rev
-                setCurrentLibrary(currentLibrary)
+                const library = await saveLibrary(editedLibrary);
+                setCurrentLibrary(library)
                 setSuccess('Successfully saved library')
             } else {
                 setInfo('No updates were made, contents were identical')
