@@ -4,7 +4,8 @@ import {HasChildrenProps} from "../../duncleTypes";
 export default function ({children}: HasChildrenProps) {
     return (
         <MockContext.Provider value={{
-            authenticate: () => console.log('mock authenticated')
+            authenticate: () => console.log('mock authenticated'),
+            isAuthenticated: true
         }}>
             {children}
         </MockContext.Provider>
