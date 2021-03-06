@@ -1,13 +1,16 @@
-import React, {useContext} from 'react'
-import {MockContext} from "../../storybook-mocks/MockProviders";
+import Button from '@material-ui/core/Button';
+import React from 'react'
 
-export default function () {
-    const {isAuthenticated} = useContext(MockContext)
+interface Props {
+    isAuthenticated: boolean
+    signOutHandler: Function
+}
+
+export default function ({isAuthenticated, signOutHandler}: Props) {
 
     return (
         <>
-            hi
-            {isAuthenticated ? <p>yes</p> : <p>no</p>}
+            {isAuthenticated ? <Button onClick={signOutHandler}>Sign Out</Button> : <p>Not signed in</p>}
         </>
     )
 }

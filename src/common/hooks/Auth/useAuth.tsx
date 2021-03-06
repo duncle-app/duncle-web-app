@@ -1,8 +1,6 @@
 import React, {Dispatch, SetStateAction, useCallback} from 'react'
 import UserDAO from "../../../model/userDAO";
-import userDAO from "../../../model/userDAO";
 import {useUserPouch} from "../UsePouch";
-import {isEqual} from 'lodash';
 
 export type useAuthReturn = {
     isAuthenticated: boolean;

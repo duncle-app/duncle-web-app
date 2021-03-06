@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import Profile from "./Profile";
-import MockProviders from "../../storybook-mocks/MockProviders";
 
 export default {
     title: "Molecules/Profile"
 };
 
-export const withProps = () =>
-    <MockProviders><Profile/></MockProviders>
+const handler = () => console.log('Logging out!')
+
+export const SignedOut = () =>
+    <Profile isAuthenticated={false} signOutHandler={handler}/>
+
+export const SignedIn = () =>
+    <Profile isAuthenticated={true} signOutHandler={handler}/>
