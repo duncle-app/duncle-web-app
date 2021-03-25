@@ -1,14 +1,16 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Profile from "./Profile";
 
 export default {
-    title: "Molecules/Profile"
+  title: "Molecules/Profile",
 };
 
-const handler = () => console.log('Logging out!')
+const mockHandler = () => console.log("Logging out!");
 
-export const SignedOut = () =>
-    <Profile isAuthenticated={false} signOutHandler={handler}/>
+export const SignedOut = () => (
+  <Profile isAuthenticated={false} signOutHandler={mockHandler} />
+);
 
-export const SignedIn = () =>
-    <Profile isAuthenticated={true} signOutHandler={handler}/>
+export const SignedIn = () => (
+  <Profile isAuthenticated={true} signOutHandler={mockHandler} />
+);

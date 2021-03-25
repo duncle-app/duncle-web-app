@@ -1,11 +1,11 @@
 import React from "react";
-import {withKnobs} from "@storybook/addon-knobs";
+import { withKnobs } from "@storybook/addon-knobs";
 import Snackbar from "./Snackbar";
-import {GlobalContext} from "../../../common/GlobalContext";
+import { GlobalContext } from "../../../common/GlobalContext";
 
 export default {
-    title: "Atoms/Snackbar",
-    decorators: [withKnobs],
+  title: "Atoms/Snackbar",
+  decorators: [withKnobs],
 };
 
 // export const withProps = () =>

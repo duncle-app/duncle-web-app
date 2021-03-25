@@ -1,8 +1,14 @@
 import React from "react";
 import "./App.css";
-import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Login from "./components/pages/LogIn/Login";
-import {GlobalProvider} from "./common/GlobalContext";
+import { GlobalProvider } from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/molecules/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
@@ -13,74 +19,57 @@ import EditLibraryController from "./components/pages/EditLibrary/EditLibraryCon
 import DefaultButton from "./components/atoms/Button/DefaultButton";
 import CalendarController from "./components/atoms/Calendar/CalendarController";
 import Snackbar from "./components/atoms/Snackbar/Snackbar";
-import {Typography} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import useStyles from "./global-styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 const Unauthorized = () => {
-    const {paddingOneChildren} = useStyles()
+  const { paddingOneChildren } = useStyles();
 
-    return <Container component="main" maxWidth="xs" className={paddingOneChildren}>
-        <Typography variant="h4">You are not authorized</Typography>
-        <Link to="/login">
-            <DefaultButton>Sign in</DefaultButton>
-        </Link>
+  return (
+    <Container component="main" maxWidth="xs" className={paddingOneChildren}>
+      <Typography variant="h4">You are not authorized</Typography>
+      <Link to="/login">
+        <DefaultButton>Sign in</DefaultButton>
+      </Link>
     </Container>
-}
+  );
+};
 
-export default () =>
-    <div className="App">
-        <CssBaseline/>
-        <GlobalProvider>
-            <Router>
-                <Navbar/>
-                <Snackbar/>
-                <Switch>
-                    {/* todo - auto route to login page if we're not logged in */}
-                    <Redirect exact from="/" to="login"/>
-                    <Route
-                        exact
-                        path="/signup"
-                    >
-                        <SignUp/>
-                    </Route>
-                    <Route
-                        exact
-                        path="/login">
-                        {/* TODO - REDIRECT */}
-                        <Login/>
-                    </Route>
-                    <PrivateRoute
-                        exact
-                        path="/dashboard"
-                        component={AllLibraries}
-                    />
-                    <PrivateRoute
-                        exact
-                        path="/calendar"
-                        component={CalendarController}
-                    />
-                    <PrivateRoute
-                        exact
-                        path="/library/new"
-                        component={AddLibrary}
-                    />
-                    <PrivateRoute
-                        exact
-                        path="/library/:libraryId"
-                        component={ViewLibrary}
-                    />
-                    <PrivateRoute
-                        exact
-                        path="/library/:libraryId/edit"
-                        component={EditLibraryController}
-                    />
-                    <Route
-                        path="/unauthorized"
-                        children={<Unauthorized/>}
-                    />
-                </Switch>
-            </Router>
-        </GlobalProvider>
-    </div>
+export default () => (
+  <div className="App">
+    <CssBaseline />
+    <GlobalProvider>
+      <Router>
+        <Navbar />
+        <Snackbar />
+        <Switch>
+          {/* todo - auto route to login page if we're not logged in */}
+          <Redirect exact from="/" to="login" />
+          <Route exact path="/signup">
+            <SignUp />
+          </Route>
+          <Route exact path="/login">
+            {/* TODO - REDIRECT */}
+            <Login />
+          </Route>
+          <PrivateRoute exact path="/dashboard" component={AllLibraries} />
+          <PrivateRoute exact path="/calendar" component={CalendarController} />
+          <PrivateRoute exact path="/library/new" component={AddLibrary} />
+          <PrivateRoute
+            exact
+            path="/library/:libraryId"
+            component={ViewLibrary}
+          />
+          <PrivateRoute
+            exact
+            path="/library/:libraryId/edit"
+            component={EditLibraryController}
+          />
+          <Route path="/unauthorized" children={<Unauthorized />} />
+        </Switch>
+      </Router>
+    </GlobalProvider>
+  </div>
+);

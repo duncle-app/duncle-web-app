@@ -1,24 +1,26 @@
-import React, {useState} from 'react'
-import {Button} from "@material-ui/core";
+import React, { useState } from "react";
+import { Button } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 interface PingAnythingProps {
-    name: string,
-    callback: any
+  name: string;
+  callback: any;
 }
 
-export default ({name, callback}: PingAnythingProps) => {
-    const [loading, setLoading] = useState<boolean>(false)
+export default ({ name, callback }: PingAnythingProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-    return (<Button
-        variant="outlined"
-        onClick={() => {
-            setLoading(true)
-            callback()
-            setLoading(false)
-        }}>
-        {name}
-        {loading ? <CircularProgress/> : null}
-    </Button>)
-}
-
+  return (
+    <Button
+      variant="outlined"
+      onClick={() => {
+        setLoading(true);
+        callback();
+        setLoading(false);
+      }}
+    >
+      {name}
+      {loading ? <CircularProgress /> : null}
+    </Button>
+  );
+};

@@ -1,12 +1,13 @@
 import React from "react";
-import SalesArea from "./SalesArea"
-import {action} from "@storybook/addon-actions";
+import SalesArea from "./SalesArea";
+import { action } from "@storybook/addon-actions";
 
 export default {
-    title: "Atoms/SalesArea",
+  title: "Atoms/SalesArea",
 };
 
-const addSale = () => action("Added sale")
+const addSale = () => action("Added sale");
 
-export const withProps = () =>
-    <SalesArea totalSales={50250} lastSale={2500} addSale={addSale}/>
+export const withProps = () => (
+  <SalesArea totalSales={50250} lastSale={2500} addSale={addSale} />
+);

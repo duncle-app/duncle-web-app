@@ -1,5 +1,5 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 interface HasChildrenProps {
-    children: ReactNode
+  children: ReactNode;
 }

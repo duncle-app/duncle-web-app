@@ -4,15 +4,16 @@ import MockForm from "../../storybook-mocks/mockForm";
 import DefaultButton from "../Button/DefaultButton";
 
 export default {
-    title: "Atoms/DatePicker"
+  title: "Atoms/DatePicker",
 };
 
-export const withProps = () =>
-    <MockForm>
-        <div>
-            <DatePicker/>
-        </div>
-        <div>
-            <DefaultButton type="submit">Submit</DefaultButton>
-        </div>
-    </MockForm>
+export const withProps = () => (
+  <MockForm>
+    <div>
+      <DatePicker />
+    </div>
+    <div>
+      <DefaultButton type="submit">Submit</DefaultButton>
+    </div>
+  </MockForm>
+);

@@ -1,10 +1,8 @@
 import React from "react";
-import FullCalendar from "./Calendar"
+import FullCalendar from "./Calendar";
 
 export default {
-    title: "Atoms/Calendar"
+  title: "Atoms/Calendar",
 };
 
-export const withProps = () => (
-    <FullCalendar/>
-);
+export const withProps = () => <FullCalendar />;

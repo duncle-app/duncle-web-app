@@ -3,7 +3,9 @@
 ## Local ENV setup
 
 ### `.env` file
+
 Populate your app with these variables with an .env file at the root.
+
 ```
 REACT_APP_DATABASE_URL=
 REACT_APP_DATABASE_USERNAME=
@@ -18,7 +20,8 @@ REACT_APP_ENCRYPTION_PASSWORD=
 In the project directory, you can run:
 
 ### `npm start`
-#### NOTE: this is used to start up a node.js server, which Heroku uses to serve up static build files  
+
+#### NOTE: this is used to start up a node.js server, which Heroku uses to serve up static build files
 
 ### `npm start:dev`
 
@@ -38,6 +41,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 
 ### `npm run storybook`
+
 It's possible you'll need to configure these variables in your `.rc` file
 
 ```
@@ -51,22 +55,29 @@ echo NOTE: hard coding development for both the NODE_ENV and BABEL_ENV.. see htt
 This project, like literally every single other ReactJS app, was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Useful GCloud commands
+
 ### gcloud config unset project
+
 Resets configuration for the current project. This is useful if you need to switch accounts
 
 ### gcloud init
+
 Initializes all configuration to deploy the app to the cloud
 
 ### gcloud app deploy
+
 deploys the app to the specified environment
 
 ## Install certs on AWS instance
+
 1. Sudo `sudo su`
 2. Set these env variables
+
 ```
 DOMAIN=api.sergionajera.com
 WILDCARD=*.$DOMAIN
 ```
+
 3. Run certbot command `sudo certbot -d $DOMAIN -d $WILDCARD --manual --preferred-challenges dns certonly`
 
 Idea to automate: set up a scheduled job to run `certbot renew` every other month
