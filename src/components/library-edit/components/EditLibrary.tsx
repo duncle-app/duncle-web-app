@@ -9,18 +9,13 @@ import useStyles from "../../../global-styles";
 
 interface LibraryEditProps {
   library: Library;
-  formSubmit(values: any): any;
+  formSubmit(editedLibrary: Library): any;
 }
 
 interface LabelProps {
   label: string;
   currentValue: string | number | undefined;
   isRequired: boolean;
-}
-
-export interface EditLibrarySubmitProps {
-  library: Library;
-  formSubmit(args: any): any;
 }
 
 export default function ({ library, formSubmit }: LibraryEditProps) {

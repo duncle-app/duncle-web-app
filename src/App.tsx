@@ -23,6 +23,8 @@ import { Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import useStyles from "./global-styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const Unauthorized = () => {
   const { paddingOneChildren } = useStyles();
@@ -37,39 +39,50 @@ const Unauthorized = () => {
   );
 };
 
-export default () => (
-  <div className="App">
-    <CssBaseline />
-    <GlobalProvider>
-      <Router>
-        <Navbar />
-        <Snackbar />
-        <Switch>
-          {/* todo - auto route to login page if we're not logged in */}
-          <Redirect exact from="/" to="login" />
-          <Route exact path="/signup">
-            <SignUp />
-          </Route>
-          <Route exact path="/login">
-            {/* TODO - REDIRECT */}
-            <Login />
-          </Route>
-          <PrivateRoute exact path="/dashboard" component={AllLibraries} />
-          <PrivateRoute exact path="/calendar" component={CalendarController} />
-          <PrivateRoute exact path="/library/new" component={AddLibrary} />
-          <PrivateRoute
-            exact
-            path="/library/:libraryId"
-            component={ViewLibrary}
-          />
-          <PrivateRoute
-            exact
-            path="/library/:libraryId/edit"
-            component={EditLibraryController}
-          />
-          <Route path="/unauthorized" children={<Unauthorized />} />
-        </Switch>
-      </Router>
-    </GlobalProvider>
-  </div>
-);
+export default () => {
+  const queryClient = new QueryClient();
+
+  return (
+    <div className="App">
+      <CssBaseline />
+      <QueryClientProvider client={queryClient}>
+        <GlobalProvider>
+          <Router>
+            <Navbar />
+            <Snackbar />
+            <Switch>
+              {/* todo - auto route to login page if we're not logged in */}
+              <Redirect exact from="/" to="login" />
+              <Route exact path="/signup">
+                <SignUp />
+              </Route>
+              <Route exact path="/login">
+                {/* TODO - REDIRECT */}
+                <Login />
+              </Route>
+              <PrivateRoute exact path="/dashboard" component={AllLibraries} />
+              <PrivateRoute
+                exact
+                path="/calendar"
+                component={CalendarController}
+              />
+              <PrivateRoute exact path="/library/new" component={AddLibrary} />
+              <PrivateRoute
+                exact
+                path="/library/:libraryId"
+                component={ViewLibrary}
+              />
+              <PrivateRoute
+                exact
+                path="/library/:libraryId/edit"
+                component={EditLibraryController}
+              />
+              <Route path="/unauthorized" children={<Unauthorized />} />
+            </Switch>
+            <ReactQueryDevtools />
+          </Router>
+        </GlobalProvider>
+      </QueryClientProvider>
+    </div>
+  );
+};

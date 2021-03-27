@@ -109,11 +109,11 @@ class EnvVariableNotSetError extends Error {
 interface useLibraryPouchReturn {
   getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>>;
   getLibrary(libraryId: string): any;
-  saveLibrary(library: Library): Promise<Library>;
+    saveLibrary(library: Library): Promise<Library>;
   addNewLibrary(library: NewLibrary): Promise<Library>;
 }
 
-function roundDecimals(library: Library | NewLibrary) {
+export function roundDecimals(library: Library | NewLibrary) {
   library.lastSale = Number(library.lastSale.toFixed(2));
   library.totalSales = Number(library.totalSales.toFixed(2));
 }
@@ -174,7 +174,7 @@ export function useLibraryPouch(): useLibraryPouchReturn {
   return { getAll, getLibrary, saveLibrary, addNewLibrary };
 }
 
-function usePouch(database: string): any {
+export function usePouch(database: string): any {
   const localPouch: PouchDB.Database = new PouchDB(database);
 
   const remoteDb = process.env.REACT_APP_DATABASE_URL;
