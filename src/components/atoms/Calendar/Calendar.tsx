@@ -95,9 +95,9 @@ export default function ({ initialEvents }: any) {
   const cancel = () => setIsOpen(false);
 
   const handleEventClick = (clickInfo: EventClickArg) => {
-    // @ts-ignore
-    // eslint-disable-next-line
     if (
+      // @ts-ignore
+      // eslint-disable-next-line
       confirm(
         `Are you sure you want to delete the event '${clickInfo.event.title}'`
       )

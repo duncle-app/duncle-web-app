@@ -2,11 +2,7 @@ import MUIButton from "@material-ui/core/Button";
 import React from "react";
 import styled from "styled-components";
 import NavigationLink from "../../styles/NavigationLink";
-
-interface Props {
-  isAuthenticated: boolean;
-  signOutHandler(props: any): any;
-}
+import useAuth from "../../../common/hooks/Auth/useAuth";
 
 const Container = styled.div`
   position: absolute;
@@ -24,11 +20,13 @@ const Button = styled(MUIButton)`
   border-color: white;
 `;
 
-export default ({ isAuthenticated, signOutHandler }: Props) => {
+export default () => {
+  const { isAuthenticated, signOut } = useAuth();
+
   return (
     <Container>
-      {isAuthenticated ? (
-        <Button variant="contained" onClick={signOutHandler}>
+      {isAuthenticated() ? (
+        <Button variant="outlined" onClick={signOut}>
           Sign Out
         </Button>
       ) : (

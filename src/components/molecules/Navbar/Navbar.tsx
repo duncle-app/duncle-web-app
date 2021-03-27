@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppBar, Tabs, Tab, Typography, Box, Toolbar } from "@material-ui/core";
+import { AppBar, Tab, Tabs } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import Profile from "../Profile/Profile";
 
@@ -29,10 +29,7 @@ export default function Navbar() {
         {navbarTabs.map(({ name }) => (
           <Tab key={name} label={name} />
         ))}
-        <Profile
-          isAuthenticated={false}
-          signOutHandler={() => console.log("dd")}
-        />
+        <Profile />
       </Tabs>
     </AppBar>
   );

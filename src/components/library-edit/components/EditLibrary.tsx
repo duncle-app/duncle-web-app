@@ -19,23 +19,8 @@ interface LabelProps {
 }
 
 export interface EditLibrarySubmitProps {
-  // @ts-ignore
-  street;
-  city;
-  county;
-  level;
-  libraryName;
-  librarian;
-  district;
-  state;
-  // @ts-ignore
-  zip;
-  size;
-  email;
-  phoneNumber;
-  assistant;
-  assignedRep;
-  extension;
+  library: Library;
+  formSubmit(args: any): any;
 }
 
 export default function ({ library, formSubmit }: LibraryEditProps) {

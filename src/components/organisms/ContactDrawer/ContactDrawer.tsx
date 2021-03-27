@@ -46,9 +46,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
   const [nextContactDate, setNextContactDate] = useState<string | undefined>(
     dateNextContact
   );
-  const [lastContactDate, setLastContactDate] = useState<string | undefined>(
-    dateNextContact
-  );
+  const [lastContactDate] = useState<string | undefined>(dateNextContact);
   const [selectedDates] = useState<DateSelectArg>();
   const { setSuccess, setInfo, setError } = useNotification();
 
@@ -175,10 +173,10 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
                   <div className={paddingTop}>
                     <Typography variant="h6">
                       <div className={black}>Last Contact:</div>
-                      {/*@ts-ignore - we're checking for undefined using isEmpty*/}
                       <div>
                         {!isEmpty(lastContactDate)
-                          ? readableDate(lastContactDate)
+                          ? // @ts-ignore - we're checking for undefined using isEmpty
+                            readableDate(lastContactDate)
                           : "N/A"}
                       </div>
                     </Typography>
@@ -186,10 +184,10 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
                   <div className={paddingTop}>
                     <Typography variant="h6">
                       <div className={black}>Next Contact:</div>
-                      {/*@ts-ignore - we're checking for undefined using isEmpty*/}
                       <div>
                         {!isEmpty(nextContactDate)
-                          ? readableDate(nextContactDate)
+                          ? // @ts-ignore - we're checking for undefined using isEmpty
+                            readableDate(nextContactDate)
                           : "N/A"}
                       </div>
                     </Typography>

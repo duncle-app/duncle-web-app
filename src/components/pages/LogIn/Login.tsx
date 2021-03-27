@@ -25,7 +25,7 @@ export default function Login() {
   async function submitForm(user: User) {
     try {
       const returnedUser: UserDAO = await loginService.logInUser(user);
-      await authenticate(returnedUser);
+      authenticate(returnedUser);
       history.push("/dashboard");
       setSuccess(`Login successful. Welcome ${returnedUser.firstName}`);
     } catch (e) {

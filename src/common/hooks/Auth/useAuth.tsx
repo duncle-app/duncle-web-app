@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction, useCallback } from "react";
+import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import UserDAO from "../../../model/userDAO";
 import { useUserPouch } from "../UsePouch";
 
@@ -6,6 +7,7 @@ export type useAuthReturn = {
   isAuthenticated: boolean;
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   getAuthenticatedUser: string | Error;
+  signOut: Function;
 };
 
 interface localStorageItem {
@@ -17,7 +19,8 @@ interface localStorageItem {
 // https://www.sohamkamani.com/blog/javascript-localstorage-with-ttl-expiry/
 export default function useAuth() {
   const TOKEN_ID: string = "authCredentials";
-  const { fetchUser } = useUserPouch();
+  let history = useHistory();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   function isValidToken(): boolean {
     return (
@@ -42,11 +45,26 @@ export default function useAuth() {
     localStorage.setItem(TOKEN_ID, JSON.stringify(item));
   }
 
+  function signOut(): void {
+    localStorage.removeItem(TOKEN_ID);
+    if (history) {
+      history.push("/");
+    }
+    setIsLoggedIn(false);
+  }
+
   return {
     // todo - return a state object containing this, rather than calling the isValidToken function
     //  everytime to get the state?
     //  downsides - it re-renders every single time rather than just calling the local storage.
-    isAuthenticated: (): boolean => isValidToken(),
+    isAuthenticated: (): boolean => {
+      if (!isValidToken() && isLoggedIn) {
+        signOut();
+      } else if (isValidToken() && !isLoggedIn) {
+        setIsLoggedIn(true);
+      }
+      return isLoggedIn;
+    },
     getAuthenticatedUser: (): UserDAO => {
       const token: UserDAO | null = getWithExpiry(TOKEN_ID);
       if (token === null) {
@@ -57,8 +75,9 @@ export default function useAuth() {
     },
     authenticate: useCallback((user: UserDAO) => {
       setUserToken(user);
+      setIsLoggedIn(true);
     }, []),
-    signout: useCallback(() => localStorage.removeItem(TOKEN_ID), []),
+    signOut: useCallback(() => signOut(), []),
   };
 }
 
