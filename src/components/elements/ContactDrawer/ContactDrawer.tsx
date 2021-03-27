@@ -12,7 +12,7 @@ import { readableDate } from "../../../utils/dateUtil";
 import Typography from "@material-ui/core/Typography";
 import { useNotification } from "../../atoms/Snackbar/Snackbar";
 import { useLibraryPouch } from "../../../common/hooks/UsePouch";
-import ScheduleNext from "../../molecules/ScheduleNext";
+import ScheduleNext from "../ScheduleNext";
 
 interface drawerProps {
   library: Library;

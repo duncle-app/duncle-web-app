@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import Library from "../../../model/library";
-import ContactDrawer from "../../organisms/ContactDrawer/ContactDrawer";
+import ContactDrawer from "../../elements/ContactDrawer/ContactDrawer";
 import { useHistory, useParams } from "react-router-dom";
-import NoteList from "../../molecules/NoteList/NoteList";
+import NoteList from "../../elements/NoteList/NoteList";
 import useStyles from "../../../global-styles";
 import SalesArea, { addSaleInputProps } from "../../atoms/Sales/SalesArea";
 import NewNote from "../../atoms/Note/NewNote";

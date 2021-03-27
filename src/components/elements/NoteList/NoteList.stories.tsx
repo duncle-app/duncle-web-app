@@ -4,7 +4,7 @@ import { newNotes } from "../../storybook-mocks/constants";
 import NoteDAO from "../../../model/noteDAO";
 
 export default {
-  title: "Molecules/NoteList",
+  title: "Elements/NoteList",
   component: NoteList,
 };
 

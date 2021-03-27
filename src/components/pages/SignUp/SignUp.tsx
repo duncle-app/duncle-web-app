@@ -5,7 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { Avatar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { Form } from "react-final-form";
-import { SignUpForm } from "../../organisms/SignUp/SignUpForm";
+import { SignUpForm } from "../../elements/SignUp/SignUpForm";
 import { AccountCircle } from "@material-ui/icons";
 import LoginService from "../../../services/LoginService";
 import NewUser from "../../../model/newUser";

@@ -3,7 +3,7 @@ import MockForm from "../../storybook-mocks/mockForm";
 import AddLibraryForm from "./AddLibraryForm";
 
 export default {
-  title: "Organisms/AddLibraryForm",
+  title: "Elements/AddLibraryForm",
   component: AddLibraryForm,
 };
 

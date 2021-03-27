@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Profile from "./Profile";
 
 export default {
-  title: "Molecules/Profile",
+  title: "Elements/Profile",
 };
 
 const mockHandler = () => console.log("Logging out!");

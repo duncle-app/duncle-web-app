@@ -10,7 +10,7 @@ import {
 import Login from "./components/pages/LogIn/Login";
 import { GlobalProvider } from "./common/GlobalContext";
 import SignUp from "./components/pages/SignUp/SignUp";
-import Navbar from "./components/molecules/Navbar/Navbar";
+import Navbar from "./components/elements/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
 import AllLibraries from "./components/pages/Dashboard/AllLibraries";
 import AddLibrary from "./components/pages/AddLibrary/AddLibrary";

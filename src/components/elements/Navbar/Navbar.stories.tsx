@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import { BrowserRouter } from "react-router-dom";
 
 export default {
-  title: "Molecules/Navbar",
+  title: "Elements/Navbar",
   component: Navbar,
 };
 

@@ -4,7 +4,7 @@ import MockForm from "../../storybook-mocks/mockForm";
 import { BrowserRouter } from "react-router-dom";
 
 export default {
-  title: `Organisms/LogInForm`,
+  title: `Elements/LogInForm`,
   component: LogInForm,
 };
 

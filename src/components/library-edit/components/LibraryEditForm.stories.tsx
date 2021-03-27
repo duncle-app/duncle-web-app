@@ -4,7 +4,7 @@ import MockForm from "../../storybook-mocks/mockForm";
 import EditLibrary from "./EditLibrary";
 
 export default {
-  title: "Organisms/EditLibrary",
+  title: "Elements/EditLibrary",
 };
 
 export const Props = () => (
