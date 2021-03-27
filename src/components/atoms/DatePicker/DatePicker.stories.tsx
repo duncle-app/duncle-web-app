@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import DatePicker from "./DatePicker";
 import MockForm from "../../storybook-mocks/mockForm";
 import DefaultButton from "../Button/DefaultButton";
@@ -7,13 +7,17 @@ export default {
   title: "Atoms/DatePicker",
 };
 
-export const Default = () => (
+const MockWrapper = ({ children }: PropsWithChildren<any>) => (
   <MockForm>
-    <div>
-      <DatePicker />
-    </div>
+    <div>{children}</div>
     <div>
       <DefaultButton type="submit">Submit</DefaultButton>
     </div>
   </MockForm>
+);
+
+export const Default = () => (
+  <MockWrapper>
+    <DatePicker />
+  </MockWrapper>
 );
