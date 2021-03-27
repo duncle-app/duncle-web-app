@@ -5,4 +5,4 @@ export default {
   title: "Atoms/Calendar",
 };
 
-export const withProps = () => <FullCalendar />;
+export const Default = () => <FullCalendar />;

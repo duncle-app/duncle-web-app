@@ -8,6 +8,6 @@ export default {
 
 const addSale = () => action("Added sale");
 
-export const withProps = () => (
+export const Default = () => (
   <SalesArea totalSales={50250} lastSale={2500} addSale={addSale} />
 );

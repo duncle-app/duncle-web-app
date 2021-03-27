@@ -8,7 +8,7 @@ export default {
   title: "Atoms/Test/PingCouch",
 };
 
-export const withProps = () => (
+export const Default = () => (
   <PingAnything
     name="Ping and update the db with a new name"
     callback={async () => {

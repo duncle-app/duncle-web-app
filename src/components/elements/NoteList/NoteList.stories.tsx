@@ -9,7 +9,7 @@ export default {
 };
 
 const notes: NoteDAO[] = newNotes;
-export const withProps = () => (
+export const Default = () => (
   <NoteList
     notes={notes}
     SubmitForm={(note) => alert(`Submitted ${note.message}`)}

@@ -8,7 +8,7 @@ export default {
 };
 const date = readableDate(dateNowIso());
 
-export const withProps = () => (
+export const Default = () => (
   <EditableNote
     id="testId"
     message="Sally wasn't feeling so great. I had to give her the people's elbow and show her what real pain looks like"

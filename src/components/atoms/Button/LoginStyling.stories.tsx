@@ -6,6 +6,6 @@ export default {
   title: "Atoms/Test/LoginStyling",
 };
 
-export const withProps = () => (
+export const Default = () => (
   <p className="achievement-name">This is a test to outline text</p>
 );

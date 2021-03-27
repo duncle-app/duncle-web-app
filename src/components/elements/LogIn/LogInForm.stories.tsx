@@ -8,7 +8,7 @@ export default {
   component: LogInForm,
 };
 
-export const withProps = () => (
+export const Default = () => (
   <MockForm>
     <BrowserRouter>
       <LogInForm />

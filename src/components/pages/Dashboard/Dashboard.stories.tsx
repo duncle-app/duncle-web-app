@@ -5,4 +5,4 @@ export default {
   title: "Pages/Dashboard",
 };
 
-export const withProps = () => <AllLibraries />;
+export const Default = () => <AllLibraries />;

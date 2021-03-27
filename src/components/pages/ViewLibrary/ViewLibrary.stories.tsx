@@ -9,7 +9,7 @@ export default {
   component: ViewLibrary,
 };
 
-export const withProps = () => (
+export const Default = () => (
   <GlobalContext.Provider value={{ currentLibrary: newLibrary }}>
     <Router>
       <ViewLibrary />

@@ -8,5 +8,5 @@ export default {
   decorators: [withKnobs],
 };
 
-// export const withProps = () =>
+// export const Default = () =>
 //     <Snackbar/>

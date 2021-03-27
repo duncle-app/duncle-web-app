@@ -6,4 +6,4 @@ export default {
   component: SignUp,
 };
 
-export const withProps = () => <SignUp />;
+export const Default = () => <SignUp />;

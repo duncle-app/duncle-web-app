@@ -6,7 +6,7 @@ export default {
   component: NewNote,
 };
 
-export const withProps = () => (
+export const Default = () => (
   <NewNote
     formSubmit={({ newNote }) => alert(`submitted! message: ${newNote}`)}
   />

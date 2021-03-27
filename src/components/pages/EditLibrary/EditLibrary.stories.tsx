@@ -9,7 +9,7 @@ export default {
   title: "Pages/EditLibrary",
 };
 
-export const withProps = () => (
+export const Default = () => (
   <GlobalContext.Provider value={{ currentLibrary: newLibrary }}>
     <MockForm>
       <EditLibraryController />

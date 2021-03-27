@@ -5,4 +5,4 @@ export default {
   title: "Pages/AddLibrary",
   component: AddLibrary,
 };
-export const withProps = () => <AddLibrary />;
+export const Default = () => <AddLibrary />;

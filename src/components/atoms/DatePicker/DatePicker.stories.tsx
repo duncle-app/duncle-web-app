@@ -7,7 +7,7 @@ export default {
   title: "Atoms/DatePicker",
 };
 
-export const withProps = () => (
+export const Default = () => (
   <MockForm>
     <div>
       <DatePicker />

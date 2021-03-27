@@ -7,7 +7,7 @@ export default {
   component: SignUpForm,
 };
 
-export const withProps = () => (
+export const Default = () => (
   <MockForm>
     <SignUpForm />
   </MockForm>

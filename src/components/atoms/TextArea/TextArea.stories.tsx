@@ -6,7 +6,7 @@ export default {
   title: "Atoms/TextArea",
   component: TextArea,
 };
-export const withProps = () => (
+export const Default = () => (
   <MockForm>
     <TextArea name="example" placeholderText="Minimum of 4 rows" />
   </MockForm>

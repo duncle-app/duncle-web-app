@@ -7,7 +7,7 @@ export default {
   component: AddLibraryForm,
 };
 
-export const withProps = () => (
+export const Default = () => (
   <MockForm>
     <AddLibraryForm />
   </MockForm>

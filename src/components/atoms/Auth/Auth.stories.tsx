@@ -6,7 +6,7 @@ export default {
   title: "Atoms/Auth",
 };
 
-export const withProps = () => {
+export const Default = () => {
   return (
     <GlobalProvider>
       <Auth />

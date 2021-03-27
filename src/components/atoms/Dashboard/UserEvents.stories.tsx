@@ -38,4 +38,4 @@ const rows = [
   createData("Should be green, this is today", normalDate, "Terry"),
 ];
 
-export const withProps = () => <UserEvents events={rows} />;
+export const Default = () => <UserEvents events={rows} />;

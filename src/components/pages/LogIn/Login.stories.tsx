@@ -7,7 +7,7 @@ export default {
   component: Login,
 };
 
-export const withProps = () => (
+export const Default = () => (
   <BrowserRouter>
     <Login />
   </BrowserRouter>

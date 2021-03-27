@@ -6,4 +6,4 @@ export default {
   component: TestDrawer,
 };
 
-export const withProps = () => <TestDrawer />;
+export const Default = () => <TestDrawer />;

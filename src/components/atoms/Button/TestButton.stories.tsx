@@ -42,4 +42,4 @@ export default {
   title: "Test/PingRemoteDB",
   component: PingRemoteDB,
 };
-export const withProps = () => <PingRemoteDB />;
+export const Default = () => <PingRemoteDB />;
