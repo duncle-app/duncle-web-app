@@ -1,16 +1,4 @@
-import React from "react";
 import Library from "../../../model/library";
-import { Grid } from "@material-ui/core";
-import CustomTextField from "../../atoms/TextField/CustomTextField";
-import FormSubmitButton from "../../atoms/Button/FormSubmitButton";
-import Form from "../../../common/Form";
-import Paper from "@material-ui/core/Paper";
-import useStyles from "../../../global-styles";
-
-interface LibraryEditProps {
-  library: Library;
-  formSubmit(editedLibrary: Library): any;
-}
 
 interface LabelProps {
   label: string;
@@ -18,7 +6,8 @@ interface LabelProps {
   isRequired: boolean;
 }
 
-export default function ({ library, formSubmit }: LibraryEditProps) {
+export default (currentLibrary: Library): LabelProps[] => {
+  const isRequired: boolean = true;
   const {
     street,
     city,
@@ -35,11 +24,9 @@ export default function ({ library, formSubmit }: LibraryEditProps) {
     assistant,
     assignedRep,
     extension,
-  } = library;
-  const { content, editLibrary } = useStyles();
-  const isRequired: boolean = true;
+  } = currentLibrary;
 
-  const formLabels: LabelProps[] = [
+  return [
     { label: "Library Name", currentValue: libraryName, isRequired },
     { label: "Librarian", currentValue: librarian, isRequired },
     { label: "Assistant", currentValue: assistant, isRequired: false },
@@ -56,27 +43,4 @@ export default function ({ library, formSubmit }: LibraryEditProps) {
     { label: "Level", currentValue: level, isRequired: false },
     { label: "Size", currentValue: size, isRequired: false },
   ];
-
-  return (
-    <Paper className={content}>
-      <Form onSubmit={formSubmit}>
-        <Grid container>
-          {formLabels.map(({ label, currentValue, isRequired }, index) => {
-            return (
-              <Grid xs={6} className={editLibrary}>
-                <CustomTextField
-                  name={label}
-                  defaultValue={currentValue}
-                  alsoInitialValue
-                  fullWidth={true}
-                  isRequired={isRequired}
-                />
-              </Grid>
-            );
-          })}
-        </Grid>
-        <FormSubmitButton DisplayText="Save Library" />
-      </Form>
-    </Paper>
-  );
-}
+};

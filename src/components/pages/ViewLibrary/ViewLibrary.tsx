@@ -8,12 +8,7 @@ import SalesArea, { addSaleInputProps } from "../../atoms/Sales/SalesArea";
 import NewNote from "../../atoms/Note/NewNote";
 import { GlobalContext } from "../../../common/GlobalContext";
 import NoteDAO from "../../../model/noteDAO";
-import {
-  newLibrary,
-  newLibrary2,
-  newNote,
-  NoLibrary,
-} from "../../storybook-mocks/constants";
+import { newLibrary2, NoLibrary } from "../../storybook-mocks/constants";
 import { useLibraryPouch, useUserPouch } from "../../../common/hooks/UsePouch";
 import userDAO from "../../../model/userDAO";
 import UserDAO from "../../../model/userDAO";
