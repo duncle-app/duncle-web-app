@@ -1,8 +1,6 @@
 import React from "react";
 import PingAnything from "./PingAnything";
 import { useLibraryPouch } from "../../../common/hooks/UsePouch";
-import { storiesOf } from "@storybook/react";
-import { Button } from "@material-ui/core";
 
 export default {
   title: "Atoms/Test/PingCouch",
@@ -13,6 +11,7 @@ export const Default = () => (
     name="Ping and update the db with a new name"
     callback={async () => {
       console.log("creating a connection");
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const { getAll, saveLibrary } = useLibraryPouch();
       try {
         const response = await getAll();
