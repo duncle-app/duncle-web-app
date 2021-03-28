@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import NoteList from "../../elements/NoteList/NoteList";
 import useStyles from "../../../global-styles";
 import SalesArea from "../../atoms/Sales/SalesArea";
-import NewNote from "../../atoms/Note/NewNote";
+import NewNote from "../../elements/Note/NewNote";
 import { GlobalContext } from "../../../common/GlobalContext";
 import { NoLibrary } from "../../storybook-mocks/constants";
 import { Grid } from "@material-ui/core";

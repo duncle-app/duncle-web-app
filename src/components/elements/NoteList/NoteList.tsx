@@ -1,5 +1,5 @@
 import React from "react";
-import EditableNote from "../../atoms/Note/EditableNote";
+import EditableNote from "../Note/EditableNote";
 import useStyles from "../../../global-styles";
 import NoteDAO from "../../../model/noteDAO";
 import { Grid } from "@material-ui/core";

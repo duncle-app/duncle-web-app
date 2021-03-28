@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Edit from "@material-ui/icons/Edit";
-import TextArea from "../TextArea/TextArea";
+import TextArea from "../../atoms/TextArea/TextArea";
 import { Form } from "react-final-form";
 import Clear from "@material-ui/icons/Clear";
 import NoteDAO from "../../../model/noteDAO";
