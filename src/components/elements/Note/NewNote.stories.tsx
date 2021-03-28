@@ -2,7 +2,7 @@ import React from "react";
 import NewNote from "./NewNote";
 
 export default {
-  title: "Atoms/NewNote",
+  title: "Elements/NewNote",
   component: NewNote,
 };
 

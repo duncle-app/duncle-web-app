@@ -4,7 +4,7 @@ import { dateNowIso, readableDate } from "../../../utils/dateUtil";
 import MockForm from "../../storybook-mocks/mockForm";
 
 export default {
-  title: "Atoms/EditableNote",
+  title: "Elements/EditableNote",
 };
 const date = readableDate(dateNowIso());
 

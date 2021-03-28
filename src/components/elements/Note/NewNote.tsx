@@ -7,6 +7,11 @@ import Button from "@material-ui/core/Button";
 import DefaultButton from "../../atoms/Button/DefaultButton";
 import useStyles from "../../../global-styles";
 import { PhoneDisabled } from "@material-ui/icons";
+import {
+  ContactedByEmail,
+  ContactedByPhone,
+  ContactedInPerson,
+} from "../../atoms/DatePicker/DPButtons";
 
 interface props {
   // @ts-ignore
@@ -28,10 +33,9 @@ export default function ({ formSubmit }: props) {
             placeholderText="Enter a new note here"
           />
           <div>
-            <Button variant="outlined" type="submit">
-              Save Note{" "}
-              <AddBoxIcon style={{ color: "green", paddingLeft: ".1em" }} />
-            </Button>
+            <ContactedByPhone />
+            <ContactedByEmail />
+            <ContactedInPerson />
           </div>
           <div className={paddingTwo}>
             <Button variant="outlined" onClick={onNoAnswer}>
