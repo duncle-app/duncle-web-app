@@ -5,10 +5,11 @@ import { roundDecimals, usePouch } from "../hooks/UsePouch";
 import { GlobalContext } from "../GlobalContext";
 import { useMutation, useQueryClient } from "react-query";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
+import useAuth from "../hooks/Auth/useAuth";
 
 export default () => {
   const { currentLibrary } = useContext(GlobalContext);
-  const { getAuthenticatedUser } = useContext(GlobalContext);
+  const { getAuthenticatedUser } = useAuth();
   const { setSuccess, setError } = useNotification();
   const queryClient = useQueryClient();
 

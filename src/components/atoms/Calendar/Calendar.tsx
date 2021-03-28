@@ -1,10 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import FullCalendar, {
   DateSelectArg,
   EventApi,
   EventClickArg,
   EventContentArg,
-  formatDate,
 } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -13,22 +12,22 @@ import DateTimeDialog, { DateDialogReturn } from "../Dialogs/DateTimeDialog";
 import { v4 as uuidv4 } from "uuid";
 
 import "./main.css";
-import { GlobalContext } from "../../../common/GlobalContext";
 import event from "../../../model/event";
 import { dateNowIso, readableDate } from "../../../utils/dateUtil";
 import UserDAO from "../../../model/userDAO";
 import { useUserPouch } from "../../../common/hooks/UsePouch";
 import { useNotification } from "../Snackbar/Snackbar";
+import useAuth from "../../../common/hooks/Auth/useAuth";
 
 // todo - fix this
 export default function ({ initialEvents }: any) {
   const [weekendsVisible, setWeekendsVisible] = useState<boolean>(true);
-  const [currentEvents, setCurrentEvents] = useState<EventApi[]>([]);
+  const [_, setCurrentEvents] = useState<EventApi[]>([]);
   const [selectedDates, setSelectedDates] = useState<DateSelectArg>();
   const { setSuccess, setError } = useNotification();
 
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const { authenticate, getAuthenticatedUser } = useContext(GlobalContext);
+  const { authenticate, getAuthenticatedUser } = useAuth();
   const { updateUser } = useUserPouch();
 
   const handleWeekendsToggle = () => {

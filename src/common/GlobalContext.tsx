@@ -5,9 +5,6 @@ import { NoLibrary } from "../components/storybook-mocks/constants";
 import { Color as Severity } from "@material-ui/lab";
 
 interface ContextProps {
-  isAuthenticated: boolean;
-  authenticate(): void;
-  useAuth(): useAuthReturn;
   lang: string;
   theme: string;
 }
@@ -24,18 +21,12 @@ export let initialState: SnackbarStateProps = {
 
 // @ts-ignore
 export function GlobalProvider({ children }) {
-  const { isAuthenticated, authenticate, getAuthenticatedUser } = useAuth();
   const [currentLibrary, setCurrentLibrary] = useState<Library>(NoLibrary);
   const [message, setMessage] = useState<SnackbarStateProps>(initialState);
 
   return (
     <GlobalContext.Provider
       value={{
-        lang: "en",
-        theme: "dark",
-        isAuthenticated,
-        authenticate,
-        getAuthenticatedUser,
         currentLibrary,
         setCurrentLibrary,
         message,

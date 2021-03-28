@@ -14,12 +14,13 @@ import { GlobalContext } from "../../../common/GlobalContext";
 import User from "../../../model/user";
 import { useHistory } from "react-router-dom";
 import { useNotification } from "../../atoms/Snackbar/Snackbar";
+import useAuth from "../../../common/hooks/Auth/useAuth";
 
 export default function Login() {
   const { paper, avatar } = useStyles();
   const history = useHistory();
   const loginService = new LoginService();
-  const { authenticate } = useContext(GlobalContext);
+  const { authenticate } = useAuth();
   const { setError, setSuccess } = useNotification();
 
   async function submitForm(user: User) {

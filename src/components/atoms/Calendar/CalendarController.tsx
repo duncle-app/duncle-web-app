@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Calendar from "./Calendar";
-import { GlobalContext } from "../../../common/GlobalContext";
 import event from "../../../model/event";
+import useAuth from "../../../common/hooks/Auth/useAuth";
 
 export default function () {
   const INITIAL_EVENT_STATE = [null];
   const [events, setEvents] = React.useState(INITIAL_EVENT_STATE);
-  const { getAuthenticatedUser } = useContext(GlobalContext);
+  const { getAuthenticatedUser } = useAuth();
 
   useEffect(() => {
     const user = getAuthenticatedUser();

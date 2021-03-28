@@ -3,7 +3,7 @@ import { cloneDeep, isEqual } from "lodash";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 import { useLibraryPouch } from "./UsePouch";
 import Library from "../../model/library";
-import useSaveLibrary from "../queries/useSaveLibrary";
+import useSaveLibrary from "../queries/useSaveLibraryQuery";
 import library from "../../model/library";
 import { useContext } from "react";
 import { GlobalContext } from "../GlobalContext";

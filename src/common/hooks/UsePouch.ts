@@ -7,6 +7,7 @@ import NewLibrary from "../../model/newLibrary";
 import { useContext } from "react";
 import { GlobalContext } from "../GlobalContext";
 import { isEmpty } from "lodash";
+import useAuth from "./Auth/useAuth";
 
 export type PouchReturnProps = {
   localDB: PouchDB.Database;
@@ -109,7 +110,7 @@ class EnvVariableNotSetError extends Error {
 interface useLibraryPouchReturn {
   getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>>;
   getLibrary(libraryId: string): any;
-    saveLibrary(library: Library): Promise<Library>;
+  saveLibrary(library: Library): Promise<Library>;
   addNewLibrary(library: NewLibrary): Promise<Library>;
 }
 
@@ -120,7 +121,7 @@ export function roundDecimals(library: Library | NewLibrary) {
 
 export function useLibraryPouch(): useLibraryPouchReturn {
   // value.username
-  const { getAuthenticatedUser } = useContext(GlobalContext);
+  const { getAuthenticatedUser } = useAuth();
 
   const USER_DB_PREFIX = "user_";
   const { localPouch } = usePouch(

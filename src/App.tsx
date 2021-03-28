@@ -45,8 +45,8 @@ export default () => {
   return (
     <div className="App">
       <CssBaseline />
-      <QueryClientProvider client={queryClient}>
-        <GlobalProvider>
+      <GlobalProvider>
+        <QueryClientProvider client={queryClient}>
           <Router>
             <Navbar />
             <Snackbar />
@@ -72,7 +72,7 @@ export default () => {
                 path="/library/:libraryId"
                 component={ViewLibrary}
               />
-              <PrivateRoute
+              <Route
                 exact
                 path="/library/:libraryId/edit"
                 component={EditLibraryController}
@@ -81,8 +81,8 @@ export default () => {
             </Switch>
             <ReactQueryDevtools />
           </Router>
-        </GlobalProvider>
-      </QueryClientProvider>
+        </QueryClientProvider>
+      </GlobalProvider>
     </div>
   );
 };

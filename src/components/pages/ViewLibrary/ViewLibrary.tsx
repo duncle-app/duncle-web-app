@@ -19,19 +19,15 @@ import { Grid } from "@material-ui/core";
 import DefaultButton from "../../atoms/Button/DefaultButton";
 import event from "../../../model/event";
 import moment from "moment";
+import useAuth from "../../../common/hooks/Auth/useAuth";
 
 interface p {
   libraryId: string;
 }
 
 function ViewLibrary() {
-  // todo - consult with aaron, there's probably a better way to do this
-  const {
-    currentLibrary,
-    setCurrentLibrary,
-    authenticate,
-    getAuthenticatedUser,
-  } = useContext(GlobalContext);
+  const { currentLibrary, setCurrentLibrary } = useContext(GlobalContext);
+  const { authenticate, getAuthenticatedUser } = useAuth();
   const { content, alignToDrawer, paddingOne, paddingTopTiny } = useStyles();
 
   const [totalSales, setTotalSales] = useState<number>(
@@ -54,9 +50,8 @@ function ViewLibrary() {
     onBack();
   }
 
-  function onEdit(library: Library): void {
-    console.log("on edit clicked...");
-    history.push(`/library/${libraryId}/edit`);
+  function onEdit(id: string): void {
+    history.push(`/library/${id}/edit`);
   }
 
   async function submitNewEditableNote(note: NoteDAO) {
@@ -206,9 +201,7 @@ function ViewLibrary() {
     <div className={alignToDrawer}>
       <div className={paddingTopTiny}>
         <DefaultButton onClick={onBack}>Back</DefaultButton>
-        <DefaultButton onClick={() => onEdit(currentLibrary)}>
-          Edit
-        </DefaultButton>
+        <DefaultButton onClick={() => onEdit(libraryId)}>Edit</DefaultButton>
       </div>
       <ContactDrawer
         library={currentLibrary}

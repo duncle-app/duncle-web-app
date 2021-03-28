@@ -1,12 +1,10 @@
 import Library from "../../../model/library";
 import React, { useContext, useEffect, useState } from "react";
 import { Card } from "@material-ui/core";
-import useStyles from "../../../global-styles";
 import Grid from "@material-ui/core/Grid/Grid";
 import Table from "../../elements/Table/Table";
 import { useHistory } from "react-router-dom";
 import { useLibraryPouch } from "../../../common/hooks/UsePouch";
-import { NoLibrary } from "../../storybook-mocks/constants";
 import { GlobalContext } from "../../../common/GlobalContext";
 
 type PouchRow = {
