@@ -26,7 +26,7 @@ export default function ({ initialEvents }: any) {
   const [selectedDates, setSelectedDates] = useState<DateSelectArg>();
   const { setSuccess, setError } = useNotification();
 
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isOpen, setOpen] = React.useState<boolean>(false);
   const { authenticate, getAuthenticatedUser } = useAuth();
   const { updateUser } = useUserPouch();
 
@@ -35,7 +35,7 @@ export default function ({ initialEvents }: any) {
   };
 
   const handleDateSelect = (selectInfo: DateSelectArg) => {
-    setIsOpen(true);
+    setOpen(true);
     setSelectedDates(selectInfo);
   };
 
@@ -88,10 +88,10 @@ export default function ({ initialEvents }: any) {
         allDay: false,
       });
     }
-    setIsOpen(false);
+    setOpen(false);
   };
 
-  const cancel = () => setIsOpen(false);
+  const cancel = () => setOpen(false);
 
   const handleEventClick = (clickInfo: EventClickArg) => {
     if (

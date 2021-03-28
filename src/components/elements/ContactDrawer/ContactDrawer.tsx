@@ -42,7 +42,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
     paddingTop,
     paddingTopTwo,
   } = useStyles();
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isOpen, setOpen] = React.useState<boolean>(false);
   const [nextContactDate, setNextContactDate] = useState<string | undefined>(
     dateNextContact
   );
@@ -52,7 +52,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
 
   const { saveLibrary } = useLibraryPouch();
 
-  const cancel = () => setIsOpen(false);
+  const cancel = () => setOpen(false);
 
   // todo - this logic is duplicated from EditLibraryController
   // @ts-ignore
@@ -90,7 +90,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
         allDay: selectedDates.allDay,
       });
     }
-    setIsOpen(false);
+    setOpen(false);
   };
 
   return (
@@ -152,7 +152,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
                     <Typography variant="h6">View Calendar</Typography>
                     <EventNote
                       className={`${calendarIcon} ${black}`}
-                      onClick={() => setIsOpen(true)}
+                      onClick={() => setOpen(true)}
                     />
                   </div>
                   <div className={paddingTop}>
