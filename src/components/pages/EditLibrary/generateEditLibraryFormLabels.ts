@@ -1,6 +1,6 @@
 import Library from "../../../model/library";
 
-interface LabelProps {
+export interface LabelProps {
   label: string;
   currentValue: string | number | undefined;
   isRequired: boolean;

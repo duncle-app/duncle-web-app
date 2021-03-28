@@ -1,7 +1,6 @@
-import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, {Dispatch, SetStateAction, useCallback, useState} from "react";
+import {useHistory} from "react-router-dom";
 import UserDAO from "../../../model/userDAO";
-import { useUserPouch } from "../UsePouch";
 
 export type useAuthReturn = {
   isAuthenticated: boolean;

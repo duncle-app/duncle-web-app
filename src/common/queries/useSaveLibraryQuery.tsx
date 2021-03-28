@@ -1,16 +1,16 @@
-import PouchDB from "pouchdb";
 import React, { useContext } from "react";
 import { Library } from "../../model";
-import { cloneDeep, isEmpty, isEqual } from "lodash";
+import { isEmpty, isEqual } from "lodash";
 import { roundDecimals, usePouch } from "../hooks/UsePouch";
 import { GlobalContext } from "../GlobalContext";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 
 export default () => {
   const { currentLibrary } = useContext(GlobalContext);
   const { getAuthenticatedUser } = useContext(GlobalContext);
-  const { setSuccess, setInfo, setError } = useNotification();
+  const { setSuccess, setError } = useNotification();
+  const queryClient = useQueryClient();
 
   const USER_DB_PREFIX = "user_";
   const { localPouch } = usePouch(
@@ -21,6 +21,7 @@ export default () => {
   const saveLibrary = (library: Library): Promise<void> => {
     // this is done just to get the _rev and _id, since our form doesn't store that info
     library = { ...currentLibrary, ...library };
+    console.log("new lib", library);
 
     if (isEmpty(library._rev) || library._rev === "norev") {
       throw new Error(`Error code: 51. _rev is undefined. Cannot save library`);
@@ -40,9 +41,12 @@ export default () => {
     onSuccess: (_, library) => {
       // todo - update the queryCache to use this new saved library
       // i.e. queryCache.currentLibrary = library
+      console.log("save library", library);
+      // queryClient.invalidateQueries()
       setSuccess("Successfully saved library");
     },
-    onError: (e) => {
+    onError: (e, library) => {
+      console.log("save library", library);
       setError(`${e}`);
     },
   });
