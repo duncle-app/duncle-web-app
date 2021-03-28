@@ -1,10 +1,10 @@
 import React from "react";
 import Form from "../../../common/Form";
-import { Paper } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 import TextArea from "../../atoms/TextArea/TextArea";
 import Button from "@material-ui/core/Button";
 import useStyles from "../../../global-styles";
-import { PhoneDisabled } from "@material-ui/icons";
+import PhoneDisabled from "@material-ui/icons/PhoneDisabled";
 import { ContactButtonsRow } from "../../atoms/DatePicker/DPButtons";
 
 interface props {
