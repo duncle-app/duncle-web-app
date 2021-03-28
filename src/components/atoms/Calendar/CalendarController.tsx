@@ -8,6 +8,7 @@ export default function () {
   const [events, setEvents] = React.useState(INITIAL_EVENT_STATE);
   const { getAuthenticatedUser } = useAuth();
 
+  // todo - why does this need to be in a useEffect?
   useEffect(() => {
     const user = getAuthenticatedUser();
 
