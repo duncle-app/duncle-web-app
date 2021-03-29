@@ -13,36 +13,29 @@ import { GlobalContext } from "../GlobalContext";
 import useAuth from "./Auth/useAuth";
 import { useLibraryPouch, useUserPouch } from "./UsePouch";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
+import useSaveLibraryQuery from "../queries/useSaveLibraryQuery";
 
 export default () => {
   const { currentLibrary, setCurrentLibrary } = useContext(GlobalContext);
   const { authenticate, getAuthenticatedUser } = useAuth();
 
-  const [totalSales, setTotalSales] = useState<number>(
-    currentLibrary.totalSales
-  );
-  const [lastSale, setlastSale] = useState<number>(currentLibrary.lastSale);
-  const { saveLibrary } = useLibraryPouch();
+  const { mutate: saveLibrary } = useSaveLibraryQuery();
   const { updateUser } = useUserPouch();
 
   const { setSuccess, setError } = useNotification();
 
   async function submitNewEditableNote(note: NoteDAO) {
     console.log("submitting editable note", note);
-    const updatedLibrary: Library = await editNote(currentLibrary, note);
-    console.log("log for me", updatedLibrary);
-    jankUpdateLibrary(updatedLibrary);
+    editNote(currentLibrary, note);
+    // todo - add logic to auto render the new component from RQ instead of calling this
+    // console.log("log for me", updatedLibrary);
+    // jankUpdateLibrary(updatedLibrary);
   }
 
   // @ts-ignore
   async function submitNewNote({ newNote: message }) {
     const { firstName }: userDAO = await getAuthenticatedUser();
-    const updatedLibrary: Library = await saveNote(
-      currentLibrary,
-      message,
-      firstName
-    );
-    jankUpdateLibrary(updatedLibrary);
+    saveNote(currentLibrary, message, firstName);
   }
 
   function jankUpdateLibrary(updatedLibrary: Library) {
@@ -59,14 +52,14 @@ export default () => {
     library.notes = library.notes.map((n) => (n.id === note.id ? note : n));
     console.log("library notes", library.notes);
 
-    return await saveLibrary(library);
+    saveLibrary(library);
   }
 
-  async function saveNote(
+  function saveNote(
     { notes, ...rest }: Library,
     message: string,
     author: string
-  ): Promise<Library> {
+  ): void {
     const newSavedNote: NoteDAO = {
       id: uuidv4(),
       message,
@@ -80,7 +73,7 @@ export default () => {
       dateUpdated: dateNowIso(),
     };
 
-    return await saveLibrary(newLibrary);
+    saveLibrary(newLibrary);
   }
 
   /**
@@ -149,23 +142,18 @@ export default () => {
     }
   }
 
-  const addSale = async ({ newSale }: addSaleInputProps) => {
+  const addSale = async (newSale: number, library: Library) => {
+    debugger;
     // subtract 7% for S&H
     const withShippingAndHandling: number = newSale * 0.93;
-    const withNewSale: number = totalSales + withShippingAndHandling;
+    const withNewSale: number = library.totalSales + withShippingAndHandling;
 
-    currentLibrary.lastSale = withShippingAndHandling;
-    currentLibrary.totalSales = withNewSale;
+    library.lastSale = withShippingAndHandling;
+    library.totalSales = withNewSale;
 
-    try {
-      const { _rev } = await saveLibrary(currentLibrary);
-      currentLibrary._rev = _rev;
-      setlastSale(currentLibrary.lastSale);
-      setTotalSales(currentLibrary.totalSales);
-      setSuccess(`Success! The total after S&H is ${withShippingAndHandling}`);
-    } catch (e) {
-      setError(`Failed to add the new sale ${e}`);
-    }
+    console.log({ library });
+    saveLibrary(library);
+    setSuccess(`Success! The total after S&H is ${withShippingAndHandling}`);
 
     // todo - add "undo last sale" button?
   };
@@ -175,7 +163,5 @@ export default () => {
     submitNewNote,
     handleNewAppointment,
     addSale,
-    totalSales,
-    lastSale,
   };
 };

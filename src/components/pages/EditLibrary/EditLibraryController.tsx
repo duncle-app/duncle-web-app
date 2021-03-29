@@ -39,7 +39,7 @@ export default function EditLibraryController() {
 
   return (
     <>
-      {isError && <h2>Error, try again</h2>}
+      {isError && <p>Error, try again</p>}
       {isSuccess && (
         <Paper className={content}>
           <Form

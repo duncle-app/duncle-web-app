@@ -2,6 +2,7 @@ import { usePouch } from "../hooks/UsePouch";
 import { useQuery } from "react-query";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 import useAuth from "../hooks/Auth/useAuth";
+import { libraryKey } from "../constants/queryKeys";
 
 export default (uuid: string) => {
   const { getAuthenticatedUser } = useAuth();
@@ -14,7 +15,7 @@ export default (uuid: string) => {
 
   const fetchSingleDoc = () => localPouch.get(uuid);
 
-  return useQuery(["getLibrary", uuid], fetchSingleDoc, {
+  return useQuery(libraryKey(uuid), fetchSingleDoc, {
     onError: () => {
       setError(`Couldn't find a matching record for ID: ${uuid}`);
     },

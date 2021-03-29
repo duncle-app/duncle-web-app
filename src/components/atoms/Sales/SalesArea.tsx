@@ -25,9 +25,7 @@ export default ({ totalSales, lastSale, addSale }: props) => {
           Total Sales: ${totalSales} Last Sale: ${lastSale}
         </Typography>
         <div className={smallerHeight}>
-          <Form onSubmit={addSale}>
-            <NumberTextField name="New Sale" />
-          </Form>
+          <NumberTextField name="New Sale" />
         </div>
       </Paper>
     </Form>

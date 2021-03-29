@@ -6,6 +6,7 @@ import { GlobalContext } from "../GlobalContext";
 import { useMutation, useQueryClient } from "react-query";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 import useAuth from "../hooks/Auth/useAuth";
+import { libraryKey, saveLibraryKey } from "../constants/queryKeys";
 
 export default () => {
   const { currentLibrary } = useContext(GlobalContext);
@@ -18,8 +19,9 @@ export default () => {
     `${USER_DB_PREFIX}${getAuthenticatedUser().username}`
   );
 
-  // @ts-ignore
-  const saveLibrary = (library: Library): Promise<void> => {
+  const saveLibrary = (
+    library: Library
+  ): Promise<PouchDB.Core.Response | void> => {
     // this is done just to get the _rev and _id, since our form doesn't store that info
     library = { ...currentLibrary, ...library };
     console.log("new lib", library);
@@ -36,14 +38,22 @@ export default () => {
     if (!isEqual(currentLibrary, library)) {
       return localPouch.put(library);
     }
+    // no op promise, just so the types don't complain.. probably a better way to do this
+    return new Promise(() => Promise.resolve());
   };
 
-  return useMutation(["saveLibrary"], saveLibrary, {
-    onSuccess: (_, library) => {
-      // todo - update the queryCache to use this new saved library
-      // i.e. queryCache.currentLibrary = library
-      console.log("save library", library);
-      // queryClient.invalidateQueries()
+  return useMutation(saveLibraryKey, saveLibrary, {
+    onSuccess: (response, library) => {
+      if (response) {
+        const updatedLibrary: Library = {
+          ...library,
+          _rev: response.rev,
+          _id: response.id,
+        };
+        queryClient.setQueryData(libraryKey(response.id), updatedLibrary);
+        queryClient.invalidateQueries(libraryKey(response.id));
+        console.log(`invalidated: ${libraryKey(response.id)}`);
+      }
       setSuccess("Successfully saved library");
     },
     onError: (e, library) => {
