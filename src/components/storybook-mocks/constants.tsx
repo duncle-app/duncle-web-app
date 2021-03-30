@@ -153,10 +153,6 @@ export const newNote: NoteDAO = {
   author: "Mr Sir",
 };
 
-export const mockFunction = () => {
-  console.log("calling function!");
-};
-
 function setUserToken(user: UserDAO) {
   const now = new Date();
   const oneMinute = 60000;

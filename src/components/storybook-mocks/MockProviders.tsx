@@ -1,17 +1,12 @@
-import React, { Context } from "react";
-import { HasChildrenProps } from "../../duncleTypes";
-
-export default function ({ children }: HasChildrenProps) {
-  return (
-    <MockContext.Provider
-      value={{
-        authenticate: () => console.log("mock authenticated"),
-      }}
-    >
-      {children}
-    </MockContext.Provider>
-  );
-}
-
+import { mockToken } from "./constants";
+import React, { PropsWithChildren } from "react";
 // @ts-ignore
-export const MockContext: Context = React.createContext({});
+import { LocalStorageMock } from "@react-mock/localstorage";
+
+export const LocalStorageMockProvider = ({
+  children,
+}: PropsWithChildren<any>) => (
+  <LocalStorageMock items={{ authCredentials: mockToken }}>
+    {children}
+  </LocalStorageMock>
+);

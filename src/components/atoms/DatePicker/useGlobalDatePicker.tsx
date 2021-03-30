@@ -13,7 +13,7 @@ interface ReturnProps {
 export default (): ReturnProps => {
   const { setOpen } = useGlobalDatePickerState();
   const { currentLibrary } = useLibraryState();
-  const { mutate: saveLibrary } = useSaveLibraryQuery();
+  const { mutate: saveLibrary, isSuccess } = useSaveLibraryQuery();
 
   const handleOpen = () => {
     setOpen(true);
@@ -22,6 +22,10 @@ export default (): ReturnProps => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  if (isSuccess) {
+    handleClose();
+  }
 
   const handleSubmit = (
     nextAppointment: string,

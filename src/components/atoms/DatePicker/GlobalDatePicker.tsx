@@ -7,8 +7,6 @@ import Button from "@material-ui/core/Button";
 import { DateTimePicker } from "@material-ui/pickers";
 import DatePickerWrapper from "./DatePickerWrapper";
 import useGlobalDatePicker from "./useGlobalDatePicker";
-import { flexCenterCss } from "../../../common/styles/FlexCenter";
-import styled from "styled-components";
 import { useGlobalDatePickerState } from "../../../common/providers/GlobalDatePickerProvider";
 import camelize from "../../../utils/camelize";
 import { dateNowIso } from "../../../utils/dateUtil";
@@ -22,16 +20,13 @@ export default ({ contactType }: Props) => {
   const label: string = camelize("Next appointment");
   const defaultDate = dateNowIso();
   const [datePickerValue, setDatePickerValue] = useState(defaultDate);
+  console.log({ datePickerValue });
   const { isOpen } = useGlobalDatePickerState();
   const { handleClose, handleSubmit } = useGlobalDatePicker();
 
-  const CenteredDialog = styled(Dialog)`
-    ${flexCenterCss};
-  `;
-
   return (
     <div>
-      <CenteredDialog
+      <Dialog
         open={isOpen}
         onClose={handleClose}
         closeAfterTransition
@@ -51,7 +46,7 @@ export default ({ contactType }: Props) => {
               variant="static"
               style={{ minWidth: "200px" }}
               onChange={(momentDate) => {
-                if (momentDate !== null) {
+                if (momentDate) {
                   setDatePickerValue(momentDate.format());
                 }
               }}
@@ -74,7 +69,7 @@ export default ({ contactType }: Props) => {
             OK
           </Button>
         </DialogActions>
-      </CenteredDialog>
+      </Dialog>
     </div>
   );
 };
