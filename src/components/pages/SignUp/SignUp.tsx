@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import useStyles from "../../../global-styles";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,17 +9,17 @@ import { SignUpForm } from "../../elements/SignUp/SignUpForm";
 import { AccountCircle } from "@material-ui/icons";
 import LoginService from "../../../services/LoginService";
 import NewUser from "../../../model/newUser";
-import { GlobalContext } from "../../../common/GlobalContext";
 import UserDAO from "../../../model/userDAO";
 import { useHistory } from "react-router-dom";
 import { useNotification } from "../../atoms/Snackbar/Snackbar";
-import { isEmpty, isEqual } from "lodash";
+import { isEqual } from "lodash";
+import useAuth from "../../../common/hooks/Auth/useAuth";
 
 export default function SignUp() {
   const classes = useStyles();
   const history = useHistory();
   const loginService = new LoginService();
-  const { authenticate } = useContext(GlobalContext);
+  const { authenticate } = useAuth();
   const { setError, setSuccess } = useNotification();
 
   async function submitForm(newUser: NewUser) {

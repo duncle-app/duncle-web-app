@@ -8,7 +8,7 @@ import {
   Switch,
 } from "react-router-dom";
 import Login from "./components/pages/LogIn/Login";
-import { GlobalProvider } from "./common/GlobalContext";
+import { GlobalProvider } from "./common/providers/GlobalProvider";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/elements/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
@@ -47,7 +47,6 @@ export default () => {
     <div className="App">
       <CssBaseline />
       <GlobalProvider>
-        <GlobalDatePickerProvider>
           <QueryClientProvider client={queryClient}>
             <Router>
               <Navbar />
@@ -92,7 +91,6 @@ export default () => {
               <ReactQueryDevtools />
             </Router>
           </QueryClientProvider>
-        </GlobalDatePickerProvider>
       </GlobalProvider>
     </div>
   );

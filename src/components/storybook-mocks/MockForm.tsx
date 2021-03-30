@@ -4,11 +4,12 @@ import { action } from "@storybook/addon-actions";
 
 export default ({ children }: PropsWithChildren<any>) => (
   <Form
-    onSubmit={action("submit")}
+    onSubmit={() => {
+      action("submit");
+      console.log("submitting");
+    }}
     render={({ handleSubmit }) => (
-      <>
-        <form onSubmit={handleSubmit}>{children}</form>
-      </>
+      <form onSubmit={handleSubmit}>{children}</form>
     )}
   />
 );

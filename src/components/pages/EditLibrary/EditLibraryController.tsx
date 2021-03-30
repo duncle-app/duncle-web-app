@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../../../common/GlobalContext";
+import React from "react";
 import useSaveLibrary from "../../../common/queries/useSaveLibraryQuery";
 import Library from "../../../model/library";
 import { useHistory, useParams } from "react-router-dom";
@@ -13,9 +12,10 @@ import generateEditLibraryFormLabels, {
   LabelProps,
 } from "./generateEditLibraryFormLabels";
 import useLibraryQuery from "../../../common/queries/useLibraryQuery";
+import { useLibraryState } from "../../../common/providers/LibraryProvider";
 
 export default function EditLibraryController() {
-  const { setCurrentLibrary } = useContext(GlobalContext);
+  const { setCurrentLibrary } = useLibraryState();
   let { libraryId } = useParams<{ libraryId: string }>();
   const { data: library, isLoading, isSuccess, isError } = useLibraryQuery(
     libraryId

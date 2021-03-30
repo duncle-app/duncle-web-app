@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import ContactDrawer from "../../elements/ContactDrawer/ContactDrawer";
 import { useHistory, useParams } from "react-router-dom";
 import NoteList from "../../elements/NoteList/NoteList";
 import useStyles from "../../../global-styles";
 import SalesArea from "../../atoms/Sales/SalesArea";
 import NewNote from "../../elements/Note/NewNote";
-import { GlobalContext } from "../../../common/GlobalContext";
-import { NoLibrary } from "../../storybook-mocks/constants";
 import { Grid } from "@material-ui/core";
 import DefaultButton from "../../atoms/Button/DefaultButton";
 import useUpdateLibrary from "../../../common/hooks/useUpdateLibrary";

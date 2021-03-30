@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Library } from "../../model";
 import { isEmpty, isEqual } from "lodash";
 import { roundDecimals, usePouch } from "../hooks/UsePouch";
-import { GlobalContext } from "../GlobalContext";
 import { useMutation, useQueryClient } from "react-query";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 import useAuth from "../hooks/Auth/useAuth";
 import { libraryKey, saveLibraryKey } from "../constants/queryKeys";
+import { useLibraryState } from "../providers/LibraryProvider";
 
 export default () => {
-  const { currentLibrary } = useContext(GlobalContext);
+  const { currentLibrary } = useLibraryState();
   const { getAuthenticatedUser } = useAuth();
   const { setSuccess, setError } = useNotification();
   const queryClient = useQueryClient();

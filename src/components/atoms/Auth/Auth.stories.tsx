@@ -1,6 +1,8 @@
-import React, { useContext } from "react";
-import { GlobalContext, GlobalProvider } from "../../../common/GlobalContext";
+import React from "react";
+import { GlobalProvider } from "../../../common/providers/GlobalProvider";
 import PingAnything from "../Button/PingAnything";
+import useAuth from "../../../common/hooks/Auth/useAuth";
+import { dummyUserDAO } from "../../storybook-mocks/constants";
 
 export default {
   title: "Atoms/Auth",
@@ -15,13 +17,13 @@ export const Default = () => {
 };
 
 const Auth = () => {
-  const { isAuthenticated, authenticate } = useContext(GlobalContext);
+  const { isAuthenticated, authenticate } = useAuth();
 
   return (
     <PingAnything
       callback={() => {
-        console.log("authenticating", authenticate());
-        const key = isAuthenticated({ id: "value101" });
+        console.log("authenticating", authenticate(dummyUserDAO));
+        const key = isAuthenticated();
         console.log("is authenticated!", key);
       }}
       name="Ping me"

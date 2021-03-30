@@ -1,6 +1,5 @@
-import React, { Component, useContext } from "react";
-import { Route, Redirect } from "react-router-dom";
-import { GlobalContext } from "../../../common/GlobalContext";
+import React, { Component } from "react";
+import { Redirect, Route } from "react-router-dom";
 import useAuth from "../../../common/hooks/Auth/useAuth";
 
 // @ts-ignore

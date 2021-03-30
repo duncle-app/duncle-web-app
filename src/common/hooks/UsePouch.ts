@@ -4,8 +4,6 @@ import UserDAO from "../../model/userDAO";
 import Library from "../../model/library";
 import User from "../../model/user";
 import NewLibrary from "../../model/newLibrary";
-import { useContext } from "react";
-import { GlobalContext } from "../GlobalContext";
 import { isEmpty } from "lodash";
 import useAuth from "./Auth/useAuth";
 

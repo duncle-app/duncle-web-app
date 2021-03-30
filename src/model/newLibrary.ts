@@ -1,5 +1,7 @@
 import NoteDAO from "./noteDAO";
 
+export type LastContactType = "email" | "inPerson" | "phone";
+
 export default interface NewLibrary {
   _id: string;
   libraryName: string;
@@ -22,6 +24,7 @@ export default interface NewLibrary {
   extension?: string;
   dateLastSale?: string;
   dateLastContact?: string;
+  lastContactType?: LastContactType;
   dateNextContact?: string;
   notes: NoteDAO[];
 }

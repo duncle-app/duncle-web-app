@@ -1,14 +1,14 @@
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import React, { useContext } from "react";
+import React from "react";
 import { isEqual } from "lodash";
 import {
-  GlobalContext,
+  useNotificationState,
   initialState as initialMessageState,
-} from "../../../common/GlobalContext";
+} from "../../../common/providers/NotificationProvider";
 
 export function useNotification() {
-  const { setMessage } = useContext(GlobalContext);
+  const { setMessage } = useNotificationState();
 
   return {
     setSuccess: (newMessage: string) =>
@@ -26,7 +26,7 @@ function Alert(props: AlertProps) {
 }
 
 export default function () {
-  const { message } = useContext(GlobalContext);
+  const { message } = useNotificationState();
   const { clearMessage } = useNotification();
 
   const isOpen: boolean = !isEqual(

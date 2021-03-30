@@ -8,6 +8,6 @@ export default {
 
 export const Default = () => (
   <GlobalDatePickerProvider>
-    <MockForm><ContactButtonsRow/></MockForm>
+    <ContactButtonsRow />
   </GlobalDatePickerProvider>
 );

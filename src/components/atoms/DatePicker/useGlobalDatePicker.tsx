@@ -1,8 +1,10 @@
 import { useGlobalDatePickerState } from "../../../common/providers/GlobalDatePickerProvider";
+import { LastContactType } from "../../../model/newLibrary";
 
 interface ReturnProps {
   handleOpen(): void;
   handleClose(): void;
+  handleSubmit(nextAppointment: string, contactType: LastContactType): void;
 }
 
 export default (): ReturnProps => {
@@ -16,5 +18,13 @@ export default (): ReturnProps => {
     setOpen(false);
   };
 
-  return { handleOpen, handleClose };
+  const handleSubmit = (
+    nextAppointment: string,
+    contactType: LastContactType
+  ) => {
+    console.log({ nextAppointment });
+    console.log({ contactType });
+  };
+
+  return { handleOpen, handleClose, handleSubmit };
 };

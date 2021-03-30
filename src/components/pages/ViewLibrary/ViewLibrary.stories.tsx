@@ -2,7 +2,7 @@ import React from "react";
 import ViewLibrary from "./ViewLibrary";
 import { BrowserRouter as Router } from "react-router-dom";
 import { dummyUserDAO, newLibrary } from "../../storybook-mocks/constants";
-import { GlobalContext } from "../../../common/GlobalContext";
+import { LibraryProvider } from "../../../common/providers/LibraryProvider";
 
 export default {
   title: "Pages/ViewLibrary",
@@ -10,7 +10,7 @@ export default {
 };
 
 export const Default = () => (
-  <GlobalContext.Provider
+  <LibraryProvider
     value={{
       currentLibrary: newLibrary,
       getAuthenticatedUser: () => dummyUserDAO,
@@ -19,5 +19,5 @@ export const Default = () => (
     <Router>
       <ViewLibrary />
     </Router>
-  </GlobalContext.Provider>
+  </LibraryProvider>
 );

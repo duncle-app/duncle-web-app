@@ -2,8 +2,8 @@ import React from "react";
 import Drawer from "./ContactDrawer";
 import { newLibrary } from "../../storybook-mocks/constants";
 import MockForm from "../../storybook-mocks/MockForm";
-import { GlobalContext } from "../../../common/GlobalContext";
 import { action } from "@storybook/addon-actions";
+import { GlobalProvider } from "../../../common/providers/GlobalProvider";
 
 export default {
   title: "Elements/Drawer",
@@ -11,7 +11,7 @@ export default {
 };
 
 export const Default = () => (
-  <GlobalContext.Provider
+  <GlobalProvider
     value={{
       saveLibrary: () => action("Calling mock saveLibrary"),
       getAuthenticatedUser: () => action("Calling mock getAuthenticatedUser"),
@@ -23,5 +23,5 @@ export const Default = () => (
         handleScheduleNextAppointment={action("Submitted")}
       />
     </MockForm>
-  </GlobalContext.Provider>
+  </GlobalProvider>
 );

@@ -1,11 +1,11 @@
 import Library from "../../../model/library";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid/Grid";
 import Table from "../../elements/Table/Table";
 import { useHistory } from "react-router-dom";
 import { useLibraryPouch } from "../../../common/hooks/UsePouch";
-import { GlobalContext } from "../../../common/GlobalContext";
+import { useLibraryState } from "../../../common/providers/LibraryProvider";
 
 type PouchRow = {
   doc?: any;
@@ -19,7 +19,7 @@ type PouchRow = {
 
 export default function () {
   const [libraries, setLibraries] = useState<Library[]>([]);
-  const { setCurrentLibrary } = useContext(GlobalContext);
+  const { setCurrentLibrary } = useLibraryState();
   const { getAll } = useLibraryPouch();
   const history = useHistory();
 

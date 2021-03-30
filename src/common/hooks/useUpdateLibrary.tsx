@@ -7,16 +7,14 @@ import { dateNowIso, readableDate } from "../../utils/dateUtil";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import event from "../../model/event";
-import { addSaleInputProps } from "../../components/atoms/Sales/SalesArea";
-import { useContext, useState } from "react";
-import { GlobalContext } from "../GlobalContext";
 import useAuth from "./Auth/useAuth";
-import { useLibraryPouch, useUserPouch } from "./UsePouch";
+import { useUserPouch } from "./UsePouch";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 import useSaveLibraryQuery from "../queries/useSaveLibraryQuery";
+import { useLibraryState } from "../providers/LibraryProvider";
 
 export default () => {
-  const { currentLibrary, setCurrentLibrary } = useContext(GlobalContext);
+  const { currentLibrary, setCurrentLibrary } = useLibraryState();
   const { authenticate, getAuthenticatedUser } = useAuth();
 
   const { mutate: saveLibrary } = useSaveLibraryQuery();

@@ -12,6 +12,7 @@ import {
 } from "../../../common/providers/GlobalDatePickerProvider";
 import styled from "styled-components";
 import GlobalDatePicker from "./GlobalDatePicker";
+import { LastContactType } from "../../../model/newLibrary";
 
 const Flex = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ const Flex = styled.div`
 
 interface Props {
   Icon: OverridableComponent<SvgIconTypeMap>;
+  contactType: LastContactType;
 }
 
 /**
@@ -26,22 +28,28 @@ interface Props {
  * the icon buttons.
  * @param Icon the icon you want to display on the button
  */
-const IconWrapper = ({ Icon }: Props) => {
+const IconWrapper = ({ Icon, contactType }: Props) => {
   const { handleOpen } = useGlobalDatePicker();
 
   return (
     <>
-      <GlobalDatePicker />
-      <Button variant="outlined" onClick={handleOpen}>
+      <GlobalDatePicker contactType={contactType} />
+      <Button variant="outlined" onClick={handleOpen} type="button">
         <Icon />
       </Button>
     </>
   );
 };
 
-const ContactedByEmail = () => <IconWrapper Icon={ComputerIcon} />;
-const ContactedInPerson = () => <IconWrapper Icon={GroupIcon} />;
-const ContactedByPhone = () => <IconWrapper Icon={PhoneForwardedIcon} />;
+const ContactedByEmail = () => (
+  <IconWrapper Icon={ComputerIcon} contactType="email" />
+);
+const ContactedInPerson = () => (
+  <IconWrapper Icon={GroupIcon} contactType="inPerson" />
+);
+const ContactedByPhone = () => (
+  <IconWrapper Icon={PhoneForwardedIcon} contactType="phone" />
+);
 
 export const ContactButtonsRow = () => (
   <Flex>

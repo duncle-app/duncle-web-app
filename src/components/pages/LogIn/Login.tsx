@@ -10,7 +10,6 @@ import { Avatar } from "@material-ui/core";
 import useStyles from "../../../global-styles";
 import UserDAO from "../../../model/userDAO";
 import LoginService from "../../../services/LoginService";
-import { GlobalContext } from "../../../common/GlobalContext";
 import User from "../../../model/user";
 import { useHistory } from "react-router-dom";
 import { useNotification } from "../../atoms/Snackbar/Snackbar";

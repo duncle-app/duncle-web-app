@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import Fade from "@material-ui/core/Fade";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -12,14 +12,18 @@ import styled from "styled-components";
 import { useGlobalDatePickerState } from "../../../common/providers/GlobalDatePickerProvider";
 import camelize from "../../../utils/camelize";
 import { dateNowIso } from "../../../utils/dateUtil";
-import { Field, FieldInputProps } from "react-final-form";
+import { LastContactType } from "../../../model/newLibrary";
 
-export default () => {
-  const label = "Next appointment";
-  const camelizedName: string = camelize(label);
+interface Props {
+  contactType: LastContactType;
+}
+
+export default ({ contactType }: Props) => {
+  const label: string = camelize("Next appointment");
   const defaultDate = dateNowIso();
+  const [datePickerValue, setDatePickerValue] = useState(defaultDate);
   const { isOpen } = useGlobalDatePickerState();
-  const { handleClose } = useGlobalDatePicker();
+  const { handleClose, handleSubmit } = useGlobalDatePicker();
 
   const CenteredDialog = styled(Dialog)`
     ${flexCenterCss};
@@ -42,35 +46,31 @@ export default () => {
              We need to set the initial value of the Field so FF
              can pick it up if nothing has changed
          */}
-          <Field name={camelizedName} initialValue={defaultDate}>
-            {(props: FieldInputProps<any>) => (
-              <DatePickerWrapper>
-                <DateTimePicker
-                  variant="static"
-                  style={{ minWidth: "200px" }}
-                  onChange={(momentDate) => {
-                    if (momentDate !== null) {
-                      props.input.onChange(momentDate.format());
-                    }
-                  }}
-                  defaultValue={defaultDate}
-                  name={props.input.label}
-                  // thank you mui-rff
-                  // https://github.com/lookfirst/mui-rff/blob/master/src/DateTimePicker.tsx
-                  value={props.input.value}
-                  disablePast
-                  autoOk
-                />
-              </DatePickerWrapper>
-            )}
-          </Field>
+          <DatePickerWrapper>
+            <DateTimePicker
+              variant="static"
+              style={{ minWidth: "200px" }}
+              onChange={(momentDate) => {
+                if (momentDate !== null) {
+                  setDatePickerValue(momentDate.format());
+                }
+              }}
+              defaultValue={defaultDate}
+              name={label}
+              value={datePickerValue}
+              disablePast
+              autoOk
+            />
+          </DatePickerWrapper>
         </Fade>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          {/* todo - handle creating a new appt here */}
-          <Button onClick={handleClose} color="secondary" autoFocus>
+          <Button
+            onClick={() => handleSubmit(datePickerValue, contactType)}
+            color="secondary"
+          >
             OK
           </Button>
         </DialogActions>
