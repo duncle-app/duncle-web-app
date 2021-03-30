@@ -1,7 +1,7 @@
 import React from "react";
 import { GlobalDatePickerProvider } from "../../../common/providers/GlobalDatePickerProvider";
 import useGlobalDatePicker from "./useGlobalDatePicker";
-import MockForm from "../../storybook-mocks/mockForm";
+import MockForm from "../../storybook-mocks/MockForm";
 
 export default {
   title: "Atoms/GlobalDatePicker",

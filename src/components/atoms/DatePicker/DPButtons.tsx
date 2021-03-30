@@ -6,8 +6,12 @@ import Button from "@material-ui/core/Button";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core/SvgIcon/SvgIcon";
 import useGlobalDatePicker from "./useGlobalDatePicker";
-import { GlobalDatePickerProvider } from "../../../common/providers/GlobalDatePickerProvider";
+import {
+  GlobalDatePickerContext,
+  GlobalDatePickerProvider,
+} from "../../../common/providers/GlobalDatePickerProvider";
 import styled from "styled-components";
+import GlobalDatePicker from "./GlobalDatePicker";
 
 const Flex = styled.div`
   display: flex;
@@ -22,18 +26,16 @@ interface Props {
  * the icon buttons.
  * @param Icon the icon you want to display on the button
  */
-const IconWrapper = ({ Icon }: Props) => (
-  <GlobalDatePickerProvider>
-    <IconButton Icon={Icon} />
-  </GlobalDatePickerProvider>
-);
-
-const IconButton = ({ Icon }: Props) => {
+const IconWrapper = ({ Icon }: Props) => {
   const { handleOpen } = useGlobalDatePicker();
+
   return (
-    <Button variant="outlined" onClick={handleOpen}>
-      <Icon />
-    </Button>
+    <>
+      <GlobalDatePicker />
+      <Button variant="outlined" onClick={handleOpen}>
+        <Icon />
+      </Button>
+    </>
   );
 };
 

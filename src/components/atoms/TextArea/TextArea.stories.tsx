@@ -1,6 +1,6 @@
 import React from "react";
 import TextArea from "./TextArea";
-import MockForm from "../../storybook-mocks/mockForm";
+import MockForm from "../../storybook-mocks/MockForm";
 
 export default {
   title: "Atoms/TextArea",

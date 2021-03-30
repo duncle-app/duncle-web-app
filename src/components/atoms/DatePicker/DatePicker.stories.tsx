@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import DatePicker from "./DatePicker";
-import MockForm from "../../storybook-mocks/mockForm";
+import MockForm from "../../storybook-mocks/MockForm";
 import DefaultButton from "../Button/DefaultButton";
 
 export default {

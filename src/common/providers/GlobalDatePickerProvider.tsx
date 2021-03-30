@@ -6,7 +6,6 @@ import React, {
   useContext,
   useState,
 } from "react";
-import GlobalDatePicker from "../../components/atoms/DatePicker/GlobalDatePicker";
 
 interface GlobalDatePickerContextState {
   isOpen: boolean;
@@ -29,7 +28,6 @@ export const GlobalDatePickerProvider = ({
         setOpen,
       }}
     >
-      <GlobalDatePicker />
       {children}
     </GlobalDatePickerContext.Provider>
   );

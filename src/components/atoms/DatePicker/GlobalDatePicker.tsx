@@ -66,11 +66,11 @@ export default () => {
           </Field>
         </Fade>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary">
+          <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
           {/* todo - handle creating a new appt here */}
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleClose} color="secondary" autoFocus>
             OK
           </Button>
         </DialogActions>

@@ -1,7 +1,7 @@
 import React from "react";
 import EditableNote from "./EditableNote";
 import { dateNowIso, readableDate } from "../../../utils/dateUtil";
-import MockForm from "../../storybook-mocks/mockForm";
+import MockForm from "../../storybook-mocks/MockForm";
 
 export default {
   title: "Elements/EditableNote",

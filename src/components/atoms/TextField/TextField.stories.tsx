@@ -2,7 +2,7 @@ import React from "react";
 import CustomTextField from "./CustomTextField";
 import EmailTextField from "./EmailTextField";
 import PasswordTextFieldProps from "./PasswordTextField";
-import MockForm from "../../storybook-mocks/mockForm";
+import MockForm from "../../storybook-mocks/MockForm";
 import NumberTextField from "./NumberTextField";
 
 export default {

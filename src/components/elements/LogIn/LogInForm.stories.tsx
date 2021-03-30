@@ -1,6 +1,6 @@
 import React from "react";
 import { LogInForm } from "./LogInForm";
-import MockForm from "../../storybook-mocks/mockForm";
+import MockForm from "../../storybook-mocks/MockForm";
 import { BrowserRouter } from "react-router-dom";
 
 export default {

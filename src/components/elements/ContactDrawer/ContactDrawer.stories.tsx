@@ -1,7 +1,7 @@
 import React from "react";
 import Drawer from "./ContactDrawer";
 import { newLibrary } from "../../storybook-mocks/constants";
-import MockForm from "../../storybook-mocks/mockForm";
+import MockForm from "../../storybook-mocks/MockForm";
 import { GlobalContext } from "../../../common/GlobalContext";
 import { action } from "@storybook/addon-actions";
 
