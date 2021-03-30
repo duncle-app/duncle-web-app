@@ -10,10 +10,6 @@ import DefaultButton from "../../atoms/Button/DefaultButton";
 import useUpdateLibrary from "../../../common/hooks/useUpdateLibrary";
 import useLibraryQuery from "../../../common/queries/useLibraryQuery";
 
-interface p {
-  libraryId: string;
-}
-
 export default () => {
   const { content, alignToDrawer, paddingOne, paddingTopTiny } = useStyles();
   let { libraryId } = useParams<{ libraryId: string }>();
@@ -40,8 +36,6 @@ export default () => {
   function onEdit(id: string): void {
     history.push(`/library/${id}/edit`);
   }
-
-  console.log({ currentLibrary });
 
   return (
     <>

@@ -3,9 +3,11 @@ import { useQuery } from "react-query";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 import useAuth from "../hooks/Auth/useAuth";
 import { libraryKey } from "../constants/queryKeys";
+import { useLibraryState } from "../providers/LibraryProvider";
 
 export default (uuid: string) => {
   const { getAuthenticatedUser } = useAuth();
+  const { setCurrentLibrary } = useLibraryState();
   const { setError } = useNotification();
 
   const USER_DB_PREFIX = "user_";
@@ -16,6 +18,10 @@ export default (uuid: string) => {
   const fetchSingleDoc = () => localPouch.get(uuid);
 
   return useQuery(libraryKey(uuid), fetchSingleDoc, {
+    onSuccess: (library) => {
+      setCurrentLibrary(library);
+      return library;
+    },
     onError: () => {
       setError(`Couldn't find a matching record for ID: ${uuid}`);
     },
