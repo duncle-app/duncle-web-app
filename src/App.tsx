@@ -8,7 +8,7 @@ import {
   Switch,
 } from "react-router-dom";
 import Login from "./components/pages/LogIn/Login";
-import { GlobalProvider } from "./common/providers/GlobalProvider";
+import GlobalProvider from "./common/providers/GlobalProvider";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/elements/Navbar/Navbar";
 import PrivateRoute from "./components/atoms/Route/PrivateRoute";
@@ -25,7 +25,6 @@ import useStyles from "./global-styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { GlobalDatePickerProvider } from "./common/providers/GlobalDatePickerProvider";
 
 const Unauthorized = () => {
   const { paddingOneChildren } = useStyles();
@@ -41,56 +40,44 @@ const Unauthorized = () => {
 };
 
 export default () => {
-  const queryClient = new QueryClient();
-
   return (
     <div className="App">
       <CssBaseline />
       <GlobalProvider>
-          <QueryClientProvider client={queryClient}>
-            <Router>
-              <Navbar />
-              <Snackbar />
-              <Switch>
-                {/* todo - auto route to login page if we're not logged in */}
-                <Redirect exact from="/" to="login" />
-                <Route exact path="/signup">
-                  <SignUp />
-                </Route>
-                <Route exact path="/login">
-                  {/* TODO - REDIRECT */}
-                  <Login />
-                </Route>
-                <PrivateRoute
-                  exact
-                  path="/dashboard"
-                  component={AllLibraries}
-                />
-                <PrivateRoute
-                  exact
-                  path="/calendar"
-                  component={CalendarController}
-                />
-                <PrivateRoute
-                  exact
-                  path="/library/new"
-                  component={AddLibrary}
-                />
-                <PrivateRoute
-                  exact
-                  path="/library/:libraryId"
-                  component={ViewLibrary}
-                />
-                <Route
-                  exact
-                  path="/library/:libraryId/edit"
-                  component={EditLibraryController}
-                />
-                <Route path="/unauthorized" children={<Unauthorized />} />
-              </Switch>
-              <ReactQueryDevtools />
-            </Router>
-          </QueryClientProvider>
+        <Router>
+          <Navbar />
+          <Snackbar />
+          <Switch>
+            {/* todo - auto route to login page if we're not logged in */}
+            <Redirect exact from="/" to="login" />
+            <Route exact path="/signup">
+              <SignUp />
+            </Route>
+            <Route exact path="/login">
+              {/* TODO - REDIRECT */}
+              <Login />
+            </Route>
+            <PrivateRoute exact path="/dashboard" component={AllLibraries} />
+            <PrivateRoute
+              exact
+              path="/calendar"
+              component={CalendarController}
+            />
+            <PrivateRoute exact path="/library/new" component={AddLibrary} />
+            <PrivateRoute
+              exact
+              path="/library/:libraryId"
+              component={ViewLibrary}
+            />
+            <Route
+              exact
+              path="/library/:libraryId/edit"
+              component={EditLibraryController}
+            />
+            <Route path="/unauthorized" children={<Unauthorized />} />
+          </Switch>
+          <ReactQueryDevtools />
+        </Router>
       </GlobalProvider>
     </div>
   );

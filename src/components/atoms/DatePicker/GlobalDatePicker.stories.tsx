@@ -1,7 +1,10 @@
 import React from "react";
-import { GlobalDatePickerProvider } from "../../../common/providers/GlobalDatePickerProvider";
 import useGlobalDatePicker from "./useGlobalDatePicker";
-import MockForm from "../../storybook-mocks/MockForm";
+import GlobalProvider from "../../../common/providers/GlobalProvider";
+// @ts-ignore
+import { LocalStorageMock } from "@react-mock/localstorage";
+import { mockToken } from "../../storybook-mocks/constants";
+import GlobalDatePicker from "./GlobalDatePicker";
 
 export default {
   title: "Atoms/GlobalDatePicker",
@@ -9,11 +12,12 @@ export default {
 
 export const Default = () => {
   return (
-    <MockForm>
-      <GlobalDatePickerProvider>
+    <GlobalProvider>
+      <LocalStorageMock items={{ authCredentials: mockToken }}>
+        <GlobalDatePicker contactType="email" />
         <OpenButton />
-      </GlobalDatePickerProvider>
-    </MockForm>
+      </LocalStorageMock>
+    </GlobalProvider>
   );
 };
 

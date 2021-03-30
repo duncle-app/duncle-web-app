@@ -6,8 +6,6 @@ import useAuth from "../../../common/hooks/Auth/useAuth";
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = useAuth();
 
-  console.log(isAuthenticated());
-
   return (
     <Route
       {...rest}

@@ -156,3 +156,21 @@ export const newNote: NoteDAO = {
 export const mockFunction = () => {
   console.log("calling function!");
 };
+
+function setUserToken(user: UserDAO) {
+  const now = new Date();
+  const oneMinute = 60000;
+  const oneHour = oneMinute * 60;
+  const twoHours = oneHour * 2;
+
+  // `item` is an object which contains the original value
+  // as well as the time when it's supposed to expire
+  const item = {
+    // set user info, along with token
+    value: user,
+    expiry: now.getTime() + twoHours,
+  };
+  return JSON.stringify(item);
+}
+
+export const mockToken = setUserToken(dummyUserDAO);

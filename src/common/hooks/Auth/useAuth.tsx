@@ -13,7 +13,7 @@ interface localStorageItem {
   value: UserDAO;
   expiry: number;
 }
-
+// todo - consider just moving this into a provider
 // tutorial on setting local storage tokens with expiry dates
 // https://www.sohamkamani.com/blog/javascript-localstorage-with-ttl-expiry/
 export default function useAuth() {

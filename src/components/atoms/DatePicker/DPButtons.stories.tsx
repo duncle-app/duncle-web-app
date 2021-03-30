@@ -1,13 +1,13 @@
 import React from "react";
 import { ContactButtonsRow } from "./DPButtons";
-import { GlobalDatePickerProvider } from "../../../common/providers/GlobalDatePickerProvider";
+import GlobalProvider from "../../../common/providers/GlobalProvider";
 
 export default {
   title: "Atoms/DatePickerButtons",
 };
 
 export const Default = () => (
-  <GlobalDatePickerProvider>
+  <GlobalProvider>
     <ContactButtonsRow />
-  </GlobalDatePickerProvider>
+  </GlobalProvider>
 );

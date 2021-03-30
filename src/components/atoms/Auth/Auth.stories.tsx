@@ -1,5 +1,5 @@
 import React from "react";
-import { GlobalProvider } from "../../../common/providers/GlobalProvider";
+import GlobalProvider from "../../../common/providers/GlobalProvider";
 import PingAnything from "../Button/PingAnything";
 import useAuth from "../../../common/hooks/Auth/useAuth";
 import { dummyUserDAO } from "../../storybook-mocks/constants";
