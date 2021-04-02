@@ -2,7 +2,7 @@ import React from "react";
 import useStyles from "../../../global-styles";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Avatar  from "@material-ui/core/Avatar";
+import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { Form } from "react-final-form";
 import { SignUpForm } from "../../elements/SignUp/SignUpForm";
