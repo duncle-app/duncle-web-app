@@ -6,7 +6,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { Form } from "react-final-form";
 import { SignUpForm } from "../../elements/SignUp/SignUpForm";
-import { AccountCircle } from "@material-ui/icons";
+import AccountCircle  from "@material-ui/icons/AccountCircle";
 import LoginService from "../../../services/LoginService";
 import NewUser from "../../../model/newUser";
 import UserDAO from "../../../model/userDAO";
