@@ -20,7 +20,6 @@ export default ({ contactType }: Props) => {
   const label: string = camelize("Next appointment");
   const defaultDate = dateNowIso();
   const [datePickerValue, setDatePickerValue] = useState(defaultDate);
-  console.log({ datePickerValue });
   const { isOpen } = useGlobalDatePickerState();
   const { handleClose, handleSubmit } = useGlobalDatePicker();
 

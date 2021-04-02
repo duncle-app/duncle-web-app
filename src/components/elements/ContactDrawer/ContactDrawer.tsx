@@ -32,6 +32,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
     librarian,
     phoneNumber,
     assistant,
+    dateLastContact,
     dateNextContact,
   } = library;
   const {
@@ -43,10 +44,6 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
     paddingTopTwo,
   } = useStyles();
   const [isOpen, setOpen] = React.useState<boolean>(false);
-  const [nextContactDate, setNextContactDate] = useState<string | undefined>(
-    dateNextContact
-  );
-  const [lastContactDate] = useState<string | undefined>(dateNextContact);
   const [selectedDates] = useState<DateSelectArg>();
   const { setSuccess, setInfo, setError } = useNotification();
 
@@ -66,7 +63,6 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
         // grab the latest revision from the newly saved library
         // otherwise you'll be writing on an old revision
         library._rev = _rev;
-        setNextContactDate(nextAppointment);
         setSuccess("Successfully saved library");
       } else {
         setInfo("No updates were made, contents were identical");
@@ -174,9 +170,9 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
                     <Typography variant="h6">
                       <div className={black}>Last Contact:</div>
                       <div>
-                        {!isEmpty(lastContactDate)
+                        {!isEmpty(dateLastContact)
                           ? // @ts-ignore - we're checking for undefined using isEmpty
-                            readableDate(lastContactDate)
+                            readableDate(dateLastContact)
                           : "N/A"}
                       </div>
                     </Typography>
@@ -185,9 +181,9 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
                     <Typography variant="h6">
                       <div className={black}>Next Contact:</div>
                       <div>
-                        {!isEmpty(nextContactDate)
+                        {!isEmpty(dateNextContact)
                           ? // @ts-ignore - we're checking for undefined using isEmpty
-                            readableDate(nextContactDate)
+                            readableDate(dateNextContact)
                           : "N/A"}
                       </div>
                     </Typography>
