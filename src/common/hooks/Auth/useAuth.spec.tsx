@@ -1,9 +1,18 @@
 import useAuth from "./useAuth";
 import { renderHook, act } from "@testing-library/react-hooks";
 import { dummyUserDAO } from "../../../components/storybook-mocks/constants";
+import noop from "../../../utils/noop";
 
 describe("Auth hooks - authentication flow tests", () => {
-  const { result } = renderHook(() => useAuth());
+  const {
+    result: { current },
+  } = renderHook(() => useAuth());
+  const {
+    isAuthenticated,
+    signOut,
+    getAuthenticatedUser,
+    authenticate,
+  } = current;
 
   function testAuthentication(
     title: string,
@@ -14,19 +23,19 @@ describe("Auth hooks - authentication flow tests", () => {
       act(() => {
         callbackFunction();
       });
-      const authResult = result.current.isAuthenticated;
+      const authResult = isAuthenticated();
       expect(authResult).toBe(expectedResult);
     });
   }
 
-  const noCallback = () => console.log("do nothing");
   testAuthentication(
     "On page load, isAuthenticated should return false since we haven't authenticated",
-    noCallback,
+    noop,
     false
   );
 
-  const authCallback = () => result.current.authenticate(dummyUserDAO);
+  const authCallback = () => authenticate(dummyUserDAO);
+
   testAuthentication(
     "If we call authentication, isAuthenticated should return true",
     authCallback,
@@ -34,14 +43,14 @@ describe("Auth hooks - authentication flow tests", () => {
   );
 
   test("Test if getAuthenticatedUser returns the correct user", () => {
-    const getUserResult = result.current.getAuthenticatedUser();
+    const getUserResult = getAuthenticatedUser();
     console.log({ getUserResult });
     expect(getUserResult).toEqual(dummyUserDAO);
   });
 
   testAuthentication(
     "If we call signout, isAuthenticated should return false",
-    result.current.signout,
+    signOut,
     false
   );
 

@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import Profile from "./Profile";
+import { LocalStorageMockProvider } from "../../storybook-mocks/MockProviders";
 
 export default {
   title: "Elements/Profile",
 };
 
-const mockHandler = () => console.log("Logging out!");
-
 export const SignedOut = () => <Profile />;
 
-export const SignedIn = () => <Profile />;
+export const SignedIn = () => (
+  <LocalStorageMockProvider>
+    <Profile />
+  </LocalStorageMockProvider>
+);

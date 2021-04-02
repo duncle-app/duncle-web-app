@@ -56,14 +56,7 @@ export default function useAuth() {
     // todo - return a state object containing this, rather than calling the isValidToken function
     //  everytime to get the state?
     //  downsides - it re-renders every single time rather than just calling the local storage.
-    isAuthenticated: (): boolean => {
-      if (!isValidToken() && isLoggedIn) {
-        signOut();
-      } else if (isValidToken() && !isLoggedIn) {
-        setIsLoggedIn(true);
-      }
-      return isLoggedIn;
-    },
+    isAuthenticated: (): boolean => isValidToken(),
     getAuthenticatedUser: (): UserDAO => {
       const token: UserDAO | null = getWithExpiry(TOKEN_ID);
       if (token === null) {

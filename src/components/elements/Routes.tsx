@@ -40,7 +40,7 @@ export default ({ children }: PropsWithChildren<any>) => {
           path="/library/:libraryId"
           component={ViewLibrary}
         />
-        <Route
+        <PrivateRoute
           exact
           path="/library/:libraryId/edit"
           component={EditLibraryController}
