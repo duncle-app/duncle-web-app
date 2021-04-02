@@ -1,9 +1,11 @@
 import React from "react";
+
 import { Field, FieldInputProps } from "react-final-form";
 import camelize from "../../../utils/camelize";
 import { DateTimePicker } from "@material-ui/pickers";
-import { dateNowIso } from "../../../utils/dateUtil";
+import { dateNowIso, readableDate } from "../../../utils/dateUtil";
 import DatePickerWrapper from "./DatePickerWrapper";
+import { Moment } from "moment";
 
 export default function () {
   const label = "Next appointment";
@@ -26,6 +28,13 @@ export default function () {
             }}
             defaultValue={defaultDate}
             name={props.input.label}
+            // @ts-ignore - this is literally just a moment date
+            labelFunc={(momentDate: Moment) =>
+              // if a date exists, show the readable date. Otherwise show an error message
+              momentDate
+                ? readableDate(momentDate.format())
+                : "Date Format Error"
+            }
             // thank you mui-rff
             // https://github.com/lookfirst/mui-rff/blob/master/src/DateTimePicker.tsx
             value={props.input.value}

@@ -142,7 +142,6 @@ export default () => {
   }
 
   const addSale = async (newSale: number, library: Library) => {
-    debugger;
     // subtract 7% for S&H
     const withShippingAndHandling: number = newSale * 0.93;
     const withNewSale: number = library.totalSales + withShippingAndHandling;

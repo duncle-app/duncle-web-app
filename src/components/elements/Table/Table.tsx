@@ -89,7 +89,6 @@ export default ({ libraries, onEdit }: TableProps) => {
           //  see docs - https://material-table.com/#/docs/all-props
           paging: false,
           rowStyle: ({ dateNextContact, libraryName }: Library) => {
-            debugger;
             let nextDate;
             if (dateNextContact) {
               nextDate = moment(dateNextContact).toDate();
