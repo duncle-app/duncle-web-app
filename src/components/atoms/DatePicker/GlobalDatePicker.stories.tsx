@@ -12,7 +12,7 @@ export const Default = () => {
   return (
     <GlobalProvider>
       <LocalStorageMockProvider>
-        <GlobalDatePicker contactType="email" />
+        <GlobalDatePicker />
         <OpenButton />
       </LocalStorageMockProvider>
     </GlobalProvider>
@@ -23,7 +23,7 @@ const OpenButton = () => {
   const { handleOpen } = useGlobalDatePicker();
 
   return (
-    <button onClick={handleOpen} type="button">
+    <button onClick={() => handleOpen("email")} type="button">
       Click me to open the date picker!
     </button>
   );

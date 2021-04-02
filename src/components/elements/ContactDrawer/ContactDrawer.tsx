@@ -13,6 +13,11 @@ import Typography from "@material-ui/core/Typography";
 import { useNotification } from "../../atoms/Snackbar/Snackbar";
 import { useLibraryPouch } from "../../../common/hooks/UsePouch";
 import ScheduleNext from "../ScheduleNext";
+import styled from "styled-components";
+
+const SecondaryText = styled.div`
+  font-size: 16px;
+`;
 
 interface drawerProps {
   library: Library;
@@ -109,16 +114,15 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
               primary={libraryName}
               secondary={
                 <>
-                  <div>
+                  <SecondaryText>
                     {street} {city}
-                  </div>
-                  <div>
+                  </SecondaryText>
+                  <SecondaryText>
                     {state}, {zip}
-                  </div>
+                  </SecondaryText>
                 </>
               }
               primaryTypographyProps={{ variant: "h5" }}
-              secondaryTypographyProps={{ variant: "h6" }}
             />
           </ListItem>
           <ListItem>
@@ -126,17 +130,16 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
               primary="Contacts"
               secondary={
                 <>
-                  <div>{librarian}</div>
-                  <div>
+                  <SecondaryText>{librarian}</SecondaryText>
+                  <SecondaryText>
                     {email} {phoneNumber}
-                  </div>
-                  <div>
+                  </SecondaryText>
+                  <SecondaryText>
                     Assistant: {!isEmpty(assistant) ? assistant : "N/A"}
-                  </div>
+                  </SecondaryText>
                 </>
               }
               primaryTypographyProps={{ variant: "h5" }}
-              secondaryTypographyProps={{ variant: "h6" }}
             />
           </ListItem>
           <Divider />
@@ -145,14 +148,14 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
               secondary={
                 <>
                   <div className={black}>
-                    <Typography variant="h6">View Calendar</Typography>
+                    <Typography variant="h5">View Calendar</Typography>
                     <EventNote
                       className={`${calendarIcon} ${black}`}
                       onClick={() => setOpen(true)}
                     />
                   </div>
                   <div className={paddingTop}>
-                    <Typography variant="h6">
+                    <Typography variant="h5">
                       <div className={black}>Next Appointment:</div>
                       {/*@ts-ignore - we're checking for undefined using isEmpty*/}
                       {/*<div>{!isEmpty(nextContactDate) ? readableDate(nextContactDate) : 'N/A'}</div>*/}
@@ -167,7 +170,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
                     <Divider />
                   </div>
                   <div className={paddingTop}>
-                    <Typography variant="h6">
+                    <Typography variant="h5">
                       <div className={black}>Last Contact:</div>
                       <div>
                         {!isEmpty(dateLastContact)
@@ -178,7 +181,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
                     </Typography>
                   </div>
                   <div className={paddingTop}>
-                    <Typography variant="h6">
+                    <Typography variant="h5">
                       <div className={black}>Next Contact:</div>
                       <div>
                         {!isEmpty(dateNextContact)

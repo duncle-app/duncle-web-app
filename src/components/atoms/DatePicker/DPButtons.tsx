@@ -27,14 +27,18 @@ interface Props {
  * Slight overkill, but this makes sure the GlobalDatePickerProvider ALWAYS ships with
  * the icon buttons.
  * @param Icon the icon you want to display on the button
+ * @param contactType see LastContactType
  */
 const IconWrapper = ({ Icon, contactType }: Props) => {
   const { handleOpen } = useGlobalDatePicker();
 
   return (
     <>
-      <GlobalDatePicker contactType={contactType} />
-      <Button variant="outlined" onClick={handleOpen} type="button">
+      <Button
+        variant="outlined"
+        onClick={() => handleOpen(contactType)}
+        type="button"
+      >
         <Icon />
       </Button>
     </>
@@ -53,6 +57,7 @@ const ContactedByPhone = () => (
 
 export const ContactButtonsRow = () => (
   <Flex>
+    <GlobalDatePicker />
     <ContactedByPhone />
     <ContactedByEmail />
     <ContactedInPerson />

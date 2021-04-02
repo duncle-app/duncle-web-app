@@ -10,13 +10,8 @@ import useGlobalDatePicker from "./useGlobalDatePicker";
 import { useGlobalDatePickerState } from "../../../common/providers/GlobalDatePickerProvider";
 import camelize from "../../../utils/camelize";
 import { dateNowIso } from "../../../utils/dateUtil";
-import { LastContactType } from "../../../model/newLibrary";
 
-interface Props {
-  contactType: LastContactType;
-}
-
-export default ({ contactType }: Props) => {
+export default () => {
   const label: string = camelize("Next appointment");
   const defaultDate = dateNowIso();
   const [datePickerValue, setDatePickerValue] = useState(defaultDate);
@@ -62,7 +57,7 @@ export default ({ contactType }: Props) => {
             Cancel
           </Button>
           <Button
-            onClick={() => handleSubmit(datePickerValue, contactType)}
+            onClick={() => handleSubmit(datePickerValue)}
             color="secondary"
           >
             OK
