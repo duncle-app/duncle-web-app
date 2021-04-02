@@ -1,6 +1,4 @@
 import React, { PropsWithChildren } from "react";
-import Navbar from "./Navbar/Navbar";
-import Snackbar from "../atoms/Snackbar/Snackbar";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -10,12 +8,11 @@ import {
 import SignUp from "../pages/SignUp/SignUp";
 import Login from "../pages/LogIn/Login";
 import PrivateRoute from "../atoms/Route/PrivateRoute";
-import AllLibraries from "../pages/Dashboard/AllLibraries";
+import AllLibraries from "../pages/Dashboard/Dashboard";
 import CalendarController from "../atoms/Calendar/CalendarController";
 import AddLibrary from "../pages/AddLibrary/AddLibrary";
 import ViewLibrary from "../pages/ViewLibrary/ViewLibrary";
 import EditLibraryController from "../pages/EditLibrary/EditLibraryController";
-import { ReactQueryDevtools } from "react-query/devtools";
 import Unauthorized from "./Unauthorized/Unauthorized";
 
 export default ({ children }: PropsWithChildren<any>) => {
