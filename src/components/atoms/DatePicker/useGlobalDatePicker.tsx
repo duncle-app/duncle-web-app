@@ -12,25 +12,10 @@ interface ReturnProps {
 }
 
 export default (): ReturnProps => {
-  const [isReset, setReset] = useState<boolean>(false);
   const { setOpen } = useGlobalDatePickerState();
   let currentContactType: LastContactType | undefined;
   const { currentLibrary } = useLibraryState();
-  const { mutate: saveLibrary, isSuccess } = useSaveLibraryQuery();
-
-  /**
-   * The sole reason for needing this is this usecase:
-   * 1. Enter the a page (view library) where there are this hook is used (i.e. date picker buttons)
-   * 2. Click on a button, so a DP Dialog pops up
-   * 3. Choose a date and submit
-   * 4. Repeat step 2, but without this, if we want to close and ONLY check for isSuccess,
-   * the page will re-render and call handleClose every single time, since isSuccess never gets reset.
-   *
-   * So this is just a workaround to be able to automatically close the Dialog once there's a success
-   */
-  useEffect(() => {
-    setReset(isSuccess);
-  }, [isSuccess]);
+  const { mutate: saveLibrary, isSuccess, reset } = useSaveLibraryQuery();
 
   const handleOpen = (contactType: LastContactType) => {
     setOpen(true);
@@ -42,9 +27,9 @@ export default (): ReturnProps => {
     currentContactType = undefined;
   };
 
-  if (isSuccess && isReset) {
+  if (isSuccess) {
     handleClose();
-    setReset(false);
+    reset();
   }
 
   const handleSubmit = (nextAppointment: string) => {
