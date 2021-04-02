@@ -11,16 +11,16 @@ import { ErrorBoundary } from "./components/pages/ErrorBoundary/ErrorBoundary";
 export default () => {
   return (
     <div className="App">
-      <ErrorBoundary>
-        <CssBaseline />
-        <GlobalProvider>
-          <ReactQueryDevtools />
-          <Routes>
-            <Navbar />
-            <Snackbar />
-          </Routes>
-        </GlobalProvider>
-      </ErrorBoundary>
+      {/*<ErrorBoundary>*/}
+      <CssBaseline />
+      <GlobalProvider>
+        <ReactQueryDevtools />
+        <Routes>
+          <Navbar />
+          <Snackbar />
+        </Routes>
+      </GlobalProvider>
+      {/*</ErrorBoundary>*/}
     </div>
   );
 };

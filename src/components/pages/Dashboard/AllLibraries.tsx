@@ -6,6 +6,7 @@ import Table from "../../elements/Table/Table";
 import { useHistory } from "react-router-dom";
 import { useLibraryPouch } from "../../../common/hooks/UsePouch";
 import { useLibraryState } from "../../../common/providers/LibraryProvider";
+import useLibraries from "../../../common/queries/useLibraries";
 
 type PouchRow = {
   doc?: any;
@@ -18,25 +19,12 @@ type PouchRow = {
 };
 
 export default function () {
-  const [libraries, setLibraries] = useState<Library[]>([]);
+  const { data: libraries, isLoading, isSuccess, error } = useLibraries();
+  console.log({ libraries });
   const { setCurrentLibrary } = useLibraryState();
-  const { getAll } = useLibraryPouch();
   const history = useHistory();
 
-  useEffect(() => {
-    async function doLibraryCall() {
-      const response = await getAll();
-      let libraries: Library[] = [];
-
-      response.rows.map(({ doc }: PouchRow) => {
-        libraries.push(doc);
-      });
-
-      setLibraries(libraries);
-      console.log("all libraries", libraries);
-    }
-    doLibraryCall();
-  }, []);
+  if (isLoading) return <h1>Loading...</h1>;
 
   function routeToLibraryDetail(library: Library): void {
     history.push(`/library/${library._id}`);
@@ -45,13 +33,17 @@ export default function () {
 
   return (
     <div>
-      <Grid container justify="center">
-        <Grid item xs={11}>
-          <Card variant="outlined">
-            <Table libraries={libraries} onEdit={routeToLibraryDetail} />
-          </Card>
+      {error && <p>Error: {error}</p>}
+      {isSuccess && (
+        <Grid container justify="center">
+          <Grid item xs={11}>
+            <Card variant="outlined">
+              {/*@ts-ignore - react query is returning Library[] | undefined*/}
+              <Table libraries={libraries} onEdit={routeToLibraryDetail} />
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </div>
   );
 }
