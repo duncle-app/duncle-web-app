@@ -4,6 +4,7 @@ import { useLibraryState } from "../../../common/providers/LibraryProvider";
 import useSaveLibraryQuery from "../../../common/queries/useSaveLibraryQuery";
 import Library from "../../../model/library";
 import { useEffect, useState } from "react";
+import { dateNowIso } from "../../../utils/dateUtil";
 
 interface ReturnProps {
   handleOpen(contactType: LastContactType): void;
@@ -13,18 +14,17 @@ interface ReturnProps {
 
 export default (): ReturnProps => {
   const { setOpen } = useGlobalDatePickerState();
-  let currentContactType: LastContactType | undefined;
   const { currentLibrary } = useLibraryState();
   const { mutate: saveLibrary, isSuccess, reset } = useSaveLibraryQuery();
 
   const handleOpen = (contactType: LastContactType) => {
     setOpen(true);
-    currentContactType = contactType;
+    currentLibrary.lastContactType = contactType;
   };
 
   const handleClose = () => {
     setOpen(false);
-    currentContactType = undefined;
+    currentLibrary.lastContactType = undefined;
   };
 
   if (isSuccess) {
@@ -35,7 +35,8 @@ export default (): ReturnProps => {
   const handleSubmit = (nextAppointment: string) => {
     let editedLibrary: Library = { ...currentLibrary };
     editedLibrary.dateNextContact = nextAppointment;
-    editedLibrary.lastContactType = currentContactType;
+    editedLibrary.lastContactType = currentLibrary.lastContactType;
+    editedLibrary.dateLastContact = dateNowIso();
 
     console.log({ currentLibrary });
     // todo - also save note

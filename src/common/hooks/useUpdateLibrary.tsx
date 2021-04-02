@@ -69,6 +69,7 @@ export default () => {
       notes: [newSavedNote, ...notes],
       ...rest,
       dateUpdated: dateNowIso(),
+      dateLastContact: dateNowIso(),
     };
 
     saveLibrary(newLibrary);

@@ -1,10 +1,9 @@
 import Library from "../../../model/library";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid/Grid";
 import Table from "../../elements/Table/Table";
 import { useHistory } from "react-router-dom";
-import { useLibraryPouch } from "../../../common/hooks/UsePouch";
 import { useLibraryState } from "../../../common/providers/LibraryProvider";
 import useLibraries from "../../../common/queries/useLibraries";
 

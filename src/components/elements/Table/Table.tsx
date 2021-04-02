@@ -6,6 +6,7 @@ import { CardHeader } from "@material-ui/core";
 import moment from "moment";
 import StackedField from "../../atoms/Table/StackedField";
 import { readableDate } from "../../../utils/dateUtil";
+import { formatContactType } from "../../../utils/textFormatUtils";
 
 type TableProps = {
   libraries: Library[];
@@ -47,10 +48,18 @@ export default ({ libraries, onEdit }: TableProps) => {
     {
       title: "Last Contacted",
       field: "dateLastContact",
-      render: ({ dateLastContact }: Library) => {
-        return dateLastContact !== undefined
-          ? readableDate(dateLastContact)
-          : dateLastContact;
+      render: ({ dateLastContact, lastContactType }: Library) => {
+        const lastContactText =
+          dateLastContact !== undefined
+            ? readableDate(dateLastContact)
+            : dateLastContact;
+
+        return (
+          <StackedField
+            top={lastContactText}
+            bottom={formatContactType(lastContactType)}
+          />
+        );
       },
     },
     {

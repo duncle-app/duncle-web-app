@@ -14,6 +14,7 @@ import { useNotification } from "../../atoms/Snackbar/Snackbar";
 import { useLibraryPouch } from "../../../common/hooks/UsePouch";
 import ScheduleNext from "../ScheduleNext";
 import styled from "styled-components";
+import { formatContactType } from "../../../utils/textFormatUtils";
 
 const SecondaryText = styled.div`
   font-size: 16px;
@@ -48,6 +49,7 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
     paddingTop,
     paddingTopTwo,
   } = useStyles();
+
   const [isOpen, setOpen] = React.useState<boolean>(false);
   const [selectedDates] = useState<DateSelectArg>();
   const { setSuccess, setInfo, setError } = useNotification();
@@ -171,7 +173,10 @@ export default ({ library, handleScheduleNextAppointment }: drawerProps) => {
                   </div>
                   <div className={paddingTop}>
                     <Typography variant="h5">
-                      <div className={black}>Last Contact:</div>
+                      <div className={black}>
+                        Last Contact:{" "}
+                        {formatContactType(library.lastContactType)}
+                      </div>
                       <div>
                         {!isEmpty(dateLastContact)
                           ? // @ts-ignore - we're checking for undefined using isEmpty
