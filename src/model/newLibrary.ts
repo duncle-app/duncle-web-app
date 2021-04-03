@@ -18,6 +18,7 @@ export default interface NewLibrary {
   assignedRep: string;
   totalSales: number;
   lastSale: number;
+  personalNotes?: NoteDAO;
   level?: string;
   size?: number;
   assistant?: string;

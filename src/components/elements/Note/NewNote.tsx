@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import useStyles from "../../../global-styles";
 import PhoneDisabled from "@material-ui/icons/PhoneDisabled";
 import { ContactButtonsRow } from "../../atoms/DatePicker/DPButtons";
+import FlexCenter from "../../../common/styles/FlexCenter";
 
 interface props {
   // @ts-ignore
@@ -26,13 +27,15 @@ export default function ({ formSubmit }: props) {
             name="New Note"
             placeholderText="Enter a new note here"
           />
-          <ContactButtonsRow />
-          <div className={paddingTwo}>
-            <Button variant="outlined" onClick={onNoAnswer}>
-              No Answer{" "}
-              <PhoneDisabled style={{ color: "red", paddingLeft: ".1em" }} />
-            </Button>
-          </div>
+          <FlexCenter>
+            <div className={paddingTwo}>
+              <ContactButtonsRow />
+              <Button variant="outlined" onClick={onNoAnswer}>
+                No Answer{" "}
+                <PhoneDisabled style={{ color: "red", paddingLeft: ".1em" }} />
+              </Button>
+            </div>
+          </FlexCenter>
         </div>
       </Paper>
     </Form>

@@ -1,8 +1,6 @@
 import React from "react";
 import ViewLibrary from "./ViewLibrary";
-import { BrowserRouter as Router } from "react-router-dom";
-import { dummyUserDAO, newLibrary } from "../../storybook-mocks/constants";
-import { LibraryProvider } from "../../../common/providers/LibraryProvider";
+import { MockViewLibraryProvider } from "../../storybook-mocks/MockProviders";
 
 export default {
   title: "Pages/ViewLibrary",
@@ -10,14 +8,7 @@ export default {
 };
 
 export const Default = () => (
-  <LibraryProvider
-    value={{
-      currentLibrary: newLibrary,
-      getAuthenticatedUser: () => dummyUserDAO,
-    }}
-  >
-    <Router>
-      <ViewLibrary />
-    </Router>
-  </LibraryProvider>
+  <MockViewLibraryProvider>
+    <ViewLibrary />
+  </MockViewLibraryProvider>
 );

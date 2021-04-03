@@ -9,6 +9,7 @@ import { Grid } from "@material-ui/core";
 import DefaultButton from "../../atoms/Button/DefaultButton";
 import useUpdateLibrary from "../../../common/hooks/useUpdateLibrary";
 import useLibraryQuery from "../../../common/queries/useLibraryQuery";
+import PersonalNotes from "../../elements/PersonalNotes/PersonalNotes";
 
 export default () => {
   const { content, alignToDrawer, paddingOne, paddingTopTiny } = useStyles();
@@ -39,42 +40,55 @@ export default () => {
 
   return (
     <>
-      {error && <h2>Error loading: ${error}</h2>}
+      {error && (
+        <h2>
+          {error.status} Error loading: {error.message}
+        </h2>
+      )}
       {isSuccess && (
-        <div className={alignToDrawer}>
+        <>
           <div className={paddingTopTiny}>
             <DefaultButton onClick={onBack}>Back</DefaultButton>
             <DefaultButton onClick={() => onEdit(libraryId)}>
               Edit
             </DefaultButton>
           </div>
-          <ContactDrawer
-            library={currentLibrary}
-            handleScheduleNextAppointment={handleNewAppointment}
-          />
-          <div className={content}>
-            <Grid container>
-              <Grid item xs={6}>
-                <div className={paddingOne}>
-                  <SalesArea
-                    totalSales={currentLibrary.totalSales}
-                    lastSale={currentLibrary.lastSale}
-                    addSale={({ newSale }) => addSale(newSale, currentLibrary)}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <div className={paddingOne}>
-                  <NewNote formSubmit={submitNewNote} />
-                </div>
-              </Grid>
-            </Grid>
-            <NoteList
-              notes={currentLibrary.notes}
-              SubmitForm={submitNewEditableNote}
+          <div className={alignToDrawer}>
+            <ContactDrawer
+              library={currentLibrary}
+              handleScheduleNextAppointment={handleNewAppointment}
             />
+            <div className={content}>
+              <Grid container>
+                <Grid item xs={12} md={3}>
+                  <div className={paddingOne}>
+                    <SalesArea
+                      totalSales={currentLibrary.totalSales}
+                      lastSale={currentLibrary.lastSale}
+                      addSale={({ newSale }) =>
+                        addSale(newSale, currentLibrary)
+                      }
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <div className={paddingOne}>
+                    <PersonalNotes library={currentLibrary} />
+                  </div>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <div className={paddingOne}>
+                    <NewNote formSubmit={submitNewNote} />
+                  </div>
+                </Grid>
+              </Grid>
+              <NoteList
+                notes={currentLibrary.notes}
+                SubmitForm={submitNewEditableNote}
+              />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

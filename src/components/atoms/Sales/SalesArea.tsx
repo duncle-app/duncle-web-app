@@ -22,7 +22,10 @@ export default ({ totalSales, lastSale, addSale }: props) => {
     <Form onSubmit={addSale}>
       <Paper className={paddingTwo}>
         <Typography variant="h5" component="h2">
-          Total Sales: ${totalSales} Last Sale: ${lastSale}
+          Total Sales: ${totalSales}
+        </Typography>
+        <Typography variant="h5" component="h2">
+          Last Sale: ${lastSale}
         </Typography>
         <div className={smallerHeight}>
           <NumberTextField name="New Sale" />

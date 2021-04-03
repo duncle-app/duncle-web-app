@@ -12,6 +12,7 @@ import { useUserPouch } from "./UsePouch";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 import useSaveLibraryQuery from "../queries/useSaveLibraryQuery";
 import { useLibraryState } from "../providers/LibraryProvider";
+import { createNewNote } from "../../utils/noteUtils";
 
 export default () => {
   const { currentLibrary, setCurrentLibrary } = useLibraryState();
@@ -58,12 +59,7 @@ export default () => {
     message: string,
     author: string
   ): void {
-    const newSavedNote: NoteDAO = {
-      id: uuidv4(),
-      message,
-      dateCreated: dateNowIso(),
-      author,
-    };
+    const newSavedNote: NoteDAO = createNewNote(message, author);
 
     const newLibrary = {
       notes: [newSavedNote, ...notes],

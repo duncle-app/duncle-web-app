@@ -16,7 +16,7 @@ import { updateAllLibrariesQuery } from "./queriesUtils";
 export default () => {
   const { currentLibrary } = useLibraryState();
   const { getAuthenticatedUser } = useAuth();
-  const { setSuccess, setError } = useNotification();
+  const { setSuccess, setError, setInfo } = useNotification();
   const queryClient = useQueryClient();
 
   const USER_DB_PREFIX = "user_";
@@ -24,6 +24,12 @@ export default () => {
     `${USER_DB_PREFIX}${getAuthenticatedUser().username}`
   );
 
+  /**
+   * Saves a library
+   * @param library ** IMPORTANT ** make sure you're creating a clone of the library because we use the existing library
+   * as a comparison.
+   * This is to be re-worked once I am smarter :)
+   */
   const saveLibrary = (
     library: Library
   ): Promise<PouchDB.Core.Response | void> => {
@@ -46,10 +52,12 @@ export default () => {
 
     if (!isEqual(currentLibrary, library)) {
       return localPouch.put(library);
+    } else {
+      console.warn("noop");
+      setInfo("Library is the same - no updates were made");
+      // no op promise, just so the types don't complain.. probably a better way to do this
+      return new Promise(() => Promise.resolve());
     }
-
-    // no op promise, just so the types don't complain.. probably a better way to do this
-    return new Promise(() => Promise.resolve());
   };
 
   return useMutation(saveLibraryKey, saveLibrary, {
@@ -67,12 +75,11 @@ export default () => {
 
         // update the query for all libraries
         updateAllLibrariesQuery(updatedLibrary, queryClient);
+        setSuccess("Successfully saved library");
       }
-
-      setSuccess("Successfully saved library");
     },
     onError: (e, library) => {
-      console.log("save error library", library);
+      console.error("save error library", library);
       setError(`${e}`);
     },
     onSettled: (response) => {

@@ -22,8 +22,9 @@ export default (uuid: string) => {
       setCurrentLibrary(library);
       return library;
     },
-    onError: () => {
+    onError: (err: PouchDB.Core.Error): PouchDB.Core.Error => {
       setError(`Couldn't find a matching record for ID: ${uuid}`);
+      return err;
     },
   });
 };
