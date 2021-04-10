@@ -9,16 +9,16 @@ import { LogInForm } from "../../elements/LogIn/LogInForm";
 import { Avatar } from "@material-ui/core";
 import useStyles from "../../../global-styles";
 import UserDAO from "../../../model/userDAO";
-import LoginService from "../../../services/LoginService";
 import User from "../../../model/user";
 import { useHistory } from "react-router-dom";
 import { useNotification } from "../../atoms/Snackbar/Snackbar";
 import useAuth from "../../../common/hooks/Auth/useAuth";
+import useLogin from "../../../services/useLogin";
 
 export default function Login() {
   const { paper, avatar } = useStyles();
   const history = useHistory();
-  const loginService = new LoginService();
+  const loginService = useLogin();
   const { authenticate } = useAuth();
   const { setError, setSuccess } = useNotification();
 

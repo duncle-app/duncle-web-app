@@ -6,19 +6,20 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { Form } from "react-final-form";
 import { SignUpForm } from "../../elements/SignUp/SignUpForm";
-import AccountCircle  from "@material-ui/icons/AccountCircle";
-import LoginService from "../../../services/LoginService";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import LoginService from "../../../services/useLogin";
 import NewUser from "../../../model/newUser";
 import UserDAO from "../../../model/userDAO";
 import { useHistory } from "react-router-dom";
 import { useNotification } from "../../atoms/Snackbar/Snackbar";
 import { isEqual } from "lodash";
 import useAuth from "../../../common/hooks/Auth/useAuth";
+import useLogin from "../../../services/useLogin";
 
 export default function SignUp() {
   const classes = useStyles();
   const history = useHistory();
-  const loginService = new LoginService();
+  const loginService = useLogin();
   const { authenticate } = useAuth();
   const { setError, setSuccess } = useNotification();
 
