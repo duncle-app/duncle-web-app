@@ -13,6 +13,10 @@ REACT_APP_DATABASE_PASSWORD=
 
 REACT_APP_SALT=
 REACT_APP_ENCRYPTION_PASSWORD=
+
+# Only needed since there's a babel-loader mismatch between CRA and storybook
+# https://github.com/facebook/create-react-app/issues/10123
+SKIP_PREFLIGHT_CHECK=true
 ```
 
 ## Available Scripts
