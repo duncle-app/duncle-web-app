@@ -2,13 +2,9 @@ import React from "react";
 import EditableNote from "../Note/EditableNote";
 import NoteDAO from "../../../model/noteDAO";
 import { createNewNote } from "../../../utils/noteUtils";
-import styled from "styled-components";
 import useSaveLibraryQuery from "../../../common/queries/useSaveLibraryQuery";
 import Library from "../../../model/library";
-
-const Title = styled.h2`
-  font-size: 1.7rem;
-`;
+import Title from "../../styles/Title";
 
 interface Props {
   library: Library;

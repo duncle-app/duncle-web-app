@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Form from "../../../common/Form";
 import NumberTextField from "../TextField/NumberTextField";
 import useStyles from "../../../global-styles";
+import Title from "../../styles/Title";
 
 export interface addSaleInputProps {
   newSale: number;
@@ -20,6 +21,7 @@ export default ({ totalSales, lastSale, addSale }: props) => {
 
   return (
     <Form onSubmit={addSale}>
+      <Title>Submit Sale</Title>
       <Paper className={paddingTwo}>
         <Typography variant="h5" component="h2">
           Total Sales: ${totalSales}
