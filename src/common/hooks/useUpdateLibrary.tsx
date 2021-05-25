@@ -15,7 +15,7 @@ import { useLibraryState } from "../providers/LibraryProvider";
 import { createNewNote } from "../../utils/noteUtils";
 
 export default () => {
-  const { currentLibrary, setCurrentLibrary } = useLibraryState();
+  const { currentLibrary } = useLibraryState();
   const { authenticate, getAuthenticatedUser } = useAuth();
 
   const { mutate: saveLibrary } = useSaveLibraryQuery();
@@ -32,17 +32,19 @@ export default () => {
   }
 
   // @ts-ignore
-  async function submitNewNote({ newNote: message }) {
+  async function submitNewNote({ newNote: message, date = undefined }) {
+    console.log({ message });
+    // @ts-ignore
     const { firstName }: userDAO = await getAuthenticatedUser();
-    saveNote(currentLibrary, message, firstName);
+    saveNote(currentLibrary, message, firstName, date);
   }
 
-  function jankUpdateLibrary(updatedLibrary: Library) {
-    // todo - amazing challenge question because this ain't right.. this is needed, otherwise - see below note
-    setCurrentLibrary(newLibrary2);
-    // todo - not sure why.. but when this renders, it duplicates the note at the bottom instead of adding a new note to the top..
-    setCurrentLibrary(updatedLibrary);
-  }
+  // function jankUpdateLibrary(updatedLibrary: Library) {
+  //   // todo - amazing challenge question because this ain't right.. this is needed, otherwise - see below note
+  //   setCurrentLibrary(newLibrary2);
+  //   // todo - not sure why.. but when this renders, it duplicates the note at the bottom instead of adding a new note to the top..
+  //   setCurrentLibrary(updatedLibrary);
+  // }
 
   async function editNote(library: Library, note: NoteDAO) {
     library.dateUpdated = dateNowIso();
@@ -57,15 +59,16 @@ export default () => {
   function saveNote(
     { notes, ...rest }: Library,
     message: string,
-    author: string
+    author: string,
+    date: string | undefined
   ): void {
     const newSavedNote: NoteDAO = createNewNote(message, author);
 
     const newLibrary = {
       notes: [newSavedNote, ...notes],
       ...rest,
-      dateUpdated: dateNowIso(),
-      dateLastContact: dateNowIso(),
+      dateUpdated: date ? date : dateNowIso(),
+      dateLastContact: date ? date : dateNowIso(),
     };
 
     saveLibrary(newLibrary);
@@ -74,18 +77,18 @@ export default () => {
   /**
    * Just logs the date to contacted, and nothing else
    */
-  const handleContactedToday = async () => {
-    try {
-      currentLibrary.dateLastContact = dateNowIso();
-      // @ts-ignore
-      const { rev } = await saveLibrary(currentLibrary);
-      currentLibrary._rev = rev;
-      jankUpdateLibrary(currentLibrary);
-      setSuccess("Successfully saved library");
-    } catch (e) {
-      setError(e);
-    }
-  };
+  // const handleContactedToday = async () => {
+  //   try {
+  //     currentLibrary.dateLastContact = dateNowIso();
+  //     // @ts-ignore
+  //     const { rev } = await saveLibrary(currentLibrary);
+  //     currentLibrary._rev = rev;
+  //     jankUpdateLibrary(currentLibrary);
+  //     setSuccess("Successfully saved library");
+  //   } catch (e) {
+  //     setError(e);
+  //   }
+  // };
 
   function sortLatestComesFirst(notes: NoteDAO[]) {
     console.log("notes being sorted", notes);
@@ -117,7 +120,7 @@ export default () => {
       dateCreated: now,
       dateUpdated: now,
     };
-
+    // @ts-ignore
     const currentUser: UserDAO = await getAuthenticatedUser();
 
     try {

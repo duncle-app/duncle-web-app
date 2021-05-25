@@ -57,10 +57,11 @@ export default function useAuth() {
     //  everytime to get the state?
     //  downsides - it re-renders every single time rather than just calling the local storage.
     isAuthenticated: (): boolean => isValidToken(),
-    getAuthenticatedUser: (): UserDAO => {
+    getAuthenticatedUser: () => {
       const token: UserDAO | null = getWithExpiry(TOKEN_ID);
       if (token === null) {
-        throw new Error(`There is currently no user set. Token is ${token}`);
+        console.warn(`There is currently no user set. Token is ${token}`);
+        history.push("/");
       } else {
         return token;
       }

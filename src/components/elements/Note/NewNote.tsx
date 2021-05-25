@@ -8,19 +8,18 @@ import PhoneDisabled from "@material-ui/icons/PhoneDisabled";
 import { ContactButtonsRow } from "../../atoms/DatePicker/DPButtons";
 import FlexCenter from "../../../common/styles/FlexCenter";
 import Title from "../../styles/Title";
+import useUpdateLibrary from "../../../common/hooks/useUpdateLibrary";
+import noop from "../../../utils/noop";
 
-interface props {
-  // @ts-ignore
-  formSubmit(props): any;
-}
-
-export default function ({ formSubmit }: props) {
+export default function () {
   const { paddingTwo, longWidth } = useStyles();
+  const { submitNewNote } = useUpdateLibrary();
 
-  const onNoAnswer = () => formSubmit({ newNote: "Called, but no answer." });
+  const onNoAnswer = () => submitNewNote({ newNote: "Called, but no answer." });
 
   return (
-    <Form onSubmit={formSubmit}>
+    // todo - fix? TextArea uses a form, but I don't actually use the form...
+    <Form onSubmit={noop}>
       <Title>Create Notes</Title>
       <Paper className={paddingTwo}>
         <TextArea

@@ -65,6 +65,7 @@ export default function ({ initialEvents }: any) {
         dateUpdated: now,
       };
 
+      // @ts-ignore
       const currentUser: UserDAO = await getAuthenticatedUser();
 
       // todo - find out how to reuse this code (see ViewLibrary.tsx:146)

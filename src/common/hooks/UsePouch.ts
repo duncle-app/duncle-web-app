@@ -123,7 +123,7 @@ export function useLibraryPouch(): useLibraryPouchReturn {
 
   const USER_DB_PREFIX = "user_";
   const { localPouch } = usePouch(
-    `${USER_DB_PREFIX}${getAuthenticatedUser().username}`
+    `${USER_DB_PREFIX}${getAuthenticatedUser()?.username}`
   );
 
   async function getAll(): Promise<PouchDB.Core.AllDocsResponse<Library>> {

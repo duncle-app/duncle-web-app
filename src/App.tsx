@@ -6,12 +6,10 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Routes from "./components/elements/Routes";
 import Navbar from "./components/elements/Navbar/Navbar";
 import Snackbar from "./components/atoms/Snackbar/Snackbar";
-import { ErrorBoundary } from "./components/pages/ErrorBoundary/ErrorBoundary";
 
 export default () => {
   return (
     <div className="App">
-      {/*<ErrorBoundary>*/}
       <CssBaseline />
       <GlobalProvider>
         <ReactQueryDevtools />
@@ -20,7 +18,6 @@ export default () => {
           <Snackbar />
         </Routes>
       </GlobalProvider>
-      {/*</ErrorBoundary>*/}
     </div>
   );
 };

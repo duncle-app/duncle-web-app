@@ -10,13 +10,15 @@ import useGlobalDatePicker from "./useGlobalDatePicker";
 import { useGlobalDatePickerState } from "../../../common/providers/GlobalDatePickerProvider";
 import camelize from "../../../utils/camelize";
 import { dateNowIso } from "../../../utils/dateUtil";
+import useUpdateLibrary from "../../../common/hooks/useUpdateLibrary";
 
 export default () => {
   const label: string = camelize("Next appointment");
   const defaultDate = dateNowIso();
   const [datePickerValue, setDatePickerValue] = useState(defaultDate);
   const { isOpen } = useGlobalDatePickerState();
-  const { handleClose, handleSubmit } = useGlobalDatePicker();
+  const { submitNewNote } = useUpdateLibrary();
+  const { handleClose } = useGlobalDatePicker();
 
   return (
     <div>
@@ -57,8 +59,22 @@ export default () => {
             Cancel
           </Button>
           <Button
-            onClick={() => handleSubmit(datePickerValue)}
+            onClick={() => {
+              // todo - for next time
+              //  problem: need to get the message contents and date contents together
+              //   potential solve: need to get the message contents into this function, through context api?
+              // submitNewNote();
+              /**
+               this is the code to set the next contact date
+
+               let editedLibrary: Library = { ...currentLibrary };
+               editedLibrary.dateNextContact = nextAppointment;
+               editedLibrary.lastContactType = currentLibrary.lastContactType;
+               editedLibrary.dateLastContact = dateNowIso();
+               */
+            }}
             color="secondary"
+            type="submit"
           >
             OK
           </Button>

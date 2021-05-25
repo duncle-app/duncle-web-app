@@ -12,7 +12,7 @@ export default function () {
   useEffect(() => {
     const user = getAuthenticatedUser();
 
-    const filteredEvents = user.events.map(
+    const filteredEvents = user?.events.map(
       ({ id, title, start, end }: event) => ({ id, title, start, end })
     );
 

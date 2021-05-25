@@ -22,7 +22,6 @@ export default () => {
   const {
     handleNewAppointment,
     addSale,
-    submitNewNote,
     submitNewEditableNote,
   } = useUpdateLibrary();
 
@@ -78,7 +77,7 @@ export default () => {
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <div className={paddingOne}>
-                    <NewNote formSubmit={submitNewNote} />
+                    <NewNote />
                   </div>
                 </Grid>
               </Grid>

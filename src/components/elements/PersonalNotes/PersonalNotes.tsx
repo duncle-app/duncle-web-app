@@ -11,7 +11,6 @@ interface Props {
 }
 
 export default ({ library }: Props) => {
-  console.log("original library", library);
   const { mutate: saveLibrary } = useSaveLibraryQuery();
 
   const { message, dateCreated, id, author }: NoteDAO = library.personalNotes
@@ -21,8 +20,6 @@ export default ({ library }: Props) => {
   // this comes from the note form
   const onSubmit = (note: any) => {
     const editedLibrary: Library = { ...library, personalNotes: note };
-
-    console.log({ library });
     saveLibrary(editedLibrary);
   };
 

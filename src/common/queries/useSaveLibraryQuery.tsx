@@ -21,7 +21,7 @@ export default () => {
 
   const USER_DB_PREFIX = "user_";
   const { localPouch } = usePouch(
-    `${USER_DB_PREFIX}${getAuthenticatedUser().username}`
+    `${USER_DB_PREFIX}${getAuthenticatedUser()?.username}`
   );
 
   /**
@@ -35,6 +35,8 @@ export default () => {
   ): Promise<PouchDB.Core.Response | void> => {
     // this is done just to get the _rev and _id, since our form doesn't store that info
     library = { ...currentLibrary, ...library };
+
+    console.log("calling save library");
 
     if (library === DEFAULT_LIBRARY) {
       throw new Error(
@@ -51,18 +53,22 @@ export default () => {
     roundDecimals(library);
 
     if (!isEqual(currentLibrary, library)) {
+      console.log("doing a put");
+      console.log({ currentLibrary });
+      console.log({ library });
       return localPouch.put(library);
     } else {
       console.warn("noop");
       setInfo("Library is the same - no updates were made");
       // no op promise, just so the types don't complain.. probably a better way to do this
-      return new Promise(() => Promise.resolve());
+      return Promise.resolve();
     }
   };
 
   return useMutation(saveLibraryKey, saveLibrary, {
     onSuccess: (response, library) => {
       let updatedLibrary: Library;
+      console.log("success");
 
       if (response) {
         // update the query for the single library
@@ -83,6 +89,8 @@ export default () => {
       setError(`${e}`);
     },
     onSettled: (response) => {
+      console.log("settled");
+
       if (response) {
         console.log(
           `invalidated: ${libraryKey(response.id)} and ${allLibrariesKey}`

@@ -9,7 +9,6 @@ import { dateNowIso } from "../../../utils/dateUtil";
 interface ReturnProps {
   handleOpen(contactType: LastContactType): void;
   handleClose(): void;
-  handleSubmit(nextAppointment: string): void;
 }
 
 export default (): ReturnProps => {
@@ -32,16 +31,5 @@ export default (): ReturnProps => {
     reset();
   }
 
-  const handleSubmit = (nextAppointment: string) => {
-    let editedLibrary: Library = { ...currentLibrary };
-    editedLibrary.dateNextContact = nextAppointment;
-    editedLibrary.lastContactType = currentLibrary.lastContactType;
-    editedLibrary.dateLastContact = dateNowIso();
-
-    console.log({ currentLibrary });
-    // todo - also save note
-    saveLibrary(editedLibrary);
-  };
-
-  return { handleOpen, handleClose, handleSubmit };
+  return { handleOpen, handleClose };
 };
