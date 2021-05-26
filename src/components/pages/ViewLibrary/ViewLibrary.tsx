@@ -23,9 +23,6 @@ export default () => {
     isFetching,
   } = useLibraryQuery(libraryId);
 
-  const notes = currentLibrary?.notes;
-  console.log({ notes });
-
   const {
     handleNewAppointment,
     addSale,
@@ -91,7 +88,10 @@ export default () => {
               {isFetching ? (
                 <h1>Getting new Data...</h1>
               ) : (
-                <NoteList notes={notes} SubmitForm={submitNewEditableNote} />
+                <NoteList
+                  notes={currentLibrary.notes}
+                  SubmitForm={submitNewEditableNote}
+                />
               )}
             </div>
           </div>
