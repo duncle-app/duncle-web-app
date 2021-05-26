@@ -78,6 +78,10 @@ export default () => {
   ): void {
     const newSavedNote: NoteDAO = createNewNote(message, author);
 
+    if (!notes) {
+      notes = [];
+    }
+
     const newLibrary = {
       notes: [newSavedNote, ...notes],
       ...rest,
