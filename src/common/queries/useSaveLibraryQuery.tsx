@@ -77,6 +77,7 @@ export default () => {
           _rev: response.rev,
           _id: response.id,
         };
+        console.log("id", response.id);
         queryClient.setQueryData(libraryKey(response.id), updatedLibrary);
 
         // update the query for all libraries

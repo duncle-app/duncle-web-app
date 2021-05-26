@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import Form from "../../../common/Form";
 import Paper from "@material-ui/core/Paper";
 import TextArea from "../../atoms/TextArea/TextArea";
@@ -10,12 +10,18 @@ import FlexCenter from "../../../common/styles/FlexCenter";
 import Title from "../../styles/Title";
 import useUpdateLibrary from "../../../common/hooks/useUpdateLibrary";
 import noop from "../../../utils/noop";
+import { useGlobalDatePickerState } from "../../../common/providers/GlobalDatePickerProvider";
 
 export default function () {
   const { paddingTwo, longWidth } = useStyles();
   const { submitNewNote } = useUpdateLibrary();
+  const { noteMessage } = useGlobalDatePickerState();
 
   const onNoAnswer = () => submitNewNote({ newNote: "Called, but no answer." });
+
+  const onTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    noteMessage.current = event.target.value;
+  };
 
   return (
     // todo - fix? TextArea uses a form, but I don't actually use the form...
@@ -26,6 +32,7 @@ export default function () {
           className={longWidth}
           name="New Note"
           placeholderText="Enter a new note here"
+          onChangeFunction={onTextAreaChange}
         />
         <FlexCenter>
           <div className={paddingTwo}>

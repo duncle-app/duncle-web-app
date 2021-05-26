@@ -14,6 +14,11 @@ import useSaveLibraryQuery from "../queries/useSaveLibraryQuery";
 import { useLibraryState } from "../providers/LibraryProvider";
 import { createNewNote } from "../../utils/noteUtils";
 
+interface SubmitProps {
+  newNote: string;
+  date?: string;
+}
+
 export default () => {
   const { currentLibrary } = useLibraryState();
   const { authenticate, getAuthenticatedUser } = useAuth();
@@ -31,20 +36,29 @@ export default () => {
     // jankUpdateLibrary(updatedLibrary);
   }
 
-  // @ts-ignore
-  async function submitNewNote({ newNote: message, date = undefined }) {
+  async function submitNewContactNote(
+    newNote: string,
+    nextAppointment: string = dateNowIso()
+  ) {
+    // todo - for next time
+    //  problem: need to get the message contents and date contents together
+    //   potential solve: need to get the message contents into this function, through context api?
+    /**
+     this is the code to set the next contact date
+     */
+
+    let editedLibrary: Library = { ...currentLibrary };
+    editedLibrary.dateNextContact = nextAppointment;
+    editedLibrary.lastContactType = currentLibrary.lastContactType;
+    editedLibrary.dateLastContact = dateNowIso();
+    submitNewNote({ newNote, date: nextAppointment });
+  }
+  async function submitNewNote({ newNote: message, date }: SubmitProps) {
     console.log({ message });
     // @ts-ignore
     const { firstName }: userDAO = await getAuthenticatedUser();
     saveNote(currentLibrary, message, firstName, date);
   }
-
-  // function jankUpdateLibrary(updatedLibrary: Library) {
-  //   // todo - amazing challenge question because this ain't right.. this is needed, otherwise - see below note
-  //   setCurrentLibrary(newLibrary2);
-  //   // todo - not sure why.. but when this renders, it duplicates the note at the bottom instead of adding a new note to the top..
-  //   setCurrentLibrary(updatedLibrary);
-  // }
 
   async function editNote(library: Library, note: NoteDAO) {
     library.dateUpdated = dateNowIso();
@@ -158,6 +172,7 @@ export default () => {
   return {
     submitNewEditableNote,
     submitNewNote,
+    submitNewContactNote,
     handleNewAppointment,
     addSale,
   };

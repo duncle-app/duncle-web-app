@@ -19,7 +19,7 @@ interface localStorageItem {
 export default function useAuth() {
   const TOKEN_ID: string = "authCredentials";
   let history = useHistory();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [_, setIsLoggedIn] = useState<boolean>(false);
 
   function isValidToken(): boolean {
     return (

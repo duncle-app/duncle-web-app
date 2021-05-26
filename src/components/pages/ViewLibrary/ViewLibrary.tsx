@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ContactDrawer from "../../elements/ContactDrawer/ContactDrawer";
 import { useHistory, useParams } from "react-router-dom";
 import NoteList from "../../elements/NoteList/NoteList";
@@ -15,9 +15,16 @@ export default () => {
   const { content, alignToDrawer, paddingOne, paddingTopTiny } = useStyles();
   let { libraryId } = useParams<{ libraryId: string }>();
 
-  const { data: currentLibrary, isSuccess, error, isLoading } = useLibraryQuery(
-    libraryId
-  );
+  const {
+    data: currentLibrary,
+    isSuccess,
+    error,
+    isLoading,
+    isFetching,
+  } = useLibraryQuery(libraryId);
+
+  const notes = currentLibrary?.notes;
+  console.log({ notes });
 
   const {
     handleNewAppointment,
@@ -81,10 +88,11 @@ export default () => {
                   </div>
                 </Grid>
               </Grid>
-              <NoteList
-                notes={currentLibrary.notes}
-                SubmitForm={submitNewEditableNote}
-              />
+              {isFetching ? (
+                <h1>Getting new Data...</h1>
+              ) : (
+                <NoteList notes={notes} SubmitForm={submitNewEditableNote} />
+              )}
             </div>
           </div>
         </>

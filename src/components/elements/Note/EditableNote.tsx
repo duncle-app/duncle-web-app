@@ -40,7 +40,7 @@ export default function ({
           const newNote: NoteDAO = { id, message: note, author, dateCreated };
           SubmitForm(newNote);
           setCurrentMessage(note);
-          setisEditing(false);
+          cancel();
         }}
         // @ts-ignore
         initialValues={message}

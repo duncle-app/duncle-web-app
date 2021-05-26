@@ -17,7 +17,6 @@ export default function ({ notes, SubmitForm }: NoteListProps) {
         notes.map((props: NoteDAO, index: number) => (
           <Grid item xs={7}>
             <div key={index} className={paddingOne}>
-              {/* @ts-ignore */}
               <EditableNote SubmitForm={SubmitForm} {...props} />
             </div>
           </Grid>

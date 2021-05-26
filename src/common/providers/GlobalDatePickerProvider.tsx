@@ -1,15 +1,18 @@
 import React, {
   createContext,
   Dispatch,
+  MutableRefObject,
   PropsWithChildren,
   SetStateAction,
   useContext,
+  useRef,
   useState,
 } from "react";
 
 interface GlobalDatePickerContextState {
   isOpen: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  noteMessage: MutableRefObject<string | undefined>;
 }
 
 export const GlobalDatePickerContext = createContext<
@@ -20,12 +23,14 @@ export const GlobalDatePickerProvider = ({
   children,
 }: PropsWithChildren<any>) => {
   const [isOpen, setOpen] = useState<boolean>(false);
+  const noteMessage = useRef<string | undefined>();
 
   return (
     <GlobalDatePickerContext.Provider
       value={{
         isOpen,
         setOpen,
+        noteMessage,
       }}
     >
       {children}
