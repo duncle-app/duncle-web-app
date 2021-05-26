@@ -16,7 +16,6 @@ import { createNewNote } from "../../utils/noteUtils";
 
 interface SubmitProps {
   newNote: string;
-  date?: string;
 }
 
 export default () => {
@@ -50,14 +49,16 @@ export default () => {
     let editedLibrary: Library = { ...currentLibrary };
     editedLibrary.dateNextContact = nextAppointment;
     editedLibrary.lastContactType = currentLibrary.lastContactType;
-    editedLibrary.dateLastContact = dateNowIso();
-    submitNewNote({ newNote, date: nextAppointment });
+    // @ts-ignore
+    const { firstName }: userDAO = await getAuthenticatedUser();
+
+    saveNote(editedLibrary, newNote, firstName);
   }
-  async function submitNewNote({ newNote: message, date }: SubmitProps) {
+  async function submitNewNote({ newNote: message }: SubmitProps) {
     console.log({ message });
     // @ts-ignore
     const { firstName }: userDAO = await getAuthenticatedUser();
-    saveNote(currentLibrary, message, firstName, date);
+    saveNote(currentLibrary, message, firstName);
   }
 
   async function editNote(library: Library, note: NoteDAO) {
@@ -73,16 +74,15 @@ export default () => {
   function saveNote(
     { notes, ...rest }: Library,
     message: string,
-    author: string,
-    date: string | undefined
+    author: string
   ): void {
     const newSavedNote: NoteDAO = createNewNote(message, author);
 
     const newLibrary = {
       notes: [newSavedNote, ...notes],
       ...rest,
-      dateUpdated: date ? date : dateNowIso(),
-      dateLastContact: date ? date : dateNowIso(),
+      dateUpdated: dateNowIso(),
+      dateLastContact: dateNowIso(),
     };
 
     saveLibrary(newLibrary);
