@@ -19,15 +19,15 @@ type PouchRow = {
 
 export default function () {
   const { data: libraries, isLoading, isSuccess, error } = useLibraries();
-  const { setCurrentLibrary } = useLibraryState();
   const history = useHistory();
 
   if (isLoading) return <h1>Loading...</h1>;
 
   function routeToLibraryDetail(library: Library): void {
     history.push(`/library/${library._id}`);
-    setCurrentLibrary(library);
   }
+
+  console.log({ libraries });
 
   return (
     <div>
@@ -36,8 +36,14 @@ export default function () {
         <Grid container justify="center">
           <Grid item xs={11}>
             <Card variant="outlined">
-              {/*@ts-ignore - react query is returning Library[] | undefined*/}
-              <Table libraries={libraries} onEdit={routeToLibraryDetail} />
+              {libraries?.length ? (
+                <Table libraries={libraries} onEdit={routeToLibraryDetail} />
+              ) : (
+                <>
+                  <h1>No Libraries found!</h1>
+                  <h3>Start by adding a new library</h3>
+                </>
+              )}
             </Card>
           </Grid>
         </Grid>

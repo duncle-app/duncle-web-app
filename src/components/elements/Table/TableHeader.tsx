@@ -10,11 +10,13 @@ const FlexGroup = styled(FormGroup)`
 export default () => {
   const [state, setState] = React.useState({
     checkedA: true,
-    checkedB: true,
-    checkedC: true,
+    checkedB: false,
+    checkedC: false,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    /** When this changes, we should add/remove some data from the table
+     */
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
@@ -51,7 +53,7 @@ export default () => {
               name="checkedC"
             />
           }
-          label="John"
+          label="Jim"
         />
       </FlexGroup>
     </>

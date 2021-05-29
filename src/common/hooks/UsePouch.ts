@@ -113,8 +113,8 @@ interface useLibraryPouchReturn {
 }
 
 export function roundDecimals(library: Library | NewLibrary) {
-  library.lastSale = Number(library.lastSale.toFixed(2));
-  library.totalSales = Number(library.totalSales.toFixed(2));
+  library.lastSale = Number(library.lastSale?.toFixed(2));
+  library.totalSales = Number(library.totalSales?.toFixed(2));
 }
 
 export function useLibraryPouch(): useLibraryPouchReturn {
@@ -194,27 +194,6 @@ export function usePouch(database: string): any {
     `https://${dbUsername}:${dbPassword}@${remoteDb}/${database}`
   );
 
-  async function getInfo() {
-    console.log("Local db info:", await localPouch.info());
-    console.log("Remote db info:", await remoteDatabase.info());
-  }
-
-  async function get(docId: any) {
-    try {
-      return await localPouch.get(docId);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async function put(docId: string, title: string) {
-    try {
-      return await localPouch.put({ _id: docId, title });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   // Setup database sync
   // Read more at https://pouchdb.com/guides/replication.html
   localPouch
@@ -229,5 +208,5 @@ export function usePouch(database: string): any {
       // console.log('sync error');
     });
 
-  return { localPouch, get, put };
+  return { localPouch };
 }
