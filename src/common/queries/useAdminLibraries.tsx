@@ -17,6 +17,7 @@ export default () => {
   // todo - have these as an env var that can easily be swapped out?
   const otherUserIds = ["sam", "jim"];
   return otherUserIds.map((person) => {
+    // todo - use the same function that cuts off the rest of the email, and only gets the DB name, instead of doing this way
     const localPouch = usePouch(`${USER_DB_PREFIX}${person}`);
 
     const fetchAllLibraries = (): AllLibrariesResponse =>

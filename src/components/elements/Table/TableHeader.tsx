@@ -1,6 +1,7 @@
 import React from "react";
 import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
 import styled from "styled-components";
+import { useSeeOthersState } from "../../../common/providers/SeeOthersProvider";
 
 const FlexGroup = styled(FormGroup)`
   display: flex;
@@ -8,16 +9,12 @@ const FlexGroup = styled(FormGroup)`
 `;
 
 export default () => {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: false,
-    checkedC: false,
-  });
+  const { checked, setChecked } = useSeeOthersState();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     /** When this changes, we should add/remove some data from the table
      */
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setChecked({ ...checked, [event.target.name]: event.target.checked });
   };
 
   return (
@@ -27,9 +24,9 @@ export default () => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={state.checkedA}
+              checked={checked.checkedTerry}
               onChange={handleChange}
-              name="checkedA"
+              name="checkedTerry"
               color="primary"
             />
           }
@@ -38,9 +35,9 @@ export default () => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={state.checkedB}
+              checked={checked.checkedSam}
               onChange={handleChange}
-              name="checkedB"
+              name="checkedSam"
             />
           }
           label="Sam"
@@ -48,9 +45,9 @@ export default () => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={state.checkedC}
+              checked={checked.checkedJim}
               onChange={handleChange}
-              name="checkedC"
+              name="checkedJim"
             />
           }
           label="Jim"
