@@ -19,7 +19,6 @@ type PouchRow = {
 
 export default function () {
   const { data: libraries, isLoading, isSuccess, error } = useLibraries();
-  console.log({ libraries });
   const { setCurrentLibrary } = useLibraryState();
   const history = useHistory();
 

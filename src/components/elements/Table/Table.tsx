@@ -8,6 +8,7 @@ import StackedField from "../../atoms/Table/StackedField";
 import { readableDate } from "../../../utils/dateUtil";
 import { formatContactType } from "../../../utils/textFormatUtils";
 import { getColor } from "../../../utils/colorUtils";
+import TableHeader from "./TableHeader";
 
 type TableProps = {
   libraries: Library[];
@@ -77,7 +78,12 @@ export default ({ libraries, onEdit }: TableProps) => {
 
   return (
     <>
-      <CardHeader title="Libraries" />
+      {/*
+        todo - change this header to something like
+        Libraries
+        [] Terry [] Sam [] John
+      */}
+      <TableHeader />
       <MaterialTable
         title=" "
         columns={tableColumns}

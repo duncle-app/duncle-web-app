@@ -1,5 +1,7 @@
 import event from "./event";
 
+export type Roles = "admin" | "user";
+
 export default interface User {
   email: string;
   username: string;
@@ -8,6 +10,6 @@ export default interface User {
   lastName: string;
   dateCreated: string;
   dateUpdated: string;
-  role: "admin" | "user";
+  role: Roles;
   events: event[];
 }

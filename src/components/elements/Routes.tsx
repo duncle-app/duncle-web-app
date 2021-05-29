@@ -15,35 +15,29 @@ import ViewLibrary from "../pages/ViewLibrary/ViewLibrary";
 import EditLibraryController from "../pages/EditLibrary/EditLibraryController";
 import Unauthorized from "./Unauthorized/Unauthorized";
 
-export default ({ children }: PropsWithChildren<any>) => {
-  return (
-    <Router>
-      {children}
-      <Switch>
-        {/* todo - auto route to login page if we're not logged in */}
-        <Redirect exact from="/" to="login" />
-        <Route exact path="/signup">
-          <SignUp />
-        </Route>
-        <Route exact path="/login">
-          {/* TODO - REDIRECT */}
-          <Login />
-        </Route>
-        <PrivateRoute exact path="/dashboard" component={AllLibraries} />
-        <PrivateRoute exact path="/calendar" component={CalendarController} />
-        <PrivateRoute exact path="/library/new" component={AddLibrary} />
-        <PrivateRoute
-          exact
-          path="/library/:libraryId"
-          component={ViewLibrary}
-        />
-        <PrivateRoute
-          exact
-          path="/library/:libraryId/edit"
-          component={EditLibraryController}
-        />
-        <Route path="/unauthorized" children={<Unauthorized />} />
-      </Switch>
-    </Router>
-  );
-};
+export default ({ children }: PropsWithChildren<any>) => (
+  <Router>
+    {children}
+    <Switch>
+      {/* todo - auto route to login page if we're not logged in */}
+      <Redirect exact from="/" to="login" />
+      <Route exact path="/signup">
+        <SignUp />
+      </Route>
+      <Route exact path="/login">
+        {/* TODO - REDIRECT */}
+        <Login />
+      </Route>
+      <PrivateRoute exact path="/dashboard" component={AllLibraries} />
+      <PrivateRoute exact path="/calendar" component={CalendarController} />
+      <PrivateRoute exact path="/library/new" component={AddLibrary} />
+      <PrivateRoute exact path="/library/:libraryId" component={ViewLibrary} />
+      <PrivateRoute
+        exact
+        path="/library/:libraryId/edit"
+        component={EditLibraryController}
+      />
+      <Route path="/unauthorized" component={Unauthorized} />
+    </Switch>
+  </Router>
+);

@@ -1,16 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import useAuth from "../../../common/hooks/Auth/useAuth";
 
-// @ts-ignore
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated } = useAuth();
+const DEFAULT_INPUT = "";
+
+export default ({
+  // @ts-ignore
+  component: Component,
+  requiredRole = DEFAULT_INPUT,
+  ...rest
+}) => {
+  const { isAuthenticated, getAuthenticatedUser } = useAuth();
+
+  let canAccess: boolean;
+  if (requiredRole !== DEFAULT_INPUT) {
+    canAccess =
+      isAuthenticated() && getAuthenticatedUser()?.role === requiredRole;
+  } else {
+    canAccess = isAuthenticated();
+  }
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated() ? (
+        canAccess ? (
+          // @ts-ignore
           <Component {...props} />
         ) : (
           <Redirect to="/unauthorized" />
@@ -19,4 +34,3 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
-export default PrivateRoute;
