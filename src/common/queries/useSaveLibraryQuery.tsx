@@ -20,7 +20,7 @@ export default () => {
   const queryClient = useQueryClient();
 
   const USER_DB_PREFIX = "user_";
-  const { localPouch } = usePouch(
+  const localPouch = usePouch(
     `${USER_DB_PREFIX}${getAuthenticatedUser()?.username}`
   );
 

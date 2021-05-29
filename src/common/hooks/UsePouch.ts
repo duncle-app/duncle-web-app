@@ -28,9 +28,10 @@ interface AddUserProps {
 }
 
 const USER_ID_PREFIX = "org.duncle.";
+export const USER_DB_PREFIX = "user_";
 
 export function useUserPouch(): UseUserReturnProps {
-  const { localPouch } = usePouch("user");
+  const localPouch = usePouch("user");
 
   async function fetchUser(inputEmail: string): Promise<UserDAO> {
     console.log(`Finding username: ${inputEmail}`);
@@ -122,7 +123,7 @@ export function useLibraryPouch(): useLibraryPouchReturn {
   const { getAuthenticatedUser } = useAuth();
 
   const USER_DB_PREFIX = "user_";
-  const { localPouch } = usePouch(
+  const localPouch = usePouch(
     `${USER_DB_PREFIX}${getAuthenticatedUser()?.username}`
   );
 
@@ -208,5 +209,5 @@ export function usePouch(database: string): any {
       // console.log('sync error');
     });
 
-  return { localPouch };
+  return localPouch;
 }

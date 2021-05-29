@@ -1,4 +1,4 @@
-import { usePouch } from "../hooks/UsePouch";
+import { usePouch, USER_DB_PREFIX } from "../hooks/UsePouch";
 import { useQuery } from "react-query";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
 import useAuth from "../hooks/Auth/useAuth";
@@ -10,10 +10,9 @@ export default () => {
   const { getAuthenticatedUser } = useAuth();
   const { setError } = useNotification();
 
-  const USER_DB_PREFIX = "user_";
-  const { localPouch } = usePouch(
-    `${USER_DB_PREFIX}${getAuthenticatedUser()?.username}`
-  );
+  const currentUser = getAuthenticatedUser();
+
+  const localPouch = usePouch(`${USER_DB_PREFIX}${currentUser?.username}`);
 
   const fetchAllLibraries = (): AllLibrariesResponse =>
     localPouch.allDocs({ include_docs: true });

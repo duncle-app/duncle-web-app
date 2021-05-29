@@ -4,8 +4,8 @@ import { Card } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid/Grid";
 import Table from "../../elements/Table/Table";
 import { useHistory } from "react-router-dom";
-import { useLibraryState } from "../../../common/providers/LibraryProvider";
 import useLibraries from "../../../common/queries/useLibraries";
+import useAdminLibraries from "../../../common/queries/useAdminLibraries";
 
 type PouchRow = {
   doc?: any;
@@ -18,16 +18,26 @@ type PouchRow = {
 };
 
 export default function () {
+  const x = useAdminLibraries();
   const { data: libraries, isLoading, isSuccess, error } = useLibraries();
   const history = useHistory();
+
+  let allLibs: Library[] = [];
+  x?.map((otherLibs) => {
+    if (otherLibs.isSuccess && otherLibs.data) {
+      allLibs.push(...otherLibs.data);
+    }
+  });
+
+  if (libraries) {
+    allLibs = [...allLibs, ...libraries];
+  }
 
   if (isLoading) return <h1>Loading...</h1>;
 
   function routeToLibraryDetail(library: Library): void {
     history.push(`/library/${library._id}`);
   }
-
-  console.log({ libraries });
 
   return (
     <div>
@@ -36,8 +46,8 @@ export default function () {
         <Grid container justify="center">
           <Grid item xs={11}>
             <Card variant="outlined">
-              {libraries?.length ? (
-                <Table libraries={libraries} onEdit={routeToLibraryDetail} />
+              {allLibs?.length ? (
+                <Table libraries={allLibs} onEdit={routeToLibraryDetail} />
               ) : (
                 <>
                   <h1>No Libraries found!</h1>

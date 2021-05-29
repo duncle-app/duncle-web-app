@@ -11,7 +11,7 @@ export default (uuid: string) => {
   const { setError } = useNotification();
 
   const USER_DB_PREFIX = "user_";
-  const { localPouch } = usePouch(
+  const localPouch = usePouch(
     `${USER_DB_PREFIX}${getAuthenticatedUser()?.username}`
   );
 
