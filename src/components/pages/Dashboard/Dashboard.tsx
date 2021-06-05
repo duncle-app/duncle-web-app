@@ -28,6 +28,11 @@ export default function () {
 
   let otherLibs: Library[] = [];
 
+  // default, Terry libraries
+  if (isSuccess && libraries && checked.checkedTerry) {
+    otherLibs.push(...libraries);
+  }
+
   if (samData?.isSuccess && samData?.data && checked.checkedSam) {
     otherLibs.push(...samData.data);
   }
@@ -35,10 +40,10 @@ export default function () {
   if (jimData?.isSuccess && jimData?.data && checked.checkedJim) {
     otherLibs.push(...jimData.data);
   }
-
-  if (libraries) {
-    otherLibs = [...otherLibs, ...libraries];
-  }
+  //
+  // if (libraries) {
+  //   otherLibs = [...otherLibs, ...libraries];
+  // }
 
   if (isLoading) return <h1>Loading...</h1>;
 
@@ -54,14 +59,7 @@ export default function () {
         <Grid container justify="center">
           <Grid item xs={11}>
             <Card variant="outlined">
-              {otherLibs?.length ? (
-                <Table libraries={otherLibs} onEdit={routeToLibraryDetail} />
-              ) : (
-                <>
-                  <h1>No Libraries found!</h1>
-                  <h3>Start by adding a new library</h3>
-                </>
-              )}
+              <Table libraries={otherLibs} onEdit={routeToLibraryDetail} />
             </Card>
           </Grid>
         </Grid>
