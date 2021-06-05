@@ -19,21 +19,25 @@ type PouchRow = {
 };
 
 export default function () {
-  const queriesArray = useAdminLibraries();
+  const { checked } = useSeeOthersState();
   const { data: libraries, isLoading, isSuccess, error } = useLibraries();
+  const samData = useAdminLibraries("sam");
+  const jimData = useAdminLibraries("jim");
+
   const history = useHistory();
 
-  let allLibs: Library[] = [];
-  // todo - call this only when box is checked? or use boxes as just a filter
-  queriesArray?.map((otherLibs) => {
-    // only do this if the name of otherLibs.?? matches with those which are checked in useSeeOthersState
-    if (otherLibs.isSuccess && otherLibs.data) {
-      allLibs.push(...otherLibs.data);
-    }
-  });
+  let otherLibs: Library[] = [];
+
+  if (samData?.isSuccess && samData?.data && checked.checkedSam) {
+    otherLibs.push(...samData.data);
+  }
+
+  if (jimData?.isSuccess && jimData?.data && checked.checkedJim) {
+    otherLibs.push(...jimData.data);
+  }
 
   if (libraries) {
-    allLibs = [...allLibs, ...libraries];
+    otherLibs = [...otherLibs, ...libraries];
   }
 
   if (isLoading) return <h1>Loading...</h1>;
@@ -50,8 +54,8 @@ export default function () {
         <Grid container justify="center">
           <Grid item xs={11}>
             <Card variant="outlined">
-              {allLibs?.length ? (
-                <Table libraries={allLibs} onEdit={routeToLibraryDetail} />
+              {otherLibs?.length ? (
+                <Table libraries={otherLibs} onEdit={routeToLibraryDetail} />
               ) : (
                 <>
                   <h1>No Libraries found!</h1>

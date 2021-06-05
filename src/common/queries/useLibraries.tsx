@@ -10,14 +10,14 @@ export default () => {
   const { getAuthenticatedUser } = useAuth();
   const { setError } = useNotification();
 
-  const currentUser = getAuthenticatedUser();
+  const currentUser = getAuthenticatedUser()?.username;
 
-  const localPouch = usePouch(`${USER_DB_PREFIX}${currentUser?.username}`);
+  const localPouch = usePouch(`${USER_DB_PREFIX}${currentUser}`);
 
   const fetchAllLibraries = (): AllLibrariesResponse =>
     localPouch.allDocs({ include_docs: true });
 
-  return useQuery(allLibrariesKey, fetchAllLibraries, {
+  return useQuery([allLibrariesKey, currentUser], fetchAllLibraries, {
     select: (response: AllLibrariesResponse): Library[] =>
       parseToLibraries(response),
     onError: () => {
