@@ -23,7 +23,7 @@ export default () => {
     newUser.password = hashedPassword;
     newUser.dateCreated = dateNowIso();
     newUser.dateUpdated = dateNowIso();
-    newUser.role = "admin";
+    newUser.role = "user";
     newUser.events = [];
     return addUser(newUser);
   };
