@@ -1,15 +1,20 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Redirect, Route } from "react-router-dom";
 import useAuth from "../../../common/hooks/Auth/useAuth";
 
 const DEFAULT_INPUT = "";
 
+interface Props {
+  component: any;
+  requiredRole?: string;
+  [rest: string]: any;
+}
+
 export default ({
-  // @ts-ignore
   component: Component,
   requiredRole = DEFAULT_INPUT,
   ...rest
-}) => {
+}: Props) => {
   const { isAuthenticated, getAuthenticatedUser } = useAuth();
 
   let canAccess: boolean;
@@ -24,12 +29,7 @@ export default ({
     <Route
       {...rest}
       render={(props) =>
-        canAccess ? (
-          // @ts-ignore
-          <Component {...props} />
-        ) : (
-          <Redirect to="/unauthorized" />
-        )
+        canAccess ? <Component {...props} /> : <Redirect to="/unauthorized" />
       }
     />
   );

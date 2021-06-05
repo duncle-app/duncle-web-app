@@ -1,23 +1,32 @@
 import React from "react";
 import useAuth from "../hooks/Auth/useAuth";
-import { useQuery } from "react-query";
+import { useQuery, UseQueryResult } from "react-query";
 import { allLibrariesKey } from "../constants/queryKeys";
 import { usePouch, USER_DB_PREFIX } from "../hooks/UsePouch";
 import { AllLibrariesResponse, parseToLibraries } from "./queriesUtils";
 import Library from "../../model/library";
 import { useNotification } from "../../components/atoms/Snackbar/Snackbar";
+import {
+  CheckboxesState,
+  useSeeOthersState,
+} from "../providers/SeeOthersProvider";
 
 export default () => {
   const { getAuthenticatedUser } = useAuth();
-  const { setError } = useNotification();
   const currentUser = getAuthenticatedUser();
   // Only admins should go next
   if (currentUser?.role !== "admin") return null;
 
-  // todo - have these as an env var that can easily be swapped out?
-  const otherUserIds = ["sam", "jim"];
-  return otherUserIds.map((person) => {
-    // todo - use the same function that cuts off the rest of the email, and only gets the DB name, instead of doing this way
+  const { checked } = useSeeOthersState();
+  const { setError } = useNotification();
+
+  let validIdsToQuery: string[] = ["sam", "jim"];
+
+  console.log({ validIdsToQuery });
+
+  return validIdsToQuery.map((person) => {
+    // BIG TODO - do not use this hook in a loop..
+    // todo - use the same function that cuts off the rest of the email, and only gets the DB name, instead of doing this way?
     const localPouch = usePouch(`${USER_DB_PREFIX}${person}`);
 
     const fetchAllLibraries = (): AllLibrariesResponse =>
@@ -31,13 +40,4 @@ export default () => {
       },
     });
   });
-  /**
-   * Get other user IDs here
-   * We can (should) check if they even exist
-   * if they don't, maybe even send me a slack message?
-   * else, query for those libraries like we do with useLibraries
-   * return them from this hook
-   */
-
-  return null;
 };

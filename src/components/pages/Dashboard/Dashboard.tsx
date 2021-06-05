@@ -6,7 +6,7 @@ import Table from "../../elements/Table/Table";
 import { useHistory } from "react-router-dom";
 import useLibraries from "../../../common/queries/useLibraries";
 import useAdminLibraries from "../../../common/queries/useAdminLibraries";
-import { SeeOthersProvider } from "../../../common/providers/SeeOthersProvider";
+import { useSeeOthersState } from "../../../common/providers/SeeOthersProvider";
 
 type PouchRow = {
   doc?: any;
@@ -19,13 +19,14 @@ type PouchRow = {
 };
 
 export default function () {
-  const x = useAdminLibraries();
+  const queriesArray = useAdminLibraries();
   const { data: libraries, isLoading, isSuccess, error } = useLibraries();
   const history = useHistory();
 
   let allLibs: Library[] = [];
   // todo - call this only when box is checked? or use boxes as just a filter
-  x?.map((otherLibs, index) => {
+  queriesArray?.map((otherLibs) => {
+    // only do this if the name of otherLibs.?? matches with those which are checked in useSeeOthersState
     if (otherLibs.isSuccess && otherLibs.data) {
       allLibs.push(...otherLibs.data);
     }
@@ -49,16 +50,14 @@ export default function () {
         <Grid container justify="center">
           <Grid item xs={11}>
             <Card variant="outlined">
-              <SeeOthersProvider>
-                {allLibs?.length ? (
-                  <Table libraries={allLibs} onEdit={routeToLibraryDetail} />
-                ) : (
-                  <>
-                    <h1>No Libraries found!</h1>
-                    <h3>Start by adding a new library</h3>
-                  </>
-                )}
-              </SeeOthersProvider>
+              {allLibs?.length ? (
+                <Table libraries={allLibs} onEdit={routeToLibraryDetail} />
+              ) : (
+                <>
+                  <h1>No Libraries found!</h1>
+                  <h3>Start by adding a new library</h3>
+                </>
+              )}
             </Card>
           </Grid>
         </Grid>

@@ -14,6 +14,7 @@ import AddLibrary from "../pages/AddLibrary/AddLibrary";
 import ViewLibrary from "../pages/ViewLibrary/ViewLibrary";
 import EditLibraryController from "../pages/EditLibrary/EditLibraryController";
 import Unauthorized from "./Unauthorized/Unauthorized";
+import SeeOthersProvider from "../../common/providers/SeeOthersProvider";
 
 export default ({ children }: PropsWithChildren<any>) => (
   <Router>
@@ -28,7 +29,9 @@ export default ({ children }: PropsWithChildren<any>) => (
         {/* TODO - REDIRECT */}
         <Login />
       </Route>
-      <PrivateRoute exact path="/dashboard" component={AllLibraries} />
+      <SeeOthersProvider>
+        <PrivateRoute exact path="/dashboard" component={AllLibraries} />
+      </SeeOthersProvider>
       <PrivateRoute exact path="/calendar" component={CalendarController} />
       <PrivateRoute exact path="/library/new" component={AddLibrary} />
       <PrivateRoute exact path="/library/:libraryId" component={ViewLibrary} />

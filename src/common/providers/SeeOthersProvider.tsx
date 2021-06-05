@@ -1,6 +1,13 @@
-import React, {createContext, Dispatch, FC, SetStateAction, useContext, useState,} from "react";
+import React, {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
-interface CheckboxesState {
+export interface CheckboxesState {
   checkedTerry: boolean;
   checkedSam: boolean;
   checkedJim: boolean;
@@ -15,7 +22,7 @@ export const SeeOthersContext = createContext<
   SeeOthersContextState | undefined
 >(undefined);
 
-export const SeeOthersProvider: FC = ({ children }) => {
+const SeeOthersProvider: FC = ({ children }) => {
   const [checked, setChecked] = useState<CheckboxesState>({
     checkedTerry: true,
     checkedSam: false,
@@ -44,3 +51,5 @@ export const useSeeOthersState = () => {
 
   return context;
 };
+
+export default SeeOthersProvider;
