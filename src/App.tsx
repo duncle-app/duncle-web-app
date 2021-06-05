@@ -7,17 +7,15 @@ import Routes from "./components/elements/Routes";
 import Navbar from "./components/elements/Navbar/Navbar";
 import Snackbar from "./components/atoms/Snackbar/Snackbar";
 
-export default () => {
-  return (
-    <div className="App">
-      <CssBaseline />
-      <GlobalProvider>
-        <ReactQueryDevtools />
-        <Routes>
-          <Navbar />
-          <Snackbar />
-        </Routes>
-      </GlobalProvider>
-    </div>
-  );
-};
+export default () => (
+  <div className="App">
+    <CssBaseline />
+    <GlobalProvider>
+      <ReactQueryDevtools />
+      <Routes>
+        <Navbar />
+        <Snackbar />
+      </Routes>
+    </GlobalProvider>
+  </div>
+);

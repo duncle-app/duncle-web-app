@@ -7,6 +7,7 @@ import { formatContactType } from "../../../utils/textFormatUtils";
 
 export default (): Column<Library>[] => [
   { title: "Library", field: "libraryName" },
+  { title: "County", field: "county" },
   {
     title: "Contact / Aide",
     field: "contactName",
