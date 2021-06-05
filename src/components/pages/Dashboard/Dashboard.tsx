@@ -8,17 +8,7 @@ import useLibraries from "../../../common/queries/useLibraries";
 import useAdminLibraries from "../../../common/queries/useAdminLibraries";
 import { useSeeOthersState } from "../../../common/providers/SeeOthersProvider";
 
-type PouchRow = {
-  doc?: any;
-  id: string;
-  key: string;
-  value: {
-    rev: string;
-    deleted?: boolean;
-  };
-};
-
-export default function () {
+export default () => {
   const { checked } = useSeeOthersState();
   const { data: libraries, isLoading, isSuccess, error } = useLibraries();
   const samData = useAdminLibraries("sam");
@@ -28,7 +18,7 @@ export default function () {
 
   let otherLibs: Library[] = [];
 
-  // default, Terry libraries
+  /** default, Terry libraries */
   if (isSuccess && libraries && checked.checkedTerry) {
     otherLibs.push(...libraries);
   }
@@ -40,10 +30,6 @@ export default function () {
   if (jimData?.isSuccess && jimData?.data && checked.checkedJim) {
     otherLibs.push(...jimData.data);
   }
-  //
-  // if (libraries) {
-  //   otherLibs = [...otherLibs, ...libraries];
-  // }
 
   if (isLoading) return <h1>Loading...</h1>;
 
@@ -66,4 +52,4 @@ export default function () {
       )}
     </div>
   );
-}
+};

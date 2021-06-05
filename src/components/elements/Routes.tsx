@@ -29,9 +29,15 @@ export default ({ children }: PropsWithChildren<any>) => (
         {/* TODO - REDIRECT */}
         <Login />
       </Route>
-      <SeeOthersProvider>
-        <PrivateRoute exact path="/dashboard" component={AllLibraries} />
-      </SeeOthersProvider>
+      <PrivateRoute
+        exact
+        path="/dashboard"
+        component={() => (
+          <SeeOthersProvider>
+            <AllLibraries />
+          </SeeOthersProvider>
+        )}
+      />
       <PrivateRoute exact path="/calendar" component={CalendarController} />
       <PrivateRoute exact path="/library/new" component={AddLibrary} />
       <PrivateRoute exact path="/library/:libraryId" component={ViewLibrary} />
@@ -40,6 +46,7 @@ export default ({ children }: PropsWithChildren<any>) => (
         path="/library/:libraryId/edit"
         component={EditLibraryController}
       />
+
       <Route path="/unauthorized" component={Unauthorized} />
     </Switch>
   </Router>
