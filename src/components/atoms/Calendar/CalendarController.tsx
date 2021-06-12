@@ -23,6 +23,7 @@ export default () => {
       console.log("No events were present");
     }
   }, []);
+
   return (
     <>
       {/*
