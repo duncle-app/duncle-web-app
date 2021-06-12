@@ -38,7 +38,15 @@ export default ({ children }: PropsWithChildren<any>) => (
           </SeeOthersProvider>
         )}
       />
-      <PrivateRoute exact path="/calendar" component={CalendarController} />
+      <PrivateRoute
+        exact
+        path="/calendar"
+        component={() => (
+          <SeeOthersProvider>
+            <CalendarController />
+          </SeeOthersProvider>
+        )}
+      />
       <PrivateRoute exact path="/library/new" component={AddLibrary} />
       <PrivateRoute exact path="/library/:libraryId" component={ViewLibrary} />
       <PrivateRoute

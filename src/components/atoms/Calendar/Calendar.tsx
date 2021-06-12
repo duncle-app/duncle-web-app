@@ -18,6 +18,7 @@ import UserDAO from "../../../model/userDAO";
 import { useUserPouch } from "../../../common/hooks/UsePouch";
 import { useNotification } from "../Snackbar/Snackbar";
 import useAuth from "../../../common/hooks/Auth/useAuth";
+import AdminCheckboxes from "../../elements/AdminCheckboxes/AdminCheckboxes";
 
 // todo - fix this
 export default function ({ initialEvents }: any) {
@@ -118,6 +119,7 @@ export default function ({ initialEvents }: any) {
         handleCancel={cancel}
       />
       <div className="demo-app-main">
+        <AdminCheckboxes />
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
